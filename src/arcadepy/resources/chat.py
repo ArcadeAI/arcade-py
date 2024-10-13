@@ -23,6 +23,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.chat_response import ChatResponse
+from ..types.chat_message_param import ChatMessageParam
 
 __all__ = ["ChatResource", "AsyncChatResource"]
 
@@ -54,10 +55,10 @@ class ChatResource(SyncAPIResource):
         logit_bias: Dict[str, int] | NotGiven = NOT_GIVEN,
         logprobs: bool | NotGiven = NOT_GIVEN,
         max_tokens: int | NotGiven = NOT_GIVEN,
-        messages: Iterable[chat_completions_params.Message] | NotGiven = NOT_GIVEN,
+        messages: Iterable[ChatMessageParam] | NotGiven = NOT_GIVEN,
         model: str | NotGiven = NOT_GIVEN,
         n: int | NotGiven = NOT_GIVEN,
-        parallel_tool_calls: object | NotGiven = NOT_GIVEN,
+        parallel_tool_calls: bool | NotGiven = NOT_GIVEN,
         presence_penalty: int | NotGiven = NOT_GIVEN,
         response_format: Literal["json_object", "text"] | NotGiven = NOT_GIVEN,
         seed: int | NotGiven = NOT_GIVEN,
@@ -76,6 +77,7 @@ class ChatResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
     ) -> ChatResponse:
         """
         Talk to different LLM Chat APIs via OpenAI's API
@@ -108,6 +110,8 @@ class ChatResource(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/v1/chat/completions",
@@ -137,7 +141,11 @@ class ChatResource(SyncAPIResource):
                 chat_completions_params.ChatCompletionsParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ChatResponse,
         )
@@ -170,10 +178,10 @@ class AsyncChatResource(AsyncAPIResource):
         logit_bias: Dict[str, int] | NotGiven = NOT_GIVEN,
         logprobs: bool | NotGiven = NOT_GIVEN,
         max_tokens: int | NotGiven = NOT_GIVEN,
-        messages: Iterable[chat_completions_params.Message] | NotGiven = NOT_GIVEN,
+        messages: Iterable[ChatMessageParam] | NotGiven = NOT_GIVEN,
         model: str | NotGiven = NOT_GIVEN,
         n: int | NotGiven = NOT_GIVEN,
-        parallel_tool_calls: object | NotGiven = NOT_GIVEN,
+        parallel_tool_calls: bool | NotGiven = NOT_GIVEN,
         presence_penalty: int | NotGiven = NOT_GIVEN,
         response_format: Literal["json_object", "text"] | NotGiven = NOT_GIVEN,
         seed: int | NotGiven = NOT_GIVEN,
@@ -192,6 +200,7 @@ class AsyncChatResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
     ) -> ChatResponse:
         """
         Talk to different LLM Chat APIs via OpenAI's API
@@ -224,6 +233,8 @@ class AsyncChatResource(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/v1/chat/completions",
@@ -253,7 +264,11 @@ class AsyncChatResource(AsyncAPIResource):
                 chat_completions_params.ChatCompletionsParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=ChatResponse,
         )

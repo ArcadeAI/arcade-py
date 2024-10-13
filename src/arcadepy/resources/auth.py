@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import auth_status_params, auth_authorization_params
+from ..types import auth_status_params, auth_authorize_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
     maybe_transform,
@@ -19,7 +19,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.shared.authorization_response import AuthorizationResponse
+from ..types.authorization_response import AuthorizationResponse
 
 __all__ = ["AuthResource", "AsyncAuthResource"]
 
@@ -44,10 +44,10 @@ class AuthResource(SyncAPIResource):
         """
         return AuthResourceWithStreamingResponse(self)
 
-    def authorization(
+    def authorize(
         self,
         *,
-        auth_requirement: auth_authorization_params.AuthRequirement,
+        auth_requirement: auth_authorize_params.AuthRequirement,
         user_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -55,6 +55,7 @@ class AuthResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
     ) -> AuthorizationResponse:
         """
         Starts the authorization process for given authorization requirements
@@ -67,6 +68,8 @@ class AuthResource(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/v1/auth/authorize",
@@ -75,10 +78,14 @@ class AuthResource(SyncAPIResource):
                     "auth_requirement": auth_requirement,
                     "user_id": user_id,
                 },
-                auth_authorization_params.AuthAuthorizationParams,
+                auth_authorize_params.AuthAuthorizeParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=AuthorizationResponse,
         )
@@ -150,10 +157,10 @@ class AsyncAuthResource(AsyncAPIResource):
         """
         return AsyncAuthResourceWithStreamingResponse(self)
 
-    async def authorization(
+    async def authorize(
         self,
         *,
-        auth_requirement: auth_authorization_params.AuthRequirement,
+        auth_requirement: auth_authorize_params.AuthRequirement,
         user_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -161,6 +168,7 @@ class AsyncAuthResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
     ) -> AuthorizationResponse:
         """
         Starts the authorization process for given authorization requirements
@@ -173,6 +181,8 @@ class AsyncAuthResource(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/v1/auth/authorize",
@@ -181,10 +191,14 @@ class AsyncAuthResource(AsyncAPIResource):
                     "auth_requirement": auth_requirement,
                     "user_id": user_id,
                 },
-                auth_authorization_params.AuthAuthorizationParams,
+                auth_authorize_params.AuthAuthorizeParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
             ),
             cast_to=AuthorizationResponse,
         )
@@ -240,8 +254,8 @@ class AuthResourceWithRawResponse:
     def __init__(self, auth: AuthResource) -> None:
         self._auth = auth
 
-        self.authorization = to_raw_response_wrapper(
-            auth.authorization,
+        self.authorize = to_raw_response_wrapper(
+            auth.authorize,
         )
         self.status = to_raw_response_wrapper(
             auth.status,
@@ -252,8 +266,8 @@ class AsyncAuthResourceWithRawResponse:
     def __init__(self, auth: AsyncAuthResource) -> None:
         self._auth = auth
 
-        self.authorization = async_to_raw_response_wrapper(
-            auth.authorization,
+        self.authorize = async_to_raw_response_wrapper(
+            auth.authorize,
         )
         self.status = async_to_raw_response_wrapper(
             auth.status,
@@ -264,8 +278,8 @@ class AuthResourceWithStreamingResponse:
     def __init__(self, auth: AuthResource) -> None:
         self._auth = auth
 
-        self.authorization = to_streamed_response_wrapper(
-            auth.authorization,
+        self.authorize = to_streamed_response_wrapper(
+            auth.authorize,
         )
         self.status = to_streamed_response_wrapper(
             auth.status,
@@ -276,8 +290,8 @@ class AsyncAuthResourceWithStreamingResponse:
     def __init__(self, auth: AsyncAuthResource) -> None:
         self._auth = auth
 
-        self.authorization = async_to_streamed_response_wrapper(
-            auth.authorization,
+        self.authorize = async_to_streamed_response_wrapper(
+            auth.authorize,
         )
         self.status = async_to_streamed_response_wrapper(
             auth.status,
