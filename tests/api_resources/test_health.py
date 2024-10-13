@@ -18,13 +18,13 @@ class TestHealth:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_list(self, client: ArcadeAI) -> None:
-        health = client.health.list()
+    def test_method_check(self, client: ArcadeAI) -> None:
+        health = client.health.check()
         assert_matches_type(HealthSchema, health, path=["response"])
 
     @parametrize
-    def test_raw_response_list(self, client: ArcadeAI) -> None:
-        response = client.health.with_raw_response.list()
+    def test_raw_response_check(self, client: ArcadeAI) -> None:
+        response = client.health.with_raw_response.check()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -32,8 +32,8 @@ class TestHealth:
         assert_matches_type(HealthSchema, health, path=["response"])
 
     @parametrize
-    def test_streaming_response_list(self, client: ArcadeAI) -> None:
-        with client.health.with_streaming_response.list() as response:
+    def test_streaming_response_check(self, client: ArcadeAI) -> None:
+        with client.health.with_streaming_response.check() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -47,13 +47,13 @@ class TestAsyncHealth:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_list(self, async_client: AsyncArcadeAI) -> None:
-        health = await async_client.health.list()
+    async def test_method_check(self, async_client: AsyncArcadeAI) -> None:
+        health = await async_client.health.check()
         assert_matches_type(HealthSchema, health, path=["response"])
 
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncArcadeAI) -> None:
-        response = await async_client.health.with_raw_response.list()
+    async def test_raw_response_check(self, async_client: AsyncArcadeAI) -> None:
+        response = await async_client.health.with_raw_response.check()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -61,8 +61,8 @@ class TestAsyncHealth:
         assert_matches_type(HealthSchema, health, path=["response"])
 
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncArcadeAI) -> None:
-        async with async_client.health.with_streaming_response.list() as response:
+    async def test_streaming_response_check(self, async_client: AsyncArcadeAI) -> None:
+        async with async_client.health.with_streaming_response.check() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

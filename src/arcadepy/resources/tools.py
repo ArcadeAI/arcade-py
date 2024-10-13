@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import tool_execute_params, tool_retrieve_params, tool_authorize_params
+from ..types import tool_execute_params, tool_authorize_params, tool_retrieve_definition_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
     maybe_transform,
@@ -19,9 +19,9 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.response import Response
-from ..types.definition import Definition
-from ..types.shared.authorization_response import AuthorizationResponse
+from ..types.tool_response import ToolResponse
+from ..types.tool_definition import ToolDefinition
+from ..types.authorization_response import AuthorizationResponse
 
 __all__ = ["ToolsResource", "AsyncToolsResource"]
 
@@ -46,7 +46,109 @@ class ToolsResource(SyncAPIResource):
         """
         return ToolsResourceWithStreamingResponse(self)
 
-    def retrieve(
+    def authorize(
+        self,
+        *,
+        tool_name: str,
+        user_id: str,
+        tool_version: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+    ) -> AuthorizationResponse:
+        """
+        Authorizes a user for a specific tool by name
+
+        Args:
+          tool_version: Optional: if not provided, latest version is assumed
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        return self._post(
+            "/v1/tools/authorize",
+            body=maybe_transform(
+                {
+                    "tool_name": tool_name,
+                    "user_id": user_id,
+                    "tool_version": tool_version,
+                },
+                tool_authorize_params.ToolAuthorizeParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=AuthorizationResponse,
+        )
+
+    def execute(
+        self,
+        *,
+        inputs: str,
+        tool_name: str,
+        tool_version: str,
+        user_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+    ) -> ToolResponse:
+        """
+        Executes a tool by name and arguments
+
+        Args:
+          inputs: Serialized JSON string
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        return self._post(
+            "/v1/tools/execute",
+            body=maybe_transform(
+                {
+                    "inputs": inputs,
+                    "tool_name": tool_name,
+                    "tool_version": tool_version,
+                    "user_id": user_id,
+                },
+                tool_execute_params.ToolExecuteParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=ToolResponse,
+        )
+
+    def retrieve_definition(
         self,
         *,
         director_id: str,
@@ -57,7 +159,7 @@ class ToolsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Definition:
+    ) -> ToolDefinition:
         """
         Returns the arcade tool specification for a specific tool
 
@@ -86,98 +188,10 @@ class ToolsResource(SyncAPIResource):
                         "director_id": director_id,
                         "tool_id": tool_id,
                     },
-                    tool_retrieve_params.ToolRetrieveParams,
+                    tool_retrieve_definition_params.ToolRetrieveDefinitionParams,
                 ),
             ),
-            cast_to=Definition,
-        )
-
-    def authorize(
-        self,
-        *,
-        tool_name: str,
-        user_id: str,
-        tool_version: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthorizationResponse:
-        """
-        Authorizes a user for a specific tool by name
-
-        Args:
-          tool_version: Optional: if not provided, latest version is assumed
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/v1/tools/authorize",
-            body=maybe_transform(
-                {
-                    "tool_name": tool_name,
-                    "user_id": user_id,
-                    "tool_version": tool_version,
-                },
-                tool_authorize_params.ToolAuthorizeParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AuthorizationResponse,
-        )
-
-    def execute(
-        self,
-        *,
-        inputs: str,
-        tool_name: str,
-        tool_version: str,
-        user_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Response:
-        """
-        Executes a tool by name and arguments
-
-        Args:
-          inputs: Serialized JSON string
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/v1/tools/execute",
-            body=maybe_transform(
-                {
-                    "inputs": inputs,
-                    "tool_name": tool_name,
-                    "tool_version": tool_version,
-                    "user_id": user_id,
-                },
-                tool_execute_params.ToolExecuteParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Response,
+            cast_to=ToolDefinition,
         )
 
 
@@ -201,7 +215,109 @@ class AsyncToolsResource(AsyncAPIResource):
         """
         return AsyncToolsResourceWithStreamingResponse(self)
 
-    async def retrieve(
+    async def authorize(
+        self,
+        *,
+        tool_name: str,
+        user_id: str,
+        tool_version: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+    ) -> AuthorizationResponse:
+        """
+        Authorizes a user for a specific tool by name
+
+        Args:
+          tool_version: Optional: if not provided, latest version is assumed
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        return await self._post(
+            "/v1/tools/authorize",
+            body=await async_maybe_transform(
+                {
+                    "tool_name": tool_name,
+                    "user_id": user_id,
+                    "tool_version": tool_version,
+                },
+                tool_authorize_params.ToolAuthorizeParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=AuthorizationResponse,
+        )
+
+    async def execute(
+        self,
+        *,
+        inputs: str,
+        tool_name: str,
+        tool_version: str,
+        user_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+    ) -> ToolResponse:
+        """
+        Executes a tool by name and arguments
+
+        Args:
+          inputs: Serialized JSON string
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+
+          idempotency_key: Specify a custom idempotency key for this request
+        """
+        return await self._post(
+            "/v1/tools/execute",
+            body=await async_maybe_transform(
+                {
+                    "inputs": inputs,
+                    "tool_name": tool_name,
+                    "tool_version": tool_version,
+                    "user_id": user_id,
+                },
+                tool_execute_params.ToolExecuteParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                idempotency_key=idempotency_key,
+            ),
+            cast_to=ToolResponse,
+        )
+
+    async def retrieve_definition(
         self,
         *,
         director_id: str,
@@ -212,7 +328,7 @@ class AsyncToolsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Definition:
+    ) -> ToolDefinition:
         """
         Returns the arcade tool specification for a specific tool
 
@@ -241,98 +357,10 @@ class AsyncToolsResource(AsyncAPIResource):
                         "director_id": director_id,
                         "tool_id": tool_id,
                     },
-                    tool_retrieve_params.ToolRetrieveParams,
+                    tool_retrieve_definition_params.ToolRetrieveDefinitionParams,
                 ),
             ),
-            cast_to=Definition,
-        )
-
-    async def authorize(
-        self,
-        *,
-        tool_name: str,
-        user_id: str,
-        tool_version: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthorizationResponse:
-        """
-        Authorizes a user for a specific tool by name
-
-        Args:
-          tool_version: Optional: if not provided, latest version is assumed
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/v1/tools/authorize",
-            body=await async_maybe_transform(
-                {
-                    "tool_name": tool_name,
-                    "user_id": user_id,
-                    "tool_version": tool_version,
-                },
-                tool_authorize_params.ToolAuthorizeParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AuthorizationResponse,
-        )
-
-    async def execute(
-        self,
-        *,
-        inputs: str,
-        tool_name: str,
-        tool_version: str,
-        user_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Response:
-        """
-        Executes a tool by name and arguments
-
-        Args:
-          inputs: Serialized JSON string
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/v1/tools/execute",
-            body=await async_maybe_transform(
-                {
-                    "inputs": inputs,
-                    "tool_name": tool_name,
-                    "tool_version": tool_version,
-                    "user_id": user_id,
-                },
-                tool_execute_params.ToolExecuteParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Response,
+            cast_to=ToolDefinition,
         )
 
 
@@ -340,14 +368,14 @@ class ToolsResourceWithRawResponse:
     def __init__(self, tools: ToolsResource) -> None:
         self._tools = tools
 
-        self.retrieve = to_raw_response_wrapper(
-            tools.retrieve,
-        )
         self.authorize = to_raw_response_wrapper(
             tools.authorize,
         )
         self.execute = to_raw_response_wrapper(
             tools.execute,
+        )
+        self.retrieve_definition = to_raw_response_wrapper(
+            tools.retrieve_definition,
         )
 
 
@@ -355,14 +383,14 @@ class AsyncToolsResourceWithRawResponse:
     def __init__(self, tools: AsyncToolsResource) -> None:
         self._tools = tools
 
-        self.retrieve = async_to_raw_response_wrapper(
-            tools.retrieve,
-        )
         self.authorize = async_to_raw_response_wrapper(
             tools.authorize,
         )
         self.execute = async_to_raw_response_wrapper(
             tools.execute,
+        )
+        self.retrieve_definition = async_to_raw_response_wrapper(
+            tools.retrieve_definition,
         )
 
 
@@ -370,14 +398,14 @@ class ToolsResourceWithStreamingResponse:
     def __init__(self, tools: ToolsResource) -> None:
         self._tools = tools
 
-        self.retrieve = to_streamed_response_wrapper(
-            tools.retrieve,
-        )
         self.authorize = to_streamed_response_wrapper(
             tools.authorize,
         )
         self.execute = to_streamed_response_wrapper(
             tools.execute,
+        )
+        self.retrieve_definition = to_streamed_response_wrapper(
+            tools.retrieve_definition,
         )
 
 
@@ -385,12 +413,12 @@ class AsyncToolsResourceWithStreamingResponse:
     def __init__(self, tools: AsyncToolsResource) -> None:
         self._tools = tools
 
-        self.retrieve = async_to_streamed_response_wrapper(
-            tools.retrieve,
-        )
         self.authorize = async_to_streamed_response_wrapper(
             tools.authorize,
         )
         self.execute = async_to_streamed_response_wrapper(
             tools.execute,
+        )
+        self.retrieve_definition = async_to_streamed_response_wrapper(
+            tools.retrieve_definition,
         )
