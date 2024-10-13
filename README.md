@@ -15,29 +15,35 @@ The REST API documentation can be found on [arcade-ai.com](https://arcade-ai.com
 ## Installation
 
 ```sh
-# install from PyPI
-pip install --pre arcadepy
+# install from the production repo
+pip install git+ssh://git@github.com/ArcadeAI/arcade-py.git
 ```
+
+> [!NOTE]
+> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre arcadepy`
 
 ## Usage
 
 The full API of this library can be found in [api.md](api.md).
 
 ```python
+import os
 from arcadepy import ArcadeAI
 
 client = ArcadeAI(
+    # This is the default and can be omitted
+    api_key=os.environ.get("ARCADE_API_KEY"),
     # defaults to "production".
     environment="staging",
 )
 
-response = client.tools.execute(
+tool_response = client.tools.execute(
     inputs="[object Object]",
     tool_name="Google.ListEmails",
     tool_version="0.1.0",
-    user_id="dev@arcade-ai.com",
+    user_id="user@example.com",
 )
-print(response.invocation_id)
+print(tool_response.invocation_id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -50,23 +56,26 @@ so that your API Key is not stored in source control.
 Simply import `AsyncArcadeAI` instead of `ArcadeAI` and use `await` with each API call:
 
 ```python
+import os
 import asyncio
 from arcadepy import AsyncArcadeAI
 
 client = AsyncArcadeAI(
+    # This is the default and can be omitted
+    api_key=os.environ.get("ARCADE_API_KEY"),
     # defaults to "production".
     environment="staging",
 )
 
 
 async def main() -> None:
-    response = await client.tools.execute(
+    tool_response = await client.tools.execute(
         inputs="[object Object]",
         tool_name="Google.ListEmails",
         tool_version="0.1.0",
-        user_id="dev@arcade-ai.com",
+        user_id="user@example.com",
     )
-    print(response.invocation_id)
+    print(tool_response.invocation_id)
 
 
 asyncio.run(main())
@@ -99,7 +108,14 @@ from arcadepy import ArcadeAI
 client = ArcadeAI()
 
 try:
-    client.chat.completions()
+    client.chat.completions(
+        messages=[
+            {
+                "role": "user",
+                "content": "Hello, how can I use Arcade AI?",
+            }
+        ],
+    )
 except arcadepy.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -142,7 +158,14 @@ client = ArcadeAI(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).chat.completions()
+client.with_options(max_retries=5).chat.completions(
+    messages=[
+        {
+            "role": "user",
+            "content": "Hello, how can I use Arcade AI?",
+        }
+    ],
+)
 ```
 
 ### Timeouts
@@ -165,7 +188,14 @@ client = ArcadeAI(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).chat.completions()
+client.with_options(timeout=5.0).chat.completions(
+    messages=[
+        {
+            "role": "user",
+            "content": "Hello, how can I use Arcade AI?",
+        }
+    ],
+)
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -204,7 +234,12 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from arcadepy import ArcadeAI
 
 client = ArcadeAI()
-response = client.chat.with_raw_response.completions()
+response = client.chat.with_raw_response.completions(
+    messages=[{
+        "role": "user",
+        "content": "Hello, how can I use Arcade AI?",
+    }],
+)
 print(response.headers.get('X-My-Header'))
 
 chat = response.parse()  # get the object that `chat.completions()` would have returned
@@ -222,7 +257,14 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.chat.with_streaming_response.completions() as response:
+with client.chat.with_streaming_response.completions(
+    messages=[
+        {
+            "role": "user",
+            "content": "Hello, how can I use Arcade AI?",
+        }
+    ],
+) as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():

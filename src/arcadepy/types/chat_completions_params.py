@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 from typing import Dict, List, Iterable
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, TypedDict
 
-__all__ = ["ChatCompletionsParams", "Message", "MessageToolCall", "MessageToolCallFunction", "StreamOptions"]
+from .chat_message_param import ChatMessageParam
+
+__all__ = ["ChatCompletionsParams", "StreamOptions"]
 
 
 class ChatCompletionsParams(TypedDict, total=False):
@@ -29,13 +31,13 @@ class ChatCompletionsParams(TypedDict, total=False):
 
     max_tokens: int
 
-    messages: Iterable[Message]
+    messages: Iterable[ChatMessageParam]
 
     model: str
 
     n: int
 
-    parallel_tool_calls: object
+    parallel_tool_calls: bool
     """Disable the default behavior of parallel tool calls by setting it: false."""
 
     presence_penalty: int
@@ -68,40 +70,6 @@ class ChatCompletionsParams(TypedDict, total=False):
     top_p: float
 
     user: str
-
-
-class MessageToolCallFunction(TypedDict, total=False):
-    arguments: str
-
-    name: str
-
-
-class MessageToolCall(TypedDict, total=False):
-    id: str
-
-    function: MessageToolCallFunction
-
-    type: Literal["function"]
-
-
-class Message(TypedDict, total=False):
-    content: Required[str]
-    """The content of the message."""
-
-    role: Required[str]
-    """The role of the author of this message.
-
-    One of system, user, tool, or assistant.
-    """
-
-    name: str
-    """tool Name"""
-
-    tool_call_id: str
-    """tool_call_id"""
-
-    tool_calls: Iterable[MessageToolCall]
-    """tool calls if any"""
 
 
 class StreamOptions(TypedDict, total=False):

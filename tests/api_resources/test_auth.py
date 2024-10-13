@@ -9,7 +9,7 @@ import pytest
 
 from arcadepy import ArcadeAI, AsyncArcadeAI
 from tests.utils import assert_matches_type
-from arcadepy.types.shared import AuthorizationResponse
+from arcadepy.types import AuthorizationResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -18,16 +18,16 @@ class TestAuth:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_authorization(self, client: ArcadeAI) -> None:
-        auth = client.auth.authorization(
+    def test_method_authorize(self, client: ArcadeAI) -> None:
+        auth = client.auth.authorize(
             auth_requirement={"provider": "provider"},
             user_id="user_id",
         )
         assert_matches_type(AuthorizationResponse, auth, path=["response"])
 
     @parametrize
-    def test_method_authorization_with_all_params(self, client: ArcadeAI) -> None:
-        auth = client.auth.authorization(
+    def test_method_authorize_with_all_params(self, client: ArcadeAI) -> None:
+        auth = client.auth.authorize(
             auth_requirement={
                 "provider": "provider",
                 "oauth2": {
@@ -40,8 +40,8 @@ class TestAuth:
         assert_matches_type(AuthorizationResponse, auth, path=["response"])
 
     @parametrize
-    def test_raw_response_authorization(self, client: ArcadeAI) -> None:
-        response = client.auth.with_raw_response.authorization(
+    def test_raw_response_authorize(self, client: ArcadeAI) -> None:
+        response = client.auth.with_raw_response.authorize(
             auth_requirement={"provider": "provider"},
             user_id="user_id",
         )
@@ -52,8 +52,8 @@ class TestAuth:
         assert_matches_type(AuthorizationResponse, auth, path=["response"])
 
     @parametrize
-    def test_streaming_response_authorization(self, client: ArcadeAI) -> None:
-        with client.auth.with_streaming_response.authorization(
+    def test_streaming_response_authorize(self, client: ArcadeAI) -> None:
+        with client.auth.with_streaming_response.authorize(
             auth_requirement={"provider": "provider"},
             user_id="user_id",
         ) as response:
@@ -109,16 +109,16 @@ class TestAsyncAuth:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_authorization(self, async_client: AsyncArcadeAI) -> None:
-        auth = await async_client.auth.authorization(
+    async def test_method_authorize(self, async_client: AsyncArcadeAI) -> None:
+        auth = await async_client.auth.authorize(
             auth_requirement={"provider": "provider"},
             user_id="user_id",
         )
         assert_matches_type(AuthorizationResponse, auth, path=["response"])
 
     @parametrize
-    async def test_method_authorization_with_all_params(self, async_client: AsyncArcadeAI) -> None:
-        auth = await async_client.auth.authorization(
+    async def test_method_authorize_with_all_params(self, async_client: AsyncArcadeAI) -> None:
+        auth = await async_client.auth.authorize(
             auth_requirement={
                 "provider": "provider",
                 "oauth2": {
@@ -131,8 +131,8 @@ class TestAsyncAuth:
         assert_matches_type(AuthorizationResponse, auth, path=["response"])
 
     @parametrize
-    async def test_raw_response_authorization(self, async_client: AsyncArcadeAI) -> None:
-        response = await async_client.auth.with_raw_response.authorization(
+    async def test_raw_response_authorize(self, async_client: AsyncArcadeAI) -> None:
+        response = await async_client.auth.with_raw_response.authorize(
             auth_requirement={"provider": "provider"},
             user_id="user_id",
         )
@@ -143,8 +143,8 @@ class TestAsyncAuth:
         assert_matches_type(AuthorizationResponse, auth, path=["response"])
 
     @parametrize
-    async def test_streaming_response_authorization(self, async_client: AsyncArcadeAI) -> None:
-        async with async_client.auth.with_streaming_response.authorization(
+    async def test_streaming_response_authorize(self, async_client: AsyncArcadeAI) -> None:
+        async with async_client.auth.with_streaming_response.authorize(
             auth_requirement={"provider": "provider"},
             user_id="user_id",
         ) as response:
