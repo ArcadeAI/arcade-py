@@ -1,5 +1,5 @@
 [project]
-name = "arcade_engine"
+name = "arcade-py"
 version = "0.0.1-alpha.0"
 description = "The official Python library for the arcade-engine API"
 dynamic = ["readme"]
