@@ -15,8 +15,8 @@ The REST API documentation can be found on [arcade-ai.com](https://arcade-ai.com
 ## Installation
 
 ```sh
-# install from this staging repo
-pip install git+ssh://git@github.com/stainless-sdks/arcade-engine-python.git
+# install from the production repo
+pip install git+ssh://git@github.com/ArcadeAI/arcade-py.git
 ```
 
 > [!NOTE]
@@ -198,9 +198,9 @@ llm_completion = response.parse()  # get the object that `llm_completions.create
 print(llm_completion.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/arcade-engine-python/tree/main/src/arcade_engine/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/ArcadeAI/arcade-py/tree/main/src/arcade_engine/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/arcade-engine-python/tree/main/src/arcade_engine/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/ArcadeAI/arcade-py/tree/main/src/arcade_engine/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -294,7 +294,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/arcade-engine-python/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/ArcadeAI/arcade-py/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 
