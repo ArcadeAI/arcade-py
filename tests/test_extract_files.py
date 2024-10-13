@@ -4,8 +4,8 @@ from typing import Sequence
 
 import pytest
 
-from arcade_engine._types import FileTypes
-from arcade_engine._utils import extract_files
+from arcadepy._types import FileTypes
+from arcadepy._utils import extract_files
 
 
 def test_removes_files_from_input() -> None:

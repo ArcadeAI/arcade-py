@@ -7,14 +7,14 @@ from typing import TYPE_CHECKING, Iterator, AsyncIterator
 
 import pytest
 
-from arcade_engine import ArcadeEngine, AsyncArcadeEngine
+from arcadepy import ArcadeAI, AsyncArcadeAI
 
 if TYPE_CHECKING:
     from _pytest.fixtures import FixtureRequest
 
 pytest.register_assert_rewrite("tests.utils")
 
-logging.getLogger("arcade_engine").setLevel(logging.DEBUG)
+logging.getLogger("arcadepy").setLevel(logging.DEBUG)
 
 
 @pytest.fixture(scope="session")
@@ -26,24 +26,22 @@ def event_loop() -> Iterator[asyncio.AbstractEventLoop]:
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
-api_key = "My API Key"
-
 
 @pytest.fixture(scope="session")
-def client(request: FixtureRequest) -> Iterator[ArcadeEngine]:
+def client(request: FixtureRequest) -> Iterator[ArcadeAI]:
     strict = getattr(request, "param", True)
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    with ArcadeEngine(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
+    with ArcadeAI(base_url=base_url, _strict_response_validation=strict) as client:
         yield client
 
 
 @pytest.fixture(scope="session")
-async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncArcadeEngine]:
+async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncArcadeAI]:
     strict = getattr(request, "param", True)
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    async with AsyncArcadeEngine(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
+    async with AsyncArcadeAI(base_url=base_url, _strict_response_validation=strict) as client:
         yield client

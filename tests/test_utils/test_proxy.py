@@ -2,7 +2,7 @@ import operator
 from typing import Any
 from typing_extensions import override
 
-from arcade_engine._utils import LazyProxy
+from arcadepy._utils import LazyProxy
 
 
 class RecursiveLazyProxy(LazyProxy[Any]):

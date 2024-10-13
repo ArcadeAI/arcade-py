@@ -37,7 +37,7 @@ $ pip install -r requirements-dev.lock
 
 Most of the SDK is generated code. Modifications to code will be persisted between generations, but may
 result in merge conflicts between manual patches and changes from the generator. The generator will never
-modify the contents of the `src/arcade_engine/lib/` and `examples/` directories.
+modify the contents of the `src/arcadepy/lib/` and `examples/` directories.
 
 ## Adding and running examples
 
@@ -63,7 +63,7 @@ If you’d like to use the repository from source, you can either install from g
 To install via git:
 
 ```sh
-$ pip install git+ssh://git@github.com/ArcadeAI/arcade-py.git
+$ pip install git+ssh://git@github.com/stainless-sdks/arcade-engine-python.git
 ```
 
 Alternatively, you can build from source and install the wheel file:
@@ -121,7 +121,7 @@ the changes aren't made through the automated pipeline, you may want to make rel
 
 ### Publish with a GitHub workflow
 
-You can release to package managers by using [the `Publish PyPI` GitHub action](https://www.github.com/ArcadeAI/arcade-py/actions/workflows/publish-pypi.yml). This requires a setup organization or repository secret to be set up.
+You can release to package managers by using [the `Publish PyPI` GitHub action](https://www.github.com/stainless-sdks/arcade-engine-python/actions/workflows/publish-pypi.yml). This requires a setup organization or repository secret to be set up.
 
 ### Publish manually
 

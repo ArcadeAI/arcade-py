@@ -7,10 +7,10 @@ from typing import Any, cast
 
 import pytest
 
+from arcadepy import ArcadeAI, AsyncArcadeAI
 from tests.utils import assert_matches_type
-from arcade_engine import ArcadeEngine, AsyncArcadeEngine
-from arcade_engine.types import Response, Definition
-from arcade_engine.types.shared import AuthorizationResponse
+from arcadepy.types import Response, Definition
+from arcadepy.types.shared import AuthorizationResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +19,7 @@ class TestTools:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_retrieve(self, client: ArcadeEngine) -> None:
+    def test_method_retrieve(self, client: ArcadeAI) -> None:
         tool = client.tools.retrieve(
             director_id="director_id",
             tool_id="tool_id",
@@ -27,7 +27,7 @@ class TestTools:
         assert_matches_type(Definition, tool, path=["response"])
 
     @parametrize
-    def test_raw_response_retrieve(self, client: ArcadeEngine) -> None:
+    def test_raw_response_retrieve(self, client: ArcadeAI) -> None:
         response = client.tools.with_raw_response.retrieve(
             director_id="director_id",
             tool_id="tool_id",
@@ -39,7 +39,7 @@ class TestTools:
         assert_matches_type(Definition, tool, path=["response"])
 
     @parametrize
-    def test_streaming_response_retrieve(self, client: ArcadeEngine) -> None:
+    def test_streaming_response_retrieve(self, client: ArcadeAI) -> None:
         with client.tools.with_streaming_response.retrieve(
             director_id="director_id",
             tool_id="tool_id",
@@ -53,7 +53,7 @@ class TestTools:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_authorize(self, client: ArcadeEngine) -> None:
+    def test_method_authorize(self, client: ArcadeAI) -> None:
         tool = client.tools.authorize(
             tool_name="tool_name",
             user_id="user_id",
@@ -61,7 +61,7 @@ class TestTools:
         assert_matches_type(AuthorizationResponse, tool, path=["response"])
 
     @parametrize
-    def test_method_authorize_with_all_params(self, client: ArcadeEngine) -> None:
+    def test_method_authorize_with_all_params(self, client: ArcadeAI) -> None:
         tool = client.tools.authorize(
             tool_name="tool_name",
             user_id="user_id",
@@ -70,7 +70,7 @@ class TestTools:
         assert_matches_type(AuthorizationResponse, tool, path=["response"])
 
     @parametrize
-    def test_raw_response_authorize(self, client: ArcadeEngine) -> None:
+    def test_raw_response_authorize(self, client: ArcadeAI) -> None:
         response = client.tools.with_raw_response.authorize(
             tool_name="tool_name",
             user_id="user_id",
@@ -82,7 +82,7 @@ class TestTools:
         assert_matches_type(AuthorizationResponse, tool, path=["response"])
 
     @parametrize
-    def test_streaming_response_authorize(self, client: ArcadeEngine) -> None:
+    def test_streaming_response_authorize(self, client: ArcadeAI) -> None:
         with client.tools.with_streaming_response.authorize(
             tool_name="tool_name",
             user_id="user_id",
@@ -96,7 +96,7 @@ class TestTools:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_execute(self, client: ArcadeEngine) -> None:
+    def test_method_execute(self, client: ArcadeAI) -> None:
         tool = client.tools.execute(
             inputs="inputs",
             tool_name="tool_name",
@@ -106,7 +106,7 @@ class TestTools:
         assert_matches_type(Response, tool, path=["response"])
 
     @parametrize
-    def test_raw_response_execute(self, client: ArcadeEngine) -> None:
+    def test_raw_response_execute(self, client: ArcadeAI) -> None:
         response = client.tools.with_raw_response.execute(
             inputs="inputs",
             tool_name="tool_name",
@@ -120,7 +120,7 @@ class TestTools:
         assert_matches_type(Response, tool, path=["response"])
 
     @parametrize
-    def test_streaming_response_execute(self, client: ArcadeEngine) -> None:
+    def test_streaming_response_execute(self, client: ArcadeAI) -> None:
         with client.tools.with_streaming_response.execute(
             inputs="inputs",
             tool_name="tool_name",
@@ -140,7 +140,7 @@ class TestAsyncTools:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncArcadeEngine) -> None:
+    async def test_method_retrieve(self, async_client: AsyncArcadeAI) -> None:
         tool = await async_client.tools.retrieve(
             director_id="director_id",
             tool_id="tool_id",
@@ -148,7 +148,7 @@ class TestAsyncTools:
         assert_matches_type(Definition, tool, path=["response"])
 
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncArcadeEngine) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncArcadeAI) -> None:
         response = await async_client.tools.with_raw_response.retrieve(
             director_id="director_id",
             tool_id="tool_id",
@@ -160,7 +160,7 @@ class TestAsyncTools:
         assert_matches_type(Definition, tool, path=["response"])
 
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncArcadeEngine) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncArcadeAI) -> None:
         async with async_client.tools.with_streaming_response.retrieve(
             director_id="director_id",
             tool_id="tool_id",
@@ -174,7 +174,7 @@ class TestAsyncTools:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_authorize(self, async_client: AsyncArcadeEngine) -> None:
+    async def test_method_authorize(self, async_client: AsyncArcadeAI) -> None:
         tool = await async_client.tools.authorize(
             tool_name="tool_name",
             user_id="user_id",
@@ -182,7 +182,7 @@ class TestAsyncTools:
         assert_matches_type(AuthorizationResponse, tool, path=["response"])
 
     @parametrize
-    async def test_method_authorize_with_all_params(self, async_client: AsyncArcadeEngine) -> None:
+    async def test_method_authorize_with_all_params(self, async_client: AsyncArcadeAI) -> None:
         tool = await async_client.tools.authorize(
             tool_name="tool_name",
             user_id="user_id",
@@ -191,7 +191,7 @@ class TestAsyncTools:
         assert_matches_type(AuthorizationResponse, tool, path=["response"])
 
     @parametrize
-    async def test_raw_response_authorize(self, async_client: AsyncArcadeEngine) -> None:
+    async def test_raw_response_authorize(self, async_client: AsyncArcadeAI) -> None:
         response = await async_client.tools.with_raw_response.authorize(
             tool_name="tool_name",
             user_id="user_id",
@@ -203,7 +203,7 @@ class TestAsyncTools:
         assert_matches_type(AuthorizationResponse, tool, path=["response"])
 
     @parametrize
-    async def test_streaming_response_authorize(self, async_client: AsyncArcadeEngine) -> None:
+    async def test_streaming_response_authorize(self, async_client: AsyncArcadeAI) -> None:
         async with async_client.tools.with_streaming_response.authorize(
             tool_name="tool_name",
             user_id="user_id",
@@ -217,7 +217,7 @@ class TestAsyncTools:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_execute(self, async_client: AsyncArcadeEngine) -> None:
+    async def test_method_execute(self, async_client: AsyncArcadeAI) -> None:
         tool = await async_client.tools.execute(
             inputs="inputs",
             tool_name="tool_name",
@@ -227,7 +227,7 @@ class TestAsyncTools:
         assert_matches_type(Response, tool, path=["response"])
 
     @parametrize
-    async def test_raw_response_execute(self, async_client: AsyncArcadeEngine) -> None:
+    async def test_raw_response_execute(self, async_client: AsyncArcadeAI) -> None:
         response = await async_client.tools.with_raw_response.execute(
             inputs="inputs",
             tool_name="tool_name",
@@ -241,7 +241,7 @@ class TestAsyncTools:
         assert_matches_type(Response, tool, path=["response"])
 
     @parametrize
-    async def test_streaming_response_execute(self, async_client: AsyncArcadeEngine) -> None:
+    async def test_streaming_response_execute(self, async_client: AsyncArcadeAI) -> None:
         async with async_client.tools.with_streaming_response.execute(
             inputs="inputs",
             tool_name="tool_name",
