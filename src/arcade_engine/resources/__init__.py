@@ -1,5 +1,21 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .auth import (
+    AuthResource,
+    AsyncAuthResource,
+    AuthResourceWithRawResponse,
+    AsyncAuthResourceWithRawResponse,
+    AuthResourceWithStreamingResponse,
+    AsyncAuthResourceWithStreamingResponse,
+)
+from .chat import (
+    ChatResource,
+    AsyncChatResource,
+    ChatResourceWithRawResponse,
+    AsyncChatResourceWithRawResponse,
+    ChatResourceWithStreamingResponse,
+    AsyncChatResourceWithStreamingResponse,
+)
 from .tools import (
     ToolsResource,
     AsyncToolsResource,
@@ -8,50 +24,34 @@ from .tools import (
     ToolsResourceWithStreamingResponse,
     AsyncToolsResourceWithStreamingResponse,
 )
-from .operations import (
-    OperationsResource,
-    AsyncOperationsResource,
-    OperationsResourceWithRawResponse,
-    AsyncOperationsResourceWithRawResponse,
-    OperationsResourceWithStreamingResponse,
-    AsyncOperationsResourceWithStreamingResponse,
-)
-from .authorization import (
-    AuthorizationResource,
-    AsyncAuthorizationResource,
-    AuthorizationResourceWithRawResponse,
-    AsyncAuthorizationResourceWithRawResponse,
-    AuthorizationResourceWithStreamingResponse,
-    AsyncAuthorizationResourceWithStreamingResponse,
-)
-from .llm_completions import (
-    LlmCompletionsResource,
-    AsyncLlmCompletionsResource,
-    LlmCompletionsResourceWithRawResponse,
-    AsyncLlmCompletionsResourceWithRawResponse,
-    LlmCompletionsResourceWithStreamingResponse,
-    AsyncLlmCompletionsResourceWithStreamingResponse,
+from .health import (
+    HealthResource,
+    AsyncHealthResource,
+    HealthResourceWithRawResponse,
+    AsyncHealthResourceWithRawResponse,
+    HealthResourceWithStreamingResponse,
+    AsyncHealthResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "AuthorizationResource",
-    "AsyncAuthorizationResource",
-    "AuthorizationResourceWithRawResponse",
-    "AsyncAuthorizationResourceWithRawResponse",
-    "AuthorizationResourceWithStreamingResponse",
-    "AsyncAuthorizationResourceWithStreamingResponse",
-    "LlmCompletionsResource",
-    "AsyncLlmCompletionsResource",
-    "LlmCompletionsResourceWithRawResponse",
-    "AsyncLlmCompletionsResourceWithRawResponse",
-    "LlmCompletionsResourceWithStreamingResponse",
-    "AsyncLlmCompletionsResourceWithStreamingResponse",
-    "OperationsResource",
-    "AsyncOperationsResource",
-    "OperationsResourceWithRawResponse",
-    "AsyncOperationsResourceWithRawResponse",
-    "OperationsResourceWithStreamingResponse",
-    "AsyncOperationsResourceWithStreamingResponse",
+    "AuthResource",
+    "AsyncAuthResource",
+    "AuthResourceWithRawResponse",
+    "AsyncAuthResourceWithRawResponse",
+    "AuthResourceWithStreamingResponse",
+    "AsyncAuthResourceWithStreamingResponse",
+    "ChatResource",
+    "AsyncChatResource",
+    "ChatResourceWithRawResponse",
+    "AsyncChatResourceWithRawResponse",
+    "ChatResourceWithStreamingResponse",
+    "AsyncChatResourceWithStreamingResponse",
+    "HealthResource",
+    "AsyncHealthResource",
+    "HealthResourceWithRawResponse",
+    "AsyncHealthResourceWithRawResponse",
+    "HealthResourceWithStreamingResponse",
+    "AsyncHealthResourceWithStreamingResponse",
     "ToolsResource",
     "AsyncToolsResource",
     "ToolsResourceWithRawResponse",

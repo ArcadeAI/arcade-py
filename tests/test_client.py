@@ -31,7 +31,7 @@ from arcade_engine._base_client import (
 from .utils import update_env
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-bearer_token = "My Bearer Token"
+api_key = "My API Key"
 
 
 def _get_params(client: BaseClient[Any, Any]) -> dict[str, str]:
@@ -53,7 +53,7 @@ def _get_open_connections(client: ArcadeEngine | AsyncArcadeEngine) -> int:
 
 
 class TestArcadeEngine:
-    client = ArcadeEngine(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+    client = ArcadeEngine(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response(self, respx_mock: MockRouter) -> None:
@@ -79,9 +79,9 @@ class TestArcadeEngine:
         copied = self.client.copy()
         assert id(copied) != id(self.client)
 
-        copied = self.client.copy(bearer_token="another My Bearer Token")
-        assert copied.bearer_token == "another My Bearer Token"
-        assert self.client.bearer_token == "My Bearer Token"
+        copied = self.client.copy(api_key="another My API Key")
+        assert copied.api_key == "another My API Key"
+        assert self.client.api_key == "My API Key"
 
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
@@ -101,10 +101,7 @@ class TestArcadeEngine:
 
     def test_copy_default_headers(self) -> None:
         client = ArcadeEngine(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
 
@@ -138,7 +135,7 @@ class TestArcadeEngine:
 
     def test_copy_default_query(self) -> None:
         client = ArcadeEngine(
-            base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, default_query={"foo": "bar"}
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
 
@@ -263,7 +260,7 @@ class TestArcadeEngine:
 
     def test_client_timeout_option(self) -> None:
         client = ArcadeEngine(
-            base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, timeout=httpx.Timeout(0)
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
         )
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -274,7 +271,7 @@ class TestArcadeEngine:
         # custom timeout given to the httpx client should be used
         with httpx.Client(timeout=None) as http_client:
             client = ArcadeEngine(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -284,7 +281,7 @@ class TestArcadeEngine:
         # no timeout given to the httpx client should not use the httpx default
         with httpx.Client() as http_client:
             client = ArcadeEngine(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -294,7 +291,7 @@ class TestArcadeEngine:
         # explicitly passing the default timeout currently results in it being ignored
         with httpx.Client(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = ArcadeEngine(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -306,17 +303,14 @@ class TestArcadeEngine:
             async with httpx.AsyncClient() as http_client:
                 ArcadeEngine(
                     base_url=base_url,
-                    bearer_token=bearer_token,
+                    api_key=api_key,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
 
     def test_default_headers_option(self) -> None:
         client = ArcadeEngine(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
@@ -324,7 +318,7 @@ class TestArcadeEngine:
 
         client2 = ArcadeEngine(
             base_url=base_url,
-            bearer_token=bearer_token,
+            api_key=api_key,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -337,10 +331,7 @@ class TestArcadeEngine:
 
     def test_default_query_option(self) -> None:
         client = ArcadeEngine(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            _strict_response_validation=True,
-            default_query={"query_param": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         url = httpx.URL(request.url)
@@ -541,7 +532,7 @@ class TestArcadeEngine:
 
     def test_base_url_setter(self) -> None:
         client = ArcadeEngine(
-            base_url="https://example.com/from_init", bearer_token=bearer_token, _strict_response_validation=True
+            base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True
         )
         assert client.base_url == "https://example.com/from_init/"
 
@@ -551,20 +542,18 @@ class TestArcadeEngine:
 
     def test_base_url_env(self) -> None:
         with update_env(ARCADE_ENGINE_BASE_URL="http://localhost:5000/from/env"):
-            client = ArcadeEngine(bearer_token=bearer_token, _strict_response_validation=True)
+            client = ArcadeEngine(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
             ArcadeEngine(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             ArcadeEngine(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -585,13 +574,11 @@ class TestArcadeEngine:
         "client",
         [
             ArcadeEngine(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             ArcadeEngine(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -612,13 +599,11 @@ class TestArcadeEngine:
         "client",
         [
             ArcadeEngine(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             ArcadeEngine(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -636,7 +621,7 @@ class TestArcadeEngine:
         assert request.url == "https://myapi.com/foo"
 
     def test_copied_client_does_not_close_http(self) -> None:
-        client = ArcadeEngine(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = ArcadeEngine(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -647,7 +632,7 @@ class TestArcadeEngine:
         assert not client.is_closed()
 
     def test_client_context_manager(self) -> None:
-        client = ArcadeEngine(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = ArcadeEngine(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -669,10 +654,7 @@ class TestArcadeEngine:
     def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
             ArcadeEngine(
-                base_url=base_url,
-                bearer_token=bearer_token,
-                _strict_response_validation=True,
-                max_retries=cast(Any, None),
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
             )
 
     @pytest.mark.respx(base_url=base_url)
@@ -682,12 +664,12 @@ class TestArcadeEngine:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = ArcadeEngine(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        strict_client = ArcadeEngine(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             strict_client.get("/foo", cast_to=Model)
 
-        client = ArcadeEngine(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=False)
+        client = ArcadeEngine(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -715,7 +697,7 @@ class TestArcadeEngine:
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = ArcadeEngine(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = ArcadeEngine(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -769,7 +751,7 @@ class TestArcadeEngine:
 
         respx_mock.post("/v1/chat/completions").mock(side_effect=retry_handler)
 
-        response = client.llm_completions.with_raw_response.create()
+        response = client.chat.with_raw_response.completions()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -793,7 +775,7 @@ class TestArcadeEngine:
 
         respx_mock.post("/v1/chat/completions").mock(side_effect=retry_handler)
 
-        response = client.llm_completions.with_raw_response.create(extra_headers={"x-stainless-retry-count": Omit()})
+        response = client.chat.with_raw_response.completions(extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -816,13 +798,13 @@ class TestArcadeEngine:
 
         respx_mock.post("/v1/chat/completions").mock(side_effect=retry_handler)
 
-        response = client.llm_completions.with_raw_response.create(extra_headers={"x-stainless-retry-count": "42"})
+        response = client.chat.with_raw_response.completions(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
 
 class TestAsyncArcadeEngine:
-    client = AsyncArcadeEngine(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+    client = AsyncArcadeEngine(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
@@ -850,9 +832,9 @@ class TestAsyncArcadeEngine:
         copied = self.client.copy()
         assert id(copied) != id(self.client)
 
-        copied = self.client.copy(bearer_token="another My Bearer Token")
-        assert copied.bearer_token == "another My Bearer Token"
-        assert self.client.bearer_token == "My Bearer Token"
+        copied = self.client.copy(api_key="another My API Key")
+        assert copied.api_key == "another My API Key"
+        assert self.client.api_key == "My API Key"
 
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
@@ -872,10 +854,7 @@ class TestAsyncArcadeEngine:
 
     def test_copy_default_headers(self) -> None:
         client = AsyncArcadeEngine(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
 
@@ -909,7 +888,7 @@ class TestAsyncArcadeEngine:
 
     def test_copy_default_query(self) -> None:
         client = AsyncArcadeEngine(
-            base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, default_query={"foo": "bar"}
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
 
@@ -1034,7 +1013,7 @@ class TestAsyncArcadeEngine:
 
     async def test_client_timeout_option(self) -> None:
         client = AsyncArcadeEngine(
-            base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, timeout=httpx.Timeout(0)
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
         )
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1045,7 +1024,7 @@ class TestAsyncArcadeEngine:
         # custom timeout given to the httpx client should be used
         async with httpx.AsyncClient(timeout=None) as http_client:
             client = AsyncArcadeEngine(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1055,7 +1034,7 @@ class TestAsyncArcadeEngine:
         # no timeout given to the httpx client should not use the httpx default
         async with httpx.AsyncClient() as http_client:
             client = AsyncArcadeEngine(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1065,7 +1044,7 @@ class TestAsyncArcadeEngine:
         # explicitly passing the default timeout currently results in it being ignored
         async with httpx.AsyncClient(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = AsyncArcadeEngine(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1077,17 +1056,14 @@ class TestAsyncArcadeEngine:
             with httpx.Client() as http_client:
                 AsyncArcadeEngine(
                     base_url=base_url,
-                    bearer_token=bearer_token,
+                    api_key=api_key,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
 
     def test_default_headers_option(self) -> None:
         client = AsyncArcadeEngine(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
@@ -1095,7 +1071,7 @@ class TestAsyncArcadeEngine:
 
         client2 = AsyncArcadeEngine(
             base_url=base_url,
-            bearer_token=bearer_token,
+            api_key=api_key,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -1108,10 +1084,7 @@ class TestAsyncArcadeEngine:
 
     def test_default_query_option(self) -> None:
         client = AsyncArcadeEngine(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            _strict_response_validation=True,
-            default_query={"query_param": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         url = httpx.URL(request.url)
@@ -1312,7 +1285,7 @@ class TestAsyncArcadeEngine:
 
     def test_base_url_setter(self) -> None:
         client = AsyncArcadeEngine(
-            base_url="https://example.com/from_init", bearer_token=bearer_token, _strict_response_validation=True
+            base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True
         )
         assert client.base_url == "https://example.com/from_init/"
 
@@ -1322,20 +1295,18 @@ class TestAsyncArcadeEngine:
 
     def test_base_url_env(self) -> None:
         with update_env(ARCADE_ENGINE_BASE_URL="http://localhost:5000/from/env"):
-            client = AsyncArcadeEngine(bearer_token=bearer_token, _strict_response_validation=True)
+            client = AsyncArcadeEngine(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
             AsyncArcadeEngine(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             AsyncArcadeEngine(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1356,13 +1327,11 @@ class TestAsyncArcadeEngine:
         "client",
         [
             AsyncArcadeEngine(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             AsyncArcadeEngine(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1383,13 +1352,11 @@ class TestAsyncArcadeEngine:
         "client",
         [
             AsyncArcadeEngine(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             AsyncArcadeEngine(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1407,7 +1374,7 @@ class TestAsyncArcadeEngine:
         assert request.url == "https://myapi.com/foo"
 
     async def test_copied_client_does_not_close_http(self) -> None:
-        client = AsyncArcadeEngine(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = AsyncArcadeEngine(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -1419,7 +1386,7 @@ class TestAsyncArcadeEngine:
         assert not client.is_closed()
 
     async def test_client_context_manager(self) -> None:
-        client = AsyncArcadeEngine(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = AsyncArcadeEngine(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         async with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -1442,10 +1409,7 @@ class TestAsyncArcadeEngine:
     async def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
             AsyncArcadeEngine(
-                base_url=base_url,
-                bearer_token=bearer_token,
-                _strict_response_validation=True,
-                max_retries=cast(Any, None),
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
             )
 
     @pytest.mark.respx(base_url=base_url)
@@ -1456,14 +1420,12 @@ class TestAsyncArcadeEngine:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = AsyncArcadeEngine(
-            base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True
-        )
+        strict_client = AsyncArcadeEngine(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             await strict_client.get("/foo", cast_to=Model)
 
-        client = AsyncArcadeEngine(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=False)
+        client = AsyncArcadeEngine(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = await client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -1492,7 +1454,7 @@ class TestAsyncArcadeEngine:
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     @pytest.mark.asyncio
     async def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = AsyncArcadeEngine(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = AsyncArcadeEngine(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -1549,7 +1511,7 @@ class TestAsyncArcadeEngine:
 
         respx_mock.post("/v1/chat/completions").mock(side_effect=retry_handler)
 
-        response = await client.llm_completions.with_raw_response.create()
+        response = await client.chat.with_raw_response.completions()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1574,9 +1536,7 @@ class TestAsyncArcadeEngine:
 
         respx_mock.post("/v1/chat/completions").mock(side_effect=retry_handler)
 
-        response = await client.llm_completions.with_raw_response.create(
-            extra_headers={"x-stainless-retry-count": Omit()}
-        )
+        response = await client.chat.with_raw_response.completions(extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -1600,8 +1560,6 @@ class TestAsyncArcadeEngine:
 
         respx_mock.post("/v1/chat/completions").mock(side_effect=retry_handler)
 
-        response = await client.llm_completions.with_raw_response.create(
-            extra_headers={"x-stainless-retry-count": "42"}
-        )
+        response = await client.chat.with_raw_response.completions(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"

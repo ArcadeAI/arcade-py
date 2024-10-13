@@ -46,20 +46,20 @@ __all__ = [
 
 
 class ArcadeEngine(SyncAPIClient):
-    authorization: resources.AuthorizationResource
-    llm_completions: resources.LlmCompletionsResource
-    operations: resources.OperationsResource
+    auth: resources.AuthResource
+    chat: resources.ChatResource
+    health: resources.HealthResource
     tools: resources.ToolsResource
     with_raw_response: ArcadeEngineWithRawResponse
     with_streaming_response: ArcadeEngineWithStreamedResponse
 
     # client options
-    bearer_token: str
+    api_key: str
 
     def __init__(
         self,
         *,
-        bearer_token: str | None = None,
+        api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -81,15 +81,15 @@ class ArcadeEngine(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous arcade-engine client instance.
 
-        This automatically infers the `bearer_token` argument from the `BEARER_TOKEN` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `ARCADE_API_KEY` environment variable if it is not provided.
         """
-        if bearer_token is None:
-            bearer_token = os.environ.get("BEARER_TOKEN")
-        if bearer_token is None:
+        if api_key is None:
+            api_key = os.environ.get("ARCADE_API_KEY")
+        if api_key is None:
             raise ArcadeEngineError(
-                "The bearer_token client option must be set either by passing bearer_token to the client or by setting the BEARER_TOKEN environment variable"
+                "The api_key client option must be set either by passing api_key to the client or by setting the ARCADE_API_KEY environment variable"
             )
-        self.bearer_token = bearer_token
+        self.api_key = api_key
 
         if base_url is None:
             base_url = os.environ.get("ARCADE_ENGINE_BASE_URL")
@@ -107,9 +107,9 @@ class ArcadeEngine(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.authorization = resources.AuthorizationResource(self)
-        self.llm_completions = resources.LlmCompletionsResource(self)
-        self.operations = resources.OperationsResource(self)
+        self.auth = resources.AuthResource(self)
+        self.chat = resources.ChatResource(self)
+        self.health = resources.HealthResource(self)
         self.tools = resources.ToolsResource(self)
         self.with_raw_response = ArcadeEngineWithRawResponse(self)
         self.with_streaming_response = ArcadeEngineWithStreamedResponse(self)
@@ -122,8 +122,8 @@ class ArcadeEngine(SyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
-        bearer_token = self.bearer_token
-        return {"Authorization": bearer_token}
+        api_key = self.api_key
+        return {"Authorization": api_key}
 
     @property
     @override
@@ -137,7 +137,7 @@ class ArcadeEngine(SyncAPIClient):
     def copy(
         self,
         *,
-        bearer_token: str | None = None,
+        api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -171,7 +171,7 @@ class ArcadeEngine(SyncAPIClient):
 
         http_client = http_client or self._client
         return self.__class__(
-            bearer_token=bearer_token or self.bearer_token,
+            api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -220,20 +220,20 @@ class ArcadeEngine(SyncAPIClient):
 
 
 class AsyncArcadeEngine(AsyncAPIClient):
-    authorization: resources.AsyncAuthorizationResource
-    llm_completions: resources.AsyncLlmCompletionsResource
-    operations: resources.AsyncOperationsResource
+    auth: resources.AsyncAuthResource
+    chat: resources.AsyncChatResource
+    health: resources.AsyncHealthResource
     tools: resources.AsyncToolsResource
     with_raw_response: AsyncArcadeEngineWithRawResponse
     with_streaming_response: AsyncArcadeEngineWithStreamedResponse
 
     # client options
-    bearer_token: str
+    api_key: str
 
     def __init__(
         self,
         *,
-        bearer_token: str | None = None,
+        api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -255,15 +255,15 @@ class AsyncArcadeEngine(AsyncAPIClient):
     ) -> None:
         """Construct a new async arcade-engine client instance.
 
-        This automatically infers the `bearer_token` argument from the `BEARER_TOKEN` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `ARCADE_API_KEY` environment variable if it is not provided.
         """
-        if bearer_token is None:
-            bearer_token = os.environ.get("BEARER_TOKEN")
-        if bearer_token is None:
+        if api_key is None:
+            api_key = os.environ.get("ARCADE_API_KEY")
+        if api_key is None:
             raise ArcadeEngineError(
-                "The bearer_token client option must be set either by passing bearer_token to the client or by setting the BEARER_TOKEN environment variable"
+                "The api_key client option must be set either by passing api_key to the client or by setting the ARCADE_API_KEY environment variable"
             )
-        self.bearer_token = bearer_token
+        self.api_key = api_key
 
         if base_url is None:
             base_url = os.environ.get("ARCADE_ENGINE_BASE_URL")
@@ -281,9 +281,9 @@ class AsyncArcadeEngine(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.authorization = resources.AsyncAuthorizationResource(self)
-        self.llm_completions = resources.AsyncLlmCompletionsResource(self)
-        self.operations = resources.AsyncOperationsResource(self)
+        self.auth = resources.AsyncAuthResource(self)
+        self.chat = resources.AsyncChatResource(self)
+        self.health = resources.AsyncHealthResource(self)
         self.tools = resources.AsyncToolsResource(self)
         self.with_raw_response = AsyncArcadeEngineWithRawResponse(self)
         self.with_streaming_response = AsyncArcadeEngineWithStreamedResponse(self)
@@ -296,8 +296,8 @@ class AsyncArcadeEngine(AsyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
-        bearer_token = self.bearer_token
-        return {"Authorization": bearer_token}
+        api_key = self.api_key
+        return {"Authorization": api_key}
 
     @property
     @override
@@ -311,7 +311,7 @@ class AsyncArcadeEngine(AsyncAPIClient):
     def copy(
         self,
         *,
-        bearer_token: str | None = None,
+        api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -345,7 +345,7 @@ class AsyncArcadeEngine(AsyncAPIClient):
 
         http_client = http_client or self._client
         return self.__class__(
-            bearer_token=bearer_token or self.bearer_token,
+            api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -395,33 +395,33 @@ class AsyncArcadeEngine(AsyncAPIClient):
 
 class ArcadeEngineWithRawResponse:
     def __init__(self, client: ArcadeEngine) -> None:
-        self.authorization = resources.AuthorizationResourceWithRawResponse(client.authorization)
-        self.llm_completions = resources.LlmCompletionsResourceWithRawResponse(client.llm_completions)
-        self.operations = resources.OperationsResourceWithRawResponse(client.operations)
+        self.auth = resources.AuthResourceWithRawResponse(client.auth)
+        self.chat = resources.ChatResourceWithRawResponse(client.chat)
+        self.health = resources.HealthResourceWithRawResponse(client.health)
         self.tools = resources.ToolsResourceWithRawResponse(client.tools)
 
 
 class AsyncArcadeEngineWithRawResponse:
     def __init__(self, client: AsyncArcadeEngine) -> None:
-        self.authorization = resources.AsyncAuthorizationResourceWithRawResponse(client.authorization)
-        self.llm_completions = resources.AsyncLlmCompletionsResourceWithRawResponse(client.llm_completions)
-        self.operations = resources.AsyncOperationsResourceWithRawResponse(client.operations)
+        self.auth = resources.AsyncAuthResourceWithRawResponse(client.auth)
+        self.chat = resources.AsyncChatResourceWithRawResponse(client.chat)
+        self.health = resources.AsyncHealthResourceWithRawResponse(client.health)
         self.tools = resources.AsyncToolsResourceWithRawResponse(client.tools)
 
 
 class ArcadeEngineWithStreamedResponse:
     def __init__(self, client: ArcadeEngine) -> None:
-        self.authorization = resources.AuthorizationResourceWithStreamingResponse(client.authorization)
-        self.llm_completions = resources.LlmCompletionsResourceWithStreamingResponse(client.llm_completions)
-        self.operations = resources.OperationsResourceWithStreamingResponse(client.operations)
+        self.auth = resources.AuthResourceWithStreamingResponse(client.auth)
+        self.chat = resources.ChatResourceWithStreamingResponse(client.chat)
+        self.health = resources.HealthResourceWithStreamingResponse(client.health)
         self.tools = resources.ToolsResourceWithStreamingResponse(client.tools)
 
 
 class AsyncArcadeEngineWithStreamedResponse:
     def __init__(self, client: AsyncArcadeEngine) -> None:
-        self.authorization = resources.AsyncAuthorizationResourceWithStreamingResponse(client.authorization)
-        self.llm_completions = resources.AsyncLlmCompletionsResourceWithStreamingResponse(client.llm_completions)
-        self.operations = resources.AsyncOperationsResourceWithStreamingResponse(client.operations)
+        self.auth = resources.AsyncAuthResourceWithStreamingResponse(client.auth)
+        self.chat = resources.AsyncChatResourceWithStreamingResponse(client.chat)
+        self.health = resources.AsyncHealthResourceWithStreamingResponse(client.health)
         self.tools = resources.AsyncToolsResourceWithStreamingResponse(client.tools)
 
 

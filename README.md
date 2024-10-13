@@ -31,14 +31,14 @@ from arcade_engine import ArcadeEngine
 
 client = ArcadeEngine()
 
-chat_response = client.llm_completions.create()
+chat_response = client.chat.completions()
 print(chat_response.id)
 ```
 
-While you can provide a `bearer_token` keyword argument,
+While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `BEARER_TOKEN="My Bearer Token"` to your `.env` file
-so that your Bearer Token is not stored in source control.
+to add `ARCADE_API_KEY="My API Key"` to your `.env` file
+so that your API Key is not stored in source control.
 
 ## Async usage
 
@@ -52,7 +52,7 @@ client = AsyncArcadeEngine()
 
 
 async def main() -> None:
-    chat_response = await client.llm_completions.create()
+    chat_response = await client.chat.completions()
     print(chat_response.id)
 
 
@@ -86,7 +86,7 @@ from arcade_engine import ArcadeEngine
 client = ArcadeEngine()
 
 try:
-    client.llm_completions.create()
+    client.chat.completions()
 except arcade_engine.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -129,7 +129,7 @@ client = ArcadeEngine(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).llm_completions.create()
+client.with_options(max_retries=5).chat.completions()
 ```
 
 ### Timeouts
@@ -152,7 +152,7 @@ client = ArcadeEngine(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).llm_completions.create()
+client.with_options(timeout=5.0).chat.completions()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -191,11 +191,11 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from arcade_engine import ArcadeEngine
 
 client = ArcadeEngine()
-response = client.llm_completions.with_raw_response.create()
+response = client.chat.with_raw_response.completions()
 print(response.headers.get('X-My-Header'))
 
-llm_completion = response.parse()  # get the object that `llm_completions.create()` would have returned
-print(llm_completion.id)
+chat = response.parse()  # get the object that `chat.completions()` would have returned
+print(chat.id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/ArcadeAI/arcade-py/tree/main/src/arcade_engine/_response.py) object.
@@ -209,7 +209,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.llm_completions.with_streaming_response.create() as response:
+with client.chat.with_streaming_response.completions() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
