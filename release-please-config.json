@@ -61,6 +61,6 @@
   ],
   "release-type": "python",
   "extra-files": [
-    "src/arcade_engine/_version.py"
+    "src/arcadepy/_version.py"
   ]
 }
