@@ -8,15 +8,15 @@ from typing_extensions import Required, Annotated, TypedDict
 
 import pytest
 
-from arcade_engine._types import Base64FileInput
-from arcade_engine._utils import (
+from arcadepy._types import Base64FileInput
+from arcadepy._utils import (
     PropertyInfo,
     transform as _transform,
     parse_datetime,
     async_transform as _async_transform,
 )
-from arcade_engine._compat import PYDANTIC_V2
-from arcade_engine._models import BaseModel
+from arcadepy._compat import PYDANTIC_V2
+from arcadepy._models import BaseModel
 
 _T = TypeVar("_T")
 

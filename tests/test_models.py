@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from arcade_engine._utils import PropertyInfo
-from arcade_engine._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
-from arcade_engine._models import BaseModel, construct_type
+from arcadepy._utils import PropertyInfo
+from arcadepy._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
+from arcadepy._models import BaseModel, construct_type
 
 
 class BasicModel(BaseModel):

@@ -1,8 +1,8 @@
-# Arcade Engine Python API library
+# Arcade AI Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/arcade-py.svg)](https://pypi.org/project/arcade-py/)
+[![PyPI version](https://img.shields.io/pypi/v/arcadepy.svg)](https://pypi.org/project/arcadepy/)
 
-The Arcade Engine Python library provides convenient access to the Arcade Engine REST API from any Python 3.7+
+The Arcade AI Python library provides convenient access to the Arcade AI REST API from any Python 3.7+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -15,27 +15,32 @@ The REST API documentation can be found on [arcade-ai.com](https://arcade-ai.com
 ## Installation
 
 ```sh
-# install from the production repo
-pip install git+ssh://git@github.com/ArcadeAI/arcade-py.git
+# install from this staging repo
+pip install git+ssh://git@github.com/stainless-sdks/arcade-engine-python.git
 ```
 
 > [!NOTE]
-> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre arcade-py`
+> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre arcadepy`
 
 ## Usage
 
 The full API of this library can be found in [api.md](api.md).
 
 ```python
-from arcade_engine import ArcadeEngine
+from arcadepy import ArcadeAI
 
-client = ArcadeEngine()
-
-authorization_response = client.auth.authorization(
-    auth_requirement={"provider": "provider"},
-    user_id="user_id",
+client = ArcadeAI(
+    # defaults to "production".
+    environment="staging",
 )
-print(authorization_response.authorization_id)
+
+response = client.tools.execute(
+    inputs="[object Object]",
+    tool_name="Google.ListEmails",
+    tool_version="0.1.0",
+    user_id="dev@arcade-ai.com",
+)
+print(response.invocation_id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -45,21 +50,26 @@ so that your API Key is not stored in source control.
 
 ## Async usage
 
-Simply import `AsyncArcadeEngine` instead of `ArcadeEngine` and use `await` with each API call:
+Simply import `AsyncArcadeAI` instead of `ArcadeAI` and use `await` with each API call:
 
 ```python
 import asyncio
-from arcade_engine import AsyncArcadeEngine
+from arcadepy import AsyncArcadeAI
 
-client = AsyncArcadeEngine()
+client = AsyncArcadeAI(
+    # defaults to "production".
+    environment="staging",
+)
 
 
 async def main() -> None:
-    authorization_response = await client.auth.authorization(
-        auth_requirement={"provider": "provider"},
-        user_id="user_id",
+    response = await client.tools.execute(
+        inputs="[object Object]",
+        tool_name="Google.ListEmails",
+        tool_version="0.1.0",
+        user_id="dev@arcade-ai.com",
     )
-    print(authorization_response.authorization_id)
+    print(response.invocation_id)
 
 
 asyncio.run(main())
@@ -78,30 +88,27 @@ Typed requests and responses provide autocomplete and documentation within your 
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `arcade_engine.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `arcadepy.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `arcade_engine.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `arcadepy.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `arcade_engine.APIError`.
+All errors inherit from `arcadepy.APIError`.
 
 ```python
-import arcade_engine
-from arcade_engine import ArcadeEngine
+import arcadepy
+from arcadepy import ArcadeAI
 
-client = ArcadeEngine()
+client = ArcadeAI()
 
 try:
-    client.auth.authorization(
-        auth_requirement={"provider": "provider"},
-        user_id="user_id",
-    )
-except arcade_engine.APIConnectionError as e:
+    client.chat.completions()
+except arcadepy.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except arcade_engine.RateLimitError as e:
+except arcadepy.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except arcade_engine.APIStatusError as e:
+except arcadepy.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -129,19 +136,16 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from arcade_engine import ArcadeEngine
+from arcadepy import ArcadeAI
 
 # Configure the default for all requests:
-client = ArcadeEngine(
+client = ArcadeAI(
     # default is 2
     max_retries=0,
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).auth.authorization(
-    auth_requirement={"provider": "provider"},
-    user_id="user_id",
-)
+client.with_options(max_retries=5).chat.completions()
 ```
 
 ### Timeouts
@@ -150,24 +154,21 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
 
 ```python
-from arcade_engine import ArcadeEngine
+from arcadepy import ArcadeAI
 
 # Configure the default for all requests:
-client = ArcadeEngine(
+client = ArcadeAI(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
 )
 
 # More granular control:
-client = ArcadeEngine(
+client = ArcadeAI(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).auth.authorization(
-    auth_requirement={"provider": "provider"},
-    user_id="user_id",
-)
+client.with_options(timeout=5.0).chat.completions()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -180,10 +181,10 @@ Note that requests that time out are [retried twice by default](#retries).
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `ARCADE_ENGINE_LOG` to `debug`.
+You can enable logging by setting the environment variable `ARCADE_AI_LOG` to `debug`.
 
 ```shell
-$ export ARCADE_ENGINE_LOG=debug
+$ export ARCADE_AI_LOG=debug
 ```
 
 ### How to tell whether `None` means `null` or missing
@@ -203,24 +204,19 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from arcade_engine import ArcadeEngine
+from arcadepy import ArcadeAI
 
-client = ArcadeEngine()
-response = client.auth.with_raw_response.authorization(
-    auth_requirement={
-        "provider": "provider"
-    },
-    user_id="user_id",
-)
+client = ArcadeAI()
+response = client.chat.with_raw_response.completions()
 print(response.headers.get('X-My-Header'))
 
-auth = response.parse()  # get the object that `auth.authorization()` would have returned
-print(auth.authorization_id)
+chat = response.parse()  # get the object that `chat.completions()` would have returned
+print(chat.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/ArcadeAI/arcade-py/tree/main/src/arcade_engine/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/stainless-sdks/arcade-engine-python/tree/main/src/arcadepy/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/ArcadeAI/arcade-py/tree/main/src/arcade_engine/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/arcade-engine-python/tree/main/src/arcadepy/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -229,10 +225,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.auth.with_streaming_response.authorization(
-    auth_requirement={"provider": "provider"},
-    user_id="user_id",
-) as response:
+with client.chat.with_streaming_response.completions() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
@@ -285,10 +278,10 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 - Additional [advanced](https://www.python-httpx.org/advanced/clients/) functionality
 
 ```python
-from arcade_engine import ArcadeEngine, DefaultHttpxClient
+from arcadepy import ArcadeAI, DefaultHttpxClient
 
-client = ArcadeEngine(
-    # Or use the `ARCADE_ENGINE_BASE_URL` env var
+client = ArcadeAI(
+    # Or use the `ARCADE_AI_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
     http_client=DefaultHttpxClient(
         proxies="http://my.test.proxy.example.com",
@@ -317,7 +310,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/ArcadeAI/arcade-py/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/arcade-engine-python/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 
@@ -326,8 +319,8 @@ If you've upgraded to the latest version but aren't seeing any new features you 
 You can determine the version that is being used at runtime with:
 
 ```py
-import arcade_engine
-print(arcade_engine.__version__)
+import arcadepy
+print(arcadepy.__version__)
 ```
 
 ## Requirements
