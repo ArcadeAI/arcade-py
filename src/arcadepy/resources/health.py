@@ -39,7 +39,7 @@ class HealthResource(SyncAPIResource):
         """
         return HealthResourceWithStreamingResponse(self)
 
-    def list(
+    def check(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -79,7 +79,7 @@ class AsyncHealthResource(AsyncAPIResource):
         """
         return AsyncHealthResourceWithStreamingResponse(self)
 
-    async def list(
+    async def check(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -103,8 +103,8 @@ class HealthResourceWithRawResponse:
     def __init__(self, health: HealthResource) -> None:
         self._health = health
 
-        self.list = to_raw_response_wrapper(
-            health.list,
+        self.check = to_raw_response_wrapper(
+            health.check,
         )
 
 
@@ -112,8 +112,8 @@ class AsyncHealthResourceWithRawResponse:
     def __init__(self, health: AsyncHealthResource) -> None:
         self._health = health
 
-        self.list = async_to_raw_response_wrapper(
-            health.list,
+        self.check = async_to_raw_response_wrapper(
+            health.check,
         )
 
 
@@ -121,8 +121,8 @@ class HealthResourceWithStreamingResponse:
     def __init__(self, health: HealthResource) -> None:
         self._health = health
 
-        self.list = to_streamed_response_wrapper(
-            health.list,
+        self.check = to_streamed_response_wrapper(
+            health.check,
         )
 
 
@@ -130,6 +130,6 @@ class AsyncHealthResourceWithStreamingResponse:
     def __init__(self, health: AsyncHealthResource) -> None:
         self._health = health
 
-        self.list = async_to_streamed_response_wrapper(
-            health.list,
+        self.check = async_to_streamed_response_wrapper(
+            health.check,
         )
