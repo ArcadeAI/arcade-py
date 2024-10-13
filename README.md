@@ -15,9 +15,12 @@ The REST API documentation can be found on [arcade-ai.com](https://arcade-ai.com
 ## Installation
 
 ```sh
-# install from PyPI
-pip install --pre arcade-py
+# install from the production repo
+pip install git+ssh://git@github.com/ArcadeAI/arcade-py.git
 ```
+
+> [!NOTE]
+> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre arcade-py`
 
 ## Usage
 
@@ -28,8 +31,11 @@ from arcade_engine import ArcadeEngine
 
 client = ArcadeEngine()
 
-chat_response = client.chat.completions()
-print(chat_response.id)
+authorization_response = client.auth.authorization(
+    auth_requirement={"provider": "provider"},
+    user_id="user_id",
+)
+print(authorization_response.authorization_id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -49,8 +55,11 @@ client = AsyncArcadeEngine()
 
 
 async def main() -> None:
-    chat_response = await client.chat.completions()
-    print(chat_response.id)
+    authorization_response = await client.auth.authorization(
+        auth_requirement={"provider": "provider"},
+        user_id="user_id",
+    )
+    print(authorization_response.authorization_id)
 
 
 asyncio.run(main())
@@ -83,7 +92,10 @@ from arcade_engine import ArcadeEngine
 client = ArcadeEngine()
 
 try:
-    client.chat.completions()
+    client.auth.authorization(
+        auth_requirement={"provider": "provider"},
+        user_id="user_id",
+    )
 except arcade_engine.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -126,7 +138,10 @@ client = ArcadeEngine(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).chat.completions()
+client.with_options(max_retries=5).auth.authorization(
+    auth_requirement={"provider": "provider"},
+    user_id="user_id",
+)
 ```
 
 ### Timeouts
@@ -149,7 +164,10 @@ client = ArcadeEngine(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).chat.completions()
+client.with_options(timeout=5.0).auth.authorization(
+    auth_requirement={"provider": "provider"},
+    user_id="user_id",
+)
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -188,11 +206,16 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from arcade_engine import ArcadeEngine
 
 client = ArcadeEngine()
-response = client.chat.with_raw_response.completions()
+response = client.auth.with_raw_response.authorization(
+    auth_requirement={
+        "provider": "provider"
+    },
+    user_id="user_id",
+)
 print(response.headers.get('X-My-Header'))
 
-chat = response.parse()  # get the object that `chat.completions()` would have returned
-print(chat.id)
+auth = response.parse()  # get the object that `auth.authorization()` would have returned
+print(auth.authorization_id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/ArcadeAI/arcade-py/tree/main/src/arcade_engine/_response.py) object.
@@ -206,7 +229,10 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.chat.with_streaming_response.completions() as response:
+with client.auth.with_streaming_response.authorization(
+    auth_requirement={"provider": "provider"},
+    user_id="user_id",
+) as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
