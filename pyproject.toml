@@ -36,8 +36,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/stainless-sdks/arcade-engine-python"
-Repository = "https://github.com/stainless-sdks/arcade-engine-python"
+Homepage = "https://github.com/ArcadeAI/arcade-py"
+Repository = "https://github.com/ArcadeAI/arcade-py"
 
 
 
@@ -123,7 +123,7 @@ path = "README.md"
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 # replace relative links with absolute links
 pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/stainless-sdks/arcade-engine-python/tree/main/\g<2>)'
+replacement = '[\1](https://github.com/ArcadeAI/arcade-py/tree/main/\g<2>)'
 
 [tool.black]
 line-length = 120
