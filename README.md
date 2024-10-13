@@ -1,6 +1,6 @@
 # Arcade Engine Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/arcade_engine.svg)](https://pypi.org/project/arcade_engine/)
+[![PyPI version](https://img.shields.io/pypi/v/arcade-py.svg)](https://pypi.org/project/arcade-py/)
 
 The Arcade Engine Python library provides convenient access to the Arcade Engine REST API from any Python 3.7+
 application. The library includes type definitions for all request params and response fields,
@@ -15,12 +15,9 @@ The REST API documentation can be found on [arcade-ai.com](https://arcade-ai.com
 ## Installation
 
 ```sh
-# install from the production repo
-pip install git+ssh://git@github.com/ArcadeAI/arcade-py.git
+# install from PyPI
+pip install --pre arcade-py
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre arcade_engine`
 
 ## Usage
 
