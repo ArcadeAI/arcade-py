@@ -18,11 +18,11 @@ __all__ = [
 ]
 
 
-class ArcadeAIError(Exception):
+class ArcadeError(Exception):
     pass
 
 
-class APIError(ArcadeAIError):
+class APIError(ArcadeError):
     message: str
     request: httpx.Request
 
