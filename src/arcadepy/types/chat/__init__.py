@@ -2,4 +2,4 @@
 
 from __future__ import annotations
 
-from .completion_completions_params import CompletionCompletionsParams as CompletionCompletionsParams
+from .completion_create_params import CompletionCreateParams as CompletionCreateParams
