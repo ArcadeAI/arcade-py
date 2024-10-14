@@ -800,7 +800,7 @@ class TestArcade:
 
         respx_mock.post("/v1/chat/completions").mock(side_effect=retry_handler)
 
-        response = client.chat.completions.with_raw_response.completions()
+        response = client.chat.completions.with_raw_response.create()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -824,9 +824,7 @@ class TestArcade:
 
         respx_mock.post("/v1/chat/completions").mock(side_effect=retry_handler)
 
-        response = client.chat.completions.with_raw_response.completions(
-            extra_headers={"x-stainless-retry-count": Omit()}
-        )
+        response = client.chat.completions.with_raw_response.create(extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -849,9 +847,7 @@ class TestArcade:
 
         respx_mock.post("/v1/chat/completions").mock(side_effect=retry_handler)
 
-        response = client.chat.completions.with_raw_response.completions(
-            extra_headers={"x-stainless-retry-count": "42"}
-        )
+        response = client.chat.completions.with_raw_response.create(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1625,7 +1621,7 @@ class TestAsyncArcade:
 
         respx_mock.post("/v1/chat/completions").mock(side_effect=retry_handler)
 
-        response = await client.chat.completions.with_raw_response.completions()
+        response = await client.chat.completions.with_raw_response.create()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1650,7 +1646,7 @@ class TestAsyncArcade:
 
         respx_mock.post("/v1/chat/completions").mock(side_effect=retry_handler)
 
-        response = await client.chat.completions.with_raw_response.completions(
+        response = await client.chat.completions.with_raw_response.create(
             extra_headers={"x-stainless-retry-count": Omit()}
         )
 
@@ -1676,7 +1672,7 @@ class TestAsyncArcade:
 
         respx_mock.post("/v1/chat/completions").mock(side_effect=retry_handler)
 
-        response = await client.chat.completions.with_raw_response.completions(
+        response = await client.chat.completions.with_raw_response.create(
             extra_headers={"x-stainless-retry-count": "42"}
         )
 

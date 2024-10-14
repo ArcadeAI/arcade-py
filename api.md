@@ -41,7 +41,7 @@ from arcadepy.types import ChatMessage, ChatRequest, ChatResponse, Choice, Usage
 
 Methods:
 
-- <code title="post /v1/chat/completions">client.chat.completions.<a href="./src/arcadepy/resources/chat/completions.py">completions</a>(\*\*<a href="src/arcadepy/types/chat/completion_completions_params.py">params</a>) -> <a href="./src/arcadepy/types/chat_response.py">ChatResponse</a></code>
+- <code title="post /v1/chat/completions">client.chat.completions.<a href="./src/arcadepy/resources/chat/completions.py">create</a>(\*\*<a href="src/arcadepy/types/chat/completion_create_params.py">params</a>) -> <a href="./src/arcadepy/types/chat_response.py">ChatResponse</a></code>
 
 # Tools
 

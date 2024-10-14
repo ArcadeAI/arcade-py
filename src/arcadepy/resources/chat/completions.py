@@ -20,7 +20,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.chat import completion_completions_params
+from ...types.chat import completion_create_params
 from ..._base_client import make_request_options
 from ...types.chat_response import ChatResponse
 from ...types.chat_message_param import ChatMessageParam
@@ -48,7 +48,7 @@ class CompletionsResource(SyncAPIResource):
         """
         return CompletionsResourceWithStreamingResponse(self)
 
-    def completions(
+    def create(
         self,
         *,
         frequency_penalty: int | NotGiven = NOT_GIVEN,
@@ -64,7 +64,7 @@ class CompletionsResource(SyncAPIResource):
         seed: int | NotGiven = NOT_GIVEN,
         stop: List[str] | NotGiven = NOT_GIVEN,
         stream: bool | NotGiven = NOT_GIVEN,
-        stream_options: completion_completions_params.StreamOptions | NotGiven = NOT_GIVEN,
+        stream_options: completion_create_params.StreamOptions | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
         tool_choice: object | NotGiven = NOT_GIVEN,
         tools: object | NotGiven = NOT_GIVEN,
@@ -138,7 +138,7 @@ class CompletionsResource(SyncAPIResource):
                     "top_p": top_p,
                     "user": user,
                 },
-                completion_completions_params.CompletionCompletionsParams,
+                completion_create_params.CompletionCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -171,7 +171,7 @@ class AsyncCompletionsResource(AsyncAPIResource):
         """
         return AsyncCompletionsResourceWithStreamingResponse(self)
 
-    async def completions(
+    async def create(
         self,
         *,
         frequency_penalty: int | NotGiven = NOT_GIVEN,
@@ -187,7 +187,7 @@ class AsyncCompletionsResource(AsyncAPIResource):
         seed: int | NotGiven = NOT_GIVEN,
         stop: List[str] | NotGiven = NOT_GIVEN,
         stream: bool | NotGiven = NOT_GIVEN,
-        stream_options: completion_completions_params.StreamOptions | NotGiven = NOT_GIVEN,
+        stream_options: completion_create_params.StreamOptions | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
         tool_choice: object | NotGiven = NOT_GIVEN,
         tools: object | NotGiven = NOT_GIVEN,
@@ -261,7 +261,7 @@ class AsyncCompletionsResource(AsyncAPIResource):
                     "top_p": top_p,
                     "user": user,
                 },
-                completion_completions_params.CompletionCompletionsParams,
+                completion_create_params.CompletionCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -278,8 +278,8 @@ class CompletionsResourceWithRawResponse:
     def __init__(self, completions: CompletionsResource) -> None:
         self._completions = completions
 
-        self.completions = to_raw_response_wrapper(
-            completions.completions,
+        self.create = to_raw_response_wrapper(
+            completions.create,
         )
 
 
@@ -287,8 +287,8 @@ class AsyncCompletionsResourceWithRawResponse:
     def __init__(self, completions: AsyncCompletionsResource) -> None:
         self._completions = completions
 
-        self.completions = async_to_raw_response_wrapper(
-            completions.completions,
+        self.create = async_to_raw_response_wrapper(
+            completions.create,
         )
 
 
@@ -296,8 +296,8 @@ class CompletionsResourceWithStreamingResponse:
     def __init__(self, completions: CompletionsResource) -> None:
         self._completions = completions
 
-        self.completions = to_streamed_response_wrapper(
-            completions.completions,
+        self.create = to_streamed_response_wrapper(
+            completions.create,
         )
 
 
@@ -305,6 +305,6 @@ class AsyncCompletionsResourceWithStreamingResponse:
     def __init__(self, completions: AsyncCompletionsResource) -> None:
         self._completions = completions
 
-        self.completions = async_to_streamed_response_wrapper(
-            completions.completions,
+        self.create = async_to_streamed_response_wrapper(
+            completions.create,
         )
