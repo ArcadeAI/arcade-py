@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2024-10-14)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/ArcadeAI/arcade-py/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* remove extra fork ([f119de9](https://github.com/ArcadeAI/arcade-py/commit/f119de9e96630d4e98e7f0b9167ff950114b0b81))
+
 ## 0.1.0-alpha.1 (2024-10-13)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/ArcadeAI/arcade-py/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
