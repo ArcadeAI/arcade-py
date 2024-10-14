@@ -18,13 +18,13 @@ class TestCompletions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_completions(self, client: Arcade) -> None:
-        completion = client.chat.completions.completions()
+    def test_method_create(self, client: Arcade) -> None:
+        completion = client.chat.completions.create()
         assert_matches_type(ChatResponse, completion, path=["response"])
 
     @parametrize
-    def test_method_completions_with_all_params(self, client: Arcade) -> None:
-        completion = client.chat.completions.completions(
+    def test_method_create_with_all_params(self, client: Arcade) -> None:
+        completion = client.chat.completions.create(
             frequency_penalty=0,
             logit_bias={"foo": 0},
             logprobs=True,
@@ -146,8 +146,8 @@ class TestCompletions:
         assert_matches_type(ChatResponse, completion, path=["response"])
 
     @parametrize
-    def test_raw_response_completions(self, client: Arcade) -> None:
-        response = client.chat.completions.with_raw_response.completions()
+    def test_raw_response_create(self, client: Arcade) -> None:
+        response = client.chat.completions.with_raw_response.create()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -155,8 +155,8 @@ class TestCompletions:
         assert_matches_type(ChatResponse, completion, path=["response"])
 
     @parametrize
-    def test_streaming_response_completions(self, client: Arcade) -> None:
-        with client.chat.completions.with_streaming_response.completions() as response:
+    def test_streaming_response_create(self, client: Arcade) -> None:
+        with client.chat.completions.with_streaming_response.create() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -170,13 +170,13 @@ class TestAsyncCompletions:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_completions(self, async_client: AsyncArcade) -> None:
-        completion = await async_client.chat.completions.completions()
+    async def test_method_create(self, async_client: AsyncArcade) -> None:
+        completion = await async_client.chat.completions.create()
         assert_matches_type(ChatResponse, completion, path=["response"])
 
     @parametrize
-    async def test_method_completions_with_all_params(self, async_client: AsyncArcade) -> None:
-        completion = await async_client.chat.completions.completions(
+    async def test_method_create_with_all_params(self, async_client: AsyncArcade) -> None:
+        completion = await async_client.chat.completions.create(
             frequency_penalty=0,
             logit_bias={"foo": 0},
             logprobs=True,
@@ -298,8 +298,8 @@ class TestAsyncCompletions:
         assert_matches_type(ChatResponse, completion, path=["response"])
 
     @parametrize
-    async def test_raw_response_completions(self, async_client: AsyncArcade) -> None:
-        response = await async_client.chat.completions.with_raw_response.completions()
+    async def test_raw_response_create(self, async_client: AsyncArcade) -> None:
+        response = await async_client.chat.completions.with_raw_response.create()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -307,8 +307,8 @@ class TestAsyncCompletions:
         assert_matches_type(ChatResponse, completion, path=["response"])
 
     @parametrize
-    async def test_streaming_response_completions(self, async_client: AsyncArcade) -> None:
-        async with async_client.chat.completions.with_streaming_response.completions() as response:
+    async def test_streaming_response_create(self, async_client: AsyncArcade) -> None:
+        async with async_client.chat.completions.with_streaming_response.create() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

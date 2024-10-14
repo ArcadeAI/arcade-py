@@ -104,7 +104,7 @@ from arcadepy import Arcade
 client = Arcade()
 
 try:
-    client.chat.completions.completions(
+    client.chat.completions.create(
         messages=[
             {
                 "role": "user",
@@ -154,7 +154,7 @@ client = Arcade(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).chat.completions.completions(
+client.with_options(max_retries=5).chat.completions.create(
     messages=[
         {
             "role": "user",
@@ -184,7 +184,7 @@ client = Arcade(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).chat.completions.completions(
+client.with_options(timeout=5.0).chat.completions.create(
     messages=[
         {
             "role": "user",
@@ -230,7 +230,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from arcadepy import Arcade
 
 client = Arcade()
-response = client.chat.completions.with_raw_response.completions(
+response = client.chat.completions.with_raw_response.create(
     messages=[{
         "role": "user",
         "content": "Hello, how can I use Arcade AI?",
@@ -238,7 +238,7 @@ response = client.chat.completions.with_raw_response.completions(
 )
 print(response.headers.get('X-My-Header'))
 
-completion = response.parse()  # get the object that `chat.completions.completions()` would have returned
+completion = response.parse()  # get the object that `chat.completions.create()` would have returned
 print(completion.id)
 ```
 
@@ -253,7 +253,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.chat.completions.with_streaming_response.completions(
+with client.chat.completions.with_streaming_response.create(
     messages=[
         {
             "role": "user",
