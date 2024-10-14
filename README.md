@@ -1,8 +1,8 @@
-# Arcade AI Python API library
+# Arcade Python API library
 
 [![PyPI version](https://img.shields.io/pypi/v/arcadepy.svg)](https://pypi.org/project/arcadepy/)
 
-The Arcade AI Python library provides convenient access to the Arcade AI REST API from any Python 3.7+
+The Arcade Python library provides convenient access to the Arcade REST API from any Python 3.7+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -28,13 +28,11 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from arcadepy import ArcadeAI
+from arcadepy import Arcade
 
-client = ArcadeAI(
+client = Arcade(
     # This is the default and can be omitted
     api_key=os.environ.get("ARCADE_API_KEY"),
-    # defaults to "production".
-    environment="staging",
 )
 
 tool_response = client.tools.execute(
@@ -53,18 +51,16 @@ so that your API Key is not stored in source control.
 
 ## Async usage
 
-Simply import `AsyncArcadeAI` instead of `ArcadeAI` and use `await` with each API call:
+Simply import `AsyncArcade` instead of `Arcade` and use `await` with each API call:
 
 ```python
 import os
 import asyncio
-from arcadepy import AsyncArcadeAI
+from arcadepy import AsyncArcade
 
-client = AsyncArcadeAI(
+client = AsyncArcade(
     # This is the default and can be omitted
     api_key=os.environ.get("ARCADE_API_KEY"),
-    # defaults to "production".
-    environment="staging",
 )
 
 
@@ -103,9 +99,9 @@ All errors inherit from `arcadepy.APIError`.
 
 ```python
 import arcadepy
-from arcadepy import ArcadeAI
+from arcadepy import Arcade
 
-client = ArcadeAI()
+client = Arcade()
 
 try:
     client.chat.completions(
@@ -149,10 +145,10 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from arcadepy import ArcadeAI
+from arcadepy import Arcade
 
 # Configure the default for all requests:
-client = ArcadeAI(
+client = Arcade(
     # default is 2
     max_retries=0,
 )
@@ -174,16 +170,16 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
 
 ```python
-from arcadepy import ArcadeAI
+from arcadepy import Arcade
 
 # Configure the default for all requests:
-client = ArcadeAI(
+client = Arcade(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
 )
 
 # More granular control:
-client = ArcadeAI(
+client = Arcade(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
@@ -208,10 +204,10 @@ Note that requests that time out are [retried twice by default](#retries).
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `ARCADE_AI_LOG` to `debug`.
+You can enable logging by setting the environment variable `ARCADE_LOG` to `debug`.
 
 ```shell
-$ export ARCADE_AI_LOG=debug
+$ export ARCADE_LOG=debug
 ```
 
 ### How to tell whether `None` means `null` or missing
@@ -231,9 +227,9 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from arcadepy import ArcadeAI
+from arcadepy import Arcade
 
-client = ArcadeAI()
+client = Arcade()
 response = client.chat.with_raw_response.completions(
     messages=[{
         "role": "user",
@@ -317,10 +313,10 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 - Additional [advanced](https://www.python-httpx.org/advanced/clients/) functionality
 
 ```python
-from arcadepy import ArcadeAI, DefaultHttpxClient
+from arcadepy import Arcade, DefaultHttpxClient
 
-client = ArcadeAI(
-    # Or use the `ARCADE_AI_BASE_URL` env var
+client = Arcade(
+    # Or use the `ARCADE_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
     http_client=DefaultHttpxClient(
         proxies="http://my.test.proxy.example.com",
