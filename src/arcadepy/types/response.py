@@ -5,30 +5,13 @@ from typing import Optional
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
+from .response_output import ResponseOutput
 
-__all__ = ["Response", "FinishedAt", "Output", "OutputError"]
+__all__ = ["Response", "FinishedAt"]
 
 
 class FinishedAt(BaseModel):
     time_time: Optional[str] = FieldInfo(alias="time.Time", default=None)
-
-
-class OutputError(BaseModel):
-    message: str
-
-    additional_prompt_content: Optional[str] = None
-
-    can_retry: Optional[bool] = None
-
-    developer_message: Optional[str] = None
-
-    retry_after_ms: Optional[int] = None
-
-
-class Output(BaseModel):
-    value: object
-
-    error: Optional[OutputError] = None
 
 
 class Response(BaseModel):
@@ -38,6 +21,6 @@ class Response(BaseModel):
 
     finished_at: Optional[FinishedAt] = None
 
-    output: Optional[Output] = None
+    output: Optional[ResponseOutput] = None
 
     success: Optional[bool] = None

@@ -1,11 +1,11 @@
 [project]
 name = "arcadepy"
-version = "0.1.0-alpha.2"
-description = "The official Python library for the Arcade AI API"
+version = "0.1.0-alpha.3"
+description = "The official Python library for the Arcade API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Arcade AI", email = "contact@arcade-ai.com" },
+{ name = "Arcade", email = "contact@arcade-ai.com" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",

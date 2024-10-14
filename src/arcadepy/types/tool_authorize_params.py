@@ -13,4 +13,4 @@ class ToolAuthorizeParams(TypedDict, total=False):
     user_id: Required[str]
 
     tool_version: str
-    """Optional: if not provided, latest version is assumed"""
+    """Optional: if not provided, any version is used"""

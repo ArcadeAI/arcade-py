@@ -1,8 +1,8 @@
-# Arcade AI Python API library
+# Arcade Python API library
 
 [![PyPI version](https://img.shields.io/pypi/v/arcadepy.svg)](https://pypi.org/project/arcadepy/)
 
-The Arcade AI Python library provides convenient access to the Arcade AI REST API from any Python 3.7+
+The Arcade Python library provides convenient access to the Arcade REST API from any Python 3.7+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -28,22 +28,20 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from arcadepy import ArcadeAI
+from arcadepy import Arcade
 
-client = ArcadeAI(
+client = Arcade(
     # This is the default and can be omitted
     api_key=os.environ.get("ARCADE_API_KEY"),
-    # defaults to "production".
-    environment="staging",
 )
 
-tool_response = client.tools.execute(
-    inputs="[object Object]",
+response = client.tools.execute(
     tool_name="Google.ListEmails",
+    inputs='{"n_emails": 10}',
     tool_version="0.1.0",
     user_id="user@example.com",
 )
-print(tool_response.invocation_id)
+print(response.invocation_id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -53,29 +51,27 @@ so that your API Key is not stored in source control.
 
 ## Async usage
 
-Simply import `AsyncArcadeAI` instead of `ArcadeAI` and use `await` with each API call:
+Simply import `AsyncArcade` instead of `Arcade` and use `await` with each API call:
 
 ```python
 import os
 import asyncio
-from arcadepy import AsyncArcadeAI
+from arcadepy import AsyncArcade
 
-client = AsyncArcadeAI(
+client = AsyncArcade(
     # This is the default and can be omitted
     api_key=os.environ.get("ARCADE_API_KEY"),
-    # defaults to "production".
-    environment="staging",
 )
 
 
 async def main() -> None:
-    tool_response = await client.tools.execute(
-        inputs="[object Object]",
+    response = await client.tools.execute(
         tool_name="Google.ListEmails",
+        inputs='{"n_emails": 10}',
         tool_version="0.1.0",
         user_id="user@example.com",
     )
-    print(tool_response.invocation_id)
+    print(response.invocation_id)
 
 
 asyncio.run(main())
@@ -103,12 +99,12 @@ All errors inherit from `arcadepy.APIError`.
 
 ```python
 import arcadepy
-from arcadepy import ArcadeAI
+from arcadepy import Arcade
 
-client = ArcadeAI()
+client = Arcade()
 
 try:
-    client.chat.completions(
+    client.chat.completions.create(
         messages=[
             {
                 "role": "user",
@@ -149,16 +145,16 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from arcadepy import ArcadeAI
+from arcadepy import Arcade
 
 # Configure the default for all requests:
-client = ArcadeAI(
+client = Arcade(
     # default is 2
     max_retries=0,
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).chat.completions(
+client.with_options(max_retries=5).chat.completions.create(
     messages=[
         {
             "role": "user",
@@ -174,21 +170,21 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
 
 ```python
-from arcadepy import ArcadeAI
+from arcadepy import Arcade
 
 # Configure the default for all requests:
-client = ArcadeAI(
+client = Arcade(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
 )
 
 # More granular control:
-client = ArcadeAI(
+client = Arcade(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).chat.completions(
+client.with_options(timeout=5.0).chat.completions.create(
     messages=[
         {
             "role": "user",
@@ -208,10 +204,10 @@ Note that requests that time out are [retried twice by default](#retries).
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `ARCADE_AI_LOG` to `debug`.
+You can enable logging by setting the environment variable `ARCADE_LOG` to `debug`.
 
 ```shell
-$ export ARCADE_AI_LOG=debug
+$ export ARCADE_LOG=debug
 ```
 
 ### How to tell whether `None` means `null` or missing
@@ -231,10 +227,10 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from arcadepy import ArcadeAI
+from arcadepy import Arcade
 
-client = ArcadeAI()
-response = client.chat.with_raw_response.completions(
+client = Arcade()
+response = client.chat.completions.with_raw_response.create(
     messages=[{
         "role": "user",
         "content": "Hello, how can I use Arcade AI?",
@@ -242,8 +238,8 @@ response = client.chat.with_raw_response.completions(
 )
 print(response.headers.get('X-My-Header'))
 
-chat = response.parse()  # get the object that `chat.completions()` would have returned
-print(chat.id)
+completion = response.parse()  # get the object that `chat.completions.create()` would have returned
+print(completion.id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/ArcadeAI/arcade-py/tree/main/src/arcadepy/_response.py) object.
@@ -257,7 +253,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.chat.with_streaming_response.completions(
+with client.chat.completions.with_streaming_response.create(
     messages=[
         {
             "role": "user",
@@ -317,10 +313,10 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 - Additional [advanced](https://www.python-httpx.org/advanced/clients/) functionality
 
 ```python
-from arcadepy import ArcadeAI, DefaultHttpxClient
+from arcadepy import Arcade, DefaultHttpxClient
 
-client = ArcadeAI(
-    # Or use the `ARCADE_AI_BASE_URL` env var
+client = Arcade(
+    # Or use the `ARCADE_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
     http_client=DefaultHttpxClient(
         proxies="http://my.test.proxy.example.com",

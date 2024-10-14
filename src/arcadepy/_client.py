@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, Union, Mapping, cast
-from typing_extensions import Self, Literal, override
+from typing import Any, Union, Mapping
+from typing_extensions import Self, override
 
 import httpx
 
@@ -25,7 +25,7 @@ from ._utils import (
 )
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import ArcadeAIError, APIStatusError
+from ._exceptions import ArcadeError, APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -33,43 +33,34 @@ from ._base_client import (
 )
 
 __all__ = [
-    "ENVIRONMENTS",
     "Timeout",
     "Transport",
     "ProxiesTypes",
     "RequestOptions",
     "resources",
-    "ArcadeAI",
-    "AsyncArcadeAI",
+    "Arcade",
+    "AsyncArcade",
     "Client",
     "AsyncClient",
 ]
 
-ENVIRONMENTS: Dict[str, str] = {
-    "production": "https://api.arcade-ai.com",
-    "staging": "https://dev-api.arcade-ai.com",
-}
 
-
-class ArcadeAI(SyncAPIClient):
+class Arcade(SyncAPIClient):
     auth: resources.AuthResource
-    chat: resources.ChatResource
     health: resources.HealthResource
+    chat: resources.ChatResource
     tools: resources.ToolsResource
-    with_raw_response: ArcadeAIWithRawResponse
-    with_streaming_response: ArcadeAIWithStreamedResponse
+    with_raw_response: ArcadeWithRawResponse
+    with_streaming_response: ArcadeWithStreamedResponse
 
     # client options
     api_key: str
-
-    _environment: Literal["production", "staging"] | NotGiven
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "staging"] | NotGiven = NOT_GIVEN,
-        base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
+        base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -88,43 +79,22 @@ class ArcadeAI(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous Arcade AI client instance.
+        """Construct a new synchronous Arcade client instance.
 
         This automatically infers the `api_key` argument from the `ARCADE_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("ARCADE_API_KEY")
         if api_key is None:
-            raise ArcadeAIError(
+            raise ArcadeError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the ARCADE_API_KEY environment variable"
             )
         self.api_key = api_key
 
-        self._environment = environment
-
-        base_url_env = os.environ.get("ARCADE_AI_BASE_URL")
-        if is_given(base_url) and base_url is not None:
-            # cast required because mypy doesn't understand the type narrowing
-            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
-        elif is_given(environment):
-            if base_url_env and base_url is not None:
-                raise ValueError(
-                    "Ambiguous URL; The `ARCADE_AI_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
-                )
-
-            try:
-                base_url = ENVIRONMENTS[environment]
-            except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
-        elif base_url_env is not None:
-            base_url = base_url_env
-        else:
-            self._environment = environment = "production"
-
-            try:
-                base_url = ENVIRONMENTS[environment]
-            except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
+        if base_url is None:
+            base_url = os.environ.get("ARCADE_BASE_URL")
+        if base_url is None:
+            base_url = f"https://api.arcade-ai.com"
 
         super().__init__(
             version=__version__,
@@ -140,11 +110,11 @@ class ArcadeAI(SyncAPIClient):
         self._idempotency_header = "Idempotency-Key"
 
         self.auth = resources.AuthResource(self)
-        self.chat = resources.ChatResource(self)
         self.health = resources.HealthResource(self)
+        self.chat = resources.ChatResource(self)
         self.tools = resources.ToolsResource(self)
-        self.with_raw_response = ArcadeAIWithRawResponse(self)
-        self.with_streaming_response = ArcadeAIWithStreamedResponse(self)
+        self.with_raw_response = ArcadeWithRawResponse(self)
+        self.with_streaming_response = ArcadeWithStreamedResponse(self)
 
     @property
     @override
@@ -170,7 +140,6 @@ class ArcadeAI(SyncAPIClient):
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "staging"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -206,7 +175,6 @@ class ArcadeAI(SyncAPIClient):
         return self.__class__(
             api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
-            environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
@@ -253,25 +221,22 @@ class ArcadeAI(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class AsyncArcadeAI(AsyncAPIClient):
+class AsyncArcade(AsyncAPIClient):
     auth: resources.AsyncAuthResource
-    chat: resources.AsyncChatResource
     health: resources.AsyncHealthResource
+    chat: resources.AsyncChatResource
     tools: resources.AsyncToolsResource
-    with_raw_response: AsyncArcadeAIWithRawResponse
-    with_streaming_response: AsyncArcadeAIWithStreamedResponse
+    with_raw_response: AsyncArcadeWithRawResponse
+    with_streaming_response: AsyncArcadeWithStreamedResponse
 
     # client options
     api_key: str
-
-    _environment: Literal["production", "staging"] | NotGiven
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "staging"] | NotGiven = NOT_GIVEN,
-        base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
+        base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -290,43 +255,22 @@ class AsyncArcadeAI(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async Arcade AI client instance.
+        """Construct a new async Arcade client instance.
 
         This automatically infers the `api_key` argument from the `ARCADE_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("ARCADE_API_KEY")
         if api_key is None:
-            raise ArcadeAIError(
+            raise ArcadeError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the ARCADE_API_KEY environment variable"
             )
         self.api_key = api_key
 
-        self._environment = environment
-
-        base_url_env = os.environ.get("ARCADE_AI_BASE_URL")
-        if is_given(base_url) and base_url is not None:
-            # cast required because mypy doesn't understand the type narrowing
-            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
-        elif is_given(environment):
-            if base_url_env and base_url is not None:
-                raise ValueError(
-                    "Ambiguous URL; The `ARCADE_AI_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
-                )
-
-            try:
-                base_url = ENVIRONMENTS[environment]
-            except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
-        elif base_url_env is not None:
-            base_url = base_url_env
-        else:
-            self._environment = environment = "production"
-
-            try:
-                base_url = ENVIRONMENTS[environment]
-            except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
+        if base_url is None:
+            base_url = os.environ.get("ARCADE_BASE_URL")
+        if base_url is None:
+            base_url = f"https://api.arcade-ai.com"
 
         super().__init__(
             version=__version__,
@@ -342,11 +286,11 @@ class AsyncArcadeAI(AsyncAPIClient):
         self._idempotency_header = "Idempotency-Key"
 
         self.auth = resources.AsyncAuthResource(self)
-        self.chat = resources.AsyncChatResource(self)
         self.health = resources.AsyncHealthResource(self)
+        self.chat = resources.AsyncChatResource(self)
         self.tools = resources.AsyncToolsResource(self)
-        self.with_raw_response = AsyncArcadeAIWithRawResponse(self)
-        self.with_streaming_response = AsyncArcadeAIWithStreamedResponse(self)
+        self.with_raw_response = AsyncArcadeWithRawResponse(self)
+        self.with_streaming_response = AsyncArcadeWithStreamedResponse(self)
 
     @property
     @override
@@ -372,7 +316,6 @@ class AsyncArcadeAI(AsyncAPIClient):
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "staging"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -408,7 +351,6 @@ class AsyncArcadeAI(AsyncAPIClient):
         return self.__class__(
             api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
-            environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
@@ -455,38 +397,38 @@ class AsyncArcadeAI(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class ArcadeAIWithRawResponse:
-    def __init__(self, client: ArcadeAI) -> None:
+class ArcadeWithRawResponse:
+    def __init__(self, client: Arcade) -> None:
         self.auth = resources.AuthResourceWithRawResponse(client.auth)
-        self.chat = resources.ChatResourceWithRawResponse(client.chat)
         self.health = resources.HealthResourceWithRawResponse(client.health)
+        self.chat = resources.ChatResourceWithRawResponse(client.chat)
         self.tools = resources.ToolsResourceWithRawResponse(client.tools)
 
 
-class AsyncArcadeAIWithRawResponse:
-    def __init__(self, client: AsyncArcadeAI) -> None:
+class AsyncArcadeWithRawResponse:
+    def __init__(self, client: AsyncArcade) -> None:
         self.auth = resources.AsyncAuthResourceWithRawResponse(client.auth)
-        self.chat = resources.AsyncChatResourceWithRawResponse(client.chat)
         self.health = resources.AsyncHealthResourceWithRawResponse(client.health)
+        self.chat = resources.AsyncChatResourceWithRawResponse(client.chat)
         self.tools = resources.AsyncToolsResourceWithRawResponse(client.tools)
 
 
-class ArcadeAIWithStreamedResponse:
-    def __init__(self, client: ArcadeAI) -> None:
+class ArcadeWithStreamedResponse:
+    def __init__(self, client: Arcade) -> None:
         self.auth = resources.AuthResourceWithStreamingResponse(client.auth)
-        self.chat = resources.ChatResourceWithStreamingResponse(client.chat)
         self.health = resources.HealthResourceWithStreamingResponse(client.health)
+        self.chat = resources.ChatResourceWithStreamingResponse(client.chat)
         self.tools = resources.ToolsResourceWithStreamingResponse(client.tools)
 
 
-class AsyncArcadeAIWithStreamedResponse:
-    def __init__(self, client: AsyncArcadeAI) -> None:
+class AsyncArcadeWithStreamedResponse:
+    def __init__(self, client: AsyncArcade) -> None:
         self.auth = resources.AsyncAuthResourceWithStreamingResponse(client.auth)
-        self.chat = resources.AsyncChatResourceWithStreamingResponse(client.chat)
         self.health = resources.AsyncHealthResourceWithStreamingResponse(client.health)
+        self.chat = resources.AsyncChatResourceWithStreamingResponse(client.chat)
         self.tools = resources.AsyncToolsResourceWithStreamingResponse(client.tools)
 
 
-Client = ArcadeAI
+Client = Arcade
 
-AsyncClient = AsyncArcadeAI
+AsyncClient = AsyncArcade

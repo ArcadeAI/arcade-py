@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Iterator, AsyncIterator
 
 import pytest
 
-from arcadepy import ArcadeAI, AsyncArcadeAI
+from arcadepy import Arcade, AsyncArcade
 
 if TYPE_CHECKING:
     from _pytest.fixtures import FixtureRequest
@@ -30,20 +30,20 @@ api_key = "My API Key"
 
 
 @pytest.fixture(scope="session")
-def client(request: FixtureRequest) -> Iterator[ArcadeAI]:
+def client(request: FixtureRequest) -> Iterator[Arcade]:
     strict = getattr(request, "param", True)
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    with ArcadeAI(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
+    with Arcade(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
         yield client
 
 
 @pytest.fixture(scope="session")
-async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncArcadeAI]:
+async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncArcade]:
     strict = getattr(request, "param", True)
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    async with AsyncArcadeAI(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
+    async with AsyncArcade(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
         yield client

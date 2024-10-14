@@ -19,7 +19,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.authorization_response import AuthorizationResponse
+from ..types.shared.authorization_response import AuthorizationResponse
 
 __all__ = ["AuthResource", "AsyncAuthResource"]
 
@@ -95,6 +95,7 @@ class AuthResource(SyncAPIResource):
         *,
         authorization_id: str,
         scopes: str | NotGiven = NOT_GIVEN,
+        wait: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -102,13 +103,18 @@ class AuthResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AuthorizationResponse:
-        """
-        Checks the status of an ongoing authorization process for a specific tool
+        """Checks the status of an ongoing authorization process for a specific tool.
+
+        If
+        'wait' param is present, does not respond until either the auth status becomes
+        completed or the timeout is reached.
 
         Args:
           authorization_id: Authorization ID
 
           scopes: Scopes
+
+          wait: Timeout in seconds (max 60)
 
           extra_headers: Send extra headers
 
@@ -129,6 +135,7 @@ class AuthResource(SyncAPIResource):
                     {
                         "authorization_id": authorization_id,
                         "scopes": scopes,
+                        "wait": wait,
                     },
                     auth_status_params.AuthStatusParams,
                 ),
@@ -208,6 +215,7 @@ class AsyncAuthResource(AsyncAPIResource):
         *,
         authorization_id: str,
         scopes: str | NotGiven = NOT_GIVEN,
+        wait: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -215,13 +223,18 @@ class AsyncAuthResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AuthorizationResponse:
-        """
-        Checks the status of an ongoing authorization process for a specific tool
+        """Checks the status of an ongoing authorization process for a specific tool.
+
+        If
+        'wait' param is present, does not respond until either the auth status becomes
+        completed or the timeout is reached.
 
         Args:
           authorization_id: Authorization ID
 
           scopes: Scopes
+
+          wait: Timeout in seconds (max 60)
 
           extra_headers: Send extra headers
 
@@ -242,6 +255,7 @@ class AsyncAuthResource(AsyncAPIResource):
                     {
                         "authorization_id": authorization_id,
                         "scopes": scopes,
+                        "wait": wait,
                     },
                     auth_status_params.AuthStatusParams,
                 ),
