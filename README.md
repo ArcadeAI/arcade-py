@@ -15,12 +15,9 @@ The REST API documentation can be found on [arcade-ai.com](https://arcade-ai.com
 ## Installation
 
 ```sh
-# install from the production repo
-pip install git+ssh://git@github.com/ArcadeAI/arcade-py.git
+# install from PyPI
+pip install --pre arcadepy
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre arcadepy`
 
 ## Usage
 
