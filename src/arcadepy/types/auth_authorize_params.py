@@ -15,12 +15,12 @@ class AuthAuthorizeParams(TypedDict, total=False):
 
 
 class AuthRequirementOauth2(TypedDict, total=False):
-    authority: str
-
     scopes: List[str]
 
 
 class AuthRequirement(TypedDict, total=False):
-    provider: Required[str]
-
     oauth2: AuthRequirementOauth2
+
+    provider_id: str
+
+    provider_type: str
