@@ -8,11 +8,12 @@ __all__ = ["ToolExecuteParams"]
 
 
 class ToolExecuteParams(TypedDict, total=False):
-    inputs: Required[str]
-    """Serialized JSON string"""
-
     tool_name: Required[str]
 
-    tool_version: Required[str]
+    inputs: str
+    """Serialized JSON string"""
 
-    user_id: Required[str]
+    tool_version: str
+    """Optional: if not provided, any version is used"""
+
+    user_id: str

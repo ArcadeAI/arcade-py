@@ -35,13 +35,13 @@ client = Arcade(
     api_key=os.environ.get("ARCADE_API_KEY"),
 )
 
-tool_response = client.tools.execute(
-    inputs="[object Object]",
+response = client.tools.execute(
     tool_name="Google.ListEmails",
+    inputs='{"n_emails": 10}',
     tool_version="0.1.0",
     user_id="user@example.com",
 )
-print(tool_response.invocation_id)
+print(response.invocation_id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -65,13 +65,13 @@ client = AsyncArcade(
 
 
 async def main() -> None:
-    tool_response = await client.tools.execute(
-        inputs="[object Object]",
+    response = await client.tools.execute(
         tool_name="Google.ListEmails",
+        inputs='{"n_emails": 10}',
         tool_version="0.1.0",
         user_id="user@example.com",
     )
-    print(tool_response.invocation_id)
+    print(response.invocation_id)
 
 
 asyncio.run(main())
@@ -104,7 +104,7 @@ from arcadepy import Arcade
 client = Arcade()
 
 try:
-    client.chat.completions(
+    client.chat.completions.completions(
         messages=[
             {
                 "role": "user",
@@ -154,7 +154,7 @@ client = Arcade(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).chat.completions(
+client.with_options(max_retries=5).chat.completions.completions(
     messages=[
         {
             "role": "user",
@@ -184,7 +184,7 @@ client = Arcade(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).chat.completions(
+client.with_options(timeout=5.0).chat.completions.completions(
     messages=[
         {
             "role": "user",
@@ -230,7 +230,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from arcadepy import Arcade
 
 client = Arcade()
-response = client.chat.with_raw_response.completions(
+response = client.chat.completions.with_raw_response.completions(
     messages=[{
         "role": "user",
         "content": "Hello, how can I use Arcade AI?",
@@ -238,8 +238,8 @@ response = client.chat.with_raw_response.completions(
 )
 print(response.headers.get('X-My-Header'))
 
-chat = response.parse()  # get the object that `chat.completions()` would have returned
-print(chat.id)
+completion = response.parse()  # get the object that `chat.completions.completions()` would have returned
+print(completion.id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/ArcadeAI/arcade-py/tree/main/src/arcadepy/_response.py) object.
@@ -253,7 +253,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.chat.with_streaming_response.completions(
+with client.chat.completions.with_streaming_response.completions(
     messages=[
         {
             "role": "user",
