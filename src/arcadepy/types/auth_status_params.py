@@ -10,8 +10,11 @@ __all__ = ["AuthStatusParams"]
 
 
 class AuthStatusParams(TypedDict, total=False):
-    authorization_id: Required[Annotated[str, PropertyInfo(alias="authorizationID")]]
+    authorization_id: Required[Annotated[str, PropertyInfo(alias="authorizationId")]]
     """Authorization ID"""
 
     scopes: str
     """Scopes"""
+
+    wait: int
+    """Timeout in seconds (max 60)"""

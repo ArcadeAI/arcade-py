@@ -47,8 +47,8 @@ __all__ = [
 
 class Arcade(SyncAPIClient):
     auth: resources.AuthResource
-    chat: resources.ChatResource
     health: resources.HealthResource
+    chat: resources.ChatResource
     tools: resources.ToolsResource
     with_raw_response: ArcadeWithRawResponse
     with_streaming_response: ArcadeWithStreamedResponse
@@ -110,8 +110,8 @@ class Arcade(SyncAPIClient):
         self._idempotency_header = "Idempotency-Key"
 
         self.auth = resources.AuthResource(self)
-        self.chat = resources.ChatResource(self)
         self.health = resources.HealthResource(self)
+        self.chat = resources.ChatResource(self)
         self.tools = resources.ToolsResource(self)
         self.with_raw_response = ArcadeWithRawResponse(self)
         self.with_streaming_response = ArcadeWithStreamedResponse(self)
@@ -223,8 +223,8 @@ class Arcade(SyncAPIClient):
 
 class AsyncArcade(AsyncAPIClient):
     auth: resources.AsyncAuthResource
-    chat: resources.AsyncChatResource
     health: resources.AsyncHealthResource
+    chat: resources.AsyncChatResource
     tools: resources.AsyncToolsResource
     with_raw_response: AsyncArcadeWithRawResponse
     with_streaming_response: AsyncArcadeWithStreamedResponse
@@ -286,8 +286,8 @@ class AsyncArcade(AsyncAPIClient):
         self._idempotency_header = "Idempotency-Key"
 
         self.auth = resources.AsyncAuthResource(self)
-        self.chat = resources.AsyncChatResource(self)
         self.health = resources.AsyncHealthResource(self)
+        self.chat = resources.AsyncChatResource(self)
         self.tools = resources.AsyncToolsResource(self)
         self.with_raw_response = AsyncArcadeWithRawResponse(self)
         self.with_streaming_response = AsyncArcadeWithStreamedResponse(self)
@@ -400,32 +400,32 @@ class AsyncArcade(AsyncAPIClient):
 class ArcadeWithRawResponse:
     def __init__(self, client: Arcade) -> None:
         self.auth = resources.AuthResourceWithRawResponse(client.auth)
-        self.chat = resources.ChatResourceWithRawResponse(client.chat)
         self.health = resources.HealthResourceWithRawResponse(client.health)
+        self.chat = resources.ChatResourceWithRawResponse(client.chat)
         self.tools = resources.ToolsResourceWithRawResponse(client.tools)
 
 
 class AsyncArcadeWithRawResponse:
     def __init__(self, client: AsyncArcade) -> None:
         self.auth = resources.AsyncAuthResourceWithRawResponse(client.auth)
-        self.chat = resources.AsyncChatResourceWithRawResponse(client.chat)
         self.health = resources.AsyncHealthResourceWithRawResponse(client.health)
+        self.chat = resources.AsyncChatResourceWithRawResponse(client.chat)
         self.tools = resources.AsyncToolsResourceWithRawResponse(client.tools)
 
 
 class ArcadeWithStreamedResponse:
     def __init__(self, client: Arcade) -> None:
         self.auth = resources.AuthResourceWithStreamingResponse(client.auth)
-        self.chat = resources.ChatResourceWithStreamingResponse(client.chat)
         self.health = resources.HealthResourceWithStreamingResponse(client.health)
+        self.chat = resources.ChatResourceWithStreamingResponse(client.chat)
         self.tools = resources.ToolsResourceWithStreamingResponse(client.tools)
 
 
 class AsyncArcadeWithStreamedResponse:
     def __init__(self, client: AsyncArcade) -> None:
         self.auth = resources.AsyncAuthResourceWithStreamingResponse(client.auth)
-        self.chat = resources.AsyncChatResourceWithStreamingResponse(client.chat)
         self.health = resources.AsyncHealthResourceWithStreamingResponse(client.health)
+        self.chat = resources.AsyncChatResourceWithStreamingResponse(client.chat)
         self.tools = resources.AsyncToolsResourceWithStreamingResponse(client.tools)
 
 
