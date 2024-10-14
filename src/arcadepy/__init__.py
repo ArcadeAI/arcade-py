@@ -3,25 +3,14 @@
 from . import types
 from ._types import NOT_GIVEN, NoneType, NotGiven, Transport, ProxiesTypes
 from ._utils import file_from_path
-from ._client import (
-    ENVIRONMENTS,
-    Client,
-    Stream,
-    Timeout,
-    ArcadeAI,
-    Transport,
-    AsyncClient,
-    AsyncStream,
-    AsyncArcadeAI,
-    RequestOptions,
-)
+from ._client import Arcade, Client, Stream, Timeout, Transport, AsyncArcade, AsyncClient, AsyncStream, RequestOptions
 from ._models import BaseModel
 from ._version import __title__, __version__
 from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIResponse
 from ._constants import DEFAULT_TIMEOUT, DEFAULT_MAX_RETRIES, DEFAULT_CONNECTION_LIMITS
 from ._exceptions import (
     APIError,
-    ArcadeAIError,
+    ArcadeError,
     ConflictError,
     NotFoundError,
     APIStatusError,
@@ -47,7 +36,7 @@ __all__ = [
     "ProxiesTypes",
     "NotGiven",
     "NOT_GIVEN",
-    "ArcadeAIError",
+    "ArcadeError",
     "APIError",
     "APIStatusError",
     "APITimeoutError",
@@ -67,9 +56,8 @@ __all__ = [
     "AsyncClient",
     "Stream",
     "AsyncStream",
-    "ArcadeAI",
-    "AsyncArcadeAI",
-    "ENVIRONMENTS",
+    "Arcade",
+    "AsyncArcade",
     "file_from_path",
     "BaseModel",
     "DEFAULT_TIMEOUT",
