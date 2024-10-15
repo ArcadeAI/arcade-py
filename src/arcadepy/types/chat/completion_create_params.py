@@ -37,7 +37,7 @@ class CompletionCreateParams(TypedDict, total=False):
 
     n: int
 
-    parallel_tool_calls: object
+    parallel_tool_calls: bool
     """Disable the default behavior of parallel tool calls by setting it: false."""
 
     presence_penalty: int
@@ -55,10 +55,10 @@ class CompletionCreateParams(TypedDict, total=False):
 
     temperature: float
 
-    tool_choice: object
+    tool_choice: Dict[str, object]
     """This can be either a string or an ToolChoice object."""
 
-    tools: object
+    tools: Dict[str, object]
 
     top_logprobs: int
     """
