@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import Dict, Optional
 
 from .._models import BaseModel
 from .shared.authorization_response import AuthorizationResponse
@@ -25,4 +25,4 @@ class ResponseOutput(BaseModel):
 
     requires_authorization: Optional[AuthorizationResponse] = None
 
-    value: Optional[object] = None
+    value: Optional[Dict[str, object]] = None
