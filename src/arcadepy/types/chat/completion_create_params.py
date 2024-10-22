@@ -37,7 +37,7 @@ class CompletionCreateParams(TypedDict, total=False):
 
     n: int
 
-    parallel_tool_calls: object
+    parallel_tool_calls: bool
     """Disable the default behavior of parallel tool calls by setting it: false."""
 
     presence_penalty: int
