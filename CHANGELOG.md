@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0 (2024-10-22)
+
+Full Changelog: [v0.0.11...v0.1.0](https://github.com/ArcadeAI/arcade-py/compare/v0.0.11...v0.1.0)
+
+### Features
+
+* **api:** api update ([#25](https://github.com/ArcadeAI/arcade-py/issues/25)) ([c3ac0fa](https://github.com/ArcadeAI/arcade-py/commit/c3ac0fad62cf13e01f483448132d196f45f218af))
+* **api:** api update ([#27](https://github.com/ArcadeAI/arcade-py/issues/27)) ([f62efbf](https://github.com/ArcadeAI/arcade-py/commit/f62efbf57628d3d9b6e2734aec1c8028e21e54b4))
+* **api:** api update ([#28](https://github.com/ArcadeAI/arcade-py/issues/28)) ([5614650](https://github.com/ArcadeAI/arcade-py/commit/561465067e08077515f5e5cb361d8d09b0f7ead9))
+
 ## 0.0.11 (2024-10-15)
 
 Full Changelog: [v0.1.0-alpha.4...v0.0.11](https://github.com/ArcadeAI/arcade-py/compare/v0.1.0-alpha.4...v0.0.11)
