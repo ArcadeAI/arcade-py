@@ -64,7 +64,20 @@ from arcadepy.types import (
 
 Methods:
 
-- <code title="get /v1/tools/list">client.tools.<a href="./src/arcadepy/resources/tools.py">list</a>(\*\*<a href="src/arcadepy/types/tool_list_params.py">params</a>) -> <a href="./src/arcadepy/types/shared/tool_definition.py">SyncOffsetPage[ToolDefinition]</a></code>
-- <code title="post /v1/tools/authorize">client.tools.<a href="./src/arcadepy/resources/tools.py">authorize</a>(\*\*<a href="src/arcadepy/types/tool_authorize_params.py">params</a>) -> <a href="./src/arcadepy/types/shared/authorization_response.py">AuthorizationResponse</a></code>
-- <code title="post /v1/tools/execute">client.tools.<a href="./src/arcadepy/resources/tools.py">execute</a>(\*\*<a href="src/arcadepy/types/tool_execute_params.py">params</a>) -> <a href="./src/arcadepy/types/response.py">Response</a></code>
-- <code title="get /v1/tools/definition">client.tools.<a href="./src/arcadepy/resources/tools.py">get</a>(\*\*<a href="src/arcadepy/types/tool_get_params.py">params</a>) -> <a href="./src/arcadepy/types/shared/tool_definition.py">ToolDefinition</a></code>
+- <code title="get /v1/tools/list">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">list</a>(\*\*<a href="src/arcadepy/types/tool_list_params.py">params</a>) -> <a href="./src/arcadepy/types/shared/tool_definition.py">SyncOffsetPage[ToolDefinition]</a></code>
+- <code title="post /v1/tools/authorize">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">authorize</a>(\*\*<a href="src/arcadepy/types/tool_authorize_params.py">params</a>) -> <a href="./src/arcadepy/types/shared/authorization_response.py">AuthorizationResponse</a></code>
+- <code title="post /v1/tools/execute">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">execute</a>(\*\*<a href="src/arcadepy/types/tool_execute_params.py">params</a>) -> <a href="./src/arcadepy/types/response.py">Response</a></code>
+- <code title="get /v1/tools/definition">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">get</a>(\*\*<a href="src/arcadepy/types/tool_get_params.py">params</a>) -> <a href="./src/arcadepy/types/shared/tool_definition.py">ToolDefinition</a></code>
+
+## Formatted
+
+Types:
+
+```python
+from arcadepy.types.tools import FormattedListResponse, FormattedGetResponse
+```
+
+Methods:
+
+- <code title="get /v1/tools/formatted/list">client.tools.formatted.<a href="./src/arcadepy/resources/tools/formatted.py">list</a>(\*\*<a href="src/arcadepy/types/tools/formatted_list_params.py">params</a>) -> <a href="./src/arcadepy/types/tools/formatted_list_response.py">SyncOffsetPage[object]</a></code>
+- <code title="get /v1/tools/formatted/definition">client.tools.formatted.<a href="./src/arcadepy/resources/tools/formatted.py">get</a>(\*\*<a href="src/arcadepy/types/tools/formatted_get_params.py">params</a>) -> <a href="./src/arcadepy/types/tools/formatted_get_response.py">object</a></code>

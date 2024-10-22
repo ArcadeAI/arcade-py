@@ -140,7 +140,6 @@ class TestTools:
     @parametrize
     def test_method_get(self, client: Arcade) -> None:
         tool = client.tools.get(
-            director_id="directorId",
             tool_id="toolId",
         )
         assert_matches_type(ToolDefinition, tool, path=["response"])
@@ -148,7 +147,6 @@ class TestTools:
     @parametrize
     def test_raw_response_get(self, client: Arcade) -> None:
         response = client.tools.with_raw_response.get(
-            director_id="directorId",
             tool_id="toolId",
         )
 
@@ -160,7 +158,6 @@ class TestTools:
     @parametrize
     def test_streaming_response_get(self, client: Arcade) -> None:
         with client.tools.with_streaming_response.get(
-            director_id="directorId",
             tool_id="toolId",
         ) as response:
             assert not response.is_closed
@@ -296,7 +293,6 @@ class TestAsyncTools:
     @parametrize
     async def test_method_get(self, async_client: AsyncArcade) -> None:
         tool = await async_client.tools.get(
-            director_id="directorId",
             tool_id="toolId",
         )
         assert_matches_type(ToolDefinition, tool, path=["response"])
@@ -304,7 +300,6 @@ class TestAsyncTools:
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncArcade) -> None:
         response = await async_client.tools.with_raw_response.get(
-            director_id="directorId",
             tool_id="toolId",
         )
 
@@ -316,7 +311,6 @@ class TestAsyncTools:
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncArcade) -> None:
         async with async_client.tools.with_streaming_response.get(
-            director_id="directorId",
             tool_id="toolId",
         ) as response:
             assert not response.is_closed

@@ -4,11 +4,14 @@ from __future__ import annotations
 
 from typing_extensions import Required, Annotated, TypedDict
 
-from .._utils import PropertyInfo
+from ..._utils import PropertyInfo
 
-__all__ = ["ToolGetParams"]
+__all__ = ["FormattedGetParams"]
 
 
-class ToolGetParams(TypedDict, total=False):
+class FormattedGetParams(TypedDict, total=False):
     tool_id: Required[Annotated[str, PropertyInfo(alias="toolId")]]
     """Tool ID"""
+
+    format: str
+    """Provider format"""
