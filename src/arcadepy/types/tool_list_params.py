@@ -8,5 +8,11 @@ __all__ = ["ToolListParams"]
 
 
 class ToolListParams(TypedDict, total=False):
+    limit: int
+    """Number of items to return (default: 25, max: 100)"""
+
+    offset: int
+    """Offset from the start of the list (default: 0)"""
+
     toolkit: str
-    """Toolkit Name"""
+    """Toolkit name"""

@@ -10,7 +10,7 @@ It is generated with [Stainless](https://www.stainlessapi.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [arcade-ai.com](https://arcade-ai.com). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.arcade-ai.com](https://docs.arcade-ai.com). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 

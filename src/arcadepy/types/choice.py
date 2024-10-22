@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Optional
+from typing import List, Optional
 
 from .._models import BaseModel
 from .chat_message import ChatMessage
@@ -14,7 +14,7 @@ class Choice(BaseModel):
 
     index: Optional[int] = None
 
-    logprobs: Optional[Dict[str, object]] = None
+    logprobs: Optional[object] = None
 
     message: Optional[ChatMessage] = None
 
