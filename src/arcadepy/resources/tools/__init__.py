@@ -8,22 +8,22 @@ from .tools import (
     ToolsResourceWithStreamingResponse,
     AsyncToolsResourceWithStreamingResponse,
 )
-from .definition import (
-    DefinitionResource,
-    AsyncDefinitionResource,
-    DefinitionResourceWithRawResponse,
-    AsyncDefinitionResourceWithRawResponse,
-    DefinitionResourceWithStreamingResponse,
-    AsyncDefinitionResourceWithStreamingResponse,
+from .formatted import (
+    FormattedResource,
+    AsyncFormattedResource,
+    FormattedResourceWithRawResponse,
+    AsyncFormattedResourceWithRawResponse,
+    FormattedResourceWithStreamingResponse,
+    AsyncFormattedResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "DefinitionResource",
-    "AsyncDefinitionResource",
-    "DefinitionResourceWithRawResponse",
-    "AsyncDefinitionResourceWithRawResponse",
-    "DefinitionResourceWithStreamingResponse",
-    "AsyncDefinitionResourceWithStreamingResponse",
+    "FormattedResource",
+    "AsyncFormattedResource",
+    "FormattedResourceWithRawResponse",
+    "AsyncFormattedResourceWithRawResponse",
+    "FormattedResourceWithStreamingResponse",
+    "AsyncFormattedResourceWithStreamingResponse",
     "ToolsResource",
     "AsyncToolsResource",
     "ToolsResourceWithRawResponse",
