@@ -114,7 +114,7 @@ class AuthResource(SyncAPIResource):
 
           scopes: Scopes
 
-          wait: Timeout in seconds (max 60)
+          wait: Timeout in seconds (max 59)
 
           extra_headers: Send extra headers
 
@@ -234,7 +234,7 @@ class AsyncAuthResource(AsyncAPIResource):
 
           scopes: Scopes
 
-          wait: Timeout in seconds (max 60)
+          wait: Timeout in seconds (max 59)
 
           extra_headers: Send extra headers
 

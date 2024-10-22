@@ -17,4 +17,4 @@ class AuthStatusParams(TypedDict, total=False):
     """Scopes"""
 
     wait: int
-    """Timeout in seconds (max 60)"""
+    """Timeout in seconds (max 59)"""
