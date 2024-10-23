@@ -107,7 +107,7 @@ class TestTools:
     def test_method_execute_with_all_params(self, client: Arcade) -> None:
         tool = client.tools.execute(
             tool_name="tool_name",
-            inputs="inputs",
+            inputs={},
             tool_version="tool_version",
             user_id="user_id",
         )
@@ -260,7 +260,7 @@ class TestAsyncTools:
     async def test_method_execute_with_all_params(self, async_client: AsyncArcade) -> None:
         tool = await async_client.tools.execute(
             tool_name="tool_name",
-            inputs="inputs",
+            inputs={},
             tool_version="tool_version",
             user_id="user_id",
         )

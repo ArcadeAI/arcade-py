@@ -164,7 +164,7 @@ class ToolsResource(SyncAPIResource):
         self,
         *,
         tool_name: str,
-        inputs: str | NotGiven = NOT_GIVEN,
+        inputs: object | NotGiven = NOT_GIVEN,
         tool_version: str | NotGiven = NOT_GIVEN,
         user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -179,7 +179,7 @@ class ToolsResource(SyncAPIResource):
         Executes a tool by name and arguments
 
         Args:
-          inputs: Serialized JSON string
+          inputs: JSON input to the tool, if any
 
           tool_version: Optional: if not provided, any version is used
 
@@ -381,7 +381,7 @@ class AsyncToolsResource(AsyncAPIResource):
         self,
         *,
         tool_name: str,
-        inputs: str | NotGiven = NOT_GIVEN,
+        inputs: object | NotGiven = NOT_GIVEN,
         tool_version: str | NotGiven = NOT_GIVEN,
         user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -396,7 +396,7 @@ class AsyncToolsResource(AsyncAPIResource):
         Executes a tool by name and arguments
 
         Args:
-          inputs: Serialized JSON string
+          inputs: JSON input to the tool, if any
 
           tool_version: Optional: if not provided, any version is used
 

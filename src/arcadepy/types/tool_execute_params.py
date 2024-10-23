@@ -10,8 +10,8 @@ __all__ = ["ToolExecuteParams"]
 class ToolExecuteParams(TypedDict, total=False):
     tool_name: Required[str]
 
-    inputs: str
-    """Serialized JSON string"""
+    inputs: object
+    """JSON input to the tool, if any"""
 
     tool_version: str
     """Optional: if not provided, any version is used"""
