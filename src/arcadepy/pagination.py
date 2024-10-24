@@ -13,7 +13,7 @@ _T = TypeVar("_T")
 class SyncOffsetPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
     items: List[_T]
     total_count: Optional[int] = None
-    page_count: Optional[int] = None
+    offset: Optional[int] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
@@ -24,12 +24,12 @@ class SyncOffsetPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
     @override
     def next_page_info(self) -> Optional[PageInfo]:
-        page_count = self.page_count
-        if page_count is None:
+        offset = self.offset
+        if offset is None:
             return None
 
         length = len(self._get_page_items())
-        current_count = page_count + length
+        current_count = offset + length
 
         total_count = self.total_count
         if total_count is None:
@@ -44,7 +44,7 @@ class SyncOffsetPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 class AsyncOffsetPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
     items: List[_T]
     total_count: Optional[int] = None
-    page_count: Optional[int] = None
+    offset: Optional[int] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
@@ -55,12 +55,12 @@ class AsyncOffsetPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
 
     @override
     def next_page_info(self) -> Optional[PageInfo]:
-        page_count = self.page_count
-        if page_count is None:
+        offset = self.offset
+        if offset is None:
             return None
 
         length = len(self._get_page_items())
-        current_count = page_count + length
+        current_count = offset + length
 
         total_count = self.total_count
         if total_count is None:
