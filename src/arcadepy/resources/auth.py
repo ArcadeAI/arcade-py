@@ -183,8 +183,8 @@ class AuthResource(SyncAPIResource):
         Waits for the authorization process to complete, for example:
 
         ```py
-        auth_response = auth.start("you@example.com", "github")
-        auth_response = auth.wait_for_completion(auth_response)
+        auth_response = client.auth.start("you@example.com", "github")
+        auth_response = client.auth.wait_for_completion(auth_response)
         ```
         """
         auth_id_val: str
@@ -367,8 +367,8 @@ class AsyncAuthResource(AsyncAPIResource):
         Waits for the authorization process to complete, for example:
 
         ```py
-        auth_response = auth.start("you@example.com", "github")
-        auth_response = auth.wait_for_completion(auth_response)
+        auth_response = client.auth.start("you@example.com", "github")
+        auth_response = client.auth.wait_for_completion(auth_response)
         ```
         """
         auth_id_val: str
