@@ -23,6 +23,8 @@ from ..types.shared.authorization_response import AuthorizationResponse
 
 __all__ = ["AuthResource", "AsyncAuthResource"]
 
+_DEFAULT_LONGPOLL_WAIT_TIME = 45
+
 
 class AuthResource(SyncAPIResource):
     @cached_property
@@ -90,6 +92,36 @@ class AuthResource(SyncAPIResource):
             cast_to=AuthorizationResponse,
         )
 
+    def start(
+        self,
+        user_id: str,
+        provider: str,
+        *,
+        provider_type: str | None = "oauth2",
+        scopes: list[str] | None = None,
+    ) -> AuthorizationResponse:
+        """
+        Starts the authorization process for a given provider and scopes.
+
+        Args:
+            user_id: The user ID for which authorization is being requested.
+            provider: The authorization provider (e.g., 'github', 'google', 'linkedin', 'microsoft', 'slack', 'spotify', 'x', 'zoom').
+            provider_type: The type of authorization provider. Optional, defaults to 'oauth2'.
+            scopes: A list of scopes required for authorization, if any.
+        Returns:
+            The authorization response.
+        """
+        scopes = scopes or []
+        auth_requirement = auth_authorize_params.AuthRequirement(
+            provider_id=provider,
+            provider_type=provider_type or "oauth2",
+            oauth2=auth_authorize_params.AuthRequirementOauth2(scopes=scopes),
+        )
+        return self.authorize(
+            auth_requirement=auth_requirement,
+            user_id=user_id,
+        )
+
     def status(
         self,
         *,
@@ -142,6 +174,41 @@ class AuthResource(SyncAPIResource):
             ),
             cast_to=AuthorizationResponse,
         )
+
+    def wait_for_completion(
+        self,
+        auth_response_or_id: AuthorizationResponse | str,
+        scopes: list[str] | None = None,
+    ) -> AuthorizationResponse:
+        """
+        Waits for the authorization process to complete, for example:
+
+        ```py
+        auth_response = client.auth.start("you@example.com", "github")
+        auth_response = client.auth.wait_for_completion(auth_response)
+        ```
+        """
+        auth_id_val: str
+        scopes_val: str | NotGiven = NOT_GIVEN
+
+        if isinstance(auth_response_or_id, AuthorizationResponse):
+            if not auth_response_or_id.authorization_id:
+                raise ValueError("Authorization ID is required")
+            auth_id_val = auth_response_or_id.authorization_id
+            scopes_val = " ".join(auth_response_or_id.scopes) if auth_response_or_id.scopes else NOT_GIVEN
+            auth_response = auth_response_or_id
+        else:
+            auth_id_val = auth_response_or_id
+            scopes_val = " ".join(scopes) if scopes else NOT_GIVEN
+            auth_response = AuthorizationResponse()
+
+        while auth_response.status != "completed":
+            auth_response = self.status(
+                authorization_id=auth_id_val,
+                scopes=scopes_val,
+                wait=_DEFAULT_LONGPOLL_WAIT_TIME,
+            )
+        return auth_response
 
 
 class AsyncAuthResource(AsyncAPIResource):
@@ -210,6 +277,36 @@ class AsyncAuthResource(AsyncAPIResource):
             cast_to=AuthorizationResponse,
         )
 
+    async def start(
+        self,
+        user_id: str,
+        provider: str,
+        *,
+        provider_type: str | None = "oauth2",
+        scopes: list[str] | None = None,
+    ) -> AuthorizationResponse:
+        """
+        Starts the authorization process for a given provider and scopes.
+
+        Args:
+            user_id: The user ID for which authorization is being requested.
+            provider: The authorization provider (e.g., 'github', 'google', 'linkedin', 'microsoft', 'slack', 'spotify', 'x', 'zoom').
+            provider_type: The type of authorization provider. Optional, defaults to 'oauth2'.
+            scopes: A list of scopes required for authorization, if any.
+        Returns:
+            The authorization response.
+        """
+        scopes = scopes or []
+        auth_requirement = auth_authorize_params.AuthRequirement(
+            provider_id=provider,
+            provider_type=provider_type or "oauth2",
+            oauth2=auth_authorize_params.AuthRequirementOauth2(scopes=scopes),
+        )
+        return await self.authorize(
+            auth_requirement=auth_requirement,
+            user_id=user_id,
+        )
+
     async def status(
         self,
         *,
@@ -262,6 +359,41 @@ class AsyncAuthResource(AsyncAPIResource):
             ),
             cast_to=AuthorizationResponse,
         )
+
+    async def wait_for_completion(
+        self,
+        auth_response_or_id: AuthorizationResponse | str,
+        scopes: list[str] | None = None,
+    ) -> AuthorizationResponse:
+        """
+        Waits for the authorization process to complete, for example:
+
+        ```py
+        auth_response = client.auth.start("you@example.com", "github")
+        auth_response = client.auth.wait_for_completion(auth_response)
+        ```
+        """
+        auth_id_val: str
+        scopes_val: str | NotGiven = NOT_GIVEN
+
+        if isinstance(auth_response_or_id, AuthorizationResponse):
+            if not auth_response_or_id.authorization_id:
+                raise ValueError("Authorization ID is required")
+            auth_id_val = auth_response_or_id.authorization_id
+            scopes_val = " ".join(auth_response_or_id.scopes) if auth_response_or_id.scopes else NOT_GIVEN
+            auth_response = auth_response_or_id
+        else:
+            auth_id_val = auth_response_or_id
+            scopes_val = " ".join(scopes) if scopes else NOT_GIVEN
+            auth_response = AuthorizationResponse()
+
+        while auth_response.status != "completed":
+            auth_response = await self.status(
+                authorization_id=auth_id_val,
+                scopes=scopes_val,
+                wait=_DEFAULT_LONGPOLL_WAIT_TIME,
+            )
+        return auth_response
 
 
 class AuthResourceWithRawResponse:
