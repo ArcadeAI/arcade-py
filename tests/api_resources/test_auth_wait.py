@@ -50,6 +50,14 @@ def test_wait_for_completion_calls_status_from_auth_response(
     )
 
 
+def test_wait_for_completion_raises_value_error_for_empty_authorization_id(sync_auth_resource: AuthResource) -> None:
+    auth = sync_auth_resource
+    auth_response = AuthorizationResponse(status="pending", authorization_id="", scopes=["scope1"])
+
+    with pytest.raises(ValueError, match="Authorization ID is required"):
+        auth.wait_for_completion(auth_response)
+
+
 @parametrize_scopes
 def test_wait_for_completion_calls_status_with_auth_id(
     sync_auth_resource: AuthResource, scopes: Optional[List[str]], expected_scopes: Union[str, NotGiven]
@@ -83,6 +91,17 @@ async def test_async_wait_for_completion_calls_status_from_auth_response(
         scopes=expected_scopes,
         wait=45,
     )
+
+
+@pytest.mark.asyncio
+async def test_async_wait_for_completion_raises_value_error_for_empty_authorization_id(
+    async_auth_resource: AsyncAuthResource,
+) -> None:
+    auth = async_auth_resource
+    auth_response = AuthorizationResponse(status="pending", authorization_id="", scopes=["scope1"])
+
+    with pytest.raises(ValueError, match="Authorization ID is required"):
+        await auth.wait_for_completion(auth_response)
 
 
 @pytest.mark.asyncio
