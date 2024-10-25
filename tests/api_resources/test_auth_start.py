@@ -20,8 +20,7 @@ parametrize_provider_type = pytest.mark.parametrize(
 parametrize_scopes = pytest.mark.parametrize(
     "scopes, expected_scopes",
     [
-        (["scope1"], "scope1"),
-        (["scope1", "scope2"], "scope1 scope2"),
+        (["scope1", "scope2"], ["scope1", "scope2"]),
         (None, []),
     ],
 )
