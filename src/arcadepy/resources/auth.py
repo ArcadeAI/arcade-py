@@ -187,10 +187,13 @@ class AuthResource(SyncAPIResource):
         auth_response = auth.wait_for_completion(auth_response)
         ```
         """
+        auth_id_val: str
+        scopes_val: str | NotGiven = NOT_GIVEN
+
         if isinstance(auth_response_or_id, AuthorizationResponse):
-            auth_id_val = auth_response_or_id.authorization_id
-            if not auth_id_val:
+            if not auth_response_or_id.authorization_id:
                 raise ValueError("Authorization ID is required")
+            auth_id_val = auth_response_or_id.authorization_id
             scopes_val = " ".join(auth_response_or_id.scopes) if auth_response_or_id.scopes else NOT_GIVEN
             auth_response = auth_response_or_id
         else:
