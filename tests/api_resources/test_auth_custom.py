@@ -19,14 +19,14 @@ parametrize_scopes = pytest.mark.parametrize(
 
 
 @pytest.fixture
-def sync_auth_resource():
+def sync_auth_resource() -> AuthResource:
     client = Arcade(api_key="test")
     auth = AuthResource(client)
     return auth
 
 
 @pytest.fixture
-def async_auth_resource():
+def async_auth_resource() -> AsyncAuthResource:
     client = AsyncArcade(api_key="test")
     auth = AsyncAuthResource(client)
     return auth
@@ -34,8 +34,9 @@ def async_auth_resource():
 
 @parametrize_scopes
 def test_wait_for_completion_calls_status_from_auth_response(
-    auth: AuthResource, scopes: Optional[List[str]], expected_scopes: Union[str, NotGiven]
+    sync_auth_resource: AuthResource, scopes: Optional[List[str]], expected_scopes: Union[str, NotGiven]
 ) -> None:
+    auth = sync_auth_resource
     auth.status = Mock(return_value=AuthorizationResponse(status="completed"))  # type: ignore
 
     auth_response = AuthorizationResponse(status="pending", authorization_id="auth_id123", scopes=scopes)
@@ -51,8 +52,9 @@ def test_wait_for_completion_calls_status_from_auth_response(
 
 @parametrize_scopes
 def test_wait_for_completion_calls_status_with_auth_id(
-    auth: AuthResource, scopes: Optional[List[str]], expected_scopes: Union[str, NotGiven]
+    sync_auth_resource: AuthResource, scopes: Optional[List[str]], expected_scopes: Union[str, NotGiven]
 ) -> None:
+    auth = sync_auth_resource
     auth.status = Mock(return_value=AuthorizationResponse(status="completed"))  # type: ignore
 
     auth.wait_for_completion("auth_id456", scopes)
@@ -67,8 +69,9 @@ def test_wait_for_completion_calls_status_with_auth_id(
 @pytest.mark.asyncio
 @parametrize_scopes
 async def test_async_wait_for_completion_calls_status_from_auth_response(
-    auth: AsyncAuthResource, scopes: Optional[List[str]], expected_scopes: Union[str, NotGiven]
+    async_auth_resource: AsyncAuthResource, scopes: Optional[List[str]], expected_scopes: Union[str, NotGiven]
 ) -> None:
+    auth = async_auth_resource
     auth.status = AsyncMock(return_value=AuthorizationResponse(status="completed"))  # type: ignore
 
     auth_response = AuthorizationResponse(status="pending", authorization_id="auth_id789", scopes=scopes)
@@ -85,8 +88,9 @@ async def test_async_wait_for_completion_calls_status_from_auth_response(
 @pytest.mark.asyncio
 @parametrize_scopes
 async def test_async_wait_for_completion_calls_status_with_auth_id(
-    auth: AsyncAuthResource, scopes: Optional[List[str]], expected_scopes: Union[str, NotGiven]
+    async_auth_resource: AsyncAuthResource, scopes: Optional[List[str]], expected_scopes: Union[str, NotGiven]
 ) -> None:
+    auth = async_auth_resource
     auth.status = AsyncMock(return_value=AuthorizationResponse(status="completed"))  # type: ignore
 
     await auth.wait_for_completion("auth_id321", scopes)
