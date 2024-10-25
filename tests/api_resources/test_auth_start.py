@@ -55,7 +55,7 @@ def test_start_calls_authorize_with_correct_params(
     user_id = "user_id"
     provider = "github"
 
-    auth.start(user_id, provider, provider_type, scopes)
+    auth.start(user_id, provider, provider_type=provider_type, scopes=scopes)
 
     auth.authorize.assert_called_with(
         auth_requirement=AuthRequirement(
@@ -83,7 +83,7 @@ async def test_async_start_calls_authorize_with_correct_params(
     user_id = "user_id"
     provider = "github"
 
-    await auth.start(user_id, provider, provider_type, scopes)
+    await auth.start(user_id, provider, provider_type=provider_type, scopes=scopes)
 
     auth.authorize.assert_called_with(
         auth_requirement=AuthRequirement(
