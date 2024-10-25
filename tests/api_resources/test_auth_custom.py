@@ -8,7 +8,7 @@ from arcadepy.types.shared.authorization_response import AuthorizationResponse
 
 
 @pytest.mark.asyncio
-async def test_wait_for_completion_calls_status_from_auth_response():
+async def test_wait_for_completion_calls_status_from_auth_response() -> None:
     client = AsyncArcade(api_key="test")
     auth = AsyncAuthResource(client)
     auth.status = AsyncMock(return_value=AuthorizationResponse(status="completed"))
@@ -27,7 +27,7 @@ async def test_wait_for_completion_calls_status_from_auth_response():
 
 
 @pytest.mark.asyncio
-async def test_wait_for_completion_calls_status_with_auth_id():
+async def test_wait_for_completion_calls_status_with_auth_id() -> None:
     client = AsyncArcade(api_key="test")
     auth = AsyncAuthResource(client)
     auth.status = AsyncMock(return_value=AuthorizationResponse(status="completed"))
