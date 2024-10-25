@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.1.2 (2024-10-25)
+
+Full Changelog: [v0.1.1...v0.1.2](https://github.com/ArcadeAI/arcade-py/compare/v0.1.1...v0.1.2)
+
+### Features
+
+* Add auth.start and auth.wait_for_completion sugar methods ([e0b64a0](https://github.com/ArcadeAI/arcade-py/commit/e0b64a081ae91e8a560460ced6fe1e0010333987))
+* Another test ([66606fe](https://github.com/ArcadeAI/arcade-py/commit/66606fe18b46808997f48c46336aaf6cbbad4165))
+* Better interface for optional params ([32a92bc](https://github.com/ArcadeAI/arcade-py/commit/32a92bc92611a09078db8ed3c99e884fa8e72ba9))
+* Finish tests ([7fa68e5](https://github.com/ArcadeAI/arcade-py/commit/7fa68e5bac09a5404f201d89141876d5d0de9562))
+* Finish wait_for_authorization tests ([febe917](https://github.com/ArcadeAI/arcade-py/commit/febe917faa6b5ea18393cf48b21b7feeee9bfd31))
+* Fix lint ([6806ee5](https://github.com/ArcadeAI/arcade-py/commit/6806ee5957042c292b80fbf7867f2bb275f8a004))
+* Fix more lint ([324505c](https://github.com/ArcadeAI/arcade-py/commit/324505c86e54e7cfb95bcf6e72e881c291488c9b))
+* Fix test ([07d0cf8](https://github.com/ArcadeAI/arcade-py/commit/07d0cf8eee6d1aa527fb793bb09efacadbcfa7d2))
+* Fix tests ([1af1584](https://github.com/ArcadeAI/arcade-py/commit/1af15848b3fdc758818d1a7fcd692d8df68913cb))
+* More tests ([caf98db](https://github.com/ArcadeAI/arcade-py/commit/caf98dbe69addd8b1edf3f68b2e06c8407d3fff6))
+
 ## 0.1.1 (2024-10-24)
 
 Full Changelog: [v0.1.0...v0.1.1](https://github.com/ArcadeAI/arcade-py/compare/v0.1.0...v0.1.1)
