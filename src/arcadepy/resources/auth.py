@@ -96,6 +96,7 @@ class AuthResource(SyncAPIResource):
         self,
         user_id: str,
         provider: str,
+        *,
         provider_type: str | None = "oauth2",
         scopes: list[str] | None = None,
     ) -> AuthorizationResponse:
@@ -280,6 +281,7 @@ class AsyncAuthResource(AsyncAPIResource):
         self,
         user_id: str,
         provider: str,
+        *,
         provider_type: str | None = "oauth2",
         scopes: list[str] | None = None,
     ) -> AuthorizationResponse:
