@@ -28,8 +28,7 @@ import os
 from arcadepy import Arcade
 
 client = Arcade(
-    # This is the default and can be omitted
-    api_key=os.environ.get("ARCADE_API_KEY"),
+    api_key=os.environ.get("ARCADE_API_KEY"),  # This is the default and can be omitted
 )
 
 response = client.tools.execute(
@@ -56,8 +55,7 @@ import asyncio
 from arcadepy import AsyncArcade
 
 client = AsyncArcade(
-    # This is the default and can be omitted
-    api_key=os.environ.get("ARCADE_API_KEY"),
+    api_key=os.environ.get("ARCADE_API_KEY"),  # This is the default and can be omitted
 )
 
 
