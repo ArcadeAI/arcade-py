@@ -29,7 +29,7 @@ class TestAuth:
     def test_method_authorize_with_all_params(self, client: Arcade) -> None:
         auth = client.auth.authorize(
             auth_requirement={
-                "oauth2": {"scopes": ["string", "string", "string"]},
+                "oauth2": {"scopes": ["string"]},
                 "provider_id": "provider_id",
                 "provider_type": "provider_type",
             },
@@ -119,7 +119,7 @@ class TestAsyncAuth:
     async def test_method_authorize_with_all_params(self, async_client: AsyncArcade) -> None:
         auth = await async_client.auth.authorize(
             auth_requirement={
-                "oauth2": {"scopes": ["string", "string", "string"]},
+                "oauth2": {"scopes": ["string"]},
                 "provider_id": "provider_id",
                 "provider_type": "provider_type",
             },
