@@ -43,89 +43,9 @@ class TestCompletions:
                                 "name": "name",
                             },
                             "type": "function",
-                        },
-                        {
-                            "id": "id",
-                            "function": {
-                                "arguments": "arguments",
-                                "name": "name",
-                            },
-                            "type": "function",
-                        },
-                        {
-                            "id": "id",
-                            "function": {
-                                "arguments": "arguments",
-                                "name": "name",
-                            },
-                            "type": "function",
-                        },
+                        }
                     ],
-                },
-                {
-                    "content": "content",
-                    "role": "role",
-                    "name": "name",
-                    "tool_call_id": "tool_call_id",
-                    "tool_calls": [
-                        {
-                            "id": "id",
-                            "function": {
-                                "arguments": "arguments",
-                                "name": "name",
-                            },
-                            "type": "function",
-                        },
-                        {
-                            "id": "id",
-                            "function": {
-                                "arguments": "arguments",
-                                "name": "name",
-                            },
-                            "type": "function",
-                        },
-                        {
-                            "id": "id",
-                            "function": {
-                                "arguments": "arguments",
-                                "name": "name",
-                            },
-                            "type": "function",
-                        },
-                    ],
-                },
-                {
-                    "content": "content",
-                    "role": "role",
-                    "name": "name",
-                    "tool_call_id": "tool_call_id",
-                    "tool_calls": [
-                        {
-                            "id": "id",
-                            "function": {
-                                "arguments": "arguments",
-                                "name": "name",
-                            },
-                            "type": "function",
-                        },
-                        {
-                            "id": "id",
-                            "function": {
-                                "arguments": "arguments",
-                                "name": "name",
-                            },
-                            "type": "function",
-                        },
-                        {
-                            "id": "id",
-                            "function": {
-                                "arguments": "arguments",
-                                "name": "name",
-                            },
-                            "type": "function",
-                        },
-                    ],
-                },
+                }
             ],
             model="model",
             n=0,
@@ -133,7 +53,7 @@ class TestCompletions:
             presence_penalty=0,
             response_format="json_object",
             seed=0,
-            stop=["string", "string", "string"],
+            stop=["string"],
             stream=True,
             stream_options={"include_usage": True},
             temperature=0,
@@ -195,89 +115,9 @@ class TestAsyncCompletions:
                                 "name": "name",
                             },
                             "type": "function",
-                        },
-                        {
-                            "id": "id",
-                            "function": {
-                                "arguments": "arguments",
-                                "name": "name",
-                            },
-                            "type": "function",
-                        },
-                        {
-                            "id": "id",
-                            "function": {
-                                "arguments": "arguments",
-                                "name": "name",
-                            },
-                            "type": "function",
-                        },
+                        }
                     ],
-                },
-                {
-                    "content": "content",
-                    "role": "role",
-                    "name": "name",
-                    "tool_call_id": "tool_call_id",
-                    "tool_calls": [
-                        {
-                            "id": "id",
-                            "function": {
-                                "arguments": "arguments",
-                                "name": "name",
-                            },
-                            "type": "function",
-                        },
-                        {
-                            "id": "id",
-                            "function": {
-                                "arguments": "arguments",
-                                "name": "name",
-                            },
-                            "type": "function",
-                        },
-                        {
-                            "id": "id",
-                            "function": {
-                                "arguments": "arguments",
-                                "name": "name",
-                            },
-                            "type": "function",
-                        },
-                    ],
-                },
-                {
-                    "content": "content",
-                    "role": "role",
-                    "name": "name",
-                    "tool_call_id": "tool_call_id",
-                    "tool_calls": [
-                        {
-                            "id": "id",
-                            "function": {
-                                "arguments": "arguments",
-                                "name": "name",
-                            },
-                            "type": "function",
-                        },
-                        {
-                            "id": "id",
-                            "function": {
-                                "arguments": "arguments",
-                                "name": "name",
-                            },
-                            "type": "function",
-                        },
-                        {
-                            "id": "id",
-                            "function": {
-                                "arguments": "arguments",
-                                "name": "name",
-                            },
-                            "type": "function",
-                        },
-                    ],
-                },
+                }
             ],
             model="model",
             n=0,
@@ -285,7 +125,7 @@ class TestAsyncCompletions:
             presence_penalty=0,
             response_format="json_object",
             seed=0,
-            stop=["string", "string", "string"],
+            stop=["string"],
             stream=True,
             stream_options={"include_usage": True},
             temperature=0,
