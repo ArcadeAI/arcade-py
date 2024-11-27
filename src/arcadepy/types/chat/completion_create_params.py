@@ -11,7 +11,7 @@ __all__ = ["CompletionCreateParams", "StreamOptions"]
 
 
 class CompletionCreateParams(TypedDict, total=False):
-    frequency_penalty: int
+    frequency_penalty: float
 
     logit_bias: Dict[str, int]
     """
@@ -40,7 +40,7 @@ class CompletionCreateParams(TypedDict, total=False):
     parallel_tool_calls: bool
     """Disable the default behavior of parallel tool calls by setting it: false."""
 
-    presence_penalty: int
+    presence_penalty: float
 
     response_format: Literal["json_object", "text"]
 
