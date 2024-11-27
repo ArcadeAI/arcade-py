@@ -21,6 +21,10 @@ class AuthorizationResponse(BaseModel):
 
     context: Optional[Context] = None
 
+    provider_id: Optional[str] = None
+
     scopes: Optional[List[str]] = None
 
     status: Optional[Literal["pending", "completed", "failed"]] = None
+
+    user_id: Optional[str] = None
