@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1 (2024-12-03)
+
+Full Changelog: [v0.2.0...v0.2.1](https://github.com/ArcadeAI/arcade-py/compare/v0.2.0...v0.2.1)
+
+### Chores
+
+* **internal:** version bump ([#50](https://github.com/ArcadeAI/arcade-py/issues/50)) ([d94fe99](https://github.com/ArcadeAI/arcade-py/commit/d94fe997bb6400377c4bfeec62abc68b5b233e7d))
+
 ## 0.2.0 (2024-12-03)
 
 Full Changelog: [v0.1.2...v0.2.0](https://github.com/ArcadeAI/arcade-py/compare/v0.1.2...v0.2.0)
