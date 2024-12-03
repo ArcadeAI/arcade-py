@@ -122,7 +122,6 @@ class ToolsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AuthorizationResponse:
         """
         Authorizes a user for a specific tool by name
@@ -137,8 +136,6 @@ class ToolsResource(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/v1/tools/authorize",
@@ -151,11 +148,7 @@ class ToolsResource(SyncAPIResource):
                 tool_authorize_params.ToolAuthorizeParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AuthorizationResponse,
         )
@@ -173,7 +166,6 @@ class ToolsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> Response:
         """
         Executes a tool by name and arguments
@@ -190,8 +182,6 @@ class ToolsResource(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/v1/tools/execute",
@@ -205,11 +195,7 @@ class ToolsResource(SyncAPIResource):
                 tool_execute_params.ToolExecuteParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Response,
         )
@@ -339,7 +325,6 @@ class AsyncToolsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> AuthorizationResponse:
         """
         Authorizes a user for a specific tool by name
@@ -354,8 +339,6 @@ class AsyncToolsResource(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/v1/tools/authorize",
@@ -368,11 +351,7 @@ class AsyncToolsResource(AsyncAPIResource):
                 tool_authorize_params.ToolAuthorizeParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AuthorizationResponse,
         )
@@ -390,7 +369,6 @@ class AsyncToolsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> Response:
         """
         Executes a tool by name and arguments
@@ -407,8 +385,6 @@ class AsyncToolsResource(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/v1/tools/execute",
@@ -422,11 +398,7 @@ class AsyncToolsResource(AsyncAPIResource):
                 tool_execute_params.ToolExecuteParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Response,
         )

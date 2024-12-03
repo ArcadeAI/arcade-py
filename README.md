@@ -34,7 +34,6 @@ client = Arcade(
 response = client.tools.execute(
     tool_name="Google.ListEmails",
     inputs={"n_emails": 10},
-    tool_version="0.1.0",
     user_id="user@example.com",
 )
 print(response.invocation_id)
@@ -63,7 +62,6 @@ async def main() -> None:
     response = await client.tools.execute(
         tool_name="Google.ListEmails",
         inputs={"n_emails": 10},
-        tool_version="0.1.0",
         user_id="user@example.com",
     )
     print(response.invocation_id)

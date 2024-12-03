@@ -77,10 +77,9 @@ class CompletionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> ChatResponse:
         """
-        Talk to different LLM Chat APIs via OpenAI's API
+        Interact with language models via OpenAI's chat completions API
 
         Args:
           logit_bias: LogitBias is must be a token id string (specified by their token ID in the
@@ -110,8 +109,6 @@ class CompletionsResource(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return self._post(
             "/v1/chat/completions",
@@ -141,11 +138,7 @@ class CompletionsResource(SyncAPIResource):
                 completion_create_params.CompletionCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ChatResponse,
         )
@@ -200,10 +193,9 @@ class AsyncCompletionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-        idempotency_key: str | None = None,
     ) -> ChatResponse:
         """
-        Talk to different LLM Chat APIs via OpenAI's API
+        Interact with language models via OpenAI's chat completions API
 
         Args:
           logit_bias: LogitBias is must be a token id string (specified by their token ID in the
@@ -233,8 +225,6 @@ class AsyncCompletionsResource(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
-
-          idempotency_key: Specify a custom idempotency key for this request
         """
         return await self._post(
             "/v1/chat/completions",
@@ -264,11 +254,7 @@ class AsyncCompletionsResource(AsyncAPIResource):
                 completion_create_params.CompletionCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                idempotency_key=idempotency_key,
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ChatResponse,
         )
