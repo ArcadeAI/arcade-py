@@ -1,11 +1,11 @@
 [project]
 name = "arcadepy"
-version = "0.1.2"
+version = "0.2.0"
 description = "The official Python library for the Arcade API"
 dynamic = ["readme"]
-license = "Apache-2.0"
+license = "MIT"
 authors = [
-{ name = "Arcade", email = "contact@arcade-ai.com" },
+{ name = "Arcade", email = "dev@arcade-ai.com" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",
@@ -30,7 +30,7 @@ classifiers = [
   "Operating System :: POSIX :: Linux",
   "Operating System :: Microsoft :: Windows",
   "Topic :: Software Development :: Libraries :: Python Modules",
-  "License :: OSI Approved :: Apache Software License"
+  "License :: OSI Approved :: MIT License"
 ]
 
 [project.urls]
