@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.2.0 (2024-12-03)
+
+Full Changelog: [v0.1.2...v0.2.0](https://github.com/ArcadeAI/arcade-py/compare/v0.1.2...v0.2.0)
+
+### Features
+
+* **api:** api update ([#37](https://github.com/ArcadeAI/arcade-py/issues/37)) ([a545d48](https://github.com/ArcadeAI/arcade-py/commit/a545d485f3107c4888b00b83aab46274228b280e))
+
+
+### Bug Fixes
+
+* **client:** compat with new httpx 0.28.0 release ([#48](https://github.com/ArcadeAI/arcade-py/issues/48)) ([9a0d85c](https://github.com/ArcadeAI/arcade-py/commit/9a0d85c818da37d12bc43104d90d1391b5ef674e))
+
+
+### Chores
+
+* **internal:** bump pyright ([#49](https://github.com/ArcadeAI/arcade-py/issues/49)) ([20c0925](https://github.com/ArcadeAI/arcade-py/commit/20c09258f485f11f70193dff5de8e89b04d708d6))
+* **internal:** codegen related update ([#45](https://github.com/ArcadeAI/arcade-py/issues/45)) ([fb7fb4a](https://github.com/ArcadeAI/arcade-py/commit/fb7fb4ab4a45b8aa3ca42549c2624707605469b0))
+* **internal:** codegen related update ([#46](https://github.com/ArcadeAI/arcade-py/issues/46)) ([6635bb1](https://github.com/ArcadeAI/arcade-py/commit/6635bb1d53d4de227d755e629236d4104d9fe85b))
+* **internal:** codegen related update ([#47](https://github.com/ArcadeAI/arcade-py/issues/47)) ([61f5c17](https://github.com/ArcadeAI/arcade-py/commit/61f5c173c0792b434d2e32bb6d64be636e703355))
+* **internal:** fix compat model_dump method when warnings are passed ([#43](https://github.com/ArcadeAI/arcade-py/issues/43)) ([beb8e75](https://github.com/ArcadeAI/arcade-py/commit/beb8e753294222ccbd571643ff8bf70764286744))
+* rebuild project due to codegen change ([#39](https://github.com/ArcadeAI/arcade-py/issues/39)) ([e857a5a](https://github.com/ArcadeAI/arcade-py/commit/e857a5a5de9481ada4e3018399733dbc8e679518))
+* rebuild project due to codegen change ([#40](https://github.com/ArcadeAI/arcade-py/issues/40)) ([123b860](https://github.com/ArcadeAI/arcade-py/commit/123b860daf2f73571dec28e4b12aab6f032e3273))
+* rebuild project due to codegen change ([#41](https://github.com/ArcadeAI/arcade-py/issues/41)) ([2cf4305](https://github.com/ArcadeAI/arcade-py/commit/2cf4305f199b555c35a907bb85daf8f9f5faad5f))
+* rebuild project due to codegen change ([#42](https://github.com/ArcadeAI/arcade-py/issues/42)) ([cf6455f](https://github.com/ArcadeAI/arcade-py/commit/cf6455f62312f38917c58c4f3d8dc642f92eb074))
+
+
+### Documentation
+
+* add info log level to readme ([#44](https://github.com/ArcadeAI/arcade-py/issues/44)) ([797ec03](https://github.com/ArcadeAI/arcade-py/commit/797ec036040a3afaaf65989ca0513720bbc7db36))
+
 ## 0.1.2 (2024-10-25)
 
 Full Changelog: [v0.1.1...v0.1.2](https://github.com/ArcadeAI/arcade-py/compare/v0.1.1...v0.1.2)
