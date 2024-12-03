@@ -107,8 +107,6 @@ class Arcade(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self._idempotency_header = "Idempotency-Key"
-
         self.auth = resources.AuthResource(self)
         self.health = resources.HealthResource(self)
         self.chat = resources.ChatResource(self)
@@ -282,8 +280,6 @@ class AsyncArcade(AsyncAPIClient):
             custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
         )
-
-        self._idempotency_header = "Idempotency-Key"
 
         self.auth = resources.AsyncAuthResource(self)
         self.health = resources.AsyncHealthResource(self)
