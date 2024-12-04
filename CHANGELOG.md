@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.2 (2024-12-04)
+
+Full Changelog: [v0.2.1...v0.2.2](https://github.com/ArcadeAI/arcade-py/compare/v0.2.1...v0.2.2)
+
+### Chores
+
+* make the `Omit` type public ([#53](https://github.com/ArcadeAI/arcade-py/issues/53)) ([7512e91](https://github.com/ArcadeAI/arcade-py/commit/7512e91d0b797c51ca13e53f30029ac865075c1f))
+
 ## 0.2.1 (2024-12-03)
 
 Full Changelog: [v0.2.0...v0.2.1](https://github.com/ArcadeAI/arcade-py/compare/v0.2.0...v0.2.1)
