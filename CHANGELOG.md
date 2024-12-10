@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.2.3 (2024-12-10)
+
+Full Changelog: [v0.2.2...v0.2.3](https://github.com/ArcadeAI/arcade-py/compare/v0.2.2...v0.2.3)
+
+### Chores
+
+* **internal:** bump pydantic dependency ([#56](https://github.com/ArcadeAI/arcade-py/issues/56)) ([0f8197f](https://github.com/ArcadeAI/arcade-py/commit/0f8197fecb47c96cff8935f66a860ee5bd84488c))
+
+
+### Documentation
+
+* **readme:** fix http client proxies example ([#58](https://github.com/ArcadeAI/arcade-py/issues/58)) ([b8d94e8](https://github.com/ArcadeAI/arcade-py/commit/b8d94e8204e689c2957c3f72df31cedb6996c4e3))
+
 ## 0.2.2 (2024-12-04)
 
 Full Changelog: [v0.2.1...v0.2.2](https://github.com/ArcadeAI/arcade-py/compare/v0.2.1...v0.2.2)
