@@ -8,7 +8,7 @@ from typing_extensions import Self, override
 
 import httpx
 
-from . import _exceptions
+from . import resources, _exceptions
 from ._qs import Querystring
 from ._types import (
     NOT_GIVEN,
@@ -24,7 +24,6 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import auth, health
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import ArcadeError, APIStatusError
 from ._base_client import (
@@ -32,17 +31,25 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.chat import chat
-from .resources.tools import tools
 
-__all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Arcade", "AsyncArcade", "Client", "AsyncClient"]
+__all__ = [
+    "Timeout",
+    "Transport",
+    "ProxiesTypes",
+    "RequestOptions",
+    "resources",
+    "Arcade",
+    "AsyncArcade",
+    "Client",
+    "AsyncClient",
+]
 
 
 class Arcade(SyncAPIClient):
-    auth: auth.AuthResource
-    health: health.HealthResource
-    chat: chat.ChatResource
-    tools: tools.ToolsResource
+    auth: resources.AuthResource
+    health: resources.HealthResource
+    chat: resources.ChatResource
+    tools: resources.ToolsResource
     with_raw_response: ArcadeWithRawResponse
     with_streaming_response: ArcadeWithStreamedResponse
 
@@ -100,10 +107,10 @@ class Arcade(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.auth = auth.AuthResource(self)
-        self.health = health.HealthResource(self)
-        self.chat = chat.ChatResource(self)
-        self.tools = tools.ToolsResource(self)
+        self.auth = resources.AuthResource(self)
+        self.health = resources.HealthResource(self)
+        self.chat = resources.ChatResource(self)
+        self.tools = resources.ToolsResource(self)
         self.with_raw_response = ArcadeWithRawResponse(self)
         self.with_streaming_response = ArcadeWithStreamedResponse(self)
 
@@ -213,10 +220,10 @@ class Arcade(SyncAPIClient):
 
 
 class AsyncArcade(AsyncAPIClient):
-    auth: auth.AsyncAuthResource
-    health: health.AsyncHealthResource
-    chat: chat.AsyncChatResource
-    tools: tools.AsyncToolsResource
+    auth: resources.AsyncAuthResource
+    health: resources.AsyncHealthResource
+    chat: resources.AsyncChatResource
+    tools: resources.AsyncToolsResource
     with_raw_response: AsyncArcadeWithRawResponse
     with_streaming_response: AsyncArcadeWithStreamedResponse
 
@@ -274,10 +281,10 @@ class AsyncArcade(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.auth = auth.AsyncAuthResource(self)
-        self.health = health.AsyncHealthResource(self)
-        self.chat = chat.AsyncChatResource(self)
-        self.tools = tools.AsyncToolsResource(self)
+        self.auth = resources.AsyncAuthResource(self)
+        self.health = resources.AsyncHealthResource(self)
+        self.chat = resources.AsyncChatResource(self)
+        self.tools = resources.AsyncToolsResource(self)
         self.with_raw_response = AsyncArcadeWithRawResponse(self)
         self.with_streaming_response = AsyncArcadeWithStreamedResponse(self)
 
@@ -388,34 +395,34 @@ class AsyncArcade(AsyncAPIClient):
 
 class ArcadeWithRawResponse:
     def __init__(self, client: Arcade) -> None:
-        self.auth = auth.AuthResourceWithRawResponse(client.auth)
-        self.health = health.HealthResourceWithRawResponse(client.health)
-        self.chat = chat.ChatResourceWithRawResponse(client.chat)
-        self.tools = tools.ToolsResourceWithRawResponse(client.tools)
+        self.auth = resources.AuthResourceWithRawResponse(client.auth)
+        self.health = resources.HealthResourceWithRawResponse(client.health)
+        self.chat = resources.ChatResourceWithRawResponse(client.chat)
+        self.tools = resources.ToolsResourceWithRawResponse(client.tools)
 
 
 class AsyncArcadeWithRawResponse:
     def __init__(self, client: AsyncArcade) -> None:
-        self.auth = auth.AsyncAuthResourceWithRawResponse(client.auth)
-        self.health = health.AsyncHealthResourceWithRawResponse(client.health)
-        self.chat = chat.AsyncChatResourceWithRawResponse(client.chat)
-        self.tools = tools.AsyncToolsResourceWithRawResponse(client.tools)
+        self.auth = resources.AsyncAuthResourceWithRawResponse(client.auth)
+        self.health = resources.AsyncHealthResourceWithRawResponse(client.health)
+        self.chat = resources.AsyncChatResourceWithRawResponse(client.chat)
+        self.tools = resources.AsyncToolsResourceWithRawResponse(client.tools)
 
 
 class ArcadeWithStreamedResponse:
     def __init__(self, client: Arcade) -> None:
-        self.auth = auth.AuthResourceWithStreamingResponse(client.auth)
-        self.health = health.HealthResourceWithStreamingResponse(client.health)
-        self.chat = chat.ChatResourceWithStreamingResponse(client.chat)
-        self.tools = tools.ToolsResourceWithStreamingResponse(client.tools)
+        self.auth = resources.AuthResourceWithStreamingResponse(client.auth)
+        self.health = resources.HealthResourceWithStreamingResponse(client.health)
+        self.chat = resources.ChatResourceWithStreamingResponse(client.chat)
+        self.tools = resources.ToolsResourceWithStreamingResponse(client.tools)
 
 
 class AsyncArcadeWithStreamedResponse:
     def __init__(self, client: AsyncArcade) -> None:
-        self.auth = auth.AsyncAuthResourceWithStreamingResponse(client.auth)
-        self.health = health.AsyncHealthResourceWithStreamingResponse(client.health)
-        self.chat = chat.AsyncChatResourceWithStreamingResponse(client.chat)
-        self.tools = tools.AsyncToolsResourceWithStreamingResponse(client.tools)
+        self.auth = resources.AsyncAuthResourceWithStreamingResponse(client.auth)
+        self.health = resources.AsyncHealthResourceWithStreamingResponse(client.health)
+        self.chat = resources.AsyncChatResourceWithStreamingResponse(client.chat)
+        self.tools = resources.AsyncToolsResourceWithStreamingResponse(client.tools)
 
 
 Client = Arcade
