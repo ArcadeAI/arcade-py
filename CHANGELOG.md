@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.2.3 (2024-12-18)
+
+Full Changelog: [v0.2.2...v0.2.3](https://github.com/ArcadeAI/arcade-py/compare/v0.2.2...v0.2.3)
+
+### Chores
+
+* **internal:** add support for TypeAliasType ([#60](https://github.com/ArcadeAI/arcade-py/issues/60)) ([e16c393](https://github.com/ArcadeAI/arcade-py/commit/e16c393a6962d9104c066f244c883926a0bb3651))
+* **internal:** bump pydantic dependency ([#56](https://github.com/ArcadeAI/arcade-py/issues/56)) ([0f8197f](https://github.com/ArcadeAI/arcade-py/commit/0f8197fecb47c96cff8935f66a860ee5bd84488c))
+* **internal:** bump pyright ([#59](https://github.com/ArcadeAI/arcade-py/issues/59)) ([a1a0a95](https://github.com/ArcadeAI/arcade-py/commit/a1a0a953ae35caea4ad07967caa392e9e86bd706))
+* **internal:** codegen related update ([#61](https://github.com/ArcadeAI/arcade-py/issues/61)) ([87f170b](https://github.com/ArcadeAI/arcade-py/commit/87f170b0703930cf2e675c336b3b2f0f0c7eef28))
+* **internal:** codegen related update ([#62](https://github.com/ArcadeAI/arcade-py/issues/62)) ([541faad](https://github.com/ArcadeAI/arcade-py/commit/541faadf245f00d7342875ec10b7cf1ecee8007b))
+* **internal:** codegen related update ([#64](https://github.com/ArcadeAI/arcade-py/issues/64)) ([808aa6b](https://github.com/ArcadeAI/arcade-py/commit/808aa6b8e8b59e3bc857d6487b4e6dc601480508))
+* **internal:** fix some typos ([#65](https://github.com/ArcadeAI/arcade-py/issues/65)) ([de0fefd](https://github.com/ArcadeAI/arcade-py/commit/de0fefd92f29fd1dd7cfaf5657c12b3ddd761ac6))
+* **internal:** updated imports ([#63](https://github.com/ArcadeAI/arcade-py/issues/63)) ([28ea714](https://github.com/ArcadeAI/arcade-py/commit/28ea714eede1a04b73b78a4c9447d62683acde3d))
+
+
+### Documentation
+
+* **readme:** fix http client proxies example ([#58](https://github.com/ArcadeAI/arcade-py/issues/58)) ([b8d94e8](https://github.com/ArcadeAI/arcade-py/commit/b8d94e8204e689c2957c3f72df31cedb6996c4e3))
+
 ## 0.2.2 (2024-12-04)
 
 Full Changelog: [v0.2.1...v0.2.2](https://github.com/ArcadeAI/arcade-py/compare/v0.2.1...v0.2.2)
