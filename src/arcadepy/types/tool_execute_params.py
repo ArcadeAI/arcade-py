@@ -13,7 +13,13 @@ class ToolExecuteParams(TypedDict, total=False):
     inputs: object
     """JSON input to the tool, if any"""
 
+    run_at: str
+    """The time at which the tool should be run (optional).
+
+    If not provided, the tool is run immediately
+    """
+
     tool_version: str
-    """Optional: if not provided, any version is used"""
+    """The tool version to use (optional). If not provided, any version is used"""
 
     user_id: str

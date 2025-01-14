@@ -7,7 +7,7 @@ from typing_extensions import Literal, TypedDict
 
 from ..chat_message_param import ChatMessageParam
 
-__all__ = ["CompletionCreateParams", "StreamOptions"]
+__all__ = ["CompletionCreateParams", "ResponseFormat", "StreamOptions"]
 
 
 class CompletionCreateParams(TypedDict, total=False):
@@ -42,7 +42,7 @@ class CompletionCreateParams(TypedDict, total=False):
 
     presence_penalty: float
 
-    response_format: Literal["json_object", "text"]
+    response_format: ResponseFormat
 
     seed: int
 
@@ -70,6 +70,10 @@ class CompletionCreateParams(TypedDict, total=False):
     top_p: float
 
     user: str
+
+
+class ResponseFormat(TypedDict, total=False):
+    type: Literal["json_object", "text"]
 
 
 class StreamOptions(TypedDict, total=False):

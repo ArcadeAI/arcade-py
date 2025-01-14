@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import Dict, List, Iterable
-from typing_extensions import Literal
 
 import httpx
 
@@ -60,7 +59,7 @@ class CompletionsResource(SyncAPIResource):
         n: int | NotGiven = NOT_GIVEN,
         parallel_tool_calls: bool | NotGiven = NOT_GIVEN,
         presence_penalty: float | NotGiven = NOT_GIVEN,
-        response_format: Literal["json_object", "text"] | NotGiven = NOT_GIVEN,
+        response_format: completion_create_params.ResponseFormat | NotGiven = NOT_GIVEN,
         seed: int | NotGiven = NOT_GIVEN,
         stop: List[str] | NotGiven = NOT_GIVEN,
         stream: bool | NotGiven = NOT_GIVEN,
@@ -176,7 +175,7 @@ class AsyncCompletionsResource(AsyncAPIResource):
         n: int | NotGiven = NOT_GIVEN,
         parallel_tool_calls: bool | NotGiven = NOT_GIVEN,
         presence_penalty: float | NotGiven = NOT_GIVEN,
-        response_format: Literal["json_object", "text"] | NotGiven = NOT_GIVEN,
+        response_format: completion_create_params.ResponseFormat | NotGiven = NOT_GIVEN,
         seed: int | NotGiven = NOT_GIVEN,
         stop: List[str] | NotGiven = NOT_GIVEN,
         stream: bool | NotGiven = NOT_GIVEN,
