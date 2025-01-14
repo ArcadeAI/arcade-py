@@ -31,12 +31,12 @@ client = Arcade(
     api_key=os.environ.get("ARCADE_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.tools.execute(
+execute_tool_response = client.tools.execute(
     tool_name="Google.ListEmails",
     inputs={"n_emails": 10},
     user_id="user@example.com",
 )
-print(response.invocation_id)
+print(execute_tool_response.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -59,12 +59,12 @@ client = AsyncArcade(
 
 
 async def main() -> None:
-    response = await client.tools.execute(
+    execute_tool_response = await client.tools.execute(
         tool_name="Google.ListEmails",
         inputs={"n_emails": 10},
         user_id="user@example.com",
     )
-    print(response.invocation_id)
+    print(execute_tool_response.id)
 
 
 asyncio.run(main())

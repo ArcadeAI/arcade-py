@@ -59,8 +59,8 @@ class FormattedResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncOffsetPage[object]:
         """
-        Returns a page of tools, optionally filtered by toolkit, formatted for a
-        specific provider
+        Returns a page of tools from the engine configuration, optionally filtered by
+        toolkit, formatted for a specific provider
 
         Args:
           format: Provider format
@@ -103,7 +103,6 @@ class FormattedResource(SyncAPIResource):
     def get(
         self,
         *,
-        tool_id: str,
         format: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -116,8 +115,6 @@ class FormattedResource(SyncAPIResource):
         Returns the formatted tool specification for a specific tool, given a provider
 
         Args:
-          tool_id: Tool ID
-
           format: Provider format
 
           extra_headers: Send extra headers
@@ -135,13 +132,7 @@ class FormattedResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "tool_id": tool_id,
-                        "format": format,
-                    },
-                    formatted_get_params.FormattedGetParams,
-                ),
+                query=maybe_transform({"format": format}, formatted_get_params.FormattedGetParams),
             ),
             cast_to=object,
         )
@@ -182,8 +173,8 @@ class AsyncFormattedResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[object, AsyncOffsetPage[object]]:
         """
-        Returns a page of tools, optionally filtered by toolkit, formatted for a
-        specific provider
+        Returns a page of tools from the engine configuration, optionally filtered by
+        toolkit, formatted for a specific provider
 
         Args:
           format: Provider format
@@ -226,7 +217,6 @@ class AsyncFormattedResource(AsyncAPIResource):
     async def get(
         self,
         *,
-        tool_id: str,
         format: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -239,8 +229,6 @@ class AsyncFormattedResource(AsyncAPIResource):
         Returns the formatted tool specification for a specific tool, given a provider
 
         Args:
-          tool_id: Tool ID
-
           format: Provider format
 
           extra_headers: Send extra headers
@@ -258,13 +246,7 @@ class AsyncFormattedResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "tool_id": tool_id,
-                        "format": format,
-                    },
-                    formatted_get_params.FormattedGetParams,
-                ),
+                query=await async_maybe_transform({"format": format}, formatted_get_params.FormattedGetParams),
             ),
             cast_to=object,
         )

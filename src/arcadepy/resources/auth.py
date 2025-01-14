@@ -86,8 +86,7 @@ class AuthResource(SyncAPIResource):
     def status(
         self,
         *,
-        authorization_id: str,
-        scopes: str | NotGiven = NOT_GIVEN,
+        id: str,
         wait: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -103,9 +102,7 @@ class AuthResource(SyncAPIResource):
         completed or the timeout is reached.
 
         Args:
-          authorization_id: Authorization ID
-
-          scopes: Scopes
+          id: Authorization ID
 
           wait: Timeout in seconds (max 59)
 
@@ -126,8 +123,7 @@ class AuthResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "authorization_id": authorization_id,
-                        "scopes": scopes,
+                        "id": id,
                         "wait": wait,
                     },
                     auth_status_params.AuthStatusParams,
@@ -199,8 +195,7 @@ class AsyncAuthResource(AsyncAPIResource):
     async def status(
         self,
         *,
-        authorization_id: str,
-        scopes: str | NotGiven = NOT_GIVEN,
+        id: str,
         wait: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -216,9 +211,7 @@ class AsyncAuthResource(AsyncAPIResource):
         completed or the timeout is reached.
 
         Args:
-          authorization_id: Authorization ID
-
-          scopes: Scopes
+          id: Authorization ID
 
           wait: Timeout in seconds (max 59)
 
@@ -239,8 +232,7 @@ class AsyncAuthResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "authorization_id": authorization_id,
-                        "scopes": scopes,
+                        "id": id,
                         "wait": wait,
                     },
                     auth_status_params.AuthStatusParams,

@@ -54,24 +54,19 @@ class TestFormatted:
 
     @parametrize
     def test_method_get(self, client: Arcade) -> None:
-        formatted = client.tools.formatted.get(
-            tool_id="toolId",
-        )
+        formatted = client.tools.formatted.get()
         assert_matches_type(object, formatted, path=["response"])
 
     @parametrize
     def test_method_get_with_all_params(self, client: Arcade) -> None:
         formatted = client.tools.formatted.get(
-            tool_id="toolId",
             format="format",
         )
         assert_matches_type(object, formatted, path=["response"])
 
     @parametrize
     def test_raw_response_get(self, client: Arcade) -> None:
-        response = client.tools.formatted.with_raw_response.get(
-            tool_id="toolId",
-        )
+        response = client.tools.formatted.with_raw_response.get()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -80,9 +75,7 @@ class TestFormatted:
 
     @parametrize
     def test_streaming_response_get(self, client: Arcade) -> None:
-        with client.tools.formatted.with_streaming_response.get(
-            tool_id="toolId",
-        ) as response:
+        with client.tools.formatted.with_streaming_response.get() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -132,24 +125,19 @@ class TestAsyncFormatted:
 
     @parametrize
     async def test_method_get(self, async_client: AsyncArcade) -> None:
-        formatted = await async_client.tools.formatted.get(
-            tool_id="toolId",
-        )
+        formatted = await async_client.tools.formatted.get()
         assert_matches_type(object, formatted, path=["response"])
 
     @parametrize
     async def test_method_get_with_all_params(self, async_client: AsyncArcade) -> None:
         formatted = await async_client.tools.formatted.get(
-            tool_id="toolId",
             format="format",
         )
         assert_matches_type(object, formatted, path=["response"])
 
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncArcade) -> None:
-        response = await async_client.tools.formatted.with_raw_response.get(
-            tool_id="toolId",
-        )
+        response = await async_client.tools.formatted.with_raw_response.get()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -158,9 +146,7 @@ class TestAsyncFormatted:
 
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncArcade) -> None:
-        async with async_client.tools.formatted.with_streaming_response.get(
-            tool_id="toolId",
-        ) as response:
+        async with async_client.tools.formatted.with_streaming_response.get() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

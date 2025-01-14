@@ -21,8 +21,8 @@ class Error(BaseModel):
 
 
 class ResponseOutput(BaseModel):
-    error: Optional[Error] = None
+    authorization: Optional[AuthorizationResponse] = None
 
-    requires_authorization: Optional[AuthorizationResponse] = None
+    error: Optional[Error] = None
 
     value: Optional[object] = None

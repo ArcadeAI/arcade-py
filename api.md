@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from arcadepy.types import AuthorizationResponse, Error, ToolDefinition
+from arcadepy.types import AuthorizationResponse, Error
 ```
 
 # Auth
@@ -51,23 +51,34 @@ Types:
 from arcadepy.types import (
     AuthorizeToolRequest,
     ExecuteToolRequest,
-    Inputs,
-    Output,
-    Parameter,
-    Requirements,
-    Response,
+    ExecuteToolResponse,
     ResponseOutput,
-    ToolkitDefinition,
-    ValueSchema,
+    ToolExecution,
+    ToolExecutionAttempt,
+    ToolListResponse,
+    ToolGetResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /v1/tools/list">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">list</a>(\*\*<a href="src/arcadepy/types/tool_list_params.py">params</a>) -> <a href="./src/arcadepy/types/shared/tool_definition.py">SyncOffsetPage[ToolDefinition]</a></code>
+- <code title="get /v1/tools/list">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">list</a>(\*\*<a href="src/arcadepy/types/tool_list_params.py">params</a>) -> <a href="./src/arcadepy/types/tool_list_response.py">SyncOffsetPage[ToolListResponse]</a></code>
 - <code title="post /v1/tools/authorize">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">authorize</a>(\*\*<a href="src/arcadepy/types/tool_authorize_params.py">params</a>) -> <a href="./src/arcadepy/types/shared/authorization_response.py">AuthorizationResponse</a></code>
-- <code title="post /v1/tools/execute">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">execute</a>(\*\*<a href="src/arcadepy/types/tool_execute_params.py">params</a>) -> <a href="./src/arcadepy/types/response.py">Response</a></code>
-- <code title="get /v1/tools/definition">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">get</a>(\*\*<a href="src/arcadepy/types/tool_get_params.py">params</a>) -> <a href="./src/arcadepy/types/shared/tool_definition.py">ToolDefinition</a></code>
+- <code title="post /v1/tools/execute">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">execute</a>(\*\*<a href="src/arcadepy/types/tool_execute_params.py">params</a>) -> <a href="./src/arcadepy/types/execute_tool_response.py">ExecuteToolResponse</a></code>
+- <code title="get /v1/tools/definition">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">get</a>() -> <a href="./src/arcadepy/types/tool_get_response.py">ToolGetResponse</a></code>
+
+## Scheduled
+
+Types:
+
+```python
+from arcadepy.types.tools import ScheduledListResponse, ScheduledDetailsResponse
+```
+
+Methods:
+
+- <code title="get /v1/tools/scheduled">client.tools.scheduled.<a href="./src/arcadepy/resources/tools/scheduled.py">list</a>() -> <a href="./src/arcadepy/types/tools/scheduled_list_response.py">ScheduledListResponse</a></code>
+- <code title="get /v1/tools/scheduled/{id}">client.tools.scheduled.<a href="./src/arcadepy/resources/tools/scheduled.py">details</a>(id) -> <a href="./src/arcadepy/types/tools/scheduled_details_response.py">ScheduledDetailsResponse</a></code>
 
 ## Formatted
 
