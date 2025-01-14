@@ -10,7 +10,8 @@ __all__ = ["ToolAuthorizeParams"]
 class ToolAuthorizeParams(TypedDict, total=False):
     tool_name: Required[str]
 
-    user_id: Required[str]
-
     tool_version: str
     """Optional: if not provided, any version is used"""
+
+    user_id: str
+    """Required only when calling with an API key"""

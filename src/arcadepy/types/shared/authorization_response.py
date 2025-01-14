@@ -15,9 +15,7 @@ class Context(BaseModel):
 
 
 class AuthorizationResponse(BaseModel):
-    authorization_id: Optional[str] = None
-
-    authorization_url: Optional[str] = None
+    id: Optional[str] = None
 
     context: Optional[Context] = None
 
@@ -26,5 +24,7 @@ class AuthorizationResponse(BaseModel):
     scopes: Optional[List[str]] = None
 
     status: Optional[Literal["pending", "completed", "failed"]] = None
+
+    url: Optional[str] = None
 
     user_id: Optional[str] = None
