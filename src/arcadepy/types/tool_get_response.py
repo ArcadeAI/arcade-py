@@ -3,33 +3,24 @@
 from typing import List, Optional
 
 from .._models import BaseModel
+from .value_schema import ValueSchema
 
 __all__ = [
     "ToolGetResponse",
     "Input",
     "InputParameter",
-    "InputParameterValueSchema",
     "Toolkit",
     "Output",
-    "OutputValueSchema",
     "Requirements",
     "RequirementsAuthorization",
     "RequirementsAuthorizationOauth2",
 ]
 
 
-class InputParameterValueSchema(BaseModel):
-    val_type: str
-
-    enum: Optional[List[str]] = None
-
-    inner_val_type: Optional[str] = None
-
-
 class InputParameter(BaseModel):
     name: str
 
-    value_schema: InputParameterValueSchema
+    value_schema: ValueSchema
 
     description: Optional[str] = None
 
@@ -50,20 +41,12 @@ class Toolkit(BaseModel):
     version: Optional[str] = None
 
 
-class OutputValueSchema(BaseModel):
-    val_type: str
-
-    enum: Optional[List[str]] = None
-
-    inner_val_type: Optional[str] = None
-
-
 class Output(BaseModel):
     available_modes: Optional[List[str]] = None
 
     description: Optional[str] = None
 
-    value_schema: Optional[OutputValueSchema] = None
+    value_schema: Optional[ValueSchema] = None
 
 
 class RequirementsAuthorizationOauth2(BaseModel):

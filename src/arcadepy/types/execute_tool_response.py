@@ -3,9 +3,29 @@
 from typing import Optional
 
 from .._models import BaseModel
-from .response_output import ResponseOutput
+from .shared.auth_authorization_response import AuthAuthorizationResponse
 
-__all__ = ["ExecuteToolResponse"]
+__all__ = ["ExecuteToolResponse", "Output", "OutputError"]
+
+
+class OutputError(BaseModel):
+    message: str
+
+    additional_prompt_content: Optional[str] = None
+
+    can_retry: Optional[bool] = None
+
+    developer_message: Optional[str] = None
+
+    retry_after_ms: Optional[int] = None
+
+
+class Output(BaseModel):
+    authorization: Optional[AuthAuthorizationResponse] = None
+
+    error: Optional[OutputError] = None
+
+    value: Optional[object] = None
 
 
 class ExecuteToolResponse(BaseModel):
@@ -19,7 +39,7 @@ class ExecuteToolResponse(BaseModel):
 
     finished_at: Optional[str] = None
 
-    output: Optional[ResponseOutput] = None
+    output: Optional[Output] = None
 
     run_at: Optional[str] = None
 

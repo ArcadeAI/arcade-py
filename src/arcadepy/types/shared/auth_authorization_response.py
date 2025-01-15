@@ -1,23 +1,18 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
+from .auth_authorization_context import AuthAuthorizationContext
 
-__all__ = ["AuthorizationResponse", "Context"]
-
-
-class Context(BaseModel):
-    token: Optional[str] = None
-
-    user_info: Optional[Dict[str, object]] = None
+__all__ = ["AuthAuthorizationResponse"]
 
 
-class AuthorizationResponse(BaseModel):
+class AuthAuthorizationResponse(BaseModel):
     id: Optional[str] = None
 
-    context: Optional[Context] = None
+    context: Optional[AuthAuthorizationContext] = None
 
     provider_id: Optional[str] = None
 

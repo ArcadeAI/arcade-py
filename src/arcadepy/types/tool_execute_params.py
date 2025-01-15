@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Dict
 from typing_extensions import Required, TypedDict
 
 __all__ = ["ToolExecuteParams"]
@@ -10,7 +11,7 @@ __all__ = ["ToolExecuteParams"]
 class ToolExecuteParams(TypedDict, total=False):
     tool_name: Required[str]
 
-    inputs: object
+    input: Dict[str, object]
     """JSON input to the tool, if any"""
 
     run_at: str
