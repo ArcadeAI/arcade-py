@@ -4,15 +4,12 @@ from __future__ import annotations
 
 from typing_extensions import TypedDict
 
-__all__ = ["ToolListParams"]
+__all__ = ["ScheduledListParams"]
 
 
-class ToolListParams(TypedDict, total=False):
+class ScheduledListParams(TypedDict, total=False):
     limit: int
     """Number of items to return (default: 25, max: 100)"""
 
     offset: int
     """Offset from the start of the list (default: 0)"""
-
-    toolkit: str
-    """Toolkit name"""

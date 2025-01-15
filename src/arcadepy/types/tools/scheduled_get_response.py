@@ -5,10 +5,10 @@ from typing import Dict, List, Optional
 from ..._models import BaseModel
 from ..tool_execution_attempt import ToolExecutionAttempt
 
-__all__ = ["ScheduledDetailsResponse"]
+__all__ = ["ScheduledGetResponse"]
 
 
-class ScheduledDetailsResponse(BaseModel):
+class ScheduledGetResponse(BaseModel):
     id: Optional[str] = None
 
     attempts: Optional[List[ToolExecutionAttempt]] = None
@@ -21,7 +21,7 @@ class ScheduledDetailsResponse(BaseModel):
 
     finished_at: Optional[str] = None
 
-    inputs: Optional[Dict[str, object]] = None
+    input: Optional[Dict[str, object]] = None
 
     run_at: Optional[str] = None
 
