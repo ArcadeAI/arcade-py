@@ -6,7 +6,7 @@ from typing import Dict
 
 import httpx
 
-from ...types import tool_execute_params, tool_authorize_params
+from ...types import tool_list_params, tool_execute_params, tool_authorize_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
     maybe_transform,
@@ -36,8 +36,10 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import make_request_options
+from ...pagination import SyncOffsetPage, AsyncOffsetPage
+from ..._base_client import AsyncPaginator, make_request_options
 from ...types.tool_get_response import ToolGetResponse
+from ...types.tool_list_response import ToolListResponse
 from ...types.execute_tool_response import ExecuteToolResponse
 from ...types.shared.auth_authorization_response import AuthAuthorizationResponse
 
@@ -71,6 +73,58 @@ class ToolsResource(SyncAPIResource):
         For more information, see https://www.github.com/ArcadeAI/arcade-py#with_streaming_response
         """
         return ToolsResourceWithStreamingResponse(self)
+
+    def list(
+        self,
+        *,
+        limit: int | NotGiven = NOT_GIVEN,
+        offset: int | NotGiven = NOT_GIVEN,
+        toolkit: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SyncOffsetPage[ToolListResponse]:
+        """
+        Returns a page of tools from the engine configuration, optionally filtered by
+        toolkit
+
+        Args:
+          limit: Number of items to return (default: 25, max: 100)
+
+          offset: Offset from the start of the list (default: 0)
+
+          toolkit: Toolkit name
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/v1/tools",
+            page=SyncOffsetPage[ToolListResponse],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                        "toolkit": toolkit,
+                    },
+                    tool_list_params.ToolListParams,
+                ),
+            ),
+            model=ToolListResponse,
+        )
 
     def authorize(
         self,
@@ -231,6 +285,58 @@ class AsyncToolsResource(AsyncAPIResource):
         """
         return AsyncToolsResourceWithStreamingResponse(self)
 
+    def list(
+        self,
+        *,
+        limit: int | NotGiven = NOT_GIVEN,
+        offset: int | NotGiven = NOT_GIVEN,
+        toolkit: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AsyncPaginator[ToolListResponse, AsyncOffsetPage[ToolListResponse]]:
+        """
+        Returns a page of tools from the engine configuration, optionally filtered by
+        toolkit
+
+        Args:
+          limit: Number of items to return (default: 25, max: 100)
+
+          offset: Offset from the start of the list (default: 0)
+
+          toolkit: Toolkit name
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/v1/tools",
+            page=AsyncOffsetPage[ToolListResponse],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                        "toolkit": toolkit,
+                    },
+                    tool_list_params.ToolListParams,
+                ),
+            ),
+            model=ToolListResponse,
+        )
+
     async def authorize(
         self,
         *,
@@ -366,6 +472,9 @@ class ToolsResourceWithRawResponse:
     def __init__(self, tools: ToolsResource) -> None:
         self._tools = tools
 
+        self.list = to_raw_response_wrapper(
+            tools.list,
+        )
         self.authorize = to_raw_response_wrapper(
             tools.authorize,
         )
@@ -389,6 +498,9 @@ class AsyncToolsResourceWithRawResponse:
     def __init__(self, tools: AsyncToolsResource) -> None:
         self._tools = tools
 
+        self.list = async_to_raw_response_wrapper(
+            tools.list,
+        )
         self.authorize = async_to_raw_response_wrapper(
             tools.authorize,
         )
@@ -412,6 +524,9 @@ class ToolsResourceWithStreamingResponse:
     def __init__(self, tools: ToolsResource) -> None:
         self._tools = tools
 
+        self.list = to_streamed_response_wrapper(
+            tools.list,
+        )
         self.authorize = to_streamed_response_wrapper(
             tools.authorize,
         )
@@ -435,6 +550,9 @@ class AsyncToolsResourceWithStreamingResponse:
     def __init__(self, tools: AsyncToolsResource) -> None:
         self._tools = tools
 
+        self.list = async_to_streamed_response_wrapper(
+            tools.list,
+        )
         self.authorize = async_to_streamed_response_wrapper(
             tools.authorize,
         )

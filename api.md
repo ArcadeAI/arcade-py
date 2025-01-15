@@ -55,12 +55,14 @@ from arcadepy.types import (
     ToolExecution,
     ToolExecutionAttempt,
     ValueSchema,
+    ToolListResponse,
     ToolGetResponse,
 )
 ```
 
 Methods:
 
+- <code title="get /v1/tools">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">list</a>(\*\*<a href="src/arcadepy/types/tool_list_params.py">params</a>) -> <a href="./src/arcadepy/types/tool_list_response.py">SyncOffsetPage[ToolListResponse]</a></code>
 - <code title="post /v1/tools/authorize">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">authorize</a>(\*\*<a href="src/arcadepy/types/tool_authorize_params.py">params</a>) -> <a href="./src/arcadepy/types/shared/auth_authorization_response.py">AuthAuthorizationResponse</a></code>
 - <code title="post /v1/tools/execute">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">execute</a>(\*\*<a href="src/arcadepy/types/tool_execute_params.py">params</a>) -> <a href="./src/arcadepy/types/execute_tool_response.py">ExecuteToolResponse</a></code>
 - <code title="get /v1/tools/{name}">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">get</a>(name) -> <a href="./src/arcadepy/types/tool_get_response.py">ToolGetResponse</a></code>
@@ -83,9 +85,10 @@ Methods:
 Types:
 
 ```python
-from arcadepy.types.tools import FormattedGetResponse
+from arcadepy.types.tools import FormattedListResponse, FormattedGetResponse
 ```
 
 Methods:
 
+- <code title="get /v1/formatted_tools">client.tools.formatted.<a href="./src/arcadepy/resources/tools/formatted.py">list</a>(\*\*<a href="src/arcadepy/types/tools/formatted_list_params.py">params</a>) -> <a href="./src/arcadepy/types/tools/formatted_list_response.py">SyncOffsetPage[object]</a></code>
 - <code title="get /v1/formatted_tools/{name}">client.tools.formatted.<a href="./src/arcadepy/resources/tools/formatted.py">get</a>(name, \*\*<a href="src/arcadepy/types/tools/formatted_get_params.py">params</a>) -> <a href="./src/arcadepy/types/tools/formatted_get_response.py">object</a></code>

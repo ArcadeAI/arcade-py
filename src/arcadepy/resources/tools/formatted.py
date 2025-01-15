@@ -17,8 +17,9 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.tools import formatted_get_params
-from ..._base_client import make_request_options
+from ...pagination import SyncOffsetPage, AsyncOffsetPage
+from ...types.tools import formatted_get_params, formatted_list_params
+from ..._base_client import AsyncPaginator, make_request_options
 
 __all__ = ["FormattedResource", "AsyncFormattedResource"]
 
@@ -42,6 +43,62 @@ class FormattedResource(SyncAPIResource):
         For more information, see https://www.github.com/ArcadeAI/arcade-py#with_streaming_response
         """
         return FormattedResourceWithStreamingResponse(self)
+
+    def list(
+        self,
+        *,
+        format: str | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
+        offset: int | NotGiven = NOT_GIVEN,
+        toolkit: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SyncOffsetPage[object]:
+        """
+        Returns a page of tools from the engine configuration, optionally filtered by
+        toolkit, formatted for a specific provider
+
+        Args:
+          format: Provider format
+
+          limit: Number of items to return (default: 25, max: 100)
+
+          offset: Offset from the start of the list (default: 0)
+
+          toolkit: Toolkit name
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/v1/formatted_tools",
+            page=SyncOffsetPage[object],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "format": format,
+                        "limit": limit,
+                        "offset": offset,
+                        "toolkit": toolkit,
+                    },
+                    formatted_list_params.FormattedListParams,
+                ),
+            ),
+            model=object,
+        )
 
     def get(
         self,
@@ -104,6 +161,62 @@ class AsyncFormattedResource(AsyncAPIResource):
         """
         return AsyncFormattedResourceWithStreamingResponse(self)
 
+    def list(
+        self,
+        *,
+        format: str | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
+        offset: int | NotGiven = NOT_GIVEN,
+        toolkit: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AsyncPaginator[object, AsyncOffsetPage[object]]:
+        """
+        Returns a page of tools from the engine configuration, optionally filtered by
+        toolkit, formatted for a specific provider
+
+        Args:
+          format: Provider format
+
+          limit: Number of items to return (default: 25, max: 100)
+
+          offset: Offset from the start of the list (default: 0)
+
+          toolkit: Toolkit name
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/v1/formatted_tools",
+            page=AsyncOffsetPage[object],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "format": format,
+                        "limit": limit,
+                        "offset": offset,
+                        "toolkit": toolkit,
+                    },
+                    formatted_list_params.FormattedListParams,
+                ),
+            ),
+            model=object,
+        )
+
     async def get(
         self,
         name: str,
@@ -149,6 +262,9 @@ class FormattedResourceWithRawResponse:
     def __init__(self, formatted: FormattedResource) -> None:
         self._formatted = formatted
 
+        self.list = to_raw_response_wrapper(
+            formatted.list,
+        )
         self.get = to_raw_response_wrapper(
             formatted.get,
         )
@@ -158,6 +274,9 @@ class AsyncFormattedResourceWithRawResponse:
     def __init__(self, formatted: AsyncFormattedResource) -> None:
         self._formatted = formatted
 
+        self.list = async_to_raw_response_wrapper(
+            formatted.list,
+        )
         self.get = async_to_raw_response_wrapper(
             formatted.get,
         )
@@ -167,6 +286,9 @@ class FormattedResourceWithStreamingResponse:
     def __init__(self, formatted: FormattedResource) -> None:
         self._formatted = formatted
 
+        self.list = to_streamed_response_wrapper(
+            formatted.list,
+        )
         self.get = to_streamed_response_wrapper(
             formatted.get,
         )
@@ -176,6 +298,9 @@ class AsyncFormattedResourceWithStreamingResponse:
     def __init__(self, formatted: AsyncFormattedResource) -> None:
         self._formatted = formatted
 
+        self.list = async_to_streamed_response_wrapper(
+            formatted.list,
+        )
         self.get = async_to_streamed_response_wrapper(
             formatted.get,
         )
