@@ -164,11 +164,7 @@ class AuthResource(SyncAPIResource):
             cast_to=AuthAuthorizationResponse,
         )
 
-    def wait_for_completion(
-        self,
-        auth_response_or_id: AuthorizationResponse | str,
-        scopes: list[str] | None = None,
-    ) -> AuthorizationResponse:
+    def wait_for_completion(self, auth_response_or_id: AuthorizationResponse | str) -> AuthorizationResponse:
         """
         Waits for the authorization process to complete, for example:
 
@@ -178,23 +174,19 @@ class AuthResource(SyncAPIResource):
         ```
         """
         auth_id_val: str
-        scopes_val: str | NotGiven = NOT_GIVEN
 
         if isinstance(auth_response_or_id, AuthorizationResponse):
-            if not auth_response_or_id.authorization_id:
+            if not auth_response_or_id.id:
                 raise ValueError("Authorization ID is required")
-            auth_id_val = auth_response_or_id.authorization_id
-            scopes_val = " ".join(auth_response_or_id.scopes) if auth_response_or_id.scopes else NOT_GIVEN
+            auth_id_val = auth_response_or_id.id
             auth_response = auth_response_or_id
         else:
             auth_id_val = auth_response_or_id
-            scopes_val = " ".join(scopes) if scopes else NOT_GIVEN
             auth_response = AuthorizationResponse()
 
         while auth_response.status != "completed":
             auth_response = self.status(
-                authorization_id=auth_id_val,
-                scopes=scopes_val,
+                id=auth_id_val,
                 wait=_DEFAULT_LONGPOLL_WAIT_TIME,
             )
         return auth_response
@@ -341,7 +333,6 @@ class AsyncAuthResource(AsyncAPIResource):
     async def wait_for_completion(
         self,
         auth_response_or_id: AuthorizationResponse | str,
-        scopes: list[str] | None = None,
     ) -> AuthorizationResponse:
         """
         Waits for the authorization process to complete, for example:
@@ -352,23 +343,19 @@ class AsyncAuthResource(AsyncAPIResource):
         ```
         """
         auth_id_val: str
-        scopes_val: str | NotGiven = NOT_GIVEN
 
         if isinstance(auth_response_or_id, AuthorizationResponse):
-            if not auth_response_or_id.authorization_id:
+            if not auth_response_or_id.id:
                 raise ValueError("Authorization ID is required")
-            auth_id_val = auth_response_or_id.authorization_id
-            scopes_val = " ".join(auth_response_or_id.scopes) if auth_response_or_id.scopes else NOT_GIVEN
+            auth_id_val = auth_response_or_id.id
             auth_response = auth_response_or_id
         else:
             auth_id_val = auth_response_or_id
-            scopes_val = " ".join(scopes) if scopes else NOT_GIVEN
             auth_response = AuthorizationResponse()
 
         while auth_response.status != "completed":
             auth_response = await self.status(
-                authorization_id=auth_id_val,
-                scopes=scopes_val,
+                id=auth_id_val,
                 wait=_DEFAULT_LONGPOLL_WAIT_TIME,
             )
         return auth_response
