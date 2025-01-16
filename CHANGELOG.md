@@ -1,19 +1,20 @@
 # Changelog
 
-## 0.3.0 (2025-01-14)
 
-Full Changelog: [v0.2.2...v0.3.0](https://github.com/ArcadeAI/arcade-py/compare/v0.2.2...v0.3.0)
+## 1.0.0rc1 (2025-01-16)
+
+Full Changelog: [v0.2.2...v1.0.0rc1](https://github.com/ArcadeAI/arcade-py/compare/v0.2.2...v1.0.0rc1)
 
 ### Features
 
 * **api:** api update ([#73](https://github.com/ArcadeAI/arcade-py/issues/73)) ([0f1c7ed](https://github.com/ArcadeAI/arcade-py/commit/0f1c7ed5aad99fdb3c918fbbd5513098fefa05a3))
-
+* **api:** api update ([#75](https://github.com/ArcadeAI/arcade-py/issues/75)) ([9c9dc2d](https://github.com/ArcadeAI/arcade-py/commit/9c9dc2dc41047533f89839a0535ff13c778234ca))
+* **api:** api update ([#76](https://github.com/ArcadeAI/arcade-py/issues/76)) ([641b9eb](https://github.com/ArcadeAI/arcade-py/commit/641b9eb51d3d956386f0cd55160c22d89cbcd14c))
 
 ### Bug Fixes
 
 * **client:** only call .close() when needed ([#69](https://github.com/ArcadeAI/arcade-py/issues/69)) ([b7648c0](https://github.com/ArcadeAI/arcade-py/commit/b7648c08c1c5b8bb15ffb2ca069c924506ddbfe6))
 * correctly handle deserialising `cls` fields ([#72](https://github.com/ArcadeAI/arcade-py/issues/72)) ([499b981](https://github.com/ArcadeAI/arcade-py/commit/499b9816577c551d4d1a99052492aefea78a5236))
-
 
 ### Chores
 

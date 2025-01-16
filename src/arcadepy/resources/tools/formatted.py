@@ -80,7 +80,7 @@ class FormattedResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/v1/tools/formatted/list",
+            "/v1/formatted_tools",
             page=SyncOffsetPage[object],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -102,6 +102,7 @@ class FormattedResource(SyncAPIResource):
 
     def get(
         self,
+        name: str,
         *,
         format: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -125,8 +126,10 @@ class FormattedResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not name:
+            raise ValueError(f"Expected a non-empty value for `name` but received {name!r}")
         return self._get(
-            "/v1/tools/formatted/definition",
+            f"/v1/formatted_tools/{name}",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -194,7 +197,7 @@ class AsyncFormattedResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/v1/tools/formatted/list",
+            "/v1/formatted_tools",
             page=AsyncOffsetPage[object],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -216,6 +219,7 @@ class AsyncFormattedResource(AsyncAPIResource):
 
     async def get(
         self,
+        name: str,
         *,
         format: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -239,8 +243,10 @@ class AsyncFormattedResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not name:
+            raise ValueError(f"Expected a non-empty value for `name` but received {name!r}")
         return await self._get(
-            "/v1/tools/formatted/definition",
+            f"/v1/formatted_tools/{name}",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

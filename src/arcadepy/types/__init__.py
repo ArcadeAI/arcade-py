@@ -4,12 +4,16 @@ from __future__ import annotations
 
 from .usage import Usage as Usage
 from .choice import Choice as Choice
-from .shared import Error as Error, AuthorizationResponse as AuthorizationResponse
+from .shared import (
+    Error as Error,
+    AuthAuthorizationContext as AuthAuthorizationContext,
+    AuthAuthorizationResponse as AuthAuthorizationResponse,
+)
 from .chat_message import ChatMessage as ChatMessage
+from .value_schema import ValueSchema as ValueSchema
 from .chat_response import ChatResponse as ChatResponse
 from .health_schema import HealthSchema as HealthSchema
 from .tool_execution import ToolExecution as ToolExecution
-from .response_output import ResponseOutput as ResponseOutput
 from .tool_list_params import ToolListParams as ToolListParams
 from .tool_get_response import ToolGetResponse as ToolGetResponse
 from .auth_status_params import AuthStatusParams as AuthStatusParams
