@@ -192,7 +192,6 @@ class AuthResource(SyncAPIResource):
             auth_response = self.status(
                 id=auth_id_val,
                 wait=_DEFAULT_LONGPOLL_WAIT_TIME,
-                timeout=float(_DEFAULT_LONGPOLL_WAIT_TIME + 10),
             )
         return auth_response
 
@@ -366,7 +365,6 @@ class AsyncAuthResource(AsyncAPIResource):
             auth_response = await self.status(
                 id=auth_id_val,
                 wait=_DEFAULT_LONGPOLL_WAIT_TIME,
-                timeout=float(_DEFAULT_LONGPOLL_WAIT_TIME + 10),
             )
         return auth_response
 
