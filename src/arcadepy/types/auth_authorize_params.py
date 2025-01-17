@@ -19,8 +19,12 @@ class AuthRequirementOauth2(TypedDict, total=False):
 
 
 class AuthRequirement(TypedDict, total=False):
+    id: str
+    """one of ID or ProviderID must be set"""
+
     oauth2: AuthRequirementOauth2
 
     provider_id: str
+    """one of ID or ProviderID must be set"""
 
     provider_type: str

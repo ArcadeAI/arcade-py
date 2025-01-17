@@ -54,6 +54,8 @@ class RequirementsAuthorizationOauth2(BaseModel):
 
 
 class RequirementsAuthorization(BaseModel):
+    id: Optional[str] = None
+
     oauth2: Optional[RequirementsAuthorizationOauth2] = None
 
     provider_id: Optional[str] = None
