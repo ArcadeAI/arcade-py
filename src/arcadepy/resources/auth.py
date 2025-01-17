@@ -92,7 +92,7 @@ class AuthResource(SyncAPIResource):
         *,
         provider_type: str | None = "oauth2",
         scopes: list[str] | None = None,
-    ) -> AuthorizationResponse:
+    ) -> AuthAuthorizationResponse:
         """
         Starts the authorization process for a given provider and scopes.
 
@@ -164,7 +164,7 @@ class AuthResource(SyncAPIResource):
             cast_to=AuthAuthorizationResponse,
         )
 
-    def wait_for_completion(self, auth_response_or_id: AuthorizationResponse | str) -> AuthorizationResponse:
+    def wait_for_completion(self, auth_response_or_id: AuthAuthorizationResponse | str) -> AuthAuthorizationResponse:
         """
         Waits for the authorization process to complete, for example:
 
@@ -175,14 +175,14 @@ class AuthResource(SyncAPIResource):
         """
         auth_id_val: str
 
-        if isinstance(auth_response_or_id, AuthorizationResponse):
+        if isinstance(auth_response_or_id, AuthAuthorizationResponse):
             if not auth_response_or_id.id:
                 raise ValueError("Authorization ID is required")
             auth_id_val = auth_response_or_id.id
             auth_response = auth_response_or_id
         else:
             auth_id_val = auth_response_or_id
-            auth_response = AuthorizationResponse()
+            auth_response = AuthAuthorizationResponse()
 
         while auth_response.status != "completed":
             auth_response = self.status(
@@ -258,7 +258,7 @@ class AsyncAuthResource(AsyncAPIResource):
         *,
         provider_type: str | None = "oauth2",
         scopes: list[str] | None = None,
-    ) -> AuthorizationResponse:
+    ) -> AuthAuthorizationResponse:
         """
         Starts the authorization process for a given provider and scopes.
 
@@ -332,8 +332,8 @@ class AsyncAuthResource(AsyncAPIResource):
 
     async def wait_for_completion(
         self,
-        auth_response_or_id: AuthorizationResponse | str,
-    ) -> AuthorizationResponse:
+        auth_response_or_id: AuthAuthorizationResponse | str,
+    ) -> AuthAuthorizationResponse:
         """
         Waits for the authorization process to complete, for example:
 
@@ -344,14 +344,14 @@ class AsyncAuthResource(AsyncAPIResource):
         """
         auth_id_val: str
 
-        if isinstance(auth_response_or_id, AuthorizationResponse):
+        if isinstance(auth_response_or_id, AuthAuthorizationResponse):
             if not auth_response_or_id.id:
                 raise ValueError("Authorization ID is required")
             auth_id_val = auth_response_or_id.id
             auth_response = auth_response_or_id
         else:
             auth_id_val = auth_response_or_id
-            auth_response = AuthorizationResponse()
+            auth_response = AuthAuthorizationResponse()
 
         while auth_response.status != "completed":
             auth_response = await self.status(

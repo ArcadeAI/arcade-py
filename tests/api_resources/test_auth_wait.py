@@ -3,8 +3,8 @@ from unittest.mock import Mock, AsyncMock
 import pytest
 
 from arcadepy._client import Arcade, AsyncArcade
+from arcadepy.types.shared import AuthAuthorizationResponse
 from arcadepy.resources.auth import AuthResource, AsyncAuthResource
-from arcadepy.types.shared.authorization_response import AuthorizationResponse
 
 
 @pytest.fixture
@@ -23,9 +23,9 @@ def async_auth_resource() -> AsyncAuthResource:
 
 def test_wait_for_completion_calls_status_from_auth_response(sync_auth_resource: AuthResource) -> None:
     auth = sync_auth_resource
-    auth.status = Mock(return_value=AuthorizationResponse(status="completed"))  # type: ignore
+    auth.status = Mock(return_value=AuthAuthorizationResponse(status="completed"))  # type: ignore
 
-    auth_response = AuthorizationResponse(status="pending", id="auth_id123")
+    auth_response = AuthAuthorizationResponse(status="pending", id="auth_id123")
 
     auth.wait_for_completion(auth_response)
 
@@ -34,7 +34,7 @@ def test_wait_for_completion_calls_status_from_auth_response(sync_auth_resource:
 
 def test_wait_for_completion_raises_value_error_for_empty_authorization_id(sync_auth_resource: AuthResource) -> None:
     auth = sync_auth_resource
-    auth_response = AuthorizationResponse(status="pending", id="", scopes=["scope1"])
+    auth_response = AuthAuthorizationResponse(status="pending", id="", scopes=["scope1"])
 
     with pytest.raises(ValueError, match="Authorization ID is required"):
         auth.wait_for_completion(auth_response)
@@ -42,7 +42,7 @@ def test_wait_for_completion_raises_value_error_for_empty_authorization_id(sync_
 
 def test_wait_for_completion_calls_status_with_auth_id(sync_auth_resource: AuthResource) -> None:
     auth = sync_auth_resource
-    auth.status = Mock(return_value=AuthorizationResponse(status="completed"))  # type: ignore
+    auth.status = Mock(return_value=AuthAuthorizationResponse(status="completed"))  # type: ignore
 
     auth.wait_for_completion("auth_id456")
 
@@ -54,9 +54,9 @@ async def test_async_wait_for_completion_calls_status_from_auth_response(
     async_auth_resource: AsyncAuthResource,
 ) -> None:
     auth = async_auth_resource
-    auth.status = AsyncMock(return_value=AuthorizationResponse(status="completed"))  # type: ignore
+    auth.status = AsyncMock(return_value=AuthAuthorizationResponse(status="completed"))  # type: ignore
 
-    auth_response = AuthorizationResponse(status="pending", id="auth_id789")
+    auth_response = AuthAuthorizationResponse(status="pending", id="auth_id789")
 
     await auth.wait_for_completion(auth_response)
 
@@ -68,7 +68,7 @@ async def test_async_wait_for_completion_raises_value_error_for_empty_authorizat
     async_auth_resource: AsyncAuthResource,
 ) -> None:
     auth = async_auth_resource
-    auth_response = AuthorizationResponse(status="pending", id="", scopes=["scope1"])
+    auth_response = AuthAuthorizationResponse(status="pending", id="", scopes=["scope1"])
 
     with pytest.raises(ValueError, match="Authorization ID is required"):
         await auth.wait_for_completion(auth_response)
@@ -77,7 +77,7 @@ async def test_async_wait_for_completion_raises_value_error_for_empty_authorizat
 @pytest.mark.asyncio
 async def test_async_wait_for_completion_calls_status_with_auth_id(async_auth_resource: AsyncAuthResource) -> None:
     auth = async_auth_resource
-    auth.status = AsyncMock(return_value=AuthorizationResponse(status="completed"))  # type: ignore
+    auth.status = AsyncMock(return_value=AuthAuthorizationResponse(status="completed"))  # type: ignore
 
     await auth.wait_for_completion("auth_id321")
 
