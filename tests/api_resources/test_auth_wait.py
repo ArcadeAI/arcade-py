@@ -32,7 +32,6 @@ def test_wait_for_completion_calls_status_from_auth_response(sync_auth_resource:
     auth.status.assert_called_with(
         id="auth_id123",
         wait=45,
-        timeout=55.0,
     )
 
 
@@ -53,7 +52,6 @@ def test_wait_for_completion_calls_status_with_auth_id(sync_auth_resource: AuthR
     auth.status.assert_called_with(
         id="auth_id456",
         wait=45,
-        timeout=55.0,
     )
 
 
@@ -71,7 +69,6 @@ async def test_async_wait_for_completion_calls_status_from_auth_response(
     auth.status.assert_called_with(
         id="auth_id789",
         wait=45,
-        timeout=55.0,
     )
 
 
@@ -96,5 +93,4 @@ async def test_async_wait_for_completion_calls_status_with_auth_id(async_auth_re
     auth.status.assert_called_with(
         id="auth_id321",
         wait=45,
-        timeout=55.0,
     )
