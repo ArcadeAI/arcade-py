@@ -19,7 +19,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.shared.authorization_response import AuthorizationResponse
+from ..types.shared.auth_authorization_response import AuthAuthorizationResponse
 
 __all__ = ["AuthResource", "AsyncAuthResource"]
 
@@ -57,7 +57,7 @@ class AuthResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthorizationResponse:
+    ) -> AuthAuthorizationResponse:
         """
         Starts the authorization process for given authorization requirements
 
@@ -82,7 +82,7 @@ class AuthResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthorizationResponse,
+            cast_to=AuthAuthorizationResponse,
         )
 
     def start(
@@ -92,7 +92,7 @@ class AuthResource(SyncAPIResource):
         *,
         provider_type: str | None = "oauth2",
         scopes: list[str] | None = None,
-    ) -> AuthorizationResponse:
+    ) -> AuthAuthorizationResponse:
         """
         Starts the authorization process for a given provider and scopes.
 
@@ -118,8 +118,7 @@ class AuthResource(SyncAPIResource):
     def status(
         self,
         *,
-        authorization_id: str,
-        scopes: str | NotGiven = NOT_GIVEN,
+        id: str,
         wait: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -127,7 +126,7 @@ class AuthResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthorizationResponse:
+    ) -> AuthAuthorizationResponse:
         """Checks the status of an ongoing authorization process for a specific tool.
 
         If
@@ -135,9 +134,7 @@ class AuthResource(SyncAPIResource):
         completed or the timeout is reached.
 
         Args:
-          authorization_id: Authorization ID
-
-          scopes: Scopes
+          id: Authorization ID
 
           wait: Timeout in seconds (max 59)
 
@@ -158,17 +155,16 @@ class AuthResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "authorization_id": authorization_id,
-                        "scopes": scopes,
+                        "id": id,
                         "wait": wait,
                     },
                     auth_status_params.AuthStatusParams,
                 ),
             ),
-            cast_to=AuthorizationResponse,
+            cast_to=AuthAuthorizationResponse,
         )
 
-    def wait_for_completion(self, auth_response_or_id: AuthorizationResponse | str) -> AuthorizationResponse:
+    def wait_for_completion(self, auth_response_or_id: AuthAuthorizationResponse | str) -> AuthAuthorizationResponse:
         """
         Waits for the authorization process to complete, for example:
 
@@ -179,14 +175,14 @@ class AuthResource(SyncAPIResource):
         """
         auth_id_val: str
 
-        if isinstance(auth_response_or_id, AuthorizationResponse):
+        if isinstance(auth_response_or_id, AuthAuthorizationResponse):
             if not auth_response_or_id.id:
                 raise ValueError("Authorization ID is required")
             auth_id_val = auth_response_or_id.id
             auth_response = auth_response_or_id
         else:
             auth_id_val = auth_response_or_id
-            auth_response = AuthorizationResponse()
+            auth_response = AuthAuthorizationResponse()
 
         while auth_response.status != "completed":
             auth_response = self.status(
@@ -227,7 +223,7 @@ class AsyncAuthResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthorizationResponse:
+    ) -> AuthAuthorizationResponse:
         """
         Starts the authorization process for given authorization requirements
 
@@ -252,7 +248,7 @@ class AsyncAuthResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthorizationResponse,
+            cast_to=AuthAuthorizationResponse,
         )
 
     async def start(
@@ -262,7 +258,7 @@ class AsyncAuthResource(AsyncAPIResource):
         *,
         provider_type: str | None = "oauth2",
         scopes: list[str] | None = None,
-    ) -> AuthorizationResponse:
+    ) -> AuthAuthorizationResponse:
         """
         Starts the authorization process for a given provider and scopes.
 
@@ -288,8 +284,7 @@ class AsyncAuthResource(AsyncAPIResource):
     async def status(
         self,
         *,
-        authorization_id: str,
-        scopes: str | NotGiven = NOT_GIVEN,
+        id: str,
         wait: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -297,7 +292,7 @@ class AsyncAuthResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthorizationResponse:
+    ) -> AuthAuthorizationResponse:
         """Checks the status of an ongoing authorization process for a specific tool.
 
         If
@@ -305,9 +300,7 @@ class AsyncAuthResource(AsyncAPIResource):
         completed or the timeout is reached.
 
         Args:
-          authorization_id: Authorization ID
-
-          scopes: Scopes
+          id: Authorization ID
 
           wait: Timeout in seconds (max 59)
 
@@ -328,20 +321,19 @@ class AsyncAuthResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "authorization_id": authorization_id,
-                        "scopes": scopes,
+                        "id": id,
                         "wait": wait,
                     },
                     auth_status_params.AuthStatusParams,
                 ),
             ),
-            cast_to=AuthorizationResponse,
+            cast_to=AuthAuthorizationResponse,
         )
 
     async def wait_for_completion(
         self,
-        auth_response_or_id: AuthorizationResponse | str,
-    ) -> AuthorizationResponse:
+        auth_response_or_id: AuthAuthorizationResponse | str,
+    ) -> AuthAuthorizationResponse:
         """
         Waits for the authorization process to complete, for example:
 
@@ -352,14 +344,14 @@ class AsyncAuthResource(AsyncAPIResource):
         """
         auth_id_val: str
 
-        if isinstance(auth_response_or_id, AuthorizationResponse):
+        if isinstance(auth_response_or_id, AuthAuthorizationResponse):
             if not auth_response_or_id.id:
                 raise ValueError("Authorization ID is required")
             auth_id_val = auth_response_or_id.id
             auth_response = auth_response_or_id
         else:
             auth_id_val = auth_response_or_id
-            auth_response = AuthorizationResponse()
+            auth_response = AuthAuthorizationResponse()
 
         while auth_response.status != "completed":
             auth_response = await self.status(

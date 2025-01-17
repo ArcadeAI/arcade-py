@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+from typing import Dict
+
 import httpx
 
-from ...types import tool_get_params, tool_list_params, tool_execute_params, tool_authorize_params
+from ...types import tool_list_params, tool_execute_params, tool_authorize_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
     maybe_transform,
@@ -19,6 +21,14 @@ from .formatted import (
     FormattedResourceWithStreamingResponse,
     AsyncFormattedResourceWithStreamingResponse,
 )
+from .scheduled import (
+    ScheduledResource,
+    AsyncScheduledResource,
+    ScheduledResourceWithRawResponse,
+    AsyncScheduledResourceWithRawResponse,
+    ScheduledResourceWithStreamingResponse,
+    AsyncScheduledResourceWithStreamingResponse,
+)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
     to_raw_response_wrapper,
@@ -28,14 +38,19 @@ from ..._response import (
 )
 from ...pagination import SyncOffsetPage, AsyncOffsetPage
 from ..._base_client import AsyncPaginator, make_request_options
-from ...types.response import Response
-from ...types.shared.tool_definition import ToolDefinition
-from ...types.shared.authorization_response import AuthorizationResponse
+from ...types.tool_get_response import ToolGetResponse
+from ...types.tool_list_response import ToolListResponse
+from ...types.execute_tool_response import ExecuteToolResponse
+from ...types.shared.auth_authorization_response import AuthAuthorizationResponse
 
 __all__ = ["ToolsResource", "AsyncToolsResource"]
 
 
 class ToolsResource(SyncAPIResource):
+    @cached_property
+    def scheduled(self) -> ScheduledResource:
+        return ScheduledResource(self._client)
+
     @cached_property
     def formatted(self) -> FormattedResource:
         return FormattedResource(self._client)
@@ -71,9 +86,10 @@ class ToolsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncOffsetPage[ToolDefinition]:
+    ) -> SyncOffsetPage[ToolListResponse]:
         """
-        Returns a page of tools, optionally filtered by toolkit
+        Returns a page of tools from the engine configuration, optionally filtered by
+        toolkit
 
         Args:
           limit: Number of items to return (default: 25, max: 100)
@@ -91,8 +107,8 @@ class ToolsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/v1/tools/list",
-            page=SyncOffsetPage[ToolDefinition],
+            "/v1/tools",
+            page=SyncOffsetPage[ToolListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -107,27 +123,29 @@ class ToolsResource(SyncAPIResource):
                     tool_list_params.ToolListParams,
                 ),
             ),
-            model=ToolDefinition,
+            model=ToolListResponse,
         )
 
     def authorize(
         self,
         *,
         tool_name: str,
-        user_id: str,
         tool_version: str | NotGiven = NOT_GIVEN,
+        user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthorizationResponse:
+    ) -> AuthAuthorizationResponse:
         """
         Authorizes a user for a specific tool by name
 
         Args:
           tool_version: Optional: if not provided, any version is used
+
+          user_id: Required only when calling with an API key
 
           extra_headers: Send extra headers
 
@@ -142,22 +160,23 @@ class ToolsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "tool_name": tool_name,
-                    "user_id": user_id,
                     "tool_version": tool_version,
+                    "user_id": user_id,
                 },
                 tool_authorize_params.ToolAuthorizeParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthorizationResponse,
+            cast_to=AuthAuthorizationResponse,
         )
 
     def execute(
         self,
         *,
         tool_name: str,
-        inputs: object | NotGiven = NOT_GIVEN,
+        input: Dict[str, object] | NotGiven = NOT_GIVEN,
+        run_at: str | NotGiven = NOT_GIVEN,
         tool_version: str | NotGiven = NOT_GIVEN,
         user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -166,14 +185,17 @@ class ToolsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Response:
+    ) -> ExecuteToolResponse:
         """
         Executes a tool by name and arguments
 
         Args:
-          inputs: JSON input to the tool, if any
+          input: JSON input to the tool, if any
 
-          tool_version: Optional: if not provided, any version is used
+          run_at: The time at which the tool should be run (optional). If not provided, the tool
+              is run immediately
+
+          tool_version: The tool version to use (optional). If not provided, any version is used
 
           extra_headers: Send extra headers
 
@@ -188,7 +210,8 @@ class ToolsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "tool_name": tool_name,
-                    "inputs": inputs,
+                    "input": input,
+                    "run_at": run_at,
                     "tool_version": tool_version,
                     "user_id": user_id,
                 },
@@ -197,26 +220,24 @@ class ToolsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Response,
+            cast_to=ExecuteToolResponse,
         )
 
     def get(
         self,
+        name: str,
         *,
-        tool_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ToolDefinition:
+    ) -> ToolGetResponse:
         """
         Returns the arcade tool specification for a specific tool
 
         Args:
-          tool_id: Tool ID
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -225,20 +246,22 @@ class ToolsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not name:
+            raise ValueError(f"Expected a non-empty value for `name` but received {name!r}")
         return self._get(
-            "/v1/tools/definition",
+            f"/v1/tools/{name}",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform({"tool_id": tool_id}, tool_get_params.ToolGetParams),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ToolDefinition,
+            cast_to=ToolGetResponse,
         )
 
 
 class AsyncToolsResource(AsyncAPIResource):
+    @cached_property
+    def scheduled(self) -> AsyncScheduledResource:
+        return AsyncScheduledResource(self._client)
+
     @cached_property
     def formatted(self) -> AsyncFormattedResource:
         return AsyncFormattedResource(self._client)
@@ -274,9 +297,10 @@ class AsyncToolsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[ToolDefinition, AsyncOffsetPage[ToolDefinition]]:
+    ) -> AsyncPaginator[ToolListResponse, AsyncOffsetPage[ToolListResponse]]:
         """
-        Returns a page of tools, optionally filtered by toolkit
+        Returns a page of tools from the engine configuration, optionally filtered by
+        toolkit
 
         Args:
           limit: Number of items to return (default: 25, max: 100)
@@ -294,8 +318,8 @@ class AsyncToolsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/v1/tools/list",
-            page=AsyncOffsetPage[ToolDefinition],
+            "/v1/tools",
+            page=AsyncOffsetPage[ToolListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -310,27 +334,29 @@ class AsyncToolsResource(AsyncAPIResource):
                     tool_list_params.ToolListParams,
                 ),
             ),
-            model=ToolDefinition,
+            model=ToolListResponse,
         )
 
     async def authorize(
         self,
         *,
         tool_name: str,
-        user_id: str,
         tool_version: str | NotGiven = NOT_GIVEN,
+        user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthorizationResponse:
+    ) -> AuthAuthorizationResponse:
         """
         Authorizes a user for a specific tool by name
 
         Args:
           tool_version: Optional: if not provided, any version is used
+
+          user_id: Required only when calling with an API key
 
           extra_headers: Send extra headers
 
@@ -345,22 +371,23 @@ class AsyncToolsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "tool_name": tool_name,
-                    "user_id": user_id,
                     "tool_version": tool_version,
+                    "user_id": user_id,
                 },
                 tool_authorize_params.ToolAuthorizeParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthorizationResponse,
+            cast_to=AuthAuthorizationResponse,
         )
 
     async def execute(
         self,
         *,
         tool_name: str,
-        inputs: object | NotGiven = NOT_GIVEN,
+        input: Dict[str, object] | NotGiven = NOT_GIVEN,
+        run_at: str | NotGiven = NOT_GIVEN,
         tool_version: str | NotGiven = NOT_GIVEN,
         user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -369,14 +396,17 @@ class AsyncToolsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Response:
+    ) -> ExecuteToolResponse:
         """
         Executes a tool by name and arguments
 
         Args:
-          inputs: JSON input to the tool, if any
+          input: JSON input to the tool, if any
 
-          tool_version: Optional: if not provided, any version is used
+          run_at: The time at which the tool should be run (optional). If not provided, the tool
+              is run immediately
+
+          tool_version: The tool version to use (optional). If not provided, any version is used
 
           extra_headers: Send extra headers
 
@@ -391,7 +421,8 @@ class AsyncToolsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "tool_name": tool_name,
-                    "inputs": inputs,
+                    "input": input,
+                    "run_at": run_at,
                     "tool_version": tool_version,
                     "user_id": user_id,
                 },
@@ -400,26 +431,24 @@ class AsyncToolsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Response,
+            cast_to=ExecuteToolResponse,
         )
 
     async def get(
         self,
+        name: str,
         *,
-        tool_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ToolDefinition:
+    ) -> ToolGetResponse:
         """
         Returns the arcade tool specification for a specific tool
 
         Args:
-          tool_id: Tool ID
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -428,16 +457,14 @@ class AsyncToolsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not name:
+            raise ValueError(f"Expected a non-empty value for `name` but received {name!r}")
         return await self._get(
-            "/v1/tools/definition",
+            f"/v1/tools/{name}",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform({"tool_id": tool_id}, tool_get_params.ToolGetParams),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ToolDefinition,
+            cast_to=ToolGetResponse,
         )
 
 
@@ -457,6 +484,10 @@ class ToolsResourceWithRawResponse:
         self.get = to_raw_response_wrapper(
             tools.get,
         )
+
+    @cached_property
+    def scheduled(self) -> ScheduledResourceWithRawResponse:
+        return ScheduledResourceWithRawResponse(self._tools.scheduled)
 
     @cached_property
     def formatted(self) -> FormattedResourceWithRawResponse:
@@ -481,6 +512,10 @@ class AsyncToolsResourceWithRawResponse:
         )
 
     @cached_property
+    def scheduled(self) -> AsyncScheduledResourceWithRawResponse:
+        return AsyncScheduledResourceWithRawResponse(self._tools.scheduled)
+
+    @cached_property
     def formatted(self) -> AsyncFormattedResourceWithRawResponse:
         return AsyncFormattedResourceWithRawResponse(self._tools.formatted)
 
@@ -503,6 +538,10 @@ class ToolsResourceWithStreamingResponse:
         )
 
     @cached_property
+    def scheduled(self) -> ScheduledResourceWithStreamingResponse:
+        return ScheduledResourceWithStreamingResponse(self._tools.scheduled)
+
+    @cached_property
     def formatted(self) -> FormattedResourceWithStreamingResponse:
         return FormattedResourceWithStreamingResponse(self._tools.formatted)
 
@@ -523,6 +562,10 @@ class AsyncToolsResourceWithStreamingResponse:
         self.get = async_to_streamed_response_wrapper(
             tools.get,
         )
+
+    @cached_property
+    def scheduled(self) -> AsyncScheduledResourceWithStreamingResponse:
+        return AsyncScheduledResourceWithStreamingResponse(self._tools.scheduled)
 
     @cached_property
     def formatted(self) -> AsyncFormattedResourceWithStreamingResponse:

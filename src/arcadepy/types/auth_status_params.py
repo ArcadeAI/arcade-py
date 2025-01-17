@@ -2,19 +2,14 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, Annotated, TypedDict
-
-from .._utils import PropertyInfo
+from typing_extensions import Required, TypedDict
 
 __all__ = ["AuthStatusParams"]
 
 
 class AuthStatusParams(TypedDict, total=False):
-    authorization_id: Required[Annotated[str, PropertyInfo(alias="authorizationId")]]
+    id: Required[str]
     """Authorization ID"""
-
-    scopes: str
-    """Scopes"""
 
     wait: int
     """Timeout in seconds (max 59)"""
