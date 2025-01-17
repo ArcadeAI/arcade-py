@@ -184,7 +184,6 @@ class AuthResource(SyncAPIResource):
             auth_id_val = auth_response_or_id
             auth_response = AuthAuthorizationResponse()
 
-
         while auth_response.status != "completed":
             auth_response = self.status(
                 id=auth_id_val,
@@ -344,7 +343,7 @@ class AsyncAuthResource(AsyncAPIResource):
         ```
         """
         auth_id_val: str
-        
+
         if isinstance(auth_response_or_id, AuthAuthorizationResponse):
             if not auth_response_or_id.id:
                 raise ValueError("Authorization ID is required")
@@ -353,7 +352,6 @@ class AsyncAuthResource(AsyncAPIResource):
         else:
             auth_id_val = auth_response_or_id
             auth_response = AuthAuthorizationResponse()
-
 
         while auth_response.status != "completed":
             auth_response = await self.status(

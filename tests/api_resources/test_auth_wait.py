@@ -7,7 +7,6 @@ from arcadepy.types.shared import AuthAuthorizationResponse
 from arcadepy.resources.auth import AuthResource, AsyncAuthResource
 
 
-
 @pytest.fixture
 def sync_auth_resource() -> AuthResource:
     client = Arcade(api_key="test")
@@ -70,7 +69,6 @@ async def test_async_wait_for_completion_raises_value_error_for_empty_authorizat
 ) -> None:
     auth = async_auth_resource
     auth_response = AuthAuthorizationResponse(status="pending", id="", scopes=["scope1"])
-
 
     with pytest.raises(ValueError, match="Authorization ID is required"):
         await auth.wait_for_completion(auth_response)
