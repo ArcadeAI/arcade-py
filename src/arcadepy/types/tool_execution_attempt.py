@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .._models import BaseModel
-from .shared.auth_authorization_response import AuthAuthorizationResponse
+from .shared.authorization_response import AuthorizationResponse
 
 __all__ = ["ToolExecutionAttempt", "Output", "OutputError"]
 
@@ -21,7 +21,7 @@ class OutputError(BaseModel):
 
 
 class Output(BaseModel):
-    authorization: Optional[AuthAuthorizationResponse] = None
+    authorization: Optional[AuthorizationResponse] = None
 
     error: Optional[OutputError] = None
 

@@ -10,12 +10,11 @@ import pytest
 from arcadepy import Arcade, AsyncArcade
 from tests.utils import assert_matches_type
 from arcadepy.types import (
-    ToolGetResponse,
-    ToolListResponse,
+    ToolDefinition,
     ExecuteToolResponse,
 )
 from arcadepy.pagination import SyncOffsetPage, AsyncOffsetPage
-from arcadepy.types.shared import AuthAuthorizationResponse
+from arcadepy.types.shared import AuthorizationResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -26,7 +25,7 @@ class TestTools:
     @parametrize
     def test_method_list(self, client: Arcade) -> None:
         tool = client.tools.list()
-        assert_matches_type(SyncOffsetPage[ToolListResponse], tool, path=["response"])
+        assert_matches_type(SyncOffsetPage[ToolDefinition], tool, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Arcade) -> None:
@@ -35,7 +34,7 @@ class TestTools:
             offset=0,
             toolkit="toolkit",
         )
-        assert_matches_type(SyncOffsetPage[ToolListResponse], tool, path=["response"])
+        assert_matches_type(SyncOffsetPage[ToolDefinition], tool, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Arcade) -> None:
@@ -44,7 +43,7 @@ class TestTools:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tool = response.parse()
-        assert_matches_type(SyncOffsetPage[ToolListResponse], tool, path=["response"])
+        assert_matches_type(SyncOffsetPage[ToolDefinition], tool, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Arcade) -> None:
@@ -53,7 +52,7 @@ class TestTools:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             tool = response.parse()
-            assert_matches_type(SyncOffsetPage[ToolListResponse], tool, path=["response"])
+            assert_matches_type(SyncOffsetPage[ToolDefinition], tool, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -62,7 +61,7 @@ class TestTools:
         tool = client.tools.authorize(
             tool_name="tool_name",
         )
-        assert_matches_type(AuthAuthorizationResponse, tool, path=["response"])
+        assert_matches_type(AuthorizationResponse, tool, path=["response"])
 
     @parametrize
     def test_method_authorize_with_all_params(self, client: Arcade) -> None:
@@ -71,7 +70,7 @@ class TestTools:
             tool_version="tool_version",
             user_id="user_id",
         )
-        assert_matches_type(AuthAuthorizationResponse, tool, path=["response"])
+        assert_matches_type(AuthorizationResponse, tool, path=["response"])
 
     @parametrize
     def test_raw_response_authorize(self, client: Arcade) -> None:
@@ -82,7 +81,7 @@ class TestTools:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tool = response.parse()
-        assert_matches_type(AuthAuthorizationResponse, tool, path=["response"])
+        assert_matches_type(AuthorizationResponse, tool, path=["response"])
 
     @parametrize
     def test_streaming_response_authorize(self, client: Arcade) -> None:
@@ -93,7 +92,7 @@ class TestTools:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             tool = response.parse()
-            assert_matches_type(AuthAuthorizationResponse, tool, path=["response"])
+            assert_matches_type(AuthorizationResponse, tool, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -144,7 +143,7 @@ class TestTools:
         tool = client.tools.get(
             "name",
         )
-        assert_matches_type(ToolGetResponse, tool, path=["response"])
+        assert_matches_type(ToolDefinition, tool, path=["response"])
 
     @parametrize
     def test_raw_response_get(self, client: Arcade) -> None:
@@ -155,7 +154,7 @@ class TestTools:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tool = response.parse()
-        assert_matches_type(ToolGetResponse, tool, path=["response"])
+        assert_matches_type(ToolDefinition, tool, path=["response"])
 
     @parametrize
     def test_streaming_response_get(self, client: Arcade) -> None:
@@ -166,7 +165,7 @@ class TestTools:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             tool = response.parse()
-            assert_matches_type(ToolGetResponse, tool, path=["response"])
+            assert_matches_type(ToolDefinition, tool, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -184,7 +183,7 @@ class TestAsyncTools:
     @parametrize
     async def test_method_list(self, async_client: AsyncArcade) -> None:
         tool = await async_client.tools.list()
-        assert_matches_type(AsyncOffsetPage[ToolListResponse], tool, path=["response"])
+        assert_matches_type(AsyncOffsetPage[ToolDefinition], tool, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncArcade) -> None:
@@ -193,7 +192,7 @@ class TestAsyncTools:
             offset=0,
             toolkit="toolkit",
         )
-        assert_matches_type(AsyncOffsetPage[ToolListResponse], tool, path=["response"])
+        assert_matches_type(AsyncOffsetPage[ToolDefinition], tool, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncArcade) -> None:
@@ -202,7 +201,7 @@ class TestAsyncTools:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tool = await response.parse()
-        assert_matches_type(AsyncOffsetPage[ToolListResponse], tool, path=["response"])
+        assert_matches_type(AsyncOffsetPage[ToolDefinition], tool, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncArcade) -> None:
@@ -211,7 +210,7 @@ class TestAsyncTools:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             tool = await response.parse()
-            assert_matches_type(AsyncOffsetPage[ToolListResponse], tool, path=["response"])
+            assert_matches_type(AsyncOffsetPage[ToolDefinition], tool, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -220,7 +219,7 @@ class TestAsyncTools:
         tool = await async_client.tools.authorize(
             tool_name="tool_name",
         )
-        assert_matches_type(AuthAuthorizationResponse, tool, path=["response"])
+        assert_matches_type(AuthorizationResponse, tool, path=["response"])
 
     @parametrize
     async def test_method_authorize_with_all_params(self, async_client: AsyncArcade) -> None:
@@ -229,7 +228,7 @@ class TestAsyncTools:
             tool_version="tool_version",
             user_id="user_id",
         )
-        assert_matches_type(AuthAuthorizationResponse, tool, path=["response"])
+        assert_matches_type(AuthorizationResponse, tool, path=["response"])
 
     @parametrize
     async def test_raw_response_authorize(self, async_client: AsyncArcade) -> None:
@@ -240,7 +239,7 @@ class TestAsyncTools:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tool = await response.parse()
-        assert_matches_type(AuthAuthorizationResponse, tool, path=["response"])
+        assert_matches_type(AuthorizationResponse, tool, path=["response"])
 
     @parametrize
     async def test_streaming_response_authorize(self, async_client: AsyncArcade) -> None:
@@ -251,7 +250,7 @@ class TestAsyncTools:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             tool = await response.parse()
-            assert_matches_type(AuthAuthorizationResponse, tool, path=["response"])
+            assert_matches_type(AuthorizationResponse, tool, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -302,7 +301,7 @@ class TestAsyncTools:
         tool = await async_client.tools.get(
             "name",
         )
-        assert_matches_type(ToolGetResponse, tool, path=["response"])
+        assert_matches_type(ToolDefinition, tool, path=["response"])
 
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncArcade) -> None:
@@ -313,7 +312,7 @@ class TestAsyncTools:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         tool = await response.parse()
-        assert_matches_type(ToolGetResponse, tool, path=["response"])
+        assert_matches_type(ToolDefinition, tool, path=["response"])
 
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncArcade) -> None:
@@ -324,7 +323,7 @@ class TestAsyncTools:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             tool = await response.parse()
-            assert_matches_type(ToolGetResponse, tool, path=["response"])
+            assert_matches_type(ToolDefinition, tool, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
