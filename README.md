@@ -16,7 +16,7 @@ The REST API documentation can be found on [docs.arcade-ai.com](https://docs.arc
 
 ```sh
 # install from PyPI
-pip install arcadepy
+pip install --pre arcadepy
 ```
 
 ## Usage

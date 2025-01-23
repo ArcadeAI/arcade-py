@@ -1,5 +1,53 @@
 # Changelog
 
+## 1.0.0-rc.1 (2025-01-23)
+
+Full Changelog: [v0.2.2...v1.0.0-rc.1](https://github.com/ArcadeAI/arcade-py/compare/v0.2.2...v1.0.0-rc.1)
+
+### Features
+
+* **api:** api update ([#73](https://github.com/ArcadeAI/arcade-py/issues/73)) ([0f1c7ed](https://github.com/ArcadeAI/arcade-py/commit/0f1c7ed5aad99fdb3c918fbbd5513098fefa05a3))
+* **api:** api update ([#75](https://github.com/ArcadeAI/arcade-py/issues/75)) ([9c9dc2d](https://github.com/ArcadeAI/arcade-py/commit/9c9dc2dc41047533f89839a0535ff13c778234ca))
+* **api:** api update ([#76](https://github.com/ArcadeAI/arcade-py/issues/76)) ([641b9eb](https://github.com/ArcadeAI/arcade-py/commit/641b9eb51d3d956386f0cd55160c22d89cbcd14c))
+* **api:** api update ([#82](https://github.com/ArcadeAI/arcade-py/issues/82)) ([4e66011](https://github.com/ArcadeAI/arcade-py/commit/4e6601159926eb862755e96567dc4e3726e2d97f))
+* **api:** api update ([#88](https://github.com/ArcadeAI/arcade-py/issues/88)) ([a99cbe9](https://github.com/ArcadeAI/arcade-py/commit/a99cbe951cf7bcc27d86e546bdd0ad755b2246d9))
+* feat!: Update helper methods for client breaking changes ([#78](https://github.com/ArcadeAI/arcade-py/issues/78)) ([13cae30](https://github.com/ArcadeAI/arcade-py/commit/13cae308ab2b0c98aee51e2767cfb5fe0cb116eb))
+* rc2 ([#80](https://github.com/ArcadeAI/arcade-py/issues/80)) ([bd564b9](https://github.com/ArcadeAI/arcade-py/commit/bd564b9e274df3bdcea1e2538daff9c577a0a7e3))
+* Rename some class in tests ([#81](https://github.com/ArcadeAI/arcade-py/issues/81)) ([8b09459](https://github.com/ArcadeAI/arcade-py/commit/8b0945931d5b9cb4d6ae8e0fa033365b4a4617c2))
+
+
+### Bug Fixes
+
+* **client:** only call .close() when needed ([#69](https://github.com/ArcadeAI/arcade-py/issues/69)) ([b7648c0](https://github.com/ArcadeAI/arcade-py/commit/b7648c08c1c5b8bb15ffb2ca069c924506ddbfe6))
+* correctly handle deserialising `cls` fields ([#72](https://github.com/ArcadeAI/arcade-py/issues/72)) ([499b981](https://github.com/ArcadeAI/arcade-py/commit/499b9816577c551d4d1a99052492aefea78a5236))
+* **tests:** make test_get_platform less flaky ([#85](https://github.com/ArcadeAI/arcade-py/issues/85)) ([85da3d0](https://github.com/ArcadeAI/arcade-py/commit/85da3d0439253595655dcbf9ab4f9cb36ddda84d))
+
+
+### Chores
+
+* add missing isclass check ([#67](https://github.com/ArcadeAI/arcade-py/issues/67)) ([40bfc91](https://github.com/ArcadeAI/arcade-py/commit/40bfc912c2d9a575a157ada58b7f21f010ebb579))
+* **internal:** add support for TypeAliasType ([#60](https://github.com/ArcadeAI/arcade-py/issues/60)) ([e16c393](https://github.com/ArcadeAI/arcade-py/commit/e16c393a6962d9104c066f244c883926a0bb3651))
+* **internal:** avoid pytest-asyncio deprecation warning ([#86](https://github.com/ArcadeAI/arcade-py/issues/86)) ([320391e](https://github.com/ArcadeAI/arcade-py/commit/320391e2d8e195c6d4966912a7456391db8318f2))
+* **internal:** bump httpx dependency ([#68](https://github.com/ArcadeAI/arcade-py/issues/68)) ([f3cab94](https://github.com/ArcadeAI/arcade-py/commit/f3cab941d45d8df5087eef3a3102eeceae84eced))
+* **internal:** bump pydantic dependency ([#56](https://github.com/ArcadeAI/arcade-py/issues/56)) ([0f8197f](https://github.com/ArcadeAI/arcade-py/commit/0f8197fecb47c96cff8935f66a860ee5bd84488c))
+* **internal:** bump pyright ([#59](https://github.com/ArcadeAI/arcade-py/issues/59)) ([a1a0a95](https://github.com/ArcadeAI/arcade-py/commit/a1a0a953ae35caea4ad07967caa392e9e86bd706))
+* **internal:** codegen related update ([#61](https://github.com/ArcadeAI/arcade-py/issues/61)) ([87f170b](https://github.com/ArcadeAI/arcade-py/commit/87f170b0703930cf2e675c336b3b2f0f0c7eef28))
+* **internal:** codegen related update ([#62](https://github.com/ArcadeAI/arcade-py/issues/62)) ([541faad](https://github.com/ArcadeAI/arcade-py/commit/541faadf245f00d7342875ec10b7cf1ecee8007b))
+* **internal:** codegen related update ([#64](https://github.com/ArcadeAI/arcade-py/issues/64)) ([808aa6b](https://github.com/ArcadeAI/arcade-py/commit/808aa6b8e8b59e3bc857d6487b4e6dc601480508))
+* **internal:** codegen related update ([#66](https://github.com/ArcadeAI/arcade-py/issues/66)) ([8182b3d](https://github.com/ArcadeAI/arcade-py/commit/8182b3d3106148a376534ef651ec82d128a69958))
+* **internal:** codegen related update ([#71](https://github.com/ArcadeAI/arcade-py/issues/71)) ([8bf0c65](https://github.com/ArcadeAI/arcade-py/commit/8bf0c65c3d7e162716b476cdbe10969659d89085))
+* **internal:** codegen related update ([#83](https://github.com/ArcadeAI/arcade-py/issues/83)) ([3d3c396](https://github.com/ArcadeAI/arcade-py/commit/3d3c396f6b97211290885afd0812f9415f8d668c))
+* **internal:** codegen related update ([#87](https://github.com/ArcadeAI/arcade-py/issues/87)) ([142d2ef](https://github.com/ArcadeAI/arcade-py/commit/142d2ef3146fc7e563622a0700ff7243bcec8564))
+* **internal:** fix some typos ([#65](https://github.com/ArcadeAI/arcade-py/issues/65)) ([de0fefd](https://github.com/ArcadeAI/arcade-py/commit/de0fefd92f29fd1dd7cfaf5657c12b3ddd761ac6))
+* **internal:** updated imports ([#63](https://github.com/ArcadeAI/arcade-py/issues/63)) ([28ea714](https://github.com/ArcadeAI/arcade-py/commit/28ea714eede1a04b73b78a4c9447d62683acde3d))
+
+
+### Documentation
+
+* fix typos ([#70](https://github.com/ArcadeAI/arcade-py/issues/70)) ([efc448f](https://github.com/ArcadeAI/arcade-py/commit/efc448fd0f1cba242ed467e2a0480cdf1756129e))
+* **raw responses:** fix duplicate `the` ([#84](https://github.com/ArcadeAI/arcade-py/issues/84)) ([19e4f04](https://github.com/ArcadeAI/arcade-py/commit/19e4f040a157de892123718adf7d027596f659e9))
+* **readme:** fix http client proxies example ([#58](https://github.com/ArcadeAI/arcade-py/issues/58)) ([b8d94e8](https://github.com/ArcadeAI/arcade-py/commit/b8d94e8204e689c2957c3f72df31cedb6996c4e3))
+
 ## 0.2.2 (2024-12-04)
 
 Full Changelog: [v0.2.1...v0.2.2](https://github.com/ArcadeAI/arcade-py/compare/v0.2.1...v0.2.2)
