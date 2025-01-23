@@ -19,7 +19,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.shared.auth_authorization_response import AuthAuthorizationResponse
+from ..types.shared.authorization_response import AuthorizationResponse
 
 __all__ = ["AuthResource", "AsyncAuthResource"]
 
@@ -55,7 +55,7 @@ class AuthResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthAuthorizationResponse:
+    ) -> AuthorizationResponse:
         """
         Starts the authorization process for given authorization requirements
 
@@ -80,7 +80,7 @@ class AuthResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthAuthorizationResponse,
+            cast_to=AuthorizationResponse,
         )
 
     def status(
@@ -94,7 +94,7 @@ class AuthResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthAuthorizationResponse:
+    ) -> AuthorizationResponse:
         """Checks the status of an ongoing authorization process for a specific tool.
 
         If
@@ -129,7 +129,7 @@ class AuthResource(SyncAPIResource):
                     auth_status_params.AuthStatusParams,
                 ),
             ),
-            cast_to=AuthAuthorizationResponse,
+            cast_to=AuthorizationResponse,
         )
 
 
@@ -164,7 +164,7 @@ class AsyncAuthResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthAuthorizationResponse:
+    ) -> AuthorizationResponse:
         """
         Starts the authorization process for given authorization requirements
 
@@ -189,7 +189,7 @@ class AsyncAuthResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthAuthorizationResponse,
+            cast_to=AuthorizationResponse,
         )
 
     async def status(
@@ -203,7 +203,7 @@ class AsyncAuthResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthAuthorizationResponse:
+    ) -> AuthorizationResponse:
         """Checks the status of an ongoing authorization process for a specific tool.
 
         If
@@ -238,7 +238,7 @@ class AsyncAuthResource(AsyncAPIResource):
                     auth_status_params.AuthStatusParams,
                 ),
             ),
-            cast_to=AuthAuthorizationResponse,
+            cast_to=AuthorizationResponse,
         )
 
 
