@@ -5,7 +5,7 @@ description = "The official Python library for the Arcade API"
 dynamic = ["readme"]
 license = "MIT"
 authors = [
-{ name = "Arcade", email = "dev@arcade-ai.com" },
+{ name = "Arcade", email = "dev@arcade.dev" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",
