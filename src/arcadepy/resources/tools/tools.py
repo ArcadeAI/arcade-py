@@ -85,7 +85,7 @@ class ToolsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncOffsetPage[ToolDefinition]:
+    ) -> SyncOffsetPage[ToolListResponse]:
         """
         Returns a page of tools from the engine configuration, optionally filtered by
         toolkit
@@ -122,7 +122,7 @@ class ToolsResource(SyncAPIResource):
                     tool_list_params.ToolListParams,
                 ),
             ),
-            model=ToolDefinition,
+            model=ToolListResponse,
         )
 
     def authorize(
@@ -137,7 +137,7 @@ class ToolsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthorizationResponse:
+    ) -> AuthAuthorizationResponse:
         """
         Authorizes a user for a specific tool by name
 
@@ -167,7 +167,7 @@ class ToolsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthorizationResponse,
+            cast_to=AuthAuthorizationResponse,
         )
 
     def execute(
@@ -232,7 +232,7 @@ class ToolsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ToolDefinition:
+    ) -> ToolGetResponse:
         """
         Returns the arcade tool specification for a specific tool
 
@@ -252,7 +252,7 @@ class ToolsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ToolDefinition,
+            cast_to=ToolGetResponse,
         )
 
 
@@ -296,7 +296,7 @@ class AsyncToolsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[ToolDefinition, AsyncOffsetPage[ToolDefinition]]:
+    ) -> AsyncPaginator[ToolListResponse, AsyncOffsetPage[ToolListResponse]]:
         """
         Returns a page of tools from the engine configuration, optionally filtered by
         toolkit
@@ -333,7 +333,7 @@ class AsyncToolsResource(AsyncAPIResource):
                     tool_list_params.ToolListParams,
                 ),
             ),
-            model=ToolDefinition,
+            model=ToolListResponse,
         )
 
     async def authorize(
@@ -348,7 +348,7 @@ class AsyncToolsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthorizationResponse:
+    ) -> AuthAuthorizationResponse:
         """
         Authorizes a user for a specific tool by name
 
@@ -378,7 +378,7 @@ class AsyncToolsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthorizationResponse,
+            cast_to=AuthAuthorizationResponse,
         )
 
     async def execute(
@@ -443,7 +443,7 @@ class AsyncToolsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ToolDefinition:
+    ) -> ToolGetResponse:
         """
         Returns the arcade tool specification for a specific tool
 
@@ -463,7 +463,7 @@ class AsyncToolsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ToolDefinition,
+            cast_to=ToolGetResponse,
         )
 
 
