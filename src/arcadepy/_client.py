@@ -87,7 +87,7 @@ class Arcade(SyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("ARCADE_BASE_URL")
         if base_url is None:
-            base_url = f"https://api.arcade-ai.com"
+            base_url = f"https://api.arcade.dev"
 
         super().__init__(
             version=__version__,
@@ -261,7 +261,7 @@ class AsyncArcade(AsyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("ARCADE_BASE_URL")
         if base_url is None:
-            base_url = f"https://api.arcade-ai.com"
+            base_url = f"https://api.arcade.dev"
 
         super().__init__(
             version=__version__,
