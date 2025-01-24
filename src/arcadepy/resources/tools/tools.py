@@ -38,10 +38,9 @@ from ..._response import (
 )
 from ...pagination import SyncOffsetPage, AsyncOffsetPage
 from ..._base_client import AsyncPaginator, make_request_options
-from ...types.tool_get_response import ToolGetResponse
-from ...types.tool_list_response import ToolListResponse
+from ...types.tool_definition import ToolDefinition
 from ...types.execute_tool_response import ExecuteToolResponse
-from ...types.shared.auth_authorization_response import AuthAuthorizationResponse
+from ...types.shared.authorization_response import AuthorizationResponse
 
 __all__ = ["ToolsResource", "AsyncToolsResource"]
 
@@ -58,7 +57,7 @@ class ToolsResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> ToolsResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/ArcadeAI/arcade-py#accessing-raw-response-data-eg-headers
@@ -86,7 +85,7 @@ class ToolsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncOffsetPage[ToolListResponse]:
+    ) -> SyncOffsetPage[ToolDefinition]:
         """
         Returns a page of tools from the engine configuration, optionally filtered by
         toolkit
@@ -108,7 +107,7 @@ class ToolsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/v1/tools",
-            page=SyncOffsetPage[ToolListResponse],
+            page=SyncOffsetPage[ToolDefinition],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -123,7 +122,7 @@ class ToolsResource(SyncAPIResource):
                     tool_list_params.ToolListParams,
                 ),
             ),
-            model=ToolListResponse,
+            model=ToolDefinition,
         )
 
     def authorize(
@@ -138,7 +137,7 @@ class ToolsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthAuthorizationResponse:
+    ) -> AuthorizationResponse:
         """
         Authorizes a user for a specific tool by name
 
@@ -168,7 +167,7 @@ class ToolsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthAuthorizationResponse,
+            cast_to=AuthorizationResponse,
         )
 
     def execute(
@@ -233,7 +232,7 @@ class ToolsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ToolGetResponse:
+    ) -> ToolDefinition:
         """
         Returns the arcade tool specification for a specific tool
 
@@ -253,7 +252,7 @@ class ToolsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ToolGetResponse,
+            cast_to=ToolDefinition,
         )
 
 
@@ -269,7 +268,7 @@ class AsyncToolsResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncToolsResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/ArcadeAI/arcade-py#accessing-raw-response-data-eg-headers
@@ -297,7 +296,7 @@ class AsyncToolsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[ToolListResponse, AsyncOffsetPage[ToolListResponse]]:
+    ) -> AsyncPaginator[ToolDefinition, AsyncOffsetPage[ToolDefinition]]:
         """
         Returns a page of tools from the engine configuration, optionally filtered by
         toolkit
@@ -319,7 +318,7 @@ class AsyncToolsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/v1/tools",
-            page=AsyncOffsetPage[ToolListResponse],
+            page=AsyncOffsetPage[ToolDefinition],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -334,7 +333,7 @@ class AsyncToolsResource(AsyncAPIResource):
                     tool_list_params.ToolListParams,
                 ),
             ),
-            model=ToolListResponse,
+            model=ToolDefinition,
         )
 
     async def authorize(
@@ -349,7 +348,7 @@ class AsyncToolsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthAuthorizationResponse:
+    ) -> AuthorizationResponse:
         """
         Authorizes a user for a specific tool by name
 
@@ -379,7 +378,7 @@ class AsyncToolsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthAuthorizationResponse,
+            cast_to=AuthorizationResponse,
         )
 
     async def execute(
@@ -444,7 +443,7 @@ class AsyncToolsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ToolGetResponse:
+    ) -> ToolDefinition:
         """
         Returns the arcade tool specification for a specific tool
 
@@ -464,7 +463,7 @@ class AsyncToolsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ToolGetResponse,
+            cast_to=ToolDefinition,
         )
 
 

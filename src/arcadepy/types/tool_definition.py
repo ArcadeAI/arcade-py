@@ -6,6 +6,7 @@ from .._models import BaseModel
 from .value_schema import ValueSchema
 
 __all__ = [
+    "ToolDefinition",
     "Input",
     "InputParameter",
     "Toolkit",
@@ -53,6 +54,8 @@ class RequirementsAuthorizationOauth2(BaseModel):
 
 
 class RequirementsAuthorization(BaseModel):
+    id: Optional[str] = None
+
     oauth2: Optional[RequirementsAuthorizationOauth2] = None
 
     provider_id: Optional[str] = None
@@ -62,3 +65,19 @@ class RequirementsAuthorization(BaseModel):
 
 class Requirements(BaseModel):
     authorization: Optional[RequirementsAuthorization] = None
+
+
+class ToolDefinition(BaseModel):
+    input: Input
+
+    name: str
+
+    toolkit: Toolkit
+
+    description: Optional[str] = None
+
+    fully_qualified_name: Optional[str] = None
+
+    output: Optional[Output] = None
+
+    requirements: Optional[Requirements] = None

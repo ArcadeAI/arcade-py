@@ -1,11 +1,11 @@
 [project]
 name = "arcadepy"
-version = "0.2.2"
+version = "1.0.0"
 description = "The official Python library for the Arcade API"
 dynamic = ["readme"]
 license = "MIT"
 authors = [
-{ name = "Arcade", email = "dev@arcade-ai.com" },
+{ name = "Arcade", email = "dev@arcade.dev" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",
@@ -129,6 +129,7 @@ testpaths = ["tests"]
 addopts = "--tb=short"
 xfail_strict = true
 asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "session"
 filterwarnings = [
   "error"
 ]
