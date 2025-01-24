@@ -19,7 +19,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.shared.auth_authorization_response import AuthAuthorizationResponse
+from ..types.shared.authorization_response import AuthorizationResponse
 
 __all__ = ["AuthResource", "AsyncAuthResource"]
 
@@ -57,7 +57,7 @@ class AuthResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthAuthorizationResponse:
+    ) -> AuthorizationResponse:
         """
         Starts the authorization process for given authorization requirements
 
@@ -82,7 +82,7 @@ class AuthResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthAuthorizationResponse,
+            cast_to=AuthorizationResponse,
         )
 
     def start(
@@ -92,7 +92,7 @@ class AuthResource(SyncAPIResource):
         *,
         provider_type: str | None = "oauth2",
         scopes: list[str] | None = None,
-    ) -> AuthAuthorizationResponse:
+    ) -> AuthorizationResponse:
         """
         Starts the authorization process for a given provider and scopes.
 
@@ -126,7 +126,7 @@ class AuthResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthAuthorizationResponse:
+    ) -> AuthorizationResponse:
         """Checks the status of an ongoing authorization process for a specific tool.
 
         If
@@ -161,10 +161,10 @@ class AuthResource(SyncAPIResource):
                     auth_status_params.AuthStatusParams,
                 ),
             ),
-            cast_to=AuthAuthorizationResponse,
+            cast_to=AuthorizationResponse,
         )
 
-    def wait_for_completion(self, auth_response_or_id: AuthAuthorizationResponse | str) -> AuthAuthorizationResponse:
+    def wait_for_completion(self, auth_response_or_id: AuthorizationResponse | str) -> AuthorizationResponse:
         """
         Waits for the authorization process to complete, for example:
 
@@ -175,14 +175,14 @@ class AuthResource(SyncAPIResource):
         """
         auth_id_val: str
 
-        if isinstance(auth_response_or_id, AuthAuthorizationResponse):
+        if isinstance(auth_response_or_id, AuthorizationResponse):
             if not auth_response_or_id.id:
                 raise ValueError("Authorization ID is required")
             auth_id_val = auth_response_or_id.id
             auth_response = auth_response_or_id
         else:
             auth_id_val = auth_response_or_id
-            auth_response = AuthAuthorizationResponse()
+            auth_response = AuthorizationResponse()
 
         while auth_response.status != "completed":
             auth_response = self.status(
@@ -223,7 +223,7 @@ class AsyncAuthResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthAuthorizationResponse:
+    ) -> AuthorizationResponse:
         """
         Starts the authorization process for given authorization requirements
 
@@ -248,7 +248,7 @@ class AsyncAuthResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthAuthorizationResponse,
+            cast_to=AuthorizationResponse,
         )
 
     async def start(
@@ -258,7 +258,7 @@ class AsyncAuthResource(AsyncAPIResource):
         *,
         provider_type: str | None = "oauth2",
         scopes: list[str] | None = None,
-    ) -> AuthAuthorizationResponse:
+    ) -> AuthorizationResponse:
         """
         Starts the authorization process for a given provider and scopes.
 
@@ -292,7 +292,7 @@ class AsyncAuthResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthAuthorizationResponse:
+    ) -> AuthorizationResponse:
         """Checks the status of an ongoing authorization process for a specific tool.
 
         If
@@ -327,13 +327,13 @@ class AsyncAuthResource(AsyncAPIResource):
                     auth_status_params.AuthStatusParams,
                 ),
             ),
-            cast_to=AuthAuthorizationResponse,
+            cast_to=AuthorizationResponse,
         )
 
     async def wait_for_completion(
         self,
-        auth_response_or_id: AuthAuthorizationResponse | str,
-    ) -> AuthAuthorizationResponse:
+        auth_response_or_id: AuthorizationResponse | str,
+    ) -> AuthorizationResponse:
         """
         Waits for the authorization process to complete, for example:
 
@@ -344,14 +344,14 @@ class AsyncAuthResource(AsyncAPIResource):
         """
         auth_id_val: str
 
-        if isinstance(auth_response_or_id, AuthAuthorizationResponse):
+        if isinstance(auth_response_or_id, AuthorizationResponse):
             if not auth_response_or_id.id:
                 raise ValueError("Authorization ID is required")
             auth_id_val = auth_response_or_id.id
             auth_response = auth_response_or_id
         else:
             auth_id_val = auth_response_or_id
-            auth_response = AuthAuthorizationResponse()
+            auth_response = AuthorizationResponse()
 
         while auth_response.status != "completed":
             auth_response = await self.status(

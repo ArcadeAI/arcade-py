@@ -6,7 +6,6 @@ from .._models import BaseModel
 from .value_schema import ValueSchema
 
 __all__ = [
-    "ToolListResponse",
     "Input",
     "InputParameter",
     "Toolkit",
@@ -63,19 +62,3 @@ class RequirementsAuthorization(BaseModel):
 
 class Requirements(BaseModel):
     authorization: Optional[RequirementsAuthorization] = None
-
-
-class ToolListResponse(BaseModel):
-    input: Input
-
-    name: str
-
-    toolkit: Toolkit
-
-    description: Optional[str] = None
-
-    fully_qualified_name: Optional[str] = None
-
-    output: Optional[Output] = None
-
-    requirements: Optional[Requirements] = None

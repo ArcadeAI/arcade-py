@@ -4,7 +4,7 @@ from unittest.mock import Mock, AsyncMock
 import pytest
 
 from arcadepy._client import Arcade, AsyncArcade
-from arcadepy.types.shared import AuthAuthorizationResponse
+from arcadepy.types.shared import AuthorizationResponse
 from arcadepy.resources.auth import AuthResource, AsyncAuthResource
 from arcadepy.types.auth_authorize_params import AuthRequirement, AuthRequirementOauth2
 
@@ -50,7 +50,7 @@ def test_start_calls_authorize_with_correct_params(
     expected_scopes: List[str],
 ) -> None:
     auth = sync_auth_resource
-    auth.authorize = Mock(return_value=AuthAuthorizationResponse(status="pending"))  # type: ignore
+    auth.authorize = Mock(return_value=AuthorizationResponse(status="pending"))  # type: ignore
 
     user_id = "user_id"
     provider = "github"
@@ -78,7 +78,7 @@ async def test_async_start_calls_authorize_with_correct_params(
     expected_scopes: List[str],
 ) -> None:
     auth = async_auth_resource
-    auth.authorize = AsyncMock(return_value=AuthAuthorizationResponse(status="pending"))  # type: ignore
+    auth.authorize = AsyncMock(return_value=AuthorizationResponse(status="pending"))  # type: ignore
 
     user_id = "user_id"
     provider = "github"
