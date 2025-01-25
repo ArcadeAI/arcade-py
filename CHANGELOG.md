@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.1 (2025-01-25)
+
+Full Changelog: [v1.0.0...v1.0.1](https://github.com/ArcadeAI/arcade-py/compare/v1.0.0...v1.0.1)
+
+### Chores
+
+* **internal:** codegen related update ([#92](https://github.com/ArcadeAI/arcade-py/issues/92)) ([534728b](https://github.com/ArcadeAI/arcade-py/commit/534728b5d9ac96b6e051088848bc732f05167acb))
+
 ## 1.0.0 (2025-01-24)
 
 Full Changelog: [v0.2.2...v1.0.0](https://github.com/ArcadeAI/arcade-py/compare/v0.2.2...v1.0.0)
