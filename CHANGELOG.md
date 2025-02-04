@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.2 (2025-02-04)
+
+Full Changelog: [v1.0.1...v1.0.2](https://github.com/ArcadeAI/arcade-py/compare/v1.0.1...v1.0.2)
+
+### Chores
+
+* **internal:** bummp ruff dependency ([#97](https://github.com/ArcadeAI/arcade-py/issues/97)) ([354784c](https://github.com/ArcadeAI/arcade-py/commit/354784ce85e1327bfde56746da97cc2016690a61))
+* **internal:** change default timeout to an int ([#95](https://github.com/ArcadeAI/arcade-py/issues/95)) ([bcac267](https://github.com/ArcadeAI/arcade-py/commit/bcac26785cf90888478adb3455b2e667d442c135))
+
 ## 1.0.1 (2025-01-25)
 
 Full Changelog: [v1.0.0...v1.0.1](https://github.com/ArcadeAI/arcade-py/compare/v1.0.0...v1.0.1)
