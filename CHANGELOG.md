@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.1.0 (2025-02-07)
+
+Full Changelog: [v1.0.1...v1.1.0](https://github.com/ArcadeAI/arcade-py/compare/v1.0.1...v1.1.0)
+
+### Features
+
+* **client:** send `X-Stainless-Read-Timeout` header ([#98](https://github.com/ArcadeAI/arcade-py/issues/98)) ([ed2a2f9](https://github.com/ArcadeAI/arcade-py/commit/ed2a2f91ed9b0d0f97bf70ad63006b59ff0a7e96))
+
+
+### Chores
+
+* **internal:** bummp ruff dependency ([#97](https://github.com/ArcadeAI/arcade-py/issues/97)) ([354784c](https://github.com/ArcadeAI/arcade-py/commit/354784ce85e1327bfde56746da97cc2016690a61))
+* **internal:** change default timeout to an int ([#95](https://github.com/ArcadeAI/arcade-py/issues/95)) ([bcac267](https://github.com/ArcadeAI/arcade-py/commit/bcac26785cf90888478adb3455b2e667d442c135))
+* **internal:** fix type traversing dictionary params ([#99](https://github.com/ArcadeAI/arcade-py/issues/99)) ([8d4ccf0](https://github.com/ArcadeAI/arcade-py/commit/8d4ccf0f26850f9cbb2e76c0126712f8a87567f8))
+* **internal:** minor type handling changes ([#100](https://github.com/ArcadeAI/arcade-py/issues/100)) ([3adf96e](https://github.com/ArcadeAI/arcade-py/commit/3adf96e565dcf2c62ed0490fb92833a09dd2a1f8))
+
 ## 1.0.1 (2025-01-25)
 
 Full Changelog: [v1.0.0...v1.0.1](https://github.com/ArcadeAI/arcade-py/compare/v1.0.0...v1.0.1)
