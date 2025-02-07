@@ -1,6 +1,6 @@
 [project]
 name = "arcadepy"
-version = "1.0.1"
+version = "1.1.0"
 description = "The official Python library for the Arcade API"
 dynamic = ["readme"]
 license = "MIT"
@@ -177,7 +177,7 @@ select = [
   "T201",
   "T203",
   # misuse of typing.TYPE_CHECKING
-  "TCH004",
+  "TC004",
   # import rules
   "TID251",
 ]
