@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.1 (2025-02-13)
+
+Full Changelog: [v1.1.0...v1.1.1](https://github.com/ArcadeAI/arcade-py/compare/v1.1.0...v1.1.1)
+
+### Chores
+
+* **internal:** update client tests ([#102](https://github.com/ArcadeAI/arcade-py/issues/102)) ([0607580](https://github.com/ArcadeAI/arcade-py/commit/06075801fe24e88ee7751c064ae00d8a0d597bdf))
+
 ## 1.1.0 (2025-02-07)
 
 Full Changelog: [v1.0.1...v1.1.0](https://github.com/ArcadeAI/arcade-py/compare/v1.0.1...v1.1.0)
