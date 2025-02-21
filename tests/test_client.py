@@ -724,7 +724,7 @@ class TestArcade:
                             messages=[
                                 {
                                     "role": "user",
-                                    "content": "Hello, how can I use Arcade AI?",
+                                    "content": "Hello, how can I use Arcade?",
                                 }
                             ]
                         ),
@@ -752,7 +752,7 @@ class TestArcade:
                             messages=[
                                 {
                                     "role": "user",
-                                    "content": "Hello, how can I use Arcade AI?",
+                                    "content": "Hello, how can I use Arcade?",
                                 }
                             ]
                         ),
@@ -1526,7 +1526,7 @@ class TestAsyncArcade:
                             messages=[
                                 {
                                     "role": "user",
-                                    "content": "Hello, how can I use Arcade AI?",
+                                    "content": "Hello, how can I use Arcade?",
                                 }
                             ]
                         ),
@@ -1554,7 +1554,7 @@ class TestAsyncArcade:
                             messages=[
                                 {
                                     "role": "user",
-                                    "content": "Hello, how can I use Arcade AI?",
+                                    "content": "Hello, how can I use Arcade?",
                                 }
                             ]
                         ),

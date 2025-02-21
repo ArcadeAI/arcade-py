@@ -1,11 +1,11 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 
 from .._models import BaseModel
 from .shared.authorization_response import AuthorizationResponse
 
-__all__ = ["ToolExecutionAttempt", "Output", "OutputError"]
+__all__ = ["ToolExecutionAttempt", "Output", "OutputError", "OutputLog"]
 
 
 class OutputError(BaseModel):
@@ -20,10 +20,20 @@ class OutputError(BaseModel):
     retry_after_ms: Optional[int] = None
 
 
+class OutputLog(BaseModel):
+    level: str
+
+    message: str
+
+    subtype: Optional[str] = None
+
+
 class Output(BaseModel):
     authorization: Optional[AuthorizationResponse] = None
 
     error: Optional[OutputError] = None
+
+    logs: Optional[List[OutputLog]] = None
 
     value: Optional[object] = None
 

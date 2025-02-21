@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.2.0 (2025-02-21)
+
+Full Changelog: [v1.1.1...v1.2.0](https://github.com/ArcadeAI/arcade-py/compare/v1.1.1...v1.2.0)
+
+### Features
+
+* **api:** api update ([#105](https://github.com/ArcadeAI/arcade-py/issues/105)) ([7ed533f](https://github.com/ArcadeAI/arcade-py/commit/7ed533fca689340285fe5b194efd5b0f233e3bd4))
+* **api:** api update ([#108](https://github.com/ArcadeAI/arcade-py/issues/108)) ([ba6ddc9](https://github.com/ArcadeAI/arcade-py/commit/ba6ddc9d5d7d94fbf7764aff94b5fd8a6c28e7fa))
+* **client:** allow passing `NotGiven` for body ([#109](https://github.com/ArcadeAI/arcade-py/issues/109)) ([920d114](https://github.com/ArcadeAI/arcade-py/commit/920d114c56a7d31ef0914b6bff37d4928240622a))
+
+
+### Bug Fixes
+
+* asyncify on non-asyncio runtimes ([#107](https://github.com/ArcadeAI/arcade-py/issues/107)) ([3252ac3](https://github.com/ArcadeAI/arcade-py/commit/3252ac3b2af698fd007f045e45097e858842b575))
+* **client:** mark some request bodies as optional ([920d114](https://github.com/ArcadeAI/arcade-py/commit/920d114c56a7d31ef0914b6bff37d4928240622a))
+
 ## 1.1.1 (2025-02-13)
 
 Full Changelog: [v1.1.0...v1.1.1](https://github.com/ArcadeAI/arcade-py/compare/v1.1.0...v1.1.1)
