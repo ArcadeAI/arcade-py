@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.1 (2025-02-22)
+
+Full Changelog: [v1.2.0...v1.2.1](https://github.com/ArcadeAI/arcade-py/compare/v1.2.0...v1.2.1)
+
+### Chores
+
+* **internal:** fix devcontainers setup ([#111](https://github.com/ArcadeAI/arcade-py/issues/111)) ([b8d223b](https://github.com/ArcadeAI/arcade-py/commit/b8d223b1c79a7f403bdc7334dc27835e11cacf83))
+
 ## 1.2.0 (2025-02-21)
 
 Full Changelog: [v1.1.1...v1.2.0](https://github.com/ArcadeAI/arcade-py/compare/v1.1.1...v1.2.0)
