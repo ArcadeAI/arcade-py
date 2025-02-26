@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.3.0 (2025-02-26)
+
+Full Changelog: [v1.2.1...v1.3.0](https://github.com/ArcadeAI/arcade-py/compare/v1.2.1...v1.3.0)
+
+### Features
+
+* **api:** api update ([#116](https://github.com/ArcadeAI/arcade-py/issues/116)) ([398641f](https://github.com/ArcadeAI/arcade-py/commit/398641f2805b34f760ede51ac16e9eb3bebf7a23))
+* **api:** api update ([#117](https://github.com/ArcadeAI/arcade-py/issues/117)) ([6e333f1](https://github.com/ArcadeAI/arcade-py/commit/6e333f122a4718ac9e909258774b509ef2eea1f3))
+* **api:** api update ([#118](https://github.com/ArcadeAI/arcade-py/issues/118)) ([83cf396](https://github.com/ArcadeAI/arcade-py/commit/83cf3964ed5f25447e63a2e3d02e48bf5cb6ff9f))
+
+
+### Chores
+
+* **internal:** properly set __pydantic_private__ ([#114](https://github.com/ArcadeAI/arcade-py/issues/114)) ([558c1bb](https://github.com/ArcadeAI/arcade-py/commit/558c1bb39b9d0aa30f267217642f1a2da6a6d092))
+
 ## 1.2.1 (2025-02-22)
 
 Full Changelog: [v1.2.0...v1.2.1](https://github.com/ArcadeAI/arcade-py/compare/v1.2.0...v1.2.1)
