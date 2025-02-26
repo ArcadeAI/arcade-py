@@ -24,7 +24,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import auth, health
+from .resources import auth, health, worker
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import ArcadeError, APIStatusError
 from ._base_client import (
@@ -43,6 +43,7 @@ class Arcade(SyncAPIClient):
     health: health.HealthResource
     chat: chat.ChatResource
     tools: tools.ToolsResource
+    worker: worker.WorkerResource
     with_raw_response: ArcadeWithRawResponse
     with_streaming_response: ArcadeWithStreamedResponse
 
@@ -104,6 +105,7 @@ class Arcade(SyncAPIClient):
         self.health = health.HealthResource(self)
         self.chat = chat.ChatResource(self)
         self.tools = tools.ToolsResource(self)
+        self.worker = worker.WorkerResource(self)
         self.with_raw_response = ArcadeWithRawResponse(self)
         self.with_streaming_response = ArcadeWithStreamedResponse(self)
 
@@ -217,6 +219,7 @@ class AsyncArcade(AsyncAPIClient):
     health: health.AsyncHealthResource
     chat: chat.AsyncChatResource
     tools: tools.AsyncToolsResource
+    worker: worker.AsyncWorkerResource
     with_raw_response: AsyncArcadeWithRawResponse
     with_streaming_response: AsyncArcadeWithStreamedResponse
 
@@ -278,6 +281,7 @@ class AsyncArcade(AsyncAPIClient):
         self.health = health.AsyncHealthResource(self)
         self.chat = chat.AsyncChatResource(self)
         self.tools = tools.AsyncToolsResource(self)
+        self.worker = worker.AsyncWorkerResource(self)
         self.with_raw_response = AsyncArcadeWithRawResponse(self)
         self.with_streaming_response = AsyncArcadeWithStreamedResponse(self)
 
@@ -392,6 +396,7 @@ class ArcadeWithRawResponse:
         self.health = health.HealthResourceWithRawResponse(client.health)
         self.chat = chat.ChatResourceWithRawResponse(client.chat)
         self.tools = tools.ToolsResourceWithRawResponse(client.tools)
+        self.worker = worker.WorkerResourceWithRawResponse(client.worker)
 
 
 class AsyncArcadeWithRawResponse:
@@ -400,6 +405,7 @@ class AsyncArcadeWithRawResponse:
         self.health = health.AsyncHealthResourceWithRawResponse(client.health)
         self.chat = chat.AsyncChatResourceWithRawResponse(client.chat)
         self.tools = tools.AsyncToolsResourceWithRawResponse(client.tools)
+        self.worker = worker.AsyncWorkerResourceWithRawResponse(client.worker)
 
 
 class ArcadeWithStreamedResponse:
@@ -408,6 +414,7 @@ class ArcadeWithStreamedResponse:
         self.health = health.HealthResourceWithStreamingResponse(client.health)
         self.chat = chat.ChatResourceWithStreamingResponse(client.chat)
         self.tools = tools.ToolsResourceWithStreamingResponse(client.tools)
+        self.worker = worker.WorkerResourceWithStreamingResponse(client.worker)
 
 
 class AsyncArcadeWithStreamedResponse:
@@ -416,6 +423,7 @@ class AsyncArcadeWithStreamedResponse:
         self.health = health.AsyncHealthResourceWithStreamingResponse(client.health)
         self.chat = chat.AsyncChatResourceWithStreamingResponse(client.chat)
         self.tools = tools.AsyncToolsResourceWithStreamingResponse(client.tools)
+        self.worker = worker.AsyncWorkerResourceWithStreamingResponse(client.worker)
 
 
 Client = Arcade
