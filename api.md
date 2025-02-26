@@ -109,4 +109,7 @@ from arcadepy.types import (
 Methods:
 
 - <code title="post /v1/admin/workers">client.worker.<a href="./src/arcadepy/resources/worker.py">create</a>(\*\*<a href="src/arcadepy/types/worker_create_params.py">params</a>) -> <a href="./src/arcadepy/types/worker_response.py">WorkerResponse</a></code>
+- <code title="patch /v1/admin/workers/{id}">client.worker.<a href="./src/arcadepy/resources/worker.py">update</a>(id, \*\*<a href="src/arcadepy/types/worker_update_params.py">params</a>) -> <a href="./src/arcadepy/types/worker_response.py">WorkerResponse</a></code>
 - <code title="get /v1/admin/workers">client.worker.<a href="./src/arcadepy/resources/worker.py">list</a>() -> <a href="./src/arcadepy/types/worker_list_response.py">WorkerListResponse</a></code>
+- <code title="delete /v1/admin/workers/{id}">client.worker.<a href="./src/arcadepy/resources/worker.py">delete</a>(id) -> None</code>
+- <code title="get /v1/admin/workers/{id}/health">client.worker.<a href="./src/arcadepy/resources/worker.py">health</a>(id) -> <a href="./src/arcadepy/types/worker_health_response.py">WorkerHealthResponse</a></code>
