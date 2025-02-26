@@ -91,3 +91,16 @@ Methods:
 
 - <code title="get /v1/formatted_tools">client.tools.formatted.<a href="./src/arcadepy/resources/tools/formatted.py">list</a>(\*\*<a href="src/arcadepy/types/tools/formatted_list_params.py">params</a>) -> <a href="./src/arcadepy/types/tools/formatted_list_response.py">SyncOffsetPage[object]</a></code>
 - <code title="get /v1/formatted_tools/{name}">client.tools.formatted.<a href="./src/arcadepy/resources/tools/formatted.py">get</a>(name, \*\*<a href="src/arcadepy/types/tools/formatted_get_params.py">params</a>) -> <a href="./src/arcadepy/types/tools/formatted_get_response.py">object</a></code>
+
+# Worker
+
+Types:
+
+```python
+from arcadepy.types import (
+    CreateWorkerRequest,
+    UpdateWorkerRequest,
+    WorkerHealthResponse,
+    WorkerResponse,
+)
+```
