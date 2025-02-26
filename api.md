@@ -102,5 +102,11 @@ from arcadepy.types import (
     UpdateWorkerRequest,
     WorkerHealthResponse,
     WorkerResponse,
+    WorkerListResponse,
 )
 ```
+
+Methods:
+
+- <code title="post /v1/admin/workers">client.worker.<a href="./src/arcadepy/resources/worker.py">create</a>(\*\*<a href="src/arcadepy/types/worker_create_params.py">params</a>) -> <a href="./src/arcadepy/types/worker_response.py">WorkerResponse</a></code>
+- <code title="get /v1/admin/workers">client.worker.<a href="./src/arcadepy/resources/worker.py">list</a>() -> <a href="./src/arcadepy/types/worker_list_response.py">WorkerListResponse</a></code>

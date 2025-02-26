@@ -15,10 +15,13 @@ from .chat_response import ChatResponse as ChatResponse
 from .health_schema import HealthSchema as HealthSchema
 from .tool_execution import ToolExecution as ToolExecution
 from .tool_definition import ToolDefinition as ToolDefinition
+from .worker_response import WorkerResponse as WorkerResponse
 from .tool_list_params import ToolListParams as ToolListParams
 from .auth_status_params import AuthStatusParams as AuthStatusParams
 from .chat_message_param import ChatMessageParam as ChatMessageParam
 from .tool_execute_params import ToolExecuteParams as ToolExecuteParams
+from .worker_create_params import WorkerCreateParams as WorkerCreateParams
+from .worker_list_response import WorkerListResponse as WorkerListResponse
 from .auth_authorize_params import AuthAuthorizeParams as AuthAuthorizeParams
 from .execute_tool_response import ExecuteToolResponse as ExecuteToolResponse
 from .tool_authorize_params import ToolAuthorizeParams as ToolAuthorizeParams
