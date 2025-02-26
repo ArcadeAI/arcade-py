@@ -22,7 +22,9 @@ from .chat_message_param import ChatMessageParam as ChatMessageParam
 from .tool_execute_params import ToolExecuteParams as ToolExecuteParams
 from .worker_create_params import WorkerCreateParams as WorkerCreateParams
 from .worker_list_response import WorkerListResponse as WorkerListResponse
+from .worker_update_params import WorkerUpdateParams as WorkerUpdateParams
 from .auth_authorize_params import AuthAuthorizeParams as AuthAuthorizeParams
 from .execute_tool_response import ExecuteToolResponse as ExecuteToolResponse
 from .tool_authorize_params import ToolAuthorizeParams as ToolAuthorizeParams
 from .tool_execution_attempt import ToolExecutionAttempt as ToolExecutionAttempt
+from .worker_health_response import WorkerHealthResponse as WorkerHealthResponse
