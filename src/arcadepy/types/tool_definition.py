@@ -14,6 +14,7 @@ __all__ = [
     "Requirements",
     "RequirementsAuthorization",
     "RequirementsAuthorizationOauth2",
+    "RequirementsSecret",
 ]
 
 
@@ -63,8 +64,14 @@ class RequirementsAuthorization(BaseModel):
     provider_type: Optional[str] = None
 
 
+class RequirementsSecret(BaseModel):
+    key: str
+
+
 class Requirements(BaseModel):
     authorization: Optional[RequirementsAuthorization] = None
+
+    secrets: Optional[List[RequirementsSecret]] = None
 
 
 class ToolDefinition(BaseModel):
