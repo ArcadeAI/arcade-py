@@ -249,7 +249,7 @@ class AsyncArcade(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async Arcade client instance.
+        """Construct a new async AsyncArcade client instance.
 
         This automatically infers the `api_key` argument from the `ARCADE_API_KEY` environment variable if it is not provided.
         """
