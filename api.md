@@ -91,3 +91,27 @@ Methods:
 
 - <code title="get /v1/formatted_tools">client.tools.formatted.<a href="./src/arcadepy/resources/tools/formatted.py">list</a>(\*\*<a href="src/arcadepy/types/tools/formatted_list_params.py">params</a>) -> <a href="./src/arcadepy/types/tools/formatted_list_response.py">SyncOffsetPage[object]</a></code>
 - <code title="get /v1/formatted_tools/{name}">client.tools.formatted.<a href="./src/arcadepy/resources/tools/formatted.py">get</a>(name, \*\*<a href="src/arcadepy/types/tools/formatted_get_params.py">params</a>) -> <a href="./src/arcadepy/types/tools/formatted_get_response.py">object</a></code>
+
+# Workers
+
+Types:
+
+```python
+from arcadepy.types import (
+    CreateWorkerRequest,
+    UpdateWorkerRequest,
+    WorkerHealthResponse,
+    WorkerResponse,
+    WorkerToolsResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/workers">client.workers.<a href="./src/arcadepy/resources/workers.py">create</a>(\*\*<a href="src/arcadepy/types/worker_create_params.py">params</a>) -> <a href="./src/arcadepy/types/worker_response.py">WorkerResponse</a></code>
+- <code title="patch /v1/workers/{id}">client.workers.<a href="./src/arcadepy/resources/workers.py">update</a>(id, \*\*<a href="src/arcadepy/types/worker_update_params.py">params</a>) -> <a href="./src/arcadepy/types/worker_response.py">WorkerResponse</a></code>
+- <code title="get /v1/workers">client.workers.<a href="./src/arcadepy/resources/workers.py">list</a>(\*\*<a href="src/arcadepy/types/worker_list_params.py">params</a>) -> <a href="./src/arcadepy/types/worker_response.py">SyncOffsetPage[WorkerResponse]</a></code>
+- <code title="delete /v1/workers/{id}">client.workers.<a href="./src/arcadepy/resources/workers.py">delete</a>(id) -> None</code>
+- <code title="get /v1/workers/{id}">client.workers.<a href="./src/arcadepy/resources/workers.py">get</a>(id) -> <a href="./src/arcadepy/types/worker_response.py">WorkerResponse</a></code>
+- <code title="get /v1/workers/{id}/health">client.workers.<a href="./src/arcadepy/resources/workers.py">health</a>(id) -> <a href="./src/arcadepy/types/worker_health_response.py">WorkerHealthResponse</a></code>
+- <code title="get /v1/workers/{id}/tools">client.workers.<a href="./src/arcadepy/resources/workers.py">tools</a>(id) -> <a href="./src/arcadepy/types/worker_tools_response.py">WorkerToolsResponse</a></code>

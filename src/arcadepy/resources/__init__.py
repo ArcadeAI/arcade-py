@@ -32,6 +32,14 @@ from .health import (
     HealthResourceWithStreamingResponse,
     AsyncHealthResourceWithStreamingResponse,
 )
+from .workers import (
+    WorkersResource,
+    AsyncWorkersResource,
+    WorkersResourceWithRawResponse,
+    AsyncWorkersResourceWithRawResponse,
+    WorkersResourceWithStreamingResponse,
+    AsyncWorkersResourceWithStreamingResponse,
+)
 
 __all__ = [
     "AuthResource",
@@ -58,4 +66,10 @@ __all__ = [
     "AsyncToolsResourceWithRawResponse",
     "ToolsResourceWithStreamingResponse",
     "AsyncToolsResourceWithStreamingResponse",
+    "WorkersResource",
+    "AsyncWorkersResource",
+    "WorkersResourceWithRawResponse",
+    "AsyncWorkersResourceWithRawResponse",
+    "WorkersResourceWithStreamingResponse",
+    "AsyncWorkersResourceWithStreamingResponse",
 ]
