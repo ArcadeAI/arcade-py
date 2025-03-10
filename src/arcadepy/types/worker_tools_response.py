@@ -3,13 +3,13 @@
 from typing import List, Optional
 
 from .._models import BaseModel
-from .worker_response import WorkerResponse
+from .tool_definition import ToolDefinition
 
-__all__ = ["WorkerListResponse"]
+__all__ = ["WorkerToolsResponse"]
 
 
-class WorkerListResponse(BaseModel):
-    items: Optional[List[WorkerResponse]] = None
+class WorkerToolsResponse(BaseModel):
+    items: Optional[List[ToolDefinition]] = None
 
     limit: Optional[int] = None
 
