@@ -102,7 +102,6 @@ from arcadepy.types import (
     UpdateWorkerRequest,
     WorkerHealthResponse,
     WorkerResponse,
-    WorkerToolsResponse,
 )
 ```
 
@@ -114,4 +113,4 @@ Methods:
 - <code title="delete /v1/workers/{id}">client.workers.<a href="./src/arcadepy/resources/workers.py">delete</a>(id) -> None</code>
 - <code title="get /v1/workers/{id}">client.workers.<a href="./src/arcadepy/resources/workers.py">get</a>(id) -> <a href="./src/arcadepy/types/worker_response.py">WorkerResponse</a></code>
 - <code title="get /v1/workers/{id}/health">client.workers.<a href="./src/arcadepy/resources/workers.py">health</a>(id) -> <a href="./src/arcadepy/types/worker_health_response.py">WorkerHealthResponse</a></code>
-- <code title="get /v1/workers/{id}/tools">client.workers.<a href="./src/arcadepy/resources/workers.py">tools</a>(id) -> <a href="./src/arcadepy/types/worker_tools_response.py">WorkerToolsResponse</a></code>
+- <code title="get /v1/workers/{id}/tools">client.workers.<a href="./src/arcadepy/resources/workers.py">tools</a>(id, \*\*<a href="src/arcadepy/types/worker_tools_params.py">params</a>) -> <a href="./src/arcadepy/types/tool_definition.py">SyncOffsetPage[ToolDefinition]</a></code>
