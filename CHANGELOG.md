@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.1 (2025-03-11)
+
+Full Changelog: [v1.3.0...v1.3.1](https://github.com/ArcadeAI/arcade-py/compare/v1.3.0...v1.3.1)
+
+### Features
+
+* **api:** api update ([#125](https://github.com/ArcadeAI/arcade-py/issues/125)) ([38ad010](https://github.com/ArcadeAI/arcade-py/commit/38ad01058bf4ffb679b5e9d7e0cad68960336a4d))
+
 ## 1.3.0 (2025-03-10)
 
 Full Changelog: [v1.2.1...v1.3.0](https://github.com/ArcadeAI/arcade-py/compare/v1.2.1...v1.3.0)

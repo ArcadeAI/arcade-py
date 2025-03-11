@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import worker_list_params, worker_create_params, worker_update_params
+from ..types import worker_list_params, worker_tools_params, worker_create_params, worker_update_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from .._utils import (
     maybe_transform,
@@ -20,8 +20,8 @@ from .._response import (
 )
 from ..pagination import SyncOffsetPage, AsyncOffsetPage
 from .._base_client import AsyncPaginator, make_request_options
+from ..types.tool_definition import ToolDefinition
 from ..types.worker_response import WorkerResponse
-from ..types.worker_tools_response import WorkerToolsResponse
 from ..types.worker_health_response import WorkerHealthResponse
 
 __all__ = ["WorkersResource", "AsyncWorkersResource"]
@@ -281,17 +281,23 @@ class WorkersResource(SyncAPIResource):
         self,
         id: str,
         *,
+        limit: int | NotGiven = NOT_GIVEN,
+        offset: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> WorkerToolsResponse:
+    ) -> SyncOffsetPage[ToolDefinition]:
         """
         Returns a page of tools
 
         Args:
+          limit: Number of items to return (default: 25, max: 100)
+
+          offset: Offset from the start of the list (default: 0)
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -302,12 +308,23 @@ class WorkersResource(SyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._get(
+        return self._get_api_list(
             f"/v1/workers/{id}/tools",
+            page=SyncOffsetPage[ToolDefinition],
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    worker_tools_params.WorkerToolsParams,
+                ),
             ),
-            cast_to=WorkerToolsResponse,
+            model=ToolDefinition,
         )
 
 
@@ -561,21 +578,27 @@ class AsyncWorkersResource(AsyncAPIResource):
             cast_to=WorkerHealthResponse,
         )
 
-    async def tools(
+    def tools(
         self,
         id: str,
         *,
+        limit: int | NotGiven = NOT_GIVEN,
+        offset: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> WorkerToolsResponse:
+    ) -> AsyncPaginator[ToolDefinition, AsyncOffsetPage[ToolDefinition]]:
         """
         Returns a page of tools
 
         Args:
+          limit: Number of items to return (default: 25, max: 100)
+
+          offset: Offset from the start of the list (default: 0)
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -586,12 +609,23 @@ class AsyncWorkersResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._get(
+        return self._get_api_list(
             f"/v1/workers/{id}/tools",
+            page=AsyncOffsetPage[ToolDefinition],
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    worker_tools_params.WorkerToolsParams,
+                ),
             ),
-            cast_to=WorkerToolsResponse,
+            model=ToolDefinition,
         )
 
 
