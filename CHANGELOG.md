@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.3.2 (2025-03-15)
+
+Full Changelog: [v1.3.1...v1.3.2](https://github.com/ArcadeAI/arcade-py/compare/v1.3.1...v1.3.2)
+
+### Bug Fixes
+
+* **types:** handle more discriminated union shapes ([#134](https://github.com/ArcadeAI/arcade-py/issues/134)) ([2e8aa54](https://github.com/ArcadeAI/arcade-py/commit/2e8aa5469824223540f3c1f970662bf0ed5f62ac))
+
+
+### Chores
+
+* **internal:** bump rye to 0.44.0 ([#133](https://github.com/ArcadeAI/arcade-py/issues/133)) ([0068d95](https://github.com/ArcadeAI/arcade-py/commit/0068d951be52d203c558d6a241feca26eb1f3613))
+* **internal:** codegen related update ([#132](https://github.com/ArcadeAI/arcade-py/issues/132)) ([85ff426](https://github.com/ArcadeAI/arcade-py/commit/85ff426032303355d1d8c331813aaeeeaef0f69d))
+* **internal:** remove extra empty newlines ([#131](https://github.com/ArcadeAI/arcade-py/issues/131)) ([4a0f409](https://github.com/ArcadeAI/arcade-py/commit/4a0f4094477d25a8c213f07e33f42296864d2866))
+
+
+### Documentation
+
+* revise readme docs about nested params ([#128](https://github.com/ArcadeAI/arcade-py/issues/128)) ([52f818d](https://github.com/ArcadeAI/arcade-py/commit/52f818d5bdee294add53ebc8257c6d3f48cbdd65))
+
 ## 1.3.1 (2025-03-11)
 
 Full Changelog: [v1.3.0...v1.3.1](https://github.com/ArcadeAI/arcade-py/compare/v1.3.0...v1.3.1)
