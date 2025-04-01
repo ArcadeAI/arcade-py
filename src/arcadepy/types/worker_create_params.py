@@ -10,13 +10,13 @@ __all__ = ["WorkerCreateParams", "HTTP", "Mcp"]
 class WorkerCreateParams(TypedDict, total=False):
     id: Required[str]
 
-    type: Required[str]
-
     enabled: bool
 
     http: HTTP
 
     mcp: Mcp
+
+    type: str
 
 
 class HTTP(TypedDict, total=False):
