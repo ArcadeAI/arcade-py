@@ -1663,7 +1663,7 @@ class TestAsyncArcade:
         import threading
 
         from arcadepy._utils import asyncify
-        from arcadepy._base_client import get_platform 
+        from arcadepy._base_client import get_platform
 
         async def test_main() -> None:
             result = await asyncify(get_platform)()
