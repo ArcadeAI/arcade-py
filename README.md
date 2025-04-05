@@ -90,16 +90,10 @@ from arcadepy import Arcade
 
 client = Arcade()
 
-authorization_response = client.auth.authorize(
-    auth_requirement={
-        "id": "id",
-        "oauth2": {"scopes": ["string"]},
-        "provider_id": "provider_id",
-        "provider_type": "provider_type",
-    },
-    user_id="user_id",
+chat_response = client.chat.completions.create(
+    response_format={"type": "json_object"},
 )
-print(authorization_response.auth_requirement)
+print(chat_response.response_format)
 ```
 
 ## Handling errors
