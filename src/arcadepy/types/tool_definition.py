@@ -87,4 +87,6 @@ class ToolDefinition(BaseModel):
 
     output: Optional[Output] = None
 
+    qualified_name: Optional[str] = None
+
     requirements: Optional[Requirements] = None
