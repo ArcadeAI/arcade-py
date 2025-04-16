@@ -192,7 +192,7 @@ class ToolsResource(SyncAPIResource):
           input: JSON input to the tool, if any
 
           run_at: The time at which the tool should be run (optional). If not provided, the tool
-              is run immediately
+              is run immediately. Format ISO 8601: YYYY-MM-DDTHH:MM:SS
 
           tool_version: The tool version to use (optional). If not provided, any version is used
 
@@ -403,7 +403,7 @@ class AsyncToolsResource(AsyncAPIResource):
           input: JSON input to the tool, if any
 
           run_at: The time at which the tool should be run (optional). If not provided, the tool
-              is run immediately
+              is run immediately. Format ISO 8601: YYYY-MM-DDTHH:MM:SS
 
           tool_version: The tool version to use (optional). If not provided, any version is used
 

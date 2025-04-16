@@ -17,7 +17,8 @@ class ToolExecuteParams(TypedDict, total=False):
     run_at: str
     """The time at which the tool should be run (optional).
 
-    If not provided, the tool is run immediately
+    If not provided, the tool is run immediately. Format ISO 8601:
+    YYYY-MM-DDTHH:MM:SS
     """
 
     tool_version: str
