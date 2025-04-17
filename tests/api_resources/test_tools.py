@@ -30,6 +30,7 @@ class TestTools:
     @parametrize
     def test_method_list_with_all_params(self, client: Arcade) -> None:
         tool = client.tools.list(
+            include_format=["arcade"],
             limit=0,
             offset=0,
             toolkit="toolkit",
@@ -141,14 +142,22 @@ class TestTools:
     @parametrize
     def test_method_get(self, client: Arcade) -> None:
         tool = client.tools.get(
-            "name",
+            name="name",
+        )
+        assert_matches_type(ToolDefinition, tool, path=["response"])
+
+    @parametrize
+    def test_method_get_with_all_params(self, client: Arcade) -> None:
+        tool = client.tools.get(
+            name="name",
+            include_format=["arcade"],
         )
         assert_matches_type(ToolDefinition, tool, path=["response"])
 
     @parametrize
     def test_raw_response_get(self, client: Arcade) -> None:
         response = client.tools.with_raw_response.get(
-            "name",
+            name="name",
         )
 
         assert response.is_closed is True
@@ -159,7 +168,7 @@ class TestTools:
     @parametrize
     def test_streaming_response_get(self, client: Arcade) -> None:
         with client.tools.with_streaming_response.get(
-            "name",
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -173,7 +182,7 @@ class TestTools:
     def test_path_params_get(self, client: Arcade) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `name` but received ''"):
             client.tools.with_raw_response.get(
-                "",
+                name="",
             )
 
 
@@ -188,6 +197,7 @@ class TestAsyncTools:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncArcade) -> None:
         tool = await async_client.tools.list(
+            include_format=["arcade"],
             limit=0,
             offset=0,
             toolkit="toolkit",
@@ -299,14 +309,22 @@ class TestAsyncTools:
     @parametrize
     async def test_method_get(self, async_client: AsyncArcade) -> None:
         tool = await async_client.tools.get(
-            "name",
+            name="name",
+        )
+        assert_matches_type(ToolDefinition, tool, path=["response"])
+
+    @parametrize
+    async def test_method_get_with_all_params(self, async_client: AsyncArcade) -> None:
+        tool = await async_client.tools.get(
+            name="name",
+            include_format=["arcade"],
         )
         assert_matches_type(ToolDefinition, tool, path=["response"])
 
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncArcade) -> None:
         response = await async_client.tools.with_raw_response.get(
-            "name",
+            name="name",
         )
 
         assert response.is_closed is True
@@ -317,7 +335,7 @@ class TestAsyncTools:
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncArcade) -> None:
         async with async_client.tools.with_streaming_response.get(
-            "name",
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -331,5 +349,5 @@ class TestAsyncTools:
     async def test_path_params_get(self, async_client: AsyncArcade) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `name` but received ''"):
             await async_client.tools.with_raw_response.get(
-                "",
+                name="",
             )
