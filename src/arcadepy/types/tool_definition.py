@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from .._models import BaseModel
 from .value_schema import ValueSchema
@@ -82,6 +82,8 @@ class ToolDefinition(BaseModel):
     toolkit: Toolkit
 
     description: Optional[str] = None
+
+    formatted_schema: Optional[Dict[str, object]] = None
 
     fully_qualified_name: Optional[str] = None
 
