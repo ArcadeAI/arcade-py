@@ -107,7 +107,7 @@ class AuthResource(SyncAPIResource):
             The authorization response.
         """
         if not provider and not custom_provider_id:
-            raise ValueError("Either `provider` or `id` must be provided to the Authorization `start` method")
+            raise ValueError("Either `provider` or `custom_provider_id` must be provided to the Authorization `start` method.")
         scopes = scopes or []
         auth_requirement = auth_authorize_params.AuthRequirement(
             id=custom_provider_id,
@@ -279,9 +279,7 @@ class AsyncAuthResource(AsyncAPIResource):
         """
         if not provider and not custom_provider_id:
             raise ValueError(
-                "Either `provider` or `id` must be provided to the Authorization `start` method. "
-                "If you're using a custom OAuth provider, use the `id` parameter. "
-                "If you're using a provider natively supported by Arcade, use the `provider` argument."
+                "Either `provider` or `custom_provider_id` must be provided to the Authorization `start` method."
             )
         scopes = scopes or []
         auth_requirement = auth_authorize_params.AuthRequirement(
