@@ -88,8 +88,9 @@ class AuthResource(SyncAPIResource):
     def start(
         self,
         user_id: str,
-        provider: str,
+        provider: str = "",
         *,
+        custom_provider_id: str = "",
         provider_type: str | None = "oauth2",
         scopes: list[str] | None = None,
     ) -> AuthorizationResponse:
@@ -98,14 +99,18 @@ class AuthResource(SyncAPIResource):
 
         Args:
             user_id: The user ID for which authorization is being requested.
-            provider: The authorization provider (e.g., 'github', 'google', 'linkedin', 'microsoft', 'slack', 'spotify', 'x', 'zoom').
+            provider: An OAuth provider natively supported by Arcade (e.g., 'github', 'google', 'linkedin', 'microsoft', 'slack', 'spotify', 'x', 'zoom').
+            custom_provider_id: The ID of a custom OAuth provider not natively supported by Arcade.
             provider_type: The type of authorization provider. Optional, defaults to 'oauth2'.
             scopes: A list of scopes required for authorization, if any.
         Returns:
             The authorization response.
         """
+        if not provider and not custom_provider_id:
+            raise ValueError("Either `provider` or `id` must be provided to the Authorization `start` method")
         scopes = scopes or []
         auth_requirement = auth_authorize_params.AuthRequirement(
+            id=custom_provider_id,
             provider_id=provider,
             provider_type=provider_type or "oauth2",
             oauth2=auth_authorize_params.AuthRequirementOauth2(scopes=scopes),
@@ -254,8 +259,9 @@ class AsyncAuthResource(AsyncAPIResource):
     async def start(
         self,
         user_id: str,
-        provider: str,
+        provider: str = "",
         *,
+        custom_provider_id: str = "",
         provider_type: str | None = "oauth2",
         scopes: list[str] | None = None,
     ) -> AuthorizationResponse:
@@ -264,14 +270,22 @@ class AsyncAuthResource(AsyncAPIResource):
 
         Args:
             user_id: The user ID for which authorization is being requested.
-            provider: The authorization provider (e.g., 'github', 'google', 'linkedin', 'microsoft', 'slack', 'spotify', 'x', 'zoom').
+            provider: An OAuth provider natively supported by Arcade (e.g., 'github', 'google', 'linkedin', 'microsoft', 'slack', 'spotify', 'x', 'zoom').
+            custom_provider_id: The ID of a custom OAuth provider not natively supported by Arcade.
             provider_type: The type of authorization provider. Optional, defaults to 'oauth2'.
             scopes: A list of scopes required for authorization, if any.
         Returns:
             The authorization response.
         """
+        if not provider and not custom_provider_id:
+            raise ValueError(
+                "Either `provider` or `id` must be provided to the Authorization `start` method. "
+                "If you're using a custom OAuth provider, use the `id` parameter. "
+                "If you're using a provider natively supported by Arcade, use the `provider` argument."
+            )
         scopes = scopes or []
         auth_requirement = auth_authorize_params.AuthRequirement(
+            id=custom_provider_id,
             provider_id=provider,
             provider_type=provider_type or "oauth2",
             oauth2=auth_authorize_params.AuthRequirementOauth2(scopes=scopes),
