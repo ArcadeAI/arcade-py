@@ -1,5 +1,85 @@
 # Changelog
 
+## 1.3.1 (2025-03-11)
+
+Full Changelog: [v1.3.0...v1.3.1](https://github.com/ArcadeAI/arcade-py/compare/v1.3.0...v1.3.1)
+
+### Features
+
+* **api:** api update ([#125](https://github.com/ArcadeAI/arcade-py/issues/125)) ([38ad010](https://github.com/ArcadeAI/arcade-py/commit/38ad01058bf4ffb679b5e9d7e0cad68960336a4d))
+
+## 1.3.0 (2025-03-10)
+
+Full Changelog: [v1.2.1...v1.3.0](https://github.com/ArcadeAI/arcade-py/compare/v1.2.1...v1.3.0)
+
+### Features
+
+* **api:** api update ([#116](https://github.com/ArcadeAI/arcade-py/issues/116)) ([398641f](https://github.com/ArcadeAI/arcade-py/commit/398641f2805b34f760ede51ac16e9eb3bebf7a23))
+* **api:** api update ([#117](https://github.com/ArcadeAI/arcade-py/issues/117)) ([6e333f1](https://github.com/ArcadeAI/arcade-py/commit/6e333f122a4718ac9e909258774b509ef2eea1f3))
+* **api:** api update ([#118](https://github.com/ArcadeAI/arcade-py/issues/118)) ([83cf396](https://github.com/ArcadeAI/arcade-py/commit/83cf3964ed5f25447e63a2e3d02e48bf5cb6ff9f))
+* **api:** api update ([#119](https://github.com/ArcadeAI/arcade-py/issues/119)) ([e618af4](https://github.com/ArcadeAI/arcade-py/commit/e618af4a69d6a05dcf7622d722b9440e839b86f4))
+* **api:** api update ([#123](https://github.com/ArcadeAI/arcade-py/issues/123)) ([c145e1e](https://github.com/ArcadeAI/arcade-py/commit/c145e1e78a32f83a6a5bc4bb849cc7c716632972))
+
+
+### Chores
+
+* **docs:** update client docstring ([#121](https://github.com/ArcadeAI/arcade-py/issues/121)) ([a30a866](https://github.com/ArcadeAI/arcade-py/commit/a30a866d1bd1148670cba44558abf07c7a2ac70b))
+* **internal:** properly set __pydantic_private__ ([#114](https://github.com/ArcadeAI/arcade-py/issues/114)) ([558c1bb](https://github.com/ArcadeAI/arcade-py/commit/558c1bb39b9d0aa30f267217642f1a2da6a6d092))
+* **internal:** remove unused http client options forwarding ([#122](https://github.com/ArcadeAI/arcade-py/issues/122)) ([6f0d183](https://github.com/ArcadeAI/arcade-py/commit/6f0d183deaf26b9176ba125342c40eb19a7783ae))
+
+
+### Documentation
+
+* update URLs from stainlessapi.com to stainless.com ([#120](https://github.com/ArcadeAI/arcade-py/issues/120)) ([df64b6f](https://github.com/ArcadeAI/arcade-py/commit/df64b6f7d7c6c4c76484dec5890f997701bd6056))
+
+## 1.2.1 (2025-02-22)
+
+Full Changelog: [v1.2.0...v1.2.1](https://github.com/ArcadeAI/arcade-py/compare/v1.2.0...v1.2.1)
+
+### Chores
+
+* **internal:** fix devcontainers setup ([#111](https://github.com/ArcadeAI/arcade-py/issues/111)) ([b8d223b](https://github.com/ArcadeAI/arcade-py/commit/b8d223b1c79a7f403bdc7334dc27835e11cacf83))
+
+## 1.2.0 (2025-02-21)
+
+Full Changelog: [v1.1.1...v1.2.0](https://github.com/ArcadeAI/arcade-py/compare/v1.1.1...v1.2.0)
+
+### Features
+
+* **api:** api update ([#105](https://github.com/ArcadeAI/arcade-py/issues/105)) ([7ed533f](https://github.com/ArcadeAI/arcade-py/commit/7ed533fca689340285fe5b194efd5b0f233e3bd4))
+* **api:** api update ([#108](https://github.com/ArcadeAI/arcade-py/issues/108)) ([ba6ddc9](https://github.com/ArcadeAI/arcade-py/commit/ba6ddc9d5d7d94fbf7764aff94b5fd8a6c28e7fa))
+* **client:** allow passing `NotGiven` for body ([#109](https://github.com/ArcadeAI/arcade-py/issues/109)) ([920d114](https://github.com/ArcadeAI/arcade-py/commit/920d114c56a7d31ef0914b6bff37d4928240622a))
+
+
+### Bug Fixes
+
+* asyncify on non-asyncio runtimes ([#107](https://github.com/ArcadeAI/arcade-py/issues/107)) ([3252ac3](https://github.com/ArcadeAI/arcade-py/commit/3252ac3b2af698fd007f045e45097e858842b575))
+* **client:** mark some request bodies as optional ([920d114](https://github.com/ArcadeAI/arcade-py/commit/920d114c56a7d31ef0914b6bff37d4928240622a))
+
+## 1.1.1 (2025-02-13)
+
+Full Changelog: [v1.1.0...v1.1.1](https://github.com/ArcadeAI/arcade-py/compare/v1.1.0...v1.1.1)
+
+### Chores
+
+* **internal:** update client tests ([#102](https://github.com/ArcadeAI/arcade-py/issues/102)) ([0607580](https://github.com/ArcadeAI/arcade-py/commit/06075801fe24e88ee7751c064ae00d8a0d597bdf))
+
+## 1.1.0 (2025-02-07)
+
+Full Changelog: [v1.0.1...v1.1.0](https://github.com/ArcadeAI/arcade-py/compare/v1.0.1...v1.1.0)
+
+### Features
+
+* **client:** send `X-Stainless-Read-Timeout` header ([#98](https://github.com/ArcadeAI/arcade-py/issues/98)) ([ed2a2f9](https://github.com/ArcadeAI/arcade-py/commit/ed2a2f91ed9b0d0f97bf70ad63006b59ff0a7e96))
+
+
+### Chores
+
+* **internal:** bummp ruff dependency ([#97](https://github.com/ArcadeAI/arcade-py/issues/97)) ([354784c](https://github.com/ArcadeAI/arcade-py/commit/354784ce85e1327bfde56746da97cc2016690a61))
+* **internal:** change default timeout to an int ([#95](https://github.com/ArcadeAI/arcade-py/issues/95)) ([bcac267](https://github.com/ArcadeAI/arcade-py/commit/bcac26785cf90888478adb3455b2e667d442c135))
+* **internal:** fix type traversing dictionary params ([#99](https://github.com/ArcadeAI/arcade-py/issues/99)) ([8d4ccf0](https://github.com/ArcadeAI/arcade-py/commit/8d4ccf0f26850f9cbb2e76c0126712f8a87567f8))
+* **internal:** minor type handling changes ([#100](https://github.com/ArcadeAI/arcade-py/issues/100)) ([3adf96e](https://github.com/ArcadeAI/arcade-py/commit/3adf96e565dcf2c62ed0490fb92833a09dd2a1f8))
+
 ## 1.0.1 (2025-01-25)
 
 Full Changelog: [v1.0.0...v1.0.1](https://github.com/ArcadeAI/arcade-py/compare/v1.0.0...v1.0.1)

@@ -23,6 +23,7 @@ from pydantic import ValidationError
 
 from arcadepy import Arcade, AsyncArcade, APIResponseValidationError
 from arcadepy._types import Omit
+from arcadepy._utils import maybe_transform
 from arcadepy._models import BaseModel, FinalRequestOptions
 from arcadepy._constants import RAW_RESPONSE_HEADER
 from arcadepy._exceptions import ArcadeError, APIStatusError, APITimeoutError, APIResponseValidationError
@@ -32,6 +33,7 @@ from arcadepy._base_client import (
     BaseClient,
     make_request_options,
 )
+from arcadepy.types.chat.completion_create_params import CompletionCreateParams
 
 from .utils import update_env
 
@@ -717,13 +719,16 @@ class TestArcade:
                 "/v1/chat/completions",
                 body=cast(
                     object,
-                    dict(
-                        messages=[
-                            {
-                                "role": "user",
-                                "content": "Hello, how can I use Arcade AI?",
-                            }
-                        ]
+                    maybe_transform(
+                        dict(
+                            messages=[
+                                {
+                                    "role": "user",
+                                    "content": "Hello, how can I use Arcade?",
+                                }
+                            ]
+                        ),
+                        CompletionCreateParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -742,13 +747,16 @@ class TestArcade:
                 "/v1/chat/completions",
                 body=cast(
                     object,
-                    dict(
-                        messages=[
-                            {
-                                "role": "user",
-                                "content": "Hello, how can I use Arcade AI?",
-                            }
-                        ]
+                    maybe_transform(
+                        dict(
+                            messages=[
+                                {
+                                    "role": "user",
+                                    "content": "Hello, how can I use Arcade?",
+                                }
+                            ]
+                        ),
+                        CompletionCreateParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1513,13 +1521,16 @@ class TestAsyncArcade:
                 "/v1/chat/completions",
                 body=cast(
                     object,
-                    dict(
-                        messages=[
-                            {
-                                "role": "user",
-                                "content": "Hello, how can I use Arcade AI?",
-                            }
-                        ]
+                    maybe_transform(
+                        dict(
+                            messages=[
+                                {
+                                    "role": "user",
+                                    "content": "Hello, how can I use Arcade?",
+                                }
+                            ]
+                        ),
+                        CompletionCreateParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1538,13 +1549,16 @@ class TestAsyncArcade:
                 "/v1/chat/completions",
                 body=cast(
                     object,
-                    dict(
-                        messages=[
-                            {
-                                "role": "user",
-                                "content": "Hello, how can I use Arcade AI?",
-                            }
-                        ]
+                    maybe_transform(
+                        dict(
+                            messages=[
+                                {
+                                    "role": "user",
+                                    "content": "Hello, how can I use Arcade?",
+                                }
+                            ]
+                        ),
+                        CompletionCreateParams,
                     ),
                 ),
                 cast_to=httpx.Response,

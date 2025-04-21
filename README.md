@@ -6,7 +6,7 @@ The Arcade Python library provides convenient access to the Arcade REST API from
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
-It is generated with [Stainless](https://www.stainlessapi.com/).
+It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
@@ -101,7 +101,7 @@ try:
         messages=[
             {
                 "role": "user",
-                "content": "Hello, how can I use Arcade AI?",
+                "content": "Hello, how can I use Arcade?",
             }
         ],
     )
@@ -151,7 +151,7 @@ client.with_options(max_retries=5).chat.completions.create(
     messages=[
         {
             "role": "user",
-            "content": "Hello, how can I use Arcade AI?",
+            "content": "Hello, how can I use Arcade?",
         }
     ],
 )
@@ -181,7 +181,7 @@ client.with_options(timeout=5.0).chat.completions.create(
     messages=[
         {
             "role": "user",
-            "content": "Hello, how can I use Arcade AI?",
+            "content": "Hello, how can I use Arcade?",
         }
     ],
 )
@@ -228,7 +228,7 @@ client = Arcade()
 response = client.chat.completions.with_raw_response.create(
     messages=[{
         "role": "user",
-        "content": "Hello, how can I use Arcade AI?",
+        "content": "Hello, how can I use Arcade?",
     }],
 )
 print(response.headers.get('X-My-Header'))
@@ -252,7 +252,7 @@ with client.chat.completions.with_streaming_response.create(
     messages=[
         {
             "role": "user",
-            "content": "Hello, how can I use Arcade AI?",
+            "content": "Hello, how can I use Arcade?",
         }
     ],
 ) as response:
