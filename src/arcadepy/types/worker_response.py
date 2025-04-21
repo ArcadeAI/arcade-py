@@ -11,11 +11,11 @@ __all__ = ["WorkerResponse", "Binding", "HTTP", "HTTPSecret", "Mcp", "Oxp", "Oxp
 class Binding(BaseModel):
     id: Optional[str] = None
 
-    type: Optional[Literal["static", "tenant", "organization", "account"]] = None
+    type: Optional[Literal["static", "tenant", "project", "account"]] = None
 
 
 class HTTPSecret(BaseModel):
-    binding: Optional[Literal["static", "tenant", "organization", "account"]] = None
+    binding: Optional[Literal["static", "tenant", "project", "account"]] = None
 
     editable: Optional[bool] = None
 
@@ -45,7 +45,7 @@ class Mcp(BaseModel):
 
 
 class OxpSecret(BaseModel):
-    binding: Optional[Literal["static", "tenant", "organization", "account"]] = None
+    binding: Optional[Literal["static", "tenant", "project", "account"]] = None
 
     editable: Optional[bool] = None
 
