@@ -75,9 +75,13 @@ class Requirements(BaseModel):
 
 
 class ToolDefinition(BaseModel):
+    fully_qualified_name: str
+
     input: Input
 
     name: str
+
+    qualified_name: str
 
     toolkit: Toolkit
 
@@ -85,10 +89,6 @@ class ToolDefinition(BaseModel):
 
     formatted_schema: Optional[Dict[str, object]] = None
 
-    fully_qualified_name: Optional[str] = None
-
     output: Optional[Output] = None
-
-    qualified_name: Optional[str] = None
 
     requirements: Optional[Requirements] = None
