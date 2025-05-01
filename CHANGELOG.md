@@ -1,5 +1,59 @@
 # Changelog
 
+## 1.4.0 (2025-04-25)
+
+Full Changelog: [v1.3.1...v1.4.0](https://github.com/ArcadeAI/arcade-py/compare/v1.3.1...v1.4.0)
+
+### Features
+
+* **api:** api update ([8ebf770](https://github.com/ArcadeAI/arcade-py/commit/8ebf77068b377450788bd7436bd3ed264a195805))
+* **api:** api update ([db1894b](https://github.com/ArcadeAI/arcade-py/commit/db1894bccf5cfc6078133a0cbceeefc25f473532))
+* **api:** api update ([fb62a65](https://github.com/ArcadeAI/arcade-py/commit/fb62a6583c4c3af75eb3789e80d79f0306a5c7ec))
+* **api:** api update ([3133b01](https://github.com/ArcadeAI/arcade-py/commit/3133b01155fe75e7cfd14315ff8ab8fbabfe4ab1))
+* **api:** api update ([7290dc8](https://github.com/ArcadeAI/arcade-py/commit/7290dc846a4b31d4eb5836c8d997561cacb9f2dd))
+* **api:** api update ([#137](https://github.com/ArcadeAI/arcade-py/issues/137)) ([7ce1f6a](https://github.com/ArcadeAI/arcade-py/commit/7ce1f6aee46e2d8763c194a88f28428df9eb6d5f))
+* **api:** api update ([#138](https://github.com/ArcadeAI/arcade-py/issues/138)) ([cb71d87](https://github.com/ArcadeAI/arcade-py/commit/cb71d87280889f8d1200be0d069a088560c1bc8b))
+* **api:** api update ([#139](https://github.com/ArcadeAI/arcade-py/issues/139)) ([9a0ef5a](https://github.com/ArcadeAI/arcade-py/commit/9a0ef5a37cd20950fde494f690dd403715029243))
+
+
+### Bug Fixes
+
+* **ci:** ensure pip is always available ([#135](https://github.com/ArcadeAI/arcade-py/issues/135)) ([fd63bd1](https://github.com/ArcadeAI/arcade-py/commit/fd63bd10897027f3a2ea9e82043943213c1f897f))
+* **ci:** remove publishing patch ([#136](https://github.com/ArcadeAI/arcade-py/issues/136)) ([bd4bfc8](https://github.com/ArcadeAI/arcade-py/commit/bd4bfc8d40a1a59ac65e862eb6f0e04e0184c75d))
+* **perf:** optimize some hot paths ([c544b05](https://github.com/ArcadeAI/arcade-py/commit/c544b05d5afac34fe9119b791add080567f0e4cf))
+* **perf:** skip traversing types for NotGiven values ([af97129](https://github.com/ArcadeAI/arcade-py/commit/af97129e7ce0dc09566e4166cbaaa2b6a2246864))
+* **pydantic v1:** more robust ModelField.annotation check ([be8bb32](https://github.com/ArcadeAI/arcade-py/commit/be8bb32f9fab2a893fd6b11649c4f48b77fbd79d))
+* **types:** handle more discriminated union shapes ([#134](https://github.com/ArcadeAI/arcade-py/issues/134)) ([2e8aa54](https://github.com/ArcadeAI/arcade-py/commit/2e8aa5469824223540f3c1f970662bf0ed5f62ac))
+
+
+### Chores
+
+* broadly detect json family of content-type headers ([b562715](https://github.com/ArcadeAI/arcade-py/commit/b562715e721a8aa1b53414c989fd573602e2197a))
+* **ci:** add timeout thresholds for CI jobs ([467dfb2](https://github.com/ArcadeAI/arcade-py/commit/467dfb2ae0da1a048b9055630efa9a40126060dd))
+* **ci:** only use depot for staging repos ([eb51e05](https://github.com/ArcadeAI/arcade-py/commit/eb51e05c0d9095ddf0cda7b97984254b03b62be1))
+* **client:** minor internal fixes ([4e548b8](https://github.com/ArcadeAI/arcade-py/commit/4e548b86970ec4af361c474223255a8c847c4bff))
+* **internal:** base client updates ([1a4a717](https://github.com/ArcadeAI/arcade-py/commit/1a4a717957f74170069bfff0a415ddc38e66c5ef))
+* **internal:** bump pyright version ([6681c14](https://github.com/ArcadeAI/arcade-py/commit/6681c14818b989c4968408fe7432414c326d9038))
+* **internal:** bump rye to 0.44.0 ([#133](https://github.com/ArcadeAI/arcade-py/issues/133)) ([0068d95](https://github.com/ArcadeAI/arcade-py/commit/0068d951be52d203c558d6a241feca26eb1f3613))
+* **internal:** codegen related update ([b551ba9](https://github.com/ArcadeAI/arcade-py/commit/b551ba99820f93fdecb24663e83dff11897f8f62))
+* **internal:** codegen related update ([#132](https://github.com/ArcadeAI/arcade-py/issues/132)) ([85ff426](https://github.com/ArcadeAI/arcade-py/commit/85ff426032303355d1d8c331813aaeeeaef0f69d))
+* **internal:** expand CI branch coverage ([02cc295](https://github.com/ArcadeAI/arcade-py/commit/02cc2952f5b3bc36645d1da528f46ac65b681fd5))
+* **internal:** fix list file params ([1f6d1f3](https://github.com/ArcadeAI/arcade-py/commit/1f6d1f33d2323d2d0dec2ccfa9e21cf0b208bdd1))
+* **internal:** import reformatting ([772a87c](https://github.com/ArcadeAI/arcade-py/commit/772a87cd938e2d0f008cc54f3843ca4dad567225))
+* **internal:** reduce CI branch coverage ([f6d1892](https://github.com/ArcadeAI/arcade-py/commit/f6d1892c845ee924614c174ef5bd24241b111c8c))
+* **internal:** refactor retries to not use recursion ([709debf](https://github.com/ArcadeAI/arcade-py/commit/709debf17814c59c6048b996195090ee677119ed))
+* **internal:** remove extra empty newlines ([#131](https://github.com/ArcadeAI/arcade-py/issues/131)) ([4a0f409](https://github.com/ArcadeAI/arcade-py/commit/4a0f4094477d25a8c213f07e33f42296864d2866))
+* **internal:** remove trailing character ([#140](https://github.com/ArcadeAI/arcade-py/issues/140)) ([850838e](https://github.com/ArcadeAI/arcade-py/commit/850838edc42110c22d2c4342e4340f8322fb0e86))
+* **internal:** slight transform perf improvement ([#142](https://github.com/ArcadeAI/arcade-py/issues/142)) ([af27cc2](https://github.com/ArcadeAI/arcade-py/commit/af27cc24050a658f27d49909b0596b41309c1326))
+* **internal:** update models test ([ced3495](https://github.com/ArcadeAI/arcade-py/commit/ced349577a3c0c5b033ac53ebd239f333bc13fdf))
+* **internal:** update pyright settings ([950f294](https://github.com/ArcadeAI/arcade-py/commit/950f294ea47c8aa6ac423b6ffd2cec37278a4b4b))
+
+
+### Documentation
+
+* revise readme docs about nested params ([#128](https://github.com/ArcadeAI/arcade-py/issues/128)) ([52f818d](https://github.com/ArcadeAI/arcade-py/commit/52f818d5bdee294add53ebc8257c6d3f48cbdd65))
+* swap examples used in readme ([#141](https://github.com/ArcadeAI/arcade-py/issues/141)) ([fe028d0](https://github.com/ArcadeAI/arcade-py/commit/fe028d08aa5db60e540bca6f0635911ffcb79486))
+
 ## 1.3.1 (2025-03-11)
 
 Full Changelog: [v1.3.0...v1.3.1](https://github.com/ArcadeAI/arcade-py/compare/v1.3.0...v1.3.1)

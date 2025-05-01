@@ -2,16 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Dict, List
+from typing_extensions import Literal
 
 import httpx
 
-from ...types import tool_list_params, tool_execute_params, tool_authorize_params
+from ...types import tool_get_params, tool_list_params, tool_execute_params, tool_authorize_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import (
-    maybe_transform,
-    async_maybe_transform,
-)
+from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from .formatted import (
     FormattedResource,
@@ -76,6 +74,7 @@ class ToolsResource(SyncAPIResource):
     def list(
         self,
         *,
+        include_format: List[Literal["arcade", "openai", "anthropic"]] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         toolkit: str | NotGiven = NOT_GIVEN,
@@ -91,6 +90,8 @@ class ToolsResource(SyncAPIResource):
         toolkit
 
         Args:
+          include_format: Comma separated tool formats that will be included in the response.
+
           limit: Number of items to return (default: 25, max: 100)
 
           offset: Offset from the start of the list (default: 0)
@@ -115,6 +116,7 @@ class ToolsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "include_format": include_format,
                         "limit": limit,
                         "offset": offset,
                         "toolkit": toolkit,
@@ -192,7 +194,7 @@ class ToolsResource(SyncAPIResource):
           input: JSON input to the tool, if any
 
           run_at: The time at which the tool should be run (optional). If not provided, the tool
-              is run immediately
+              is run immediately. Format ISO 8601: YYYY-MM-DDTHH:MM:SS
 
           tool_version: The tool version to use (optional). If not provided, any version is used
 
@@ -226,6 +228,7 @@ class ToolsResource(SyncAPIResource):
         self,
         name: str,
         *,
+        include_format: List[Literal["arcade", "openai", "anthropic"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -237,6 +240,8 @@ class ToolsResource(SyncAPIResource):
         Returns the arcade tool specification for a specific tool
 
         Args:
+          include_format: Comma separated tool formats that will be included in the response.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -250,7 +255,11 @@ class ToolsResource(SyncAPIResource):
         return self._get(
             f"/v1/tools/{name}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"include_format": include_format}, tool_get_params.ToolGetParams),
             ),
             cast_to=ToolDefinition,
         )
@@ -287,6 +296,7 @@ class AsyncToolsResource(AsyncAPIResource):
     def list(
         self,
         *,
+        include_format: List[Literal["arcade", "openai", "anthropic"]] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         toolkit: str | NotGiven = NOT_GIVEN,
@@ -302,6 +312,8 @@ class AsyncToolsResource(AsyncAPIResource):
         toolkit
 
         Args:
+          include_format: Comma separated tool formats that will be included in the response.
+
           limit: Number of items to return (default: 25, max: 100)
 
           offset: Offset from the start of the list (default: 0)
@@ -326,6 +338,7 @@ class AsyncToolsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "include_format": include_format,
                         "limit": limit,
                         "offset": offset,
                         "toolkit": toolkit,
@@ -403,7 +416,7 @@ class AsyncToolsResource(AsyncAPIResource):
           input: JSON input to the tool, if any
 
           run_at: The time at which the tool should be run (optional). If not provided, the tool
-              is run immediately
+              is run immediately. Format ISO 8601: YYYY-MM-DDTHH:MM:SS
 
           tool_version: The tool version to use (optional). If not provided, any version is used
 
@@ -437,6 +450,7 @@ class AsyncToolsResource(AsyncAPIResource):
         self,
         name: str,
         *,
+        include_format: List[Literal["arcade", "openai", "anthropic"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -448,6 +462,8 @@ class AsyncToolsResource(AsyncAPIResource):
         Returns the arcade tool specification for a specific tool
 
         Args:
+          include_format: Comma separated tool formats that will be included in the response.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -461,7 +477,11 @@ class AsyncToolsResource(AsyncAPIResource):
         return await self._get(
             f"/v1/tools/{name}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform({"include_format": include_format}, tool_get_params.ToolGetParams),
             ),
             cast_to=ToolDefinition,
         )

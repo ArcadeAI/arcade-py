@@ -15,6 +15,7 @@ from .chat_response import ChatResponse as ChatResponse
 from .health_schema import HealthSchema as HealthSchema
 from .tool_execution import ToolExecution as ToolExecution
 from .tool_definition import ToolDefinition as ToolDefinition
+from .tool_get_params import ToolGetParams as ToolGetParams
 from .worker_response import WorkerResponse as WorkerResponse
 from .tool_list_params import ToolListParams as ToolListParams
 from .tool_get_response import ToolGetResponse as ToolGetResponse

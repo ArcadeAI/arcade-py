@@ -26,7 +26,6 @@ class TestWorkers:
     def test_method_create(self, client: Arcade) -> None:
         worker = client.workers.create(
             id="id",
-            enabled=True,
         )
         assert_matches_type(WorkerResponse, worker, path=["response"])
 
@@ -41,6 +40,12 @@ class TestWorkers:
                 "timeout": 1,
                 "uri": "uri",
             },
+            mcp={
+                "retry": 0,
+                "timeout": 1,
+                "uri": "uri",
+            },
+            type="type",
         )
         assert_matches_type(WorkerResponse, worker, path=["response"])
 
@@ -48,7 +53,6 @@ class TestWorkers:
     def test_raw_response_create(self, client: Arcade) -> None:
         response = client.workers.with_raw_response.create(
             id="id",
-            enabled=True,
         )
 
         assert response.is_closed is True
@@ -60,7 +64,6 @@ class TestWorkers:
     def test_streaming_response_create(self, client: Arcade) -> None:
         with client.workers.with_streaming_response.create(
             id="id",
-            enabled=True,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -85,6 +88,11 @@ class TestWorkers:
             http={
                 "retry": 0,
                 "secret": "secret",
+                "timeout": 1,
+                "uri": "uri",
+            },
+            mcp={
+                "retry": 0,
                 "timeout": 1,
                 "uri": "uri",
             },
@@ -324,7 +332,6 @@ class TestAsyncWorkers:
     async def test_method_create(self, async_client: AsyncArcade) -> None:
         worker = await async_client.workers.create(
             id="id",
-            enabled=True,
         )
         assert_matches_type(WorkerResponse, worker, path=["response"])
 
@@ -339,6 +346,12 @@ class TestAsyncWorkers:
                 "timeout": 1,
                 "uri": "uri",
             },
+            mcp={
+                "retry": 0,
+                "timeout": 1,
+                "uri": "uri",
+            },
+            type="type",
         )
         assert_matches_type(WorkerResponse, worker, path=["response"])
 
@@ -346,7 +359,6 @@ class TestAsyncWorkers:
     async def test_raw_response_create(self, async_client: AsyncArcade) -> None:
         response = await async_client.workers.with_raw_response.create(
             id="id",
-            enabled=True,
         )
 
         assert response.is_closed is True
@@ -358,7 +370,6 @@ class TestAsyncWorkers:
     async def test_streaming_response_create(self, async_client: AsyncArcade) -> None:
         async with async_client.workers.with_streaming_response.create(
             id="id",
-            enabled=True,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -383,6 +394,11 @@ class TestAsyncWorkers:
             http={
                 "retry": 0,
                 "secret": "secret",
+                "timeout": 1,
+                "uri": "uri",
+            },
+            mcp={
+                "retry": 0,
                 "timeout": 1,
                 "uri": "uri",
             },

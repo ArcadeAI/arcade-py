@@ -19,7 +19,6 @@ from typing_extensions import (
 )
 
 import pydantic
-import pydantic.generics
 from pydantic.fields import FieldInfo
 
 from ._types import (
@@ -65,7 +64,7 @@ from ._compat import (
 from ._constants import RAW_RESPONSE_HEADER
 
 if TYPE_CHECKING:
-    from pydantic_core.core_schema import ModelField, LiteralSchema, ModelFieldsSchema
+    from pydantic_core.core_schema import ModelField, ModelSchema, LiteralSchema, ModelFieldsSchema
 
 __all__ = ["BaseModel", "GenericModel"]
 
@@ -627,8 +626,8 @@ def _build_discriminated_union_meta(*, union: type, meta_annotations: tuple[Any,
                 # Note: if one variant defines an alias then they all should
                 discriminator_alias = field_info.alias
 
-                if field_info.annotation and is_literal_type(field_info.annotation):
-                    for entry in get_args(field_info.annotation):
+                if (annotation := getattr(field_info, "annotation", None)) and is_literal_type(annotation):
+                    for entry in get_args(annotation):
                         if isinstance(entry, str):
                             mapping[entry] = variant
 
@@ -646,15 +645,18 @@ def _build_discriminated_union_meta(*, union: type, meta_annotations: tuple[Any,
 
 def _extract_field_schema_pv2(model: type[BaseModel], field_name: str) -> ModelField | None:
     schema = model.__pydantic_core_schema__
+    if schema["type"] == "definitions":
+        schema = schema["schema"]
+
     if schema["type"] != "model":
         return None
 
+    schema = cast("ModelSchema", schema)
     fields_schema = schema["schema"]
     if fields_schema["type"] != "model-fields":
         return None
 
     fields_schema = cast("ModelFieldsSchema", fields_schema)
-
     field = fields_schema["fields"].get(field_name)
     if not field:
         return None
@@ -678,7 +680,7 @@ def set_pydantic_config(typ: Any, config: pydantic.ConfigDict) -> None:
     setattr(typ, "__pydantic_config__", config)  # noqa: B010
 
 
-# our use of subclasssing here causes weirdness for type checkers,
+# our use of subclassing here causes weirdness for type checkers,
 # so we just pretend that we don't subclass
 if TYPE_CHECKING:
     GenericModel = BaseModel
