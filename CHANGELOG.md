@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.4.1 (2025-05-10)
+
+Full Changelog: [v1.4.0...v1.4.1](https://github.com/ArcadeAI/arcade-py/compare/v1.4.0...v1.4.1)
+
+### Bug Fixes
+
+* **package:** support direct resource imports ([b28c43b](https://github.com/ArcadeAI/arcade-py/commit/b28c43b1c107474147a829084fe4c2918fc83506))
+
+
+### Chores
+
+* **internal:** avoid errors for isinstance checks on proxies ([f6a0407](https://github.com/ArcadeAI/arcade-py/commit/f6a04072956906ba2e1f14f2938deb26fe73a93b))
+* **internal:** avoid lint errors in pagination expressions ([4288f8c](https://github.com/ArcadeAI/arcade-py/commit/4288f8c7152ee984cc11db01950a12e470fd2fd3))
+
 ## 1.4.0 (2025-04-25)
 
 Full Changelog: [v1.3.1...v1.4.0](https://github.com/ArcadeAI/arcade-py/compare/v1.3.1...v1.4.0)
