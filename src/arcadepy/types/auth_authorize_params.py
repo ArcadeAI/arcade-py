@@ -13,6 +13,12 @@ class AuthAuthorizeParams(TypedDict, total=False):
 
     user_id: Required[str]
 
+    next_uri: str
+    """
+    Optional: if provided, the user will be redirected to this URI after
+    authorization
+    """
+
 
 class AuthRequirementOauth2(TypedDict, total=False):
     scopes: List[str]

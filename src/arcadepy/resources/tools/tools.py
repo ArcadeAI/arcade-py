@@ -131,6 +131,7 @@ class ToolsResource(SyncAPIResource):
         self,
         *,
         tool_name: str,
+        next_uri: str | NotGiven = NOT_GIVEN,
         tool_version: str | NotGiven = NOT_GIVEN,
         user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -144,6 +145,9 @@ class ToolsResource(SyncAPIResource):
         Authorizes a user for a specific tool by name
 
         Args:
+          next_uri: Optional: if provided, the user will be redirected to this URI after
+              authorization
+
           tool_version: Optional: if not provided, any version is used
 
           user_id: Required only when calling with an API key
@@ -161,6 +165,7 @@ class ToolsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "tool_name": tool_name,
+                    "next_uri": next_uri,
                     "tool_version": tool_version,
                     "user_id": user_id,
                 },
@@ -353,6 +358,7 @@ class AsyncToolsResource(AsyncAPIResource):
         self,
         *,
         tool_name: str,
+        next_uri: str | NotGiven = NOT_GIVEN,
         tool_version: str | NotGiven = NOT_GIVEN,
         user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -366,6 +372,9 @@ class AsyncToolsResource(AsyncAPIResource):
         Authorizes a user for a specific tool by name
 
         Args:
+          next_uri: Optional: if provided, the user will be redirected to this URI after
+              authorization
+
           tool_version: Optional: if not provided, any version is used
 
           user_id: Required only when calling with an API key
@@ -383,6 +392,7 @@ class AsyncToolsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "tool_name": tool_name,
+                    "next_uri": next_uri,
                     "tool_version": tool_version,
                     "user_id": user_id,
                 },
