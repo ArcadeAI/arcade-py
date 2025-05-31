@@ -46,6 +46,7 @@ class AuthResource(SyncAPIResource):
         *,
         auth_requirement: auth_authorize_params.AuthRequirement,
         user_id: str,
+        next_uri: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -57,6 +58,9 @@ class AuthResource(SyncAPIResource):
         Starts the authorization process for given authorization requirements
 
         Args:
+          next_uri: Optional: if provided, the user will be redirected to this URI after
+              authorization
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -71,6 +75,7 @@ class AuthResource(SyncAPIResource):
                 {
                     "auth_requirement": auth_requirement,
                     "user_id": user_id,
+                    "next_uri": next_uri,
                 },
                 auth_authorize_params.AuthAuthorizeParams,
             ),
@@ -155,6 +160,7 @@ class AsyncAuthResource(AsyncAPIResource):
         *,
         auth_requirement: auth_authorize_params.AuthRequirement,
         user_id: str,
+        next_uri: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -166,6 +172,9 @@ class AsyncAuthResource(AsyncAPIResource):
         Starts the authorization process for given authorization requirements
 
         Args:
+          next_uri: Optional: if provided, the user will be redirected to this URI after
+              authorization
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -180,6 +189,7 @@ class AsyncAuthResource(AsyncAPIResource):
                 {
                     "auth_requirement": auth_requirement,
                     "user_id": user_id,
+                    "next_uri": next_uri,
                 },
                 auth_authorize_params.AuthAuthorizeParams,
             ),
