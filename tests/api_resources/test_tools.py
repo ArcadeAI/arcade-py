@@ -34,7 +34,6 @@ class TestTools:
             limit=0,
             offset=0,
             toolkit="toolkit",
-            user_id="user_id",
         )
         assert_matches_type(SyncOffsetPage[ToolDefinition], tool, path=["response"])
 
@@ -153,7 +152,6 @@ class TestTools:
         tool = client.tools.get(
             name="name",
             include_format=["arcade"],
-            user_id="user_id",
         )
         assert_matches_type(ToolDefinition, tool, path=["response"])
 
@@ -204,7 +202,6 @@ class TestAsyncTools:
             limit=0,
             offset=0,
             toolkit="toolkit",
-            user_id="user_id",
         )
         assert_matches_type(AsyncOffsetPage[ToolDefinition], tool, path=["response"])
 
@@ -323,7 +320,6 @@ class TestAsyncTools:
         tool = await async_client.tools.get(
             name="name",
             include_format=["arcade"],
-            user_id="user_id",
         )
         assert_matches_type(ToolDefinition, tool, path=["response"])
 

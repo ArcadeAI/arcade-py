@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Dict, List, Optional
-from typing_extensions import Literal
 
 from .._models import BaseModel
 from .value_schema import ValueSchema
@@ -64,25 +63,13 @@ class RequirementsAuthorization(BaseModel):
 
     provider_type: Optional[str] = None
 
-    status: Optional[Literal["active", "inactive"]] = None
-
-    status_reason: Optional[str] = None
-
-    token_status: Optional[Literal["not_started", "pending", "completed", "failed"]] = None
-
 
 class RequirementsSecret(BaseModel):
     key: str
 
-    met: Optional[bool] = None
-
-    status_reason: Optional[str] = None
-
 
 class Requirements(BaseModel):
     authorization: Optional[RequirementsAuthorization] = None
-
-    met: Optional[bool] = None
 
     secrets: Optional[List[RequirementsSecret]] = None
 

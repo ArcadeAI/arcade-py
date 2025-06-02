@@ -48,7 +48,6 @@ class FormattedResource(SyncAPIResource):
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         toolkit: str | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -68,8 +67,6 @@ class FormattedResource(SyncAPIResource):
           offset: Offset from the start of the list (default: 0)
 
           toolkit: Toolkit name
-
-          user_id: User ID
 
           extra_headers: Send extra headers
 
@@ -93,7 +90,6 @@ class FormattedResource(SyncAPIResource):
                         "limit": limit,
                         "offset": offset,
                         "toolkit": toolkit,
-                        "user_id": user_id,
                     },
                     formatted_list_params.FormattedListParams,
                 ),
@@ -106,7 +102,6 @@ class FormattedResource(SyncAPIResource):
         name: str,
         *,
         format: str | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -119,8 +114,6 @@ class FormattedResource(SyncAPIResource):
 
         Args:
           format: Provider format
-
-          user_id: User ID
 
           extra_headers: Send extra headers
 
@@ -139,13 +132,7 @@ class FormattedResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "format": format,
-                        "user_id": user_id,
-                    },
-                    formatted_get_params.FormattedGetParams,
-                ),
+                query=maybe_transform({"format": format}, formatted_get_params.FormattedGetParams),
             ),
             cast_to=object,
         )
@@ -178,7 +165,6 @@ class AsyncFormattedResource(AsyncAPIResource):
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         toolkit: str | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -198,8 +184,6 @@ class AsyncFormattedResource(AsyncAPIResource):
           offset: Offset from the start of the list (default: 0)
 
           toolkit: Toolkit name
-
-          user_id: User ID
 
           extra_headers: Send extra headers
 
@@ -223,7 +207,6 @@ class AsyncFormattedResource(AsyncAPIResource):
                         "limit": limit,
                         "offset": offset,
                         "toolkit": toolkit,
-                        "user_id": user_id,
                     },
                     formatted_list_params.FormattedListParams,
                 ),
@@ -236,7 +219,6 @@ class AsyncFormattedResource(AsyncAPIResource):
         name: str,
         *,
         format: str | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -249,8 +231,6 @@ class AsyncFormattedResource(AsyncAPIResource):
 
         Args:
           format: Provider format
-
-          user_id: User ID
 
           extra_headers: Send extra headers
 
@@ -269,13 +249,7 @@ class AsyncFormattedResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "format": format,
-                        "user_id": user_id,
-                    },
-                    formatted_get_params.FormattedGetParams,
-                ),
+                query=await async_maybe_transform({"format": format}, formatted_get_params.FormattedGetParams),
             ),
             cast_to=object,
         )
