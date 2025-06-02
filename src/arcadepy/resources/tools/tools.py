@@ -78,7 +78,6 @@ class ToolsResource(SyncAPIResource):
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         toolkit: str | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -98,8 +97,6 @@ class ToolsResource(SyncAPIResource):
           offset: Offset from the start of the list (default: 0)
 
           toolkit: Toolkit name
-
-          user_id: User ID
 
           extra_headers: Send extra headers
 
@@ -123,7 +120,6 @@ class ToolsResource(SyncAPIResource):
                         "limit": limit,
                         "offset": offset,
                         "toolkit": toolkit,
-                        "user_id": user_id,
                     },
                     tool_list_params.ToolListParams,
                 ),
@@ -238,7 +234,6 @@ class ToolsResource(SyncAPIResource):
         name: str,
         *,
         include_format: List[Literal["arcade", "openai", "anthropic"]] | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -251,8 +246,6 @@ class ToolsResource(SyncAPIResource):
 
         Args:
           include_format: Comma separated tool formats that will be included in the response.
-
-          user_id: User ID
 
           extra_headers: Send extra headers
 
@@ -271,13 +264,7 @@ class ToolsResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "include_format": include_format,
-                        "user_id": user_id,
-                    },
-                    tool_get_params.ToolGetParams,
-                ),
+                query=maybe_transform({"include_format": include_format}, tool_get_params.ToolGetParams),
             ),
             cast_to=ToolDefinition,
         )
@@ -318,7 +305,6 @@ class AsyncToolsResource(AsyncAPIResource):
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         toolkit: str | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -338,8 +324,6 @@ class AsyncToolsResource(AsyncAPIResource):
           offset: Offset from the start of the list (default: 0)
 
           toolkit: Toolkit name
-
-          user_id: User ID
 
           extra_headers: Send extra headers
 
@@ -363,7 +347,6 @@ class AsyncToolsResource(AsyncAPIResource):
                         "limit": limit,
                         "offset": offset,
                         "toolkit": toolkit,
-                        "user_id": user_id,
                     },
                     tool_list_params.ToolListParams,
                 ),
@@ -478,7 +461,6 @@ class AsyncToolsResource(AsyncAPIResource):
         name: str,
         *,
         include_format: List[Literal["arcade", "openai", "anthropic"]] | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -491,8 +473,6 @@ class AsyncToolsResource(AsyncAPIResource):
 
         Args:
           include_format: Comma separated tool formats that will be included in the response.
-
-          user_id: User ID
 
           extra_headers: Send extra headers
 
@@ -511,13 +491,7 @@ class AsyncToolsResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "include_format": include_format,
-                        "user_id": user_id,
-                    },
-                    tool_get_params.ToolGetParams,
-                ),
+                query=await async_maybe_transform({"include_format": include_format}, tool_get_params.ToolGetParams),
             ),
             cast_to=ToolDefinition,
         )

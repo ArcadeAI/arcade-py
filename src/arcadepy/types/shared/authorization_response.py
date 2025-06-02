@@ -18,7 +18,7 @@ class AuthorizationResponse(BaseModel):
 
     scopes: Optional[List[str]] = None
 
-    status: Optional[Literal["not_started", "pending", "completed", "failed"]] = None
+    status: Optional[Literal["pending", "completed", "failed"]] = None
 
     url: Optional[str] = None
 

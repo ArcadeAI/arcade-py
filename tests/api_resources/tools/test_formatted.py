@@ -29,7 +29,6 @@ class TestFormatted:
             limit=0,
             offset=0,
             toolkit="toolkit",
-            user_id="user_id",
         )
         assert_matches_type(SyncOffsetPage[object], formatted, path=["response"])
 
@@ -65,7 +64,6 @@ class TestFormatted:
         formatted = client.tools.formatted.get(
             name="name",
             format="format",
-            user_id="user_id",
         )
         assert_matches_type(object, formatted, path=["response"])
 
@@ -116,7 +114,6 @@ class TestAsyncFormatted:
             limit=0,
             offset=0,
             toolkit="toolkit",
-            user_id="user_id",
         )
         assert_matches_type(AsyncOffsetPage[object], formatted, path=["response"])
 
@@ -152,7 +149,6 @@ class TestAsyncFormatted:
         formatted = await async_client.tools.formatted.get(
             name="name",
             format="format",
-            user_id="user_id",
         )
         assert_matches_type(object, formatted, path=["response"])
 
