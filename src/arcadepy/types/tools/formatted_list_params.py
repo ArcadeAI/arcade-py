@@ -19,3 +19,6 @@ class FormattedListParams(TypedDict, total=False):
 
     toolkit: str
     """Toolkit name"""
+
+    user_id: str
+    """User ID"""
