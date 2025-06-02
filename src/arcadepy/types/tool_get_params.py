@@ -11,3 +11,6 @@ __all__ = ["ToolGetParams"]
 class ToolGetParams(TypedDict, total=False):
     include_format: List[Literal["arcade", "openai", "anthropic"]]
     """Comma separated tool formats that will be included in the response."""
+
+    user_id: str
+    """User ID"""
