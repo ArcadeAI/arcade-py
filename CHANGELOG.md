@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.5.0 (2025-06-02)
+
+Full Changelog: [v1.4.0...v1.5.0](https://github.com/ArcadeAI/arcade-py/compare/v1.4.0...v1.5.0)
+
+### Features
+
+* **api:** api update ([1e1f9ba](https://github.com/ArcadeAI/arcade-py/commit/1e1f9baf76f6bc0ba3a5099be15c3ea2c2d13c9d))
+* **api:** api update ([f362ab5](https://github.com/ArcadeAI/arcade-py/commit/f362ab5666cc12ade753f440e2ed2415a814a291))
+* **api:** api update ([055b14d](https://github.com/ArcadeAI/arcade-py/commit/055b14de18f70df3f17df3c7822e580189bd7754))
+* **api:** api update ([439fc45](https://github.com/ArcadeAI/arcade-py/commit/439fc45322818ee4cc4ab68937e0f0f90cc7f571))
+
+
+### Bug Fixes
+
+* **docs/api:** remove references to nonexistent types ([ade9d56](https://github.com/ArcadeAI/arcade-py/commit/ade9d56256030ba632180cbd9732dea44491944d))
+* **package:** support direct resource imports ([b28c43b](https://github.com/ArcadeAI/arcade-py/commit/b28c43b1c107474147a829084fe4c2918fc83506))
+
+
+### Chores
+
+* **ci:** fix installation instructions ([35ab018](https://github.com/ArcadeAI/arcade-py/commit/35ab01810788e9ed962e8ca18bc160cad13d5166))
+* **ci:** upload sdks to package manager ([264c2af](https://github.com/ArcadeAI/arcade-py/commit/264c2afb311f8f0042a210fcd48bf3ae4f869b3b))
+* **docs:** grammar improvements ([4039ce4](https://github.com/ArcadeAI/arcade-py/commit/4039ce4156faac6966efc62e6645328a52a3c9c3))
+* **internal:** avoid errors for isinstance checks on proxies ([f6a0407](https://github.com/ArcadeAI/arcade-py/commit/f6a04072956906ba2e1f14f2938deb26fe73a93b))
+* **internal:** avoid lint errors in pagination expressions ([4288f8c](https://github.com/ArcadeAI/arcade-py/commit/4288f8c7152ee984cc11db01950a12e470fd2fd3))
+
 ## 1.4.0 (2025-04-25)
 
 Full Changelog: [v1.3.1...v1.4.0](https://github.com/ArcadeAI/arcade-py/compare/v1.3.1...v1.4.0)
