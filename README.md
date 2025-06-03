@@ -91,7 +91,7 @@ from arcadepy import Arcade
 client = Arcade()
 
 chat_response = client.chat.completions.create(
-    response_format={"type": "json_object"},
+    response_format={},
 )
 print(chat_response.response_format)
 ```
