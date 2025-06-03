@@ -34,6 +34,7 @@ class TestTools:
             limit=0,
             offset=0,
             toolkit="toolkit",
+            user_id="user_id",
         )
         assert_matches_type(SyncOffsetPage[ToolDefinition], tool, path=["response"])
 
@@ -68,6 +69,7 @@ class TestTools:
     def test_method_authorize_with_all_params(self, client: Arcade) -> None:
         tool = client.tools.authorize(
             tool_name="tool_name",
+            next_uri="next_uri",
             tool_version="tool_version",
             user_id="user_id",
         )
@@ -151,6 +153,7 @@ class TestTools:
         tool = client.tools.get(
             name="name",
             include_format=["arcade"],
+            user_id="user_id",
         )
         assert_matches_type(ToolDefinition, tool, path=["response"])
 
@@ -201,6 +204,7 @@ class TestAsyncTools:
             limit=0,
             offset=0,
             toolkit="toolkit",
+            user_id="user_id",
         )
         assert_matches_type(AsyncOffsetPage[ToolDefinition], tool, path=["response"])
 
@@ -235,6 +239,7 @@ class TestAsyncTools:
     async def test_method_authorize_with_all_params(self, async_client: AsyncArcade) -> None:
         tool = await async_client.tools.authorize(
             tool_name="tool_name",
+            next_uri="next_uri",
             tool_version="tool_version",
             user_id="user_id",
         )
@@ -318,6 +323,7 @@ class TestAsyncTools:
         tool = await async_client.tools.get(
             name="name",
             include_format=["arcade"],
+            user_id="user_id",
         )
         assert_matches_type(ToolDefinition, tool, path=["response"])
 
