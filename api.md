@@ -4,6 +4,55 @@
 from arcadepy.types import AuthorizationContext, AuthorizationResponse, Error
 ```
 
+# Admin
+
+## UserConnections
+
+Types:
+
+```python
+from arcadepy.types.admin import UserConnectionResponse
+```
+
+Methods:
+
+- <code title="get /v1/admin/user_connections">client.admin.user_connections.<a href="./src/arcadepy/resources/admin/user_connections.py">list</a>(\*\*<a href="src/arcadepy/types/admin/user_connection_list_params.py">params</a>) -> <a href="./src/arcadepy/types/admin/user_connection_response.py">SyncOffsetPage[UserConnectionResponse]</a></code>
+- <code title="delete /v1/admin/user_connections/{id}">client.admin.user_connections.<a href="./src/arcadepy/resources/admin/user_connections.py">delete</a>(id) -> None</code>
+
+## AuthProviders
+
+Types:
+
+```python
+from arcadepy.types.admin import (
+    AuthProviderCreateRequest,
+    AuthProviderResponse,
+    AuthProviderUpdateRequest,
+    AuthProviderListResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/admin/auth_providers">client.admin.auth_providers.<a href="./src/arcadepy/resources/admin/auth_providers.py">create</a>(\*\*<a href="src/arcadepy/types/admin/auth_provider_create_params.py">params</a>) -> <a href="./src/arcadepy/types/admin/auth_provider_response.py">AuthProviderResponse</a></code>
+- <code title="get /v1/admin/auth_providers">client.admin.auth_providers.<a href="./src/arcadepy/resources/admin/auth_providers.py">list</a>() -> <a href="./src/arcadepy/types/admin/auth_provider_list_response.py">AuthProviderListResponse</a></code>
+- <code title="delete /v1/admin/auth_providers/{id}">client.admin.auth_providers.<a href="./src/arcadepy/resources/admin/auth_providers.py">delete</a>(id) -> <a href="./src/arcadepy/types/admin/auth_provider_response.py">AuthProviderResponse</a></code>
+- <code title="get /v1/admin/auth_providers/{id}">client.admin.auth_providers.<a href="./src/arcadepy/resources/admin/auth_providers.py">get</a>(id) -> <a href="./src/arcadepy/types/admin/auth_provider_response.py">AuthProviderResponse</a></code>
+- <code title="patch /v1/admin/auth_providers/{id}">client.admin.auth_providers.<a href="./src/arcadepy/resources/admin/auth_providers.py">patch</a>(path_id, \*\*<a href="src/arcadepy/types/admin/auth_provider_patch_params.py">params</a>) -> <a href="./src/arcadepy/types/admin/auth_provider_response.py">AuthProviderResponse</a></code>
+
+## Secrets
+
+Types:
+
+```python
+from arcadepy.types.admin import SecretResponse, SecretListResponse
+```
+
+Methods:
+
+- <code title="get /v1/admin/secrets">client.admin.secrets.<a href="./src/arcadepy/resources/admin/secrets.py">list</a>() -> <a href="./src/arcadepy/types/admin/secret_list_response.py">SecretListResponse</a></code>
+- <code title="delete /v1/admin/secrets/{secret_id}">client.admin.secrets.<a href="./src/arcadepy/resources/admin/secrets.py">delete</a>(secret_id) -> None</code>
+
 # Auth
 
 Types:

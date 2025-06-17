@@ -30,12 +30,14 @@ from ._base_client import (
     AsyncAPIClient,
 )
 from .resources.chat import chat
+from .resources.admin import admin
 from .resources.tools import tools
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Arcade", "AsyncArcade", "Client", "AsyncClient"]
 
 
 class Arcade(SyncAPIClient):
+    admin: admin.AdminResource
     auth: auth.AuthResource
     health: health.HealthResource
     chat: chat.ChatResource
@@ -98,6 +100,7 @@ class Arcade(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.admin = admin.AdminResource(self)
         self.auth = auth.AuthResource(self)
         self.health = health.HealthResource(self)
         self.chat = chat.ChatResource(self)
@@ -212,6 +215,7 @@ class Arcade(SyncAPIClient):
 
 
 class AsyncArcade(AsyncAPIClient):
+    admin: admin.AsyncAdminResource
     auth: auth.AsyncAuthResource
     health: health.AsyncHealthResource
     chat: chat.AsyncChatResource
@@ -274,6 +278,7 @@ class AsyncArcade(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.admin = admin.AsyncAdminResource(self)
         self.auth = auth.AsyncAuthResource(self)
         self.health = health.AsyncHealthResource(self)
         self.chat = chat.AsyncChatResource(self)
@@ -389,6 +394,7 @@ class AsyncArcade(AsyncAPIClient):
 
 class ArcadeWithRawResponse:
     def __init__(self, client: Arcade) -> None:
+        self.admin = admin.AdminResourceWithRawResponse(client.admin)
         self.auth = auth.AuthResourceWithRawResponse(client.auth)
         self.health = health.HealthResourceWithRawResponse(client.health)
         self.chat = chat.ChatResourceWithRawResponse(client.chat)
@@ -398,6 +404,7 @@ class ArcadeWithRawResponse:
 
 class AsyncArcadeWithRawResponse:
     def __init__(self, client: AsyncArcade) -> None:
+        self.admin = admin.AsyncAdminResourceWithRawResponse(client.admin)
         self.auth = auth.AsyncAuthResourceWithRawResponse(client.auth)
         self.health = health.AsyncHealthResourceWithRawResponse(client.health)
         self.chat = chat.AsyncChatResourceWithRawResponse(client.chat)
@@ -407,6 +414,7 @@ class AsyncArcadeWithRawResponse:
 
 class ArcadeWithStreamedResponse:
     def __init__(self, client: Arcade) -> None:
+        self.admin = admin.AdminResourceWithStreamingResponse(client.admin)
         self.auth = auth.AuthResourceWithStreamingResponse(client.auth)
         self.health = health.HealthResourceWithStreamingResponse(client.health)
         self.chat = chat.ChatResourceWithStreamingResponse(client.chat)
@@ -416,6 +424,7 @@ class ArcadeWithStreamedResponse:
 
 class AsyncArcadeWithStreamedResponse:
     def __init__(self, client: AsyncArcade) -> None:
+        self.admin = admin.AsyncAdminResourceWithStreamingResponse(client.admin)
         self.auth = auth.AsyncAuthResourceWithStreamingResponse(client.auth)
         self.health = health.AsyncHealthResourceWithStreamingResponse(client.health)
         self.chat = chat.AsyncChatResourceWithStreamingResponse(client.chat)

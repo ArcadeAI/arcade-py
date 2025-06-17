@@ -16,6 +16,14 @@ from .chat import (
     ChatResourceWithStreamingResponse,
     AsyncChatResourceWithStreamingResponse,
 )
+from .admin import (
+    AdminResource,
+    AsyncAdminResource,
+    AdminResourceWithRawResponse,
+    AsyncAdminResourceWithRawResponse,
+    AdminResourceWithStreamingResponse,
+    AsyncAdminResourceWithStreamingResponse,
+)
 from .tools import (
     ToolsResource,
     AsyncToolsResource,
@@ -42,6 +50,12 @@ from .workers import (
 )
 
 __all__ = [
+    "AdminResource",
+    "AsyncAdminResource",
+    "AdminResourceWithRawResponse",
+    "AsyncAdminResourceWithRawResponse",
+    "AdminResourceWithStreamingResponse",
+    "AsyncAdminResourceWithStreamingResponse",
     "AuthResource",
     "AsyncAuthResource",
     "AuthResourceWithRawResponse",
