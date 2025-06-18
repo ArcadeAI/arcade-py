@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.6.0 (2025-06-18)
+
+Full Changelog: [v1.5.0...v1.6.0](https://github.com/ArcadeAI/arcade-py/compare/v1.5.0...v1.6.0)
+
+### Features
+
+* **api:** api update ([cd6f884](https://github.com/ArcadeAI/arcade-py/commit/cd6f884df03a517ad7af92d229f0178e181f52e7))
+* **client:** add follow_redirects request option ([37071b8](https://github.com/ArcadeAI/arcade-py/commit/37071b84834f987c5c97bd31e42598d29079e670))
+
+
+### Bug Fixes
+
+* **client:** correctly parse binary response | stream ([30b1399](https://github.com/ArcadeAI/arcade-py/commit/30b1399ae02f8190c79b330190f834291190f76c))
+* **tests:** fix: tests which call HTTP endpoints directly with the example parameters ([f7d916c](https://github.com/ArcadeAI/arcade-py/commit/f7d916c9c4927adc62b438b1b71eec3a242e8f3d))
+
+
+### Chores
+
+* **ci:** enable for pull requests ([181f08f](https://github.com/ArcadeAI/arcade-py/commit/181f08fa2a8bcef17a61dcefd0e4078b6f6357aa))
+* **docs:** remove reference to rye shell ([bb105b1](https://github.com/ArcadeAI/arcade-py/commit/bb105b130ee4f24fe8e4a8114b464ae9789ffcd8))
+* **docs:** remove unnecessary param examples ([e63f45b](https://github.com/ArcadeAI/arcade-py/commit/e63f45ba884856f91e7387ed73b87667557c8ef0))
+* **internal:** update conftest.py ([6f4b908](https://github.com/ArcadeAI/arcade-py/commit/6f4b908240825138aa4f97da939fd4b8cb965bad))
+* **readme:** update badges ([e0ecda6](https://github.com/ArcadeAI/arcade-py/commit/e0ecda6d97885630a77933dc7fdb57c2540c8a2d))
+* **tests:** add tests for httpx client instantiation & proxies ([8328a61](https://github.com/ArcadeAI/arcade-py/commit/8328a616e0f73562720bcdeee7532887ae328999))
+* **tests:** run tests in parallel ([aabdc37](https://github.com/ArcadeAI/arcade-py/commit/aabdc37b1979121dd756a6cc1dbe31145db3c9da))
+
 ## 1.5.0 (2025-06-02)
 
 Full Changelog: [v1.4.0...v1.5.0](https://github.com/ArcadeAI/arcade-py/compare/v1.4.0...v1.5.0)

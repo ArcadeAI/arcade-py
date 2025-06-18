@@ -1,6 +1,6 @@
 # Arcade Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/arcadepy.svg)](https://pypi.org/project/arcadepy/)
+[![PyPI version](<https://img.shields.io/pypi/v/arcadepy.svg?label=pypi%20(stable)>)](https://pypi.org/project/arcadepy/)
 
 The Arcade Python library provides convenient access to the Arcade REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -91,7 +91,7 @@ from arcadepy import Arcade
 client = Arcade()
 
 chat_response = client.chat.completions.create(
-    response_format={"type": "json_object"},
+    response_format={},
 )
 print(chat_response.response_format)
 ```
