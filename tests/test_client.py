@@ -23,9 +23,7 @@ from pydantic import ValidationError
 
 from arcadepy import Arcade, AsyncArcade, APIResponseValidationError
 from arcadepy._types import Omit
-from arcadepy._utils import maybe_transform
 from arcadepy._models import BaseModel, FinalRequestOptions
-from arcadepy._constants import RAW_RESPONSE_HEADER
 from arcadepy._exceptions import ArcadeError, APIStatusError, APITimeoutError, APIResponseValidationError
 from arcadepy._base_client import (
     DEFAULT_TIMEOUT,
@@ -35,7 +33,6 @@ from arcadepy._base_client import (
     DefaultAsyncHttpxClient,
     make_request_options,
 )
-from arcadepy.types.chat.completion_create_params import CompletionCreateParams
 
 from .utils import update_env
 
@@ -713,58 +710,21 @@ class TestArcade:
 
     @mock.patch("arcadepy._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Arcade) -> None:
         respx_mock.post("/v1/chat/completions").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            self.client.post(
-                "/v1/chat/completions",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            messages=[
-                                {
-                                    "role": "user",
-                                    "content": "Hello, how can I use Arcade?",
-                                }
-                            ]
-                        ),
-                        CompletionCreateParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            client.chat.completions.with_streaming_response.create().__enter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("arcadepy._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Arcade) -> None:
         respx_mock.post("/v1/chat/completions").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            self.client.post(
-                "/v1/chat/completions",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            messages=[
-                                {
-                                    "role": "user",
-                                    "content": "Hello, how can I use Arcade?",
-                                }
-                            ]
-                        ),
-                        CompletionCreateParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            client.chat.completions.with_streaming_response.create().__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1564,58 +1524,21 @@ class TestAsyncArcade:
 
     @mock.patch("arcadepy._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, async_client: AsyncArcade) -> None:
         respx_mock.post("/v1/chat/completions").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await self.client.post(
-                "/v1/chat/completions",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            messages=[
-                                {
-                                    "role": "user",
-                                    "content": "Hello, how can I use Arcade?",
-                                }
-                            ]
-                        ),
-                        CompletionCreateParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            await async_client.chat.completions.with_streaming_response.create().__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("arcadepy._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, async_client: AsyncArcade) -> None:
         respx_mock.post("/v1/chat/completions").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await self.client.post(
-                "/v1/chat/completions",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            messages=[
-                                {
-                                    "role": "user",
-                                    "content": "Hello, how can I use Arcade?",
-                                }
-                            ]
-                        ),
-                        CompletionCreateParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            await async_client.chat.completions.with_streaming_response.create().__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
