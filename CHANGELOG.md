@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.7.0 (2025-06-21)
+
+Full Changelog: [v1.6.0...v1.7.0](https://github.com/ArcadeAI/arcade-py/compare/v1.6.0...v1.7.0)
+
+### Features
+
+* **client:** add support for aiohttp ([5066882](https://github.com/ArcadeAI/arcade-py/commit/50668821ffc127000372f06286f8eb74c02a7ab4))
+
+
+### Documentation
+
+* **client:** fix httpx.Timeout documentation reference ([d6a30cc](https://github.com/ArcadeAI/arcade-py/commit/d6a30cc3d80d0521cc4456d016e7a726ad1247e1))
+
 ## 1.6.0 (2025-06-18)
 
 Full Changelog: [v1.5.0...v1.6.0](https://github.com/ArcadeAI/arcade-py/compare/v1.5.0...v1.6.0)
