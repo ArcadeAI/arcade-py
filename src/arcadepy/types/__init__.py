@@ -31,3 +31,6 @@ from .execute_tool_response import ExecuteToolResponse as ExecuteToolResponse
 from .tool_authorize_params import ToolAuthorizeParams as ToolAuthorizeParams
 from .tool_execution_attempt import ToolExecutionAttempt as ToolExecutionAttempt
 from .worker_health_response import WorkerHealthResponse as WorkerHealthResponse
+from .user_verification_confirm_response import (
+    UserVerificationConfirmResponse as UserVerificationConfirmResponse,
+)

@@ -10,6 +10,7 @@ import httpx
 
 from . import _exceptions
 from ._qs import Querystring
+from .lib import UserVerificationResource, AsyncUserVerificationResource
 from ._types import (
     NOT_GIVEN,
     Omit,
@@ -43,6 +44,7 @@ class Arcade(SyncAPIClient):
     chat: chat.ChatResource
     tools: tools.ToolsResource
     workers: workers.WorkersResource
+    user_verification: UserVerificationResource
     with_raw_response: ArcadeWithRawResponse
     with_streaming_response: ArcadeWithStreamedResponse
 
@@ -106,6 +108,7 @@ class Arcade(SyncAPIClient):
         self.chat = chat.ChatResource(self)
         self.tools = tools.ToolsResource(self)
         self.workers = workers.WorkersResource(self)
+        self.user_verification = UserVerificationResource(self)
         self.with_raw_response = ArcadeWithRawResponse(self)
         self.with_streaming_response = ArcadeWithStreamedResponse(self)
 
@@ -221,6 +224,7 @@ class AsyncArcade(AsyncAPIClient):
     chat: chat.AsyncChatResource
     tools: tools.AsyncToolsResource
     workers: workers.AsyncWorkersResource
+    user_verification: AsyncUserVerificationResource
     with_raw_response: AsyncArcadeWithRawResponse
     with_streaming_response: AsyncArcadeWithStreamedResponse
 
@@ -284,6 +288,7 @@ class AsyncArcade(AsyncAPIClient):
         self.chat = chat.AsyncChatResource(self)
         self.tools = tools.AsyncToolsResource(self)
         self.workers = workers.AsyncWorkersResource(self)
+        self.user_verification = AsyncUserVerificationResource(self)
         self.with_raw_response = AsyncArcadeWithRawResponse(self)
         self.with_streaming_response = AsyncArcadeWithStreamedResponse(self)
 
@@ -400,6 +405,7 @@ class ArcadeWithRawResponse:
         self.chat = chat.ChatResourceWithRawResponse(client.chat)
         self.tools = tools.ToolsResourceWithRawResponse(client.tools)
         self.workers = workers.WorkersResourceWithRawResponse(client.workers)
+        self.user_verification = client.user_verification.with_raw_response
 
 
 class AsyncArcadeWithRawResponse:
@@ -410,6 +416,7 @@ class AsyncArcadeWithRawResponse:
         self.chat = chat.AsyncChatResourceWithRawResponse(client.chat)
         self.tools = tools.AsyncToolsResourceWithRawResponse(client.tools)
         self.workers = workers.AsyncWorkersResourceWithRawResponse(client.workers)
+        self.user_verification = client.user_verification.with_raw_response
 
 
 class ArcadeWithStreamedResponse:
@@ -420,6 +427,7 @@ class ArcadeWithStreamedResponse:
         self.chat = chat.ChatResourceWithStreamingResponse(client.chat)
         self.tools = tools.ToolsResourceWithStreamingResponse(client.tools)
         self.workers = workers.WorkersResourceWithStreamingResponse(client.workers)
+        self.user_verification = client.user_verification.with_streaming_response
 
 
 class AsyncArcadeWithStreamedResponse:
@@ -430,6 +438,7 @@ class AsyncArcadeWithStreamedResponse:
         self.chat = chat.AsyncChatResourceWithStreamingResponse(client.chat)
         self.tools = tools.AsyncToolsResourceWithStreamingResponse(client.tools)
         self.workers = workers.AsyncWorkersResourceWithStreamingResponse(client.workers)
+        self.user_verification = client.user_verification.with_streaming_response
 
 
 Client = Arcade
