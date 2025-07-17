@@ -135,7 +135,6 @@ class ToolsResource(SyncAPIResource):
         self,
         *,
         tool_name: str,
-        force_verification: bool | NotGiven = NOT_GIVEN,
         next_uri: str | NotGiven = NOT_GIVEN,
         tool_version: str | NotGiven = NOT_GIVEN,
         user_id: str | NotGiven = NOT_GIVEN,
@@ -150,9 +149,6 @@ class ToolsResource(SyncAPIResource):
         Authorizes a user for a specific tool by name
 
         Args:
-          force_verification: Optional: if true, the user will be forced to verify their identity (strict
-              session check). TODO: Remove as soon as this is the default for everyone.
-
           next_uri: Optional: if provided, the user will be redirected to this URI after
               authorization
 
@@ -173,7 +169,6 @@ class ToolsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "tool_name": tool_name,
-                    "force_verification": force_verification,
                     "next_uri": next_uri,
                     "tool_version": tool_version,
                     "user_id": user_id,
@@ -380,7 +375,6 @@ class AsyncToolsResource(AsyncAPIResource):
         self,
         *,
         tool_name: str,
-        force_verification: bool | NotGiven = NOT_GIVEN,
         next_uri: str | NotGiven = NOT_GIVEN,
         tool_version: str | NotGiven = NOT_GIVEN,
         user_id: str | NotGiven = NOT_GIVEN,
@@ -395,9 +389,6 @@ class AsyncToolsResource(AsyncAPIResource):
         Authorizes a user for a specific tool by name
 
         Args:
-          force_verification: Optional: if true, the user will be forced to verify their identity (strict
-              session check). TODO: Remove as soon as this is the default for everyone.
-
           next_uri: Optional: if provided, the user will be redirected to this URI after
               authorization
 
@@ -418,7 +409,6 @@ class AsyncToolsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "tool_name": tool_name,
-                    "force_verification": force_verification,
                     "next_uri": next_uri,
                     "tool_version": tool_version,
                     "user_id": user_id,

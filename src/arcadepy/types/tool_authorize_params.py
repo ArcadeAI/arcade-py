@@ -10,12 +10,6 @@ __all__ = ["ToolAuthorizeParams"]
 class ToolAuthorizeParams(TypedDict, total=False):
     tool_name: Required[str]
 
-    force_verification: bool
-    """
-    Optional: if true, the user will be forced to verify their identity (strict
-    session check). TODO: Remove as soon as this is the default for everyone.
-    """
-
     next_uri: str
     """
     Optional: if provided, the user will be redirected to this URI after

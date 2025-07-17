@@ -69,7 +69,6 @@ class TestTools:
     def test_method_authorize_with_all_params(self, client: Arcade) -> None:
         tool = client.tools.authorize(
             tool_name="tool_name",
-            force_verification=True,
             next_uri="next_uri",
             tool_version="tool_version",
             user_id="user_id",
@@ -242,7 +241,6 @@ class TestAsyncTools:
     async def test_method_authorize_with_all_params(self, async_client: AsyncArcade) -> None:
         tool = await async_client.tools.authorize(
             tool_name="tool_name",
-            force_verification=True,
             next_uri="next_uri",
             tool_version="tool_version",
             user_id="user_id",
