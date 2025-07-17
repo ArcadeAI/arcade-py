@@ -35,7 +35,6 @@ class TestAuth:
                 "provider_type": "provider_type",
             },
             user_id="user_id",
-            force_verification=True,
             next_uri="next_uri",
         )
         assert_matches_type(AuthorizationResponse, auth, path=["response"])
@@ -129,7 +128,6 @@ class TestAsyncAuth:
                 "provider_type": "provider_type",
             },
             user_id="user_id",
-            force_verification=True,
             next_uri="next_uri",
         )
         assert_matches_type(AuthorizationResponse, auth, path=["response"])
