@@ -26,7 +26,9 @@ from .worker_tools_params import WorkerToolsParams as WorkerToolsParams
 from .worker_create_params import WorkerCreateParams as WorkerCreateParams
 from .worker_update_params import WorkerUpdateParams as WorkerUpdateParams
 from .auth_authorize_params import AuthAuthorizeParams as AuthAuthorizeParams
+from .confirm_user_response import ConfirmUserResponse as ConfirmUserResponse
 from .execute_tool_response import ExecuteToolResponse as ExecuteToolResponse
 from .tool_authorize_params import ToolAuthorizeParams as ToolAuthorizeParams
 from .tool_execution_attempt import ToolExecutionAttempt as ToolExecutionAttempt
 from .worker_health_response import WorkerHealthResponse as WorkerHealthResponse
+from .auth_confirm_user_params import AuthConfirmUserParams as AuthConfirmUserParams
