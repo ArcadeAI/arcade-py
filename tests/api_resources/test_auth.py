@@ -9,6 +9,7 @@ import pytest
 
 from arcadepy import Arcade, AsyncArcade
 from tests.utils import assert_matches_type
+from arcadepy.types import ConfirmUserResponse
 from arcadepy.types.shared import AuthorizationResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -62,6 +63,40 @@ class TestAuth:
 
             auth = response.parse()
             assert_matches_type(AuthorizationResponse, auth, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_confirm_user(self, client: Arcade) -> None:
+        auth = client.auth.confirm_user(
+            flow_id="flow_id",
+            user_id="user_id",
+        )
+        assert_matches_type(ConfirmUserResponse, auth, path=["response"])
+
+    @parametrize
+    def test_raw_response_confirm_user(self, client: Arcade) -> None:
+        response = client.auth.with_raw_response.confirm_user(
+            flow_id="flow_id",
+            user_id="user_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        auth = response.parse()
+        assert_matches_type(ConfirmUserResponse, auth, path=["response"])
+
+    @parametrize
+    def test_streaming_response_confirm_user(self, client: Arcade) -> None:
+        with client.auth.with_streaming_response.confirm_user(
+            flow_id="flow_id",
+            user_id="user_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            auth = response.parse()
+            assert_matches_type(ConfirmUserResponse, auth, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -155,6 +190,40 @@ class TestAsyncAuth:
 
             auth = await response.parse()
             assert_matches_type(AuthorizationResponse, auth, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_confirm_user(self, async_client: AsyncArcade) -> None:
+        auth = await async_client.auth.confirm_user(
+            flow_id="flow_id",
+            user_id="user_id",
+        )
+        assert_matches_type(ConfirmUserResponse, auth, path=["response"])
+
+    @parametrize
+    async def test_raw_response_confirm_user(self, async_client: AsyncArcade) -> None:
+        response = await async_client.auth.with_raw_response.confirm_user(
+            flow_id="flow_id",
+            user_id="user_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        auth = await response.parse()
+        assert_matches_type(ConfirmUserResponse, auth, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_confirm_user(self, async_client: AsyncArcade) -> None:
+        async with async_client.auth.with_streaming_response.confirm_user(
+            flow_id="flow_id",
+            user_id="user_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            auth = await response.parse()
+            assert_matches_type(ConfirmUserResponse, auth, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
