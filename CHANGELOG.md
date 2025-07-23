@@ -1,5 +1,43 @@
 # Changelog
 
+## 1.7.0 (2025-07-23)
+
+Full Changelog: [v1.6.0...v1.7.0](https://github.com/ArcadeAI/arcade-py/compare/v1.6.0...v1.7.0)
+
+### Features
+
+* **api:** api update ([ad08b68](https://github.com/ArcadeAI/arcade-py/commit/ad08b68a90d83b6488f7214469757354131828a3))
+* **api:** api update ([ef473c5](https://github.com/ArcadeAI/arcade-py/commit/ef473c51ed732f25f731ae9e29ae5a62cf9e5928))
+* **api:** api update ([a3c10fb](https://github.com/ArcadeAI/arcade-py/commit/a3c10fb94599d7e0adc0420027d35f578b5f05e0))
+* **api:** api update ([9fc71d7](https://github.com/ArcadeAI/arcade-py/commit/9fc71d78c6bbf539e1de774373ed4b0fbe0c28ea))
+* clean up environment call outs ([47ab416](https://github.com/ArcadeAI/arcade-py/commit/47ab416eaa76e665c7ec9d3a67b239eccc67e5e8))
+* **client:** add support for aiohttp ([5066882](https://github.com/ArcadeAI/arcade-py/commit/50668821ffc127000372f06286f8eb74c02a7ab4))
+
+
+### Bug Fixes
+
+* **ci:** correct conditional ([79d08e8](https://github.com/ArcadeAI/arcade-py/commit/79d08e82eb314f465c3cd4052af53c906e4cbfd6))
+* **ci:** release-doctor — report correct token name ([03cfe8a](https://github.com/ArcadeAI/arcade-py/commit/03cfe8aed6485613f5228053d313f8152f6262a3))
+* **client:** don't send Content-Type header on GET requests ([6a3e11c](https://github.com/ArcadeAI/arcade-py/commit/6a3e11c209c831ae351feccda0d0f19970f1f7de))
+* **parsing:** correctly handle nested discriminated unions ([7291d4f](https://github.com/ArcadeAI/arcade-py/commit/7291d4f6005e1c4ec9732ec56085031ce4b6a822))
+* **parsing:** ignore empty metadata ([52e08bc](https://github.com/ArcadeAI/arcade-py/commit/52e08bcfd9aa364dbe1708799846a92ed2b3707d))
+* **parsing:** parse extra field types ([034b5dc](https://github.com/ArcadeAI/arcade-py/commit/034b5dc3b14a34c445a75bfda65615b3eec6f936))
+
+
+### Chores
+
+* **ci:** change upload type ([6e96a87](https://github.com/ArcadeAI/arcade-py/commit/6e96a8738a5d6d7b4e805be9c0cbc430b6dacf90))
+* **ci:** only run for pushes and fork pull requests ([f741da1](https://github.com/ArcadeAI/arcade-py/commit/f741da11f0a604bc7cf5e434578adca7a8f5e7a1))
+* **internal:** bump pinned h11 dep ([d63ac0c](https://github.com/ArcadeAI/arcade-py/commit/d63ac0c1b7cfa29d44d6f69c94d28a8099f715bb))
+* **package:** mark python 3.13 as supported ([7bfb29b](https://github.com/ArcadeAI/arcade-py/commit/7bfb29be939adebe113d045b2b2baa53ac1be36f))
+* **readme:** fix version rendering on pypi ([c3d919a](https://github.com/ArcadeAI/arcade-py/commit/c3d919ae31ff06e4dd3f5f792dcf137c5133452d))
+* **tests:** skip some failing tests on the latest python versions ([0f7a7e0](https://github.com/ArcadeAI/arcade-py/commit/0f7a7e0150f819d24f6295f98bc7102b74a4892c))
+
+
+### Documentation
+
+* **client:** fix httpx.Timeout documentation reference ([d6a30cc](https://github.com/ArcadeAI/arcade-py/commit/d6a30cc3d80d0521cc4456d016e7a726ad1247e1))
+
 ## 1.6.0 (2025-06-18)
 
 Full Changelog: [v1.5.0...v1.6.0](https://github.com/ArcadeAI/arcade-py/compare/v1.5.0...v1.6.0)

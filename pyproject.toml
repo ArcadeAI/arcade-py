@@ -1,6 +1,6 @@
 [project]
 name = "arcadepy"
-version = "1.6.0"
+version = "1.7.0"
 description = "The official Python library for the Arcade API"
 dynamic = ["readme"]
 license = "MIT"
@@ -24,6 +24,7 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Operating System :: OS Independent",
   "Operating System :: POSIX",
   "Operating System :: MacOS",
@@ -37,6 +38,8 @@ classifiers = [
 Homepage = "https://github.com/ArcadeAI/arcade-py"
 Repository = "https://github.com/ArcadeAI/arcade-py"
 
+[project.optional-dependencies]
+aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.8"]
 
 [tool.rye]
 managed = true

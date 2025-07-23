@@ -58,12 +58,13 @@ Methods:
 Types:
 
 ```python
-from arcadepy.types import AuthRequest
+from arcadepy.types import AuthRequest, ConfirmUserRequest, ConfirmUserResponse
 ```
 
 Methods:
 
 - <code title="post /v1/auth/authorize">client.auth.<a href="./src/arcadepy/resources/auth.py">authorize</a>(\*\*<a href="src/arcadepy/types/auth_authorize_params.py">params</a>) -> <a href="./src/arcadepy/types/shared/auth_authorization_response.py">AuthorizationResponse</a></code>
+- <code title="post /v1/auth/confirm_user">client.auth.<a href="./src/arcadepy/resources/auth.py">confirm_user</a>(\*\*<a href="src/arcadepy/types/auth_confirm_user_params.py">params</a>) -> <a href="./src/arcadepy/types/confirm_user_response.py">ConfirmUserResponse</a></code>
 - <code title="get /v1/auth/status">client.auth.<a href="./src/arcadepy/resources/auth.py">status</a>(\*\*<a href="src/arcadepy/types/auth_status_params.py">params</a>) -> <a href="./src/arcadepy/types/shared/auth_authorization_response.py">AuthorizationResponse</a></code>
 
 # Health
