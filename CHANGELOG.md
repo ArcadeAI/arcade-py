@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.8.0 (2025-07-31)
+
+Full Changelog: [v1.7.0...v1.8.0](https://github.com/ArcadeAI/arcade-py/compare/v1.7.0...v1.8.0)
+
+### Features
+
+* **client:** support file upload requests ([adee680](https://github.com/ArcadeAI/arcade-py/commit/adee6802723e2d39f46ae63d65fb8436b3407c88))
+
+
+### Chores
+
+* **project:** add settings file for vscode ([9611226](https://github.com/ArcadeAI/arcade-py/commit/9611226ac1d0bb9ea0e2e5cc3dbf66c392ef90af))
+
 ## 1.7.0 (2025-07-23)
 
 Full Changelog: [v1.6.0...v1.7.0](https://github.com/ArcadeAI/arcade-py/compare/v1.6.0...v1.7.0)
