@@ -24,6 +24,9 @@ class AuthProviderCreateParams(TypedDict, total=False):
 
     description: str
 
+    external_id: str
+    """The unique external ID for the auth provider"""
+
     oauth2: Oauth2
 
     provider_id: str
