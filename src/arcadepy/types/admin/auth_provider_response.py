@@ -162,6 +162,9 @@ class Oauth2(BaseModel):
 
     pkce: Optional[Oauth2Pkce] = None
 
+    redirect_uri: Optional[str] = None
+    """The redirect URI required for this provider."""
+
     refresh_request: Optional[Oauth2RefreshRequest] = None
 
     scope_delimiter: Optional[str] = None

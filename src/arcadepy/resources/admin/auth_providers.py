@@ -47,6 +47,7 @@ class AuthProvidersResource(SyncAPIResource):
         *,
         id: str,
         description: str | NotGiven = NOT_GIVEN,
+        external_id: str | NotGiven = NOT_GIVEN,
         oauth2: auth_provider_create_params.Oauth2 | NotGiven = NOT_GIVEN,
         provider_id: str | NotGiven = NOT_GIVEN,
         status: str | NotGiven = NOT_GIVEN,
@@ -62,6 +63,8 @@ class AuthProvidersResource(SyncAPIResource):
         Create a new auth provider
 
         Args:
+          external_id: The unique external ID for the auth provider
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -76,6 +79,7 @@ class AuthProvidersResource(SyncAPIResource):
                 {
                     "id": id,
                     "description": description,
+                    "external_id": external_id,
                     "oauth2": oauth2,
                     "provider_id": provider_id,
                     "status": status,
@@ -250,6 +254,7 @@ class AsyncAuthProvidersResource(AsyncAPIResource):
         *,
         id: str,
         description: str | NotGiven = NOT_GIVEN,
+        external_id: str | NotGiven = NOT_GIVEN,
         oauth2: auth_provider_create_params.Oauth2 | NotGiven = NOT_GIVEN,
         provider_id: str | NotGiven = NOT_GIVEN,
         status: str | NotGiven = NOT_GIVEN,
@@ -265,6 +270,8 @@ class AsyncAuthProvidersResource(AsyncAPIResource):
         Create a new auth provider
 
         Args:
+          external_id: The unique external ID for the auth provider
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -279,6 +286,7 @@ class AsyncAuthProvidersResource(AsyncAPIResource):
                 {
                     "id": id,
                     "description": description,
+                    "external_id": external_id,
                     "oauth2": oauth2,
                     "provider_id": provider_id,
                     "status": status,
