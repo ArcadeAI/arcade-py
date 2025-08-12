@@ -8,6 +8,8 @@ import textwrap
 import contextlib
 import subprocess
 from typing import Match, Optional, Sequence, Generator, NamedTuple, cast
+import shutil
+import os
 
 MD_RE = re.compile(
     r"(?P<before>^(?P<indent> *)```\s*python\n)" r"(?P<code>.*?)" r"(?P<after>^(?P=indent)```\s*$)",
@@ -104,18 +106,65 @@ def format_str(
     return src, errors
 
 
+def _resolve_ruff_executable() -> str:
+    """Return an absolute path to the Ruff executable, avoiding CWD shadowing.
+
+    Strategy:
+    - Prefer the executable in the same directory as the current Python (venv/bin or Scripts).
+    - Fallback to PATH search excluding the current working directory.
+    - Reject .py files to prevent executing a shadowing Python module/script.
+    """
+    scripts_dir = os.path.dirname(sys.executable)
+    if os.name == "nt":
+        candidates = [
+            os.path.join(scripts_dir, "ruff.exe"),
+            os.path.join(scripts_dir, "ruff.bat"),
+        ]
+    else:
+        candidates = [
+            os.path.join(scripts_dir, "ruff"),
+        ]
+    for c in candidates:
+        if os.path.isfile(c):
+            return c
+
+    # Build a PATH without CWD entries
+    env_path = os.environ.get("PATH", "")
+    parts = [p for p in env_path.split(os.pathsep) if p and p not in (".", os.getcwd())]
+    safe_path = os.pathsep.join(parts)
+
+    ruff = shutil.which("ruff", path=safe_path)
+    if ruff:
+        if os.name == "nt":
+            if ruff.lower().endswith((".exe", ".bat")):
+                return ruff
+        else:
+            if not ruff.lower().endswith(".py"):
+                return ruff
+
+    raise RuntimeError(
+        "Ruff executable not found or resolved to a Python file. Ensure Ruff is installed (e.g., `pip install ruff` or `rye sync`)."
+    )
+
+
 def format_code_block(code: str) -> str:
+    # Resolve the Ruff binary directly to avoid `python -m ruff` module shadowing.
+    ruff_path = _resolve_ruff_executable()
+
+    # Lightly sanitize environment to avoid accidental PYTHONPATH injection.
+    env = os.environ.copy()
+    env.pop("PYTHONPATH", None)
+
     return subprocess.check_output(
         [
-            sys.executable,
-            "-m",
-            "ruff",
+            ruff_path,
             "format",
             "--stdin-filename=script.py",
             f"--line-length={DEFAULT_LINE_LENGTH}",
         ],
         encoding="utf-8",
         input=code,
+        env=env,
     )
 
 
