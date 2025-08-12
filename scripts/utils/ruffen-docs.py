@@ -1,15 +1,15 @@
 # fork of https://github.com/asottile/blacken-docs adapted for ruff
 from __future__ import annotations
 
+import os
 import re
 import sys
+import shutil
 import argparse
 import textwrap
 import contextlib
 import subprocess
 from typing import Match, Optional, Sequence, Generator, NamedTuple, cast
-import shutil
-import os
 
 MD_RE = re.compile(
     r"(?P<before>^(?P<indent> *)```\s*python\n)" r"(?P<code>.*?)" r"(?P<after>^(?P=indent)```\s*$)",
@@ -25,6 +25,9 @@ PYCON_CONTINUATION_RE = re.compile(
     rf"^{re.escape(PYCON_CONTINUATION_PREFIX)}( |$)",
 )
 DEFAULT_LINE_LENGTH = 100
+
+# Track the requested line length so CLI -l is honored.
+_ruff_line_length: int = DEFAULT_LINE_LENGTH
 
 
 class CodeBlockError(NamedTuple):
@@ -126,7 +129,7 @@ def _resolve_ruff_executable() -> str:
         ]
     for c in candidates:
         if os.path.isfile(c):
-            return c
+            return os.path.abspath(c)
 
     # Build a PATH without CWD entries
     env_path = os.environ.get("PATH", "")
@@ -137,10 +140,10 @@ def _resolve_ruff_executable() -> str:
     if ruff:
         if os.name == "nt":
             if ruff.lower().endswith((".exe", ".bat")):
-                return ruff
+                return os.path.abspath(ruff)
         else:
             if not ruff.lower().endswith(".py"):
-                return ruff
+                return os.path.abspath(ruff)
 
     raise RuntimeError(
         "Ruff executable not found or resolved to a Python file. Ensure Ruff is installed (e.g., `pip install ruff` or `rye sync`)."
@@ -160,7 +163,7 @@ def format_code_block(code: str) -> str:
             ruff_path,
             "format",
             "--stdin-filename=script.py",
-            f"--line-length={DEFAULT_LINE_LENGTH}",
+            f"--line-length={_ruff_line_length}",
         ],
         encoding="utf-8",
         input=code,
@@ -205,6 +208,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("-E", "--skip-errors", action="store_true")
     parser.add_argument("filenames", nargs="*")
     args = parser.parse_args(argv)
+
+    # Honor CLI-configured line length
+    global _ruff_line_length
+    _ruff_line_length = args.line_length
 
     retv = 0
     for filename in args.filenames:
