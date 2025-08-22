@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.8.0 (2025-08-22)
+
+Full Changelog: [v1.7.0...v1.8.0](https://github.com/ArcadeAI/arcade-py/compare/v1.7.0...v1.8.0)
+
+### Features
+
+* **api:** api update ([2002172](https://github.com/ArcadeAI/arcade-py/commit/2002172f8b3ae40bc4369bf2bd855d5c226f32c6))
+* **client:** support file upload requests ([adee680](https://github.com/ArcadeAI/arcade-py/commit/adee6802723e2d39f46ae63d65fb8436b3407c88))
+
+
+### Chores
+
+* **internal:** fix ruff target version ([c10bfbb](https://github.com/ArcadeAI/arcade-py/commit/c10bfbb961d2e10744e2b8fc5940cadd2a5adb74))
+* **internal:** update comment in script ([e248479](https://github.com/ArcadeAI/arcade-py/commit/e248479421494f9f585b6a035477e95b2a04c8a1))
+* **project:** add settings file for vscode ([9611226](https://github.com/ArcadeAI/arcade-py/commit/9611226ac1d0bb9ea0e2e5cc3dbf66c392ef90af))
+* update @stainless-api/prism-cli to v5.15.0 ([6fed0b8](https://github.com/ArcadeAI/arcade-py/commit/6fed0b8458e33c4abc422430069a7a22007e52c2))
+* update github action ([66ec9db](https://github.com/ArcadeAI/arcade-py/commit/66ec9db0a712543f3e35554d02c2c7eb8d1f0bc1))
+
 ## 1.7.0 (2025-07-23)
 
 Full Changelog: [v1.6.0...v1.7.0](https://github.com/ArcadeAI/arcade-py/compare/v1.6.0...v1.7.0)
