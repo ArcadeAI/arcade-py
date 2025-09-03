@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Iterable
+from typing import Dict, Iterable
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -58,7 +58,7 @@ class CompletionsResource(SyncAPIResource):
         presence_penalty: float | NotGiven = NOT_GIVEN,
         response_format: completion_create_params.ResponseFormat | NotGiven = NOT_GIVEN,
         seed: int | NotGiven = NOT_GIVEN,
-        stop: List[str] | NotGiven = NOT_GIVEN,
+        stop: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         stream: bool | NotGiven = NOT_GIVEN,
         stream_options: completion_create_params.StreamOptions | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
@@ -174,7 +174,7 @@ class AsyncCompletionsResource(AsyncAPIResource):
         presence_penalty: float | NotGiven = NOT_GIVEN,
         response_format: completion_create_params.ResponseFormat | NotGiven = NOT_GIVEN,
         seed: int | NotGiven = NOT_GIVEN,
-        stop: List[str] | NotGiven = NOT_GIVEN,
+        stop: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         stream: bool | NotGiven = NOT_GIVEN,
         stream_options: completion_create_params.StreamOptions | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
