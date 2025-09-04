@@ -75,6 +75,8 @@ class WorkerResponse(BaseModel):
 
     http: Optional[HTTP] = None
 
+    managed: Optional[bool] = None
+
     mcp: Optional[Mcp] = None
 
     oxp: Optional[Oxp] = None
