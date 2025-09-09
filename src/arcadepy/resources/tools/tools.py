@@ -185,6 +185,7 @@ class ToolsResource(SyncAPIResource):
         self,
         *,
         tool_name: str,
+        include_error_stacktrace: bool | NotGiven = NOT_GIVEN,
         input: Dict[str, object] | NotGiven = NOT_GIVEN,
         run_at: str | NotGiven = NOT_GIVEN,
         tool_version: str | NotGiven = NOT_GIVEN,
@@ -200,6 +201,9 @@ class ToolsResource(SyncAPIResource):
         Executes a tool by name and arguments
 
         Args:
+          include_error_stacktrace: Whether to include the error stacktrace in the response. If not provided, the
+              error stacktrace is not included.
+
           input: JSON input to the tool, if any
 
           run_at: The time at which the tool should be run (optional). If not provided, the tool
@@ -220,6 +224,7 @@ class ToolsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "tool_name": tool_name,
+                    "include_error_stacktrace": include_error_stacktrace,
                     "input": input,
                     "run_at": run_at,
                     "tool_version": tool_version,
@@ -425,6 +430,7 @@ class AsyncToolsResource(AsyncAPIResource):
         self,
         *,
         tool_name: str,
+        include_error_stacktrace: bool | NotGiven = NOT_GIVEN,
         input: Dict[str, object] | NotGiven = NOT_GIVEN,
         run_at: str | NotGiven = NOT_GIVEN,
         tool_version: str | NotGiven = NOT_GIVEN,
@@ -440,6 +446,9 @@ class AsyncToolsResource(AsyncAPIResource):
         Executes a tool by name and arguments
 
         Args:
+          include_error_stacktrace: Whether to include the error stacktrace in the response. If not provided, the
+              error stacktrace is not included.
+
           input: JSON input to the tool, if any
 
           run_at: The time at which the tool should be run (optional). If not provided, the tool
@@ -460,6 +469,7 @@ class AsyncToolsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "tool_name": tool_name,
+                    "include_error_stacktrace": include_error_stacktrace,
                     "input": input,
                     "run_at": run_at,
                     "tool_version": tool_version,

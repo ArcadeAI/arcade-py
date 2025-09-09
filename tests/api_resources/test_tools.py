@@ -110,6 +110,7 @@ class TestTools:
     def test_method_execute_with_all_params(self, client: Arcade) -> None:
         tool = client.tools.execute(
             tool_name="tool_name",
+            include_error_stacktrace=True,
             input={"foo": "bar"},
             run_at="run_at",
             tool_version="tool_version",
@@ -282,6 +283,7 @@ class TestAsyncTools:
     async def test_method_execute_with_all_params(self, async_client: AsyncArcade) -> None:
         tool = await async_client.tools.execute(
             tool_name="tool_name",
+            include_error_stacktrace=True,
             input={"foo": "bar"},
             run_at="run_at",
             tool_version="tool_version",
