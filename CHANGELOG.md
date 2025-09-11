@@ -1,5 +1,37 @@
 # Changelog
 
+## 1.8.0 (2025-09-11)
+
+Full Changelog: [v1.7.0...v1.8.0](https://github.com/ArcadeAI/arcade-py/compare/v1.7.0...v1.8.0)
+
+### Features
+
+* **api:** api update ([f658a31](https://github.com/ArcadeAI/arcade-py/commit/f658a31f59d48a0b98af76f8a8c9b26c18b63c90))
+* **api:** api update ([b5347f1](https://github.com/ArcadeAI/arcade-py/commit/b5347f1b9010f3fbc6021cca7815cd7b23e1024b))
+* **api:** api update ([2002172](https://github.com/ArcadeAI/arcade-py/commit/2002172f8b3ae40bc4369bf2bd855d5c226f32c6))
+* **client:** support file upload requests ([adee680](https://github.com/ArcadeAI/arcade-py/commit/adee6802723e2d39f46ae63d65fb8436b3407c88))
+* improve future compat with pydantic v3 ([b0fee8f](https://github.com/ArcadeAI/arcade-py/commit/b0fee8f9f58da07007420ac5b741136c41672bd9))
+* **types:** replace List[str] with SequenceNotStr in params ([acea6f7](https://github.com/ArcadeAI/arcade-py/commit/acea6f763810d79845f31d73e2ea79b153ca0007))
+
+
+### Bug Fixes
+
+* avoid newer type syntax ([565f29d](https://github.com/ArcadeAI/arcade-py/commit/565f29d37e13c4cb4bb7d6b6675c2a4f74a24ef0))
+
+
+### Chores
+
+* **internal:** add Sequence related utils ([bb04ab5](https://github.com/ArcadeAI/arcade-py/commit/bb04ab57e41ddc0d2053d43e8accfd4299c7803a))
+* **internal:** change ci workflow machines ([3238508](https://github.com/ArcadeAI/arcade-py/commit/3238508b90610f40a34f4b3c214bb8082ac28f07))
+* **internal:** codegen related update ([67c2153](https://github.com/ArcadeAI/arcade-py/commit/67c215338a0af06d69a1345d312aff24190e369f))
+* **internal:** fix ruff target version ([c10bfbb](https://github.com/ArcadeAI/arcade-py/commit/c10bfbb961d2e10744e2b8fc5940cadd2a5adb74))
+* **internal:** move mypy configurations to `pyproject.toml` file ([1eebbfd](https://github.com/ArcadeAI/arcade-py/commit/1eebbfd15baf996cf5f2cf50c097a7d846c3360f))
+* **internal:** update comment in script ([e248479](https://github.com/ArcadeAI/arcade-py/commit/e248479421494f9f585b6a035477e95b2a04c8a1))
+* **internal:** update pyright exclude list ([b322b28](https://github.com/ArcadeAI/arcade-py/commit/b322b2808fb8b419f4f895f39353e000efe51767))
+* **project:** add settings file for vscode ([9611226](https://github.com/ArcadeAI/arcade-py/commit/9611226ac1d0bb9ea0e2e5cc3dbf66c392ef90af))
+* update @stainless-api/prism-cli to v5.15.0 ([6fed0b8](https://github.com/ArcadeAI/arcade-py/commit/6fed0b8458e33c4abc422430069a7a22007e52c2))
+* update github action ([66ec9db](https://github.com/ArcadeAI/arcade-py/commit/66ec9db0a712543f3e35554d02c2c7eb8d1f0bc1))
+
 ## 1.7.0 (2025-07-23)
 
 Full Changelog: [v1.6.0...v1.7.0](https://github.com/ArcadeAI/arcade-py/compare/v1.6.0...v1.7.0)
