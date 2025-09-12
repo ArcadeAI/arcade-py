@@ -32,6 +32,7 @@ class TestAuthProviders:
         auth_provider = client.admin.auth_providers.create(
             id="id",
             description="description",
+            external_id="external_id",
             oauth2={
                 "client_id": "client_id",
                 "authorize_request": {
@@ -342,6 +343,7 @@ class TestAsyncAuthProviders:
         auth_provider = await async_client.admin.auth_providers.create(
             id="id",
             description="description",
+            external_id="external_id",
             oauth2={
                 "client_id": "client_id",
                 "authorize_request": {
