@@ -6,7 +6,7 @@ from typing import Dict, Iterable
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -47,32 +47,32 @@ class CompletionsResource(SyncAPIResource):
     def create(
         self,
         *,
-        frequency_penalty: float | NotGiven = NOT_GIVEN,
-        logit_bias: Dict[str, int] | NotGiven = NOT_GIVEN,
-        logprobs: bool | NotGiven = NOT_GIVEN,
-        max_tokens: int | NotGiven = NOT_GIVEN,
-        messages: Iterable[ChatMessageParam] | NotGiven = NOT_GIVEN,
-        model: str | NotGiven = NOT_GIVEN,
-        n: int | NotGiven = NOT_GIVEN,
-        parallel_tool_calls: bool | NotGiven = NOT_GIVEN,
-        presence_penalty: float | NotGiven = NOT_GIVEN,
-        response_format: completion_create_params.ResponseFormat | NotGiven = NOT_GIVEN,
-        seed: int | NotGiven = NOT_GIVEN,
-        stop: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        stream: bool | NotGiven = NOT_GIVEN,
-        stream_options: completion_create_params.StreamOptions | NotGiven = NOT_GIVEN,
-        temperature: float | NotGiven = NOT_GIVEN,
-        tool_choice: object | NotGiven = NOT_GIVEN,
-        tools: object | NotGiven = NOT_GIVEN,
-        top_logprobs: int | NotGiven = NOT_GIVEN,
-        top_p: float | NotGiven = NOT_GIVEN,
-        user: str | NotGiven = NOT_GIVEN,
+        frequency_penalty: float | Omit = omit,
+        logit_bias: Dict[str, int] | Omit = omit,
+        logprobs: bool | Omit = omit,
+        max_tokens: int | Omit = omit,
+        messages: Iterable[ChatMessageParam] | Omit = omit,
+        model: str | Omit = omit,
+        n: int | Omit = omit,
+        parallel_tool_calls: bool | Omit = omit,
+        presence_penalty: float | Omit = omit,
+        response_format: completion_create_params.ResponseFormat | Omit = omit,
+        seed: int | Omit = omit,
+        stop: SequenceNotStr[str] | Omit = omit,
+        stream: bool | Omit = omit,
+        stream_options: completion_create_params.StreamOptions | Omit = omit,
+        temperature: float | Omit = omit,
+        tool_choice: object | Omit = omit,
+        tools: object | Omit = omit,
+        top_logprobs: int | Omit = omit,
+        top_p: float | Omit = omit,
+        user: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ChatResponse:
         """
         Interact with language models via OpenAI's chat completions API
@@ -163,32 +163,32 @@ class AsyncCompletionsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        frequency_penalty: float | NotGiven = NOT_GIVEN,
-        logit_bias: Dict[str, int] | NotGiven = NOT_GIVEN,
-        logprobs: bool | NotGiven = NOT_GIVEN,
-        max_tokens: int | NotGiven = NOT_GIVEN,
-        messages: Iterable[ChatMessageParam] | NotGiven = NOT_GIVEN,
-        model: str | NotGiven = NOT_GIVEN,
-        n: int | NotGiven = NOT_GIVEN,
-        parallel_tool_calls: bool | NotGiven = NOT_GIVEN,
-        presence_penalty: float | NotGiven = NOT_GIVEN,
-        response_format: completion_create_params.ResponseFormat | NotGiven = NOT_GIVEN,
-        seed: int | NotGiven = NOT_GIVEN,
-        stop: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        stream: bool | NotGiven = NOT_GIVEN,
-        stream_options: completion_create_params.StreamOptions | NotGiven = NOT_GIVEN,
-        temperature: float | NotGiven = NOT_GIVEN,
-        tool_choice: object | NotGiven = NOT_GIVEN,
-        tools: object | NotGiven = NOT_GIVEN,
-        top_logprobs: int | NotGiven = NOT_GIVEN,
-        top_p: float | NotGiven = NOT_GIVEN,
-        user: str | NotGiven = NOT_GIVEN,
+        frequency_penalty: float | Omit = omit,
+        logit_bias: Dict[str, int] | Omit = omit,
+        logprobs: bool | Omit = omit,
+        max_tokens: int | Omit = omit,
+        messages: Iterable[ChatMessageParam] | Omit = omit,
+        model: str | Omit = omit,
+        n: int | Omit = omit,
+        parallel_tool_calls: bool | Omit = omit,
+        presence_penalty: float | Omit = omit,
+        response_format: completion_create_params.ResponseFormat | Omit = omit,
+        seed: int | Omit = omit,
+        stop: SequenceNotStr[str] | Omit = omit,
+        stream: bool | Omit = omit,
+        stream_options: completion_create_params.StreamOptions | Omit = omit,
+        temperature: float | Omit = omit,
+        tool_choice: object | Omit = omit,
+        tools: object | Omit = omit,
+        top_logprobs: int | Omit = omit,
+        top_p: float | Omit = omit,
+        user: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ChatResponse:
         """
         Interact with language models via OpenAI's chat completions API
