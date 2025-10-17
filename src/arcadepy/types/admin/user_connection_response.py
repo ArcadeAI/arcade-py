@@ -18,6 +18,8 @@ class UserConnectionResponse(BaseModel):
 
     provider_id: Optional[str] = None
 
+    provider_type: Optional[str] = None
+
     provider_user_info: Optional[object] = None
 
     scopes: Optional[List[str]] = None
