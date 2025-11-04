@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.9.0 (2025-11-04)
+
+Full Changelog: [v1.8.0...v1.9.0](https://github.com/ArcadeAI/arcade-py/compare/v1.8.0...v1.9.0)
+
+### Features
+
+* **api:** api update ([85c5f67](https://github.com/ArcadeAI/arcade-py/commit/85c5f671f829356f6b4556745785e9ecf3d86ff5))
+* **api:** api update ([73a9b83](https://github.com/ArcadeAI/arcade-py/commit/73a9b83cd333bd38db8560b91764f662fa8f4e7a))
+* **api:** api update ([cc7a611](https://github.com/ArcadeAI/arcade-py/commit/cc7a611b60084672f41979aea807f18249d1cb01))
+* **api:** api update ([eebc9ed](https://github.com/ArcadeAI/arcade-py/commit/eebc9edf476f0838f584f6d356fdaee8d8d79c76))
+
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([e5ceb83](https://github.com/ArcadeAI/arcade-py/commit/e5ceb832d91dfca38c306f69526c8a909d932f16))
+
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([8d8e4b7](https://github.com/ArcadeAI/arcade-py/commit/8d8e4b7d707dce5a3e9869f3346cd256cd759c5c))
+* do not install brew dependencies in ./scripts/bootstrap by default ([927371b](https://github.com/ArcadeAI/arcade-py/commit/927371b47365c528be87e5dce549c0363d9b7a11))
+* **internal/tests:** avoid race condition with implicit client cleanup ([b14f88e](https://github.com/ArcadeAI/arcade-py/commit/b14f88efb33569f5307d9eabc4d7b6a6da9f477e))
+* **internal:** detect missing future annotations with ruff ([0afbe98](https://github.com/ArcadeAI/arcade-py/commit/0afbe984f92a6323e30c8eeb50685083ad83869e))
+* **internal:** grammar fix (it's -&gt; its) ([95c0ec1](https://github.com/ArcadeAI/arcade-py/commit/95c0ec14da8731bd724acb9c64973a05288c7fda))
+* **internal:** update pydantic dependency ([450a852](https://github.com/ArcadeAI/arcade-py/commit/450a852ffa8000a2c7e1d4d294a925366301c3fd))
+* **types:** change optional parameter type from NotGiven to Omit ([484c472](https://github.com/ArcadeAI/arcade-py/commit/484c472696a53d5b7ea9c14d9a826bc6701f0704))
+
 ## 1.8.0 (2025-09-11)
 
 Full Changelog: [v1.7.0...v1.8.0](https://github.com/ArcadeAI/arcade-py/compare/v1.7.0...v1.8.0)
