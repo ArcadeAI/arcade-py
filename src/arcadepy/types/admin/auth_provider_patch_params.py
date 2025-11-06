@@ -34,6 +34,8 @@ class AuthProviderPatchParams(TypedDict, total=False):
 
 
 class Oauth2AuthorizeRequest(TypedDict, total=False):
+    auth_header_value_format: str
+
     auth_method: str
 
     endpoint: str
@@ -56,6 +58,8 @@ class Oauth2Pkce(TypedDict, total=False):
 
 
 class Oauth2RefreshRequest(TypedDict, total=False):
+    auth_header_value_format: str
+
     auth_method: str
 
     endpoint: str
@@ -72,6 +76,8 @@ class Oauth2RefreshRequest(TypedDict, total=False):
 
 
 class Oauth2TokenRequest(TypedDict, total=False):
+    auth_header_value_format: str
+
     auth_method: str
 
     endpoint: str
@@ -94,6 +100,8 @@ class Oauth2UserInfoRequestTriggers(TypedDict, total=False):
 
 
 class Oauth2UserInfoRequest(TypedDict, total=False):
+    auth_header_value_format: str
+
     auth_method: str
 
     endpoint: str
