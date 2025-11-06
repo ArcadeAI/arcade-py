@@ -39,6 +39,8 @@ class AuthProviderCreateParams(TypedDict, total=False):
 class Oauth2AuthorizeRequest(TypedDict, total=False):
     endpoint: Required[str]
 
+    auth_header_value_format: str
+
     auth_method: str
 
     method: str
@@ -60,6 +62,8 @@ class Oauth2Pkce(TypedDict, total=False):
 
 class Oauth2RefreshRequest(TypedDict, total=False):
     endpoint: Required[str]
+
+    auth_header_value_format: str
 
     auth_method: str
 
@@ -85,6 +89,8 @@ class Oauth2TokenIntrospectionRequest(TypedDict, total=False):
 
     triggers: Required[Oauth2TokenIntrospectionRequestTriggers]
 
+    auth_header_value_format: str
+
     auth_method: str
 
     method: str
@@ -100,6 +106,8 @@ class Oauth2TokenIntrospectionRequest(TypedDict, total=False):
 
 class Oauth2TokenRequest(TypedDict, total=False):
     endpoint: Required[str]
+
+    auth_header_value_format: str
 
     auth_method: str
 
@@ -124,6 +132,8 @@ class Oauth2UserInfoRequest(TypedDict, total=False):
     endpoint: Required[str]
 
     triggers: Required[Oauth2UserInfoRequestTriggers]
+
+    auth_header_value_format: str
 
     auth_method: str
 
