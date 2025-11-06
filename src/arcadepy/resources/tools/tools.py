@@ -8,7 +8,7 @@ from typing_extensions import Literal
 import httpx
 
 from ...types import tool_get_params, tool_list_params, tool_execute_params, tool_authorize_params
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from .formatted import (
@@ -74,17 +74,17 @@ class ToolsResource(SyncAPIResource):
     def list(
         self,
         *,
-        include_format: List[Literal["arcade", "openai", "anthropic"]] | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        toolkit: str | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
+        include_format: List[Literal["arcade", "openai", "anthropic"]] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        toolkit: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncOffsetPage[ToolDefinition]:
         """
         Returns a page of tools from the engine configuration, optionally filtered by
@@ -135,15 +135,15 @@ class ToolsResource(SyncAPIResource):
         self,
         *,
         tool_name: str,
-        next_uri: str | NotGiven = NOT_GIVEN,
-        tool_version: str | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
+        next_uri: str | Omit = omit,
+        tool_version: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthorizationResponse:
         """
         Authorizes a user for a specific tool by name
@@ -185,17 +185,17 @@ class ToolsResource(SyncAPIResource):
         self,
         *,
         tool_name: str,
-        include_error_stacktrace: bool | NotGiven = NOT_GIVEN,
-        input: Dict[str, object] | NotGiven = NOT_GIVEN,
-        run_at: str | NotGiven = NOT_GIVEN,
-        tool_version: str | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
+        include_error_stacktrace: bool | Omit = omit,
+        input: Dict[str, object] | Omit = omit,
+        run_at: str | Omit = omit,
+        tool_version: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExecuteToolResponse:
         """
         Executes a tool by name and arguments
@@ -242,14 +242,14 @@ class ToolsResource(SyncAPIResource):
         self,
         name: str,
         *,
-        include_format: List[Literal["arcade", "openai", "anthropic"]] | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
+        include_format: List[Literal["arcade", "openai", "anthropic"]] | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ToolDefinition:
         """
         Returns the arcade tool specification for a specific tool
@@ -319,17 +319,17 @@ class AsyncToolsResource(AsyncAPIResource):
     def list(
         self,
         *,
-        include_format: List[Literal["arcade", "openai", "anthropic"]] | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        toolkit: str | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
+        include_format: List[Literal["arcade", "openai", "anthropic"]] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        toolkit: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[ToolDefinition, AsyncOffsetPage[ToolDefinition]]:
         """
         Returns a page of tools from the engine configuration, optionally filtered by
@@ -380,15 +380,15 @@ class AsyncToolsResource(AsyncAPIResource):
         self,
         *,
         tool_name: str,
-        next_uri: str | NotGiven = NOT_GIVEN,
-        tool_version: str | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
+        next_uri: str | Omit = omit,
+        tool_version: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthorizationResponse:
         """
         Authorizes a user for a specific tool by name
@@ -430,17 +430,17 @@ class AsyncToolsResource(AsyncAPIResource):
         self,
         *,
         tool_name: str,
-        include_error_stacktrace: bool | NotGiven = NOT_GIVEN,
-        input: Dict[str, object] | NotGiven = NOT_GIVEN,
-        run_at: str | NotGiven = NOT_GIVEN,
-        tool_version: str | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
+        include_error_stacktrace: bool | Omit = omit,
+        input: Dict[str, object] | Omit = omit,
+        run_at: str | Omit = omit,
+        tool_version: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExecuteToolResponse:
         """
         Executes a tool by name and arguments
@@ -487,14 +487,14 @@ class AsyncToolsResource(AsyncAPIResource):
         self,
         name: str,
         *,
-        include_format: List[Literal["arcade", "openai", "anthropic"]] | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
+        include_format: List[Literal["arcade", "openai", "anthropic"]] | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ToolDefinition:
         """
         Returns the arcade tool specification for a specific tool

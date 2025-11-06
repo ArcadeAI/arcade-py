@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -46,18 +46,18 @@ class AuthProvidersResource(SyncAPIResource):
         self,
         *,
         id: str,
-        description: str | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
-        oauth2: auth_provider_create_params.Oauth2 | NotGiven = NOT_GIVEN,
-        provider_id: str | NotGiven = NOT_GIVEN,
-        status: str | NotGiven = NOT_GIVEN,
-        type: str | NotGiven = NOT_GIVEN,
+        description: str | Omit = omit,
+        external_id: str | Omit = omit,
+        oauth2: auth_provider_create_params.Oauth2 | Omit = omit,
+        provider_id: str | Omit = omit,
+        status: str | Omit = omit,
+        type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthProviderResponse:
         """
         Create a new auth provider
@@ -101,7 +101,7 @@ class AuthProvidersResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthProviderListResponse:
         """List a page of auth providers that are available to the caller"""
         return self._get(
@@ -121,7 +121,7 @@ class AuthProvidersResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthProviderResponse:
         """
         Delete a specific auth provider
@@ -154,7 +154,7 @@ class AuthProvidersResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthProviderResponse:
         """
         Get the details of a specific auth provider
@@ -182,18 +182,18 @@ class AuthProvidersResource(SyncAPIResource):
         self,
         path_id: str,
         *,
-        body_id: str | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        oauth2: auth_provider_patch_params.Oauth2 | NotGiven = NOT_GIVEN,
-        provider_id: str | NotGiven = NOT_GIVEN,
-        status: str | NotGiven = NOT_GIVEN,
-        type: str | NotGiven = NOT_GIVEN,
+        body_id: str | Omit = omit,
+        description: str | Omit = omit,
+        oauth2: auth_provider_patch_params.Oauth2 | Omit = omit,
+        provider_id: str | Omit = omit,
+        status: str | Omit = omit,
+        type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthProviderResponse:
         """
         Patch an existing auth provider
@@ -253,18 +253,18 @@ class AsyncAuthProvidersResource(AsyncAPIResource):
         self,
         *,
         id: str,
-        description: str | NotGiven = NOT_GIVEN,
-        external_id: str | NotGiven = NOT_GIVEN,
-        oauth2: auth_provider_create_params.Oauth2 | NotGiven = NOT_GIVEN,
-        provider_id: str | NotGiven = NOT_GIVEN,
-        status: str | NotGiven = NOT_GIVEN,
-        type: str | NotGiven = NOT_GIVEN,
+        description: str | Omit = omit,
+        external_id: str | Omit = omit,
+        oauth2: auth_provider_create_params.Oauth2 | Omit = omit,
+        provider_id: str | Omit = omit,
+        status: str | Omit = omit,
+        type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthProviderResponse:
         """
         Create a new auth provider
@@ -308,7 +308,7 @@ class AsyncAuthProvidersResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthProviderListResponse:
         """List a page of auth providers that are available to the caller"""
         return await self._get(
@@ -328,7 +328,7 @@ class AsyncAuthProvidersResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthProviderResponse:
         """
         Delete a specific auth provider
@@ -361,7 +361,7 @@ class AsyncAuthProvidersResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthProviderResponse:
         """
         Get the details of a specific auth provider
@@ -389,18 +389,18 @@ class AsyncAuthProvidersResource(AsyncAPIResource):
         self,
         path_id: str,
         *,
-        body_id: str | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        oauth2: auth_provider_patch_params.Oauth2 | NotGiven = NOT_GIVEN,
-        provider_id: str | NotGiven = NOT_GIVEN,
-        status: str | NotGiven = NOT_GIVEN,
-        type: str | NotGiven = NOT_GIVEN,
+        body_id: str | Omit = omit,
+        description: str | Omit = omit,
+        oauth2: auth_provider_patch_params.Oauth2 | Omit = omit,
+        provider_id: str | Omit = omit,
+        status: str | Omit = omit,
+        type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthProviderResponse:
         """
         Patch an existing auth provider
