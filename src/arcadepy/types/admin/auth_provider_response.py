@@ -28,6 +28,8 @@ class Binding(BaseModel):
 
 
 class Oauth2AuthorizeRequest(BaseModel):
+    auth_header_value_format: Optional[str] = None
+
     auth_method: Optional[str] = None
 
     endpoint: Optional[str] = None
@@ -64,6 +66,8 @@ class Oauth2Pkce(BaseModel):
 
 
 class Oauth2RefreshRequest(BaseModel):
+    auth_header_value_format: Optional[str] = None
+
     auth_method: Optional[str] = None
 
     endpoint: Optional[str] = None
@@ -88,6 +92,8 @@ class Oauth2TokenIntrospectionRequestTriggers(BaseModel):
 
 
 class Oauth2TokenIntrospectionRequest(BaseModel):
+    auth_header_value_format: Optional[str] = None
+
     auth_method: Optional[str] = None
 
     enabled: Optional[bool] = None
@@ -110,6 +116,8 @@ class Oauth2TokenIntrospectionRequest(BaseModel):
 
 
 class Oauth2TokenRequest(BaseModel):
+    auth_header_value_format: Optional[str] = None
+
     auth_method: Optional[str] = None
 
     endpoint: Optional[str] = None
@@ -134,6 +142,8 @@ class Oauth2UserInfoRequestTriggers(BaseModel):
 
 
 class Oauth2UserInfoRequest(BaseModel):
+    auth_header_value_format: Optional[str] = None
+
     auth_method: Optional[str] = None
 
     endpoint: Optional[str] = None
