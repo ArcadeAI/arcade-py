@@ -1,8 +1,10 @@
 # fork of https://github.com/asottile/blacken-docs adapted for ruff
 from __future__ import annotations
 
+import os
 import re
 import sys
+import shutil
 import argparse
 import textwrap
 import contextlib
@@ -23,6 +25,9 @@ PYCON_CONTINUATION_RE = re.compile(
     rf"^{re.escape(PYCON_CONTINUATION_PREFIX)}( |$)",
 )
 DEFAULT_LINE_LENGTH = 100
+
+# Track the requested line length so CLI -l is honored.
+_ruff_line_length: int = DEFAULT_LINE_LENGTH
 
 
 class CodeBlockError(NamedTuple):
@@ -104,18 +109,65 @@ def format_str(
     return src, errors
 
 
+def _resolve_ruff_executable() -> str:
+    """Return an absolute path to the Ruff executable, avoiding CWD shadowing.
+
+    Strategy:
+    - Prefer the executable in the same directory as the current Python (venv/bin or Scripts).
+    - Fallback to PATH search excluding the current working directory.
+    - Reject .py files to prevent executing a shadowing Python module/script.
+    """
+    scripts_dir = os.path.dirname(sys.executable)
+    if os.name == "nt":
+        candidates = [
+            os.path.join(scripts_dir, "ruff.exe"),
+            os.path.join(scripts_dir, "ruff.bat"),
+        ]
+    else:
+        candidates = [
+            os.path.join(scripts_dir, "ruff"),
+        ]
+    for c in candidates:
+        if os.path.isfile(c):
+            return os.path.abspath(c)
+
+    # Build a PATH without CWD entries
+    env_path = os.environ.get("PATH", "")
+    parts = [p for p in env_path.split(os.pathsep) if p and p not in (".", os.getcwd())]
+    safe_path = os.pathsep.join(parts)
+
+    ruff = shutil.which("ruff", path=safe_path)
+    if ruff:
+        if os.name == "nt":
+            if ruff.lower().endswith((".exe", ".bat")):
+                return os.path.abspath(ruff)
+        else:
+            if not ruff.lower().endswith(".py"):
+                return os.path.abspath(ruff)
+
+    raise RuntimeError(
+        "Ruff executable not found or resolved to a Python file. Ensure Ruff is installed (e.g., `pip install ruff` or `rye sync`)."
+    )
+
+
 def format_code_block(code: str) -> str:
+    # Resolve the Ruff binary directly to avoid `python -m ruff` module shadowing.
+    ruff_path = _resolve_ruff_executable()
+
+    # Lightly sanitize environment to avoid accidental PYTHONPATH injection.
+    env = os.environ.copy()
+    env.pop("PYTHONPATH", None)
+
     return subprocess.check_output(
         [
-            sys.executable,
-            "-m",
-            "ruff",
+            ruff_path,
             "format",
             "--stdin-filename=script.py",
-            f"--line-length={DEFAULT_LINE_LENGTH}",
+            f"--line-length={_ruff_line_length}",
         ],
         encoding="utf-8",
         input=code,
+        env=env,
     )
 
 
@@ -156,6 +208,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("-E", "--skip-errors", action="store_true")
     parser.add_argument("filenames", nargs="*")
     args = parser.parse_args(argv)
+
+    # Honor CLI-configured line length
+    global _ruff_line_length
+    _ruff_line_length = args.line_length
 
     retv = 0
     for filename in args.filenames:
