@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.10.1 (2025-11-12)
+
+Full Changelog: [v1.10.0...v1.10.1](https://github.com/ArcadeAI/arcade-py/compare/v1.10.0...v1.10.1)
+
+### Bug Fixes
+
+* compat with Python 3.14 ([4453f62](https://github.com/ArcadeAI/arcade-py/commit/4453f62ffe78f5bf6ec84c89566a2581ef381cca))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([d4527cf](https://github.com/ArcadeAI/arcade-py/commit/d4527cf2a0ab18f31c0b75d6b452a09f47bd15f5))
+
+
+### Chores
+
+* **package:** drop Python 3.8 support ([d68084f](https://github.com/ArcadeAI/arcade-py/commit/d68084f663f4cf682457a195918d95cce6584772))
+
 ## 1.10.0 (2025-11-06)
 
 Full Changelog: [v1.9.0...v1.10.0](https://github.com/ArcadeAI/arcade-py/compare/v1.9.0...v1.10.0)
