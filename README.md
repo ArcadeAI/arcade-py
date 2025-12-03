@@ -87,6 +87,7 @@ pip install arcadepy[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from arcadepy import DefaultAioHttpClient
 from arcadepy import AsyncArcade
@@ -94,7 +95,7 @@ from arcadepy import AsyncArcade
 
 async def main() -> None:
     async with AsyncArcade(
-        api_key="My API Key",
+        api_key=os.environ.get("ARCADE_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         execute_tool_response = await client.tools.execute(
