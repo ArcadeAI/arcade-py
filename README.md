@@ -3,7 +3,7 @@
 <!-- prettier-ignore -->
 [![PyPI version](https://img.shields.io/pypi/v/arcadepy.svg?label=pypi%20(stable))](https://pypi.org/project/arcadepy/)
 
-The Arcade Python library provides convenient access to the Arcade REST API from any Python 3.8+
+The Arcade Python library provides convenient access to the Arcade REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -87,6 +87,7 @@ pip install arcadepy[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from arcadepy import DefaultAioHttpClient
 from arcadepy import AsyncArcade
@@ -94,7 +95,7 @@ from arcadepy import AsyncArcade
 
 async def main() -> None:
     async with AsyncArcade(
-        api_key="My API Key",
+        api_key=os.environ.get("ARCADE_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         execute_tool_response = await client.tools.execute(
@@ -416,7 +417,7 @@ print(arcadepy.__version__)
 
 ## Requirements
 
-Python 3.8 or higher.
+Python 3.9 or higher.
 
 ## Contributing
 
