@@ -26,6 +26,7 @@ class TestFormatted:
     def test_method_list_with_all_params(self, client: Arcade) -> None:
         formatted = client.tools.formatted.list(
             format="format",
+            include_all_versions=True,
             limit=0,
             offset=0,
             toolkit="toolkit",
@@ -115,6 +116,7 @@ class TestAsyncFormatted:
     async def test_method_list_with_all_params(self, async_client: AsyncArcade) -> None:
         formatted = await async_client.tools.formatted.list(
             format="format",
+            include_all_versions=True,
             limit=0,
             offset=0,
             toolkit="toolkit",
