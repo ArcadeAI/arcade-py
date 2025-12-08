@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import httpx
 
-from ..._types import Body, Query, Headers, NoneType, NotGiven, not_given
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -13,7 +14,9 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ...types.admin import secret_create_params
 from ..._base_client import make_request_options
+from ...types.admin.secret_response import SecretResponse
 from ...types.admin.secret_list_response import SecretListResponse
 
 __all__ = ["SecretsResource", "AsyncSecretsResource"]
@@ -38,6 +41,48 @@ class SecretsResource(SyncAPIResource):
         For more information, see https://www.github.com/ArcadeAI/arcade-py#with_streaming_response
         """
         return SecretsResourceWithStreamingResponse(self)
+
+    def create(
+        self,
+        secret_key: str,
+        *,
+        value: str,
+        description: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SecretResponse:
+        """
+        Create or update a secret
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not secret_key:
+            raise ValueError(f"Expected a non-empty value for `secret_key` but received {secret_key!r}")
+        return self._post(
+            f"/v1/admin/secrets/{secret_key}",
+            body=maybe_transform(
+                {
+                    "value": value,
+                    "description": description,
+                },
+                secret_create_params.SecretCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SecretResponse,
+        )
 
     def list(
         self,
@@ -113,6 +158,48 @@ class AsyncSecretsResource(AsyncAPIResource):
         """
         return AsyncSecretsResourceWithStreamingResponse(self)
 
+    async def create(
+        self,
+        secret_key: str,
+        *,
+        value: str,
+        description: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SecretResponse:
+        """
+        Create or update a secret
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not secret_key:
+            raise ValueError(f"Expected a non-empty value for `secret_key` but received {secret_key!r}")
+        return await self._post(
+            f"/v1/admin/secrets/{secret_key}",
+            body=await async_maybe_transform(
+                {
+                    "value": value,
+                    "description": description,
+                },
+                secret_create_params.SecretCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SecretResponse,
+        )
+
     async def list(
         self,
         *,
@@ -171,6 +258,9 @@ class SecretsResourceWithRawResponse:
     def __init__(self, secrets: SecretsResource) -> None:
         self._secrets = secrets
 
+        self.create = to_raw_response_wrapper(
+            secrets.create,
+        )
         self.list = to_raw_response_wrapper(
             secrets.list,
         )
@@ -183,6 +273,9 @@ class AsyncSecretsResourceWithRawResponse:
     def __init__(self, secrets: AsyncSecretsResource) -> None:
         self._secrets = secrets
 
+        self.create = async_to_raw_response_wrapper(
+            secrets.create,
+        )
         self.list = async_to_raw_response_wrapper(
             secrets.list,
         )
@@ -195,6 +288,9 @@ class SecretsResourceWithStreamingResponse:
     def __init__(self, secrets: SecretsResource) -> None:
         self._secrets = secrets
 
+        self.create = to_streamed_response_wrapper(
+            secrets.create,
+        )
         self.list = to_streamed_response_wrapper(
             secrets.list,
         )
@@ -207,6 +303,9 @@ class AsyncSecretsResourceWithStreamingResponse:
     def __init__(self, secrets: AsyncSecretsResource) -> None:
         self._secrets = secrets
 
+        self.create = async_to_streamed_response_wrapper(
+            secrets.create,
+        )
         self.list = async_to_streamed_response_wrapper(
             secrets.list,
         )
