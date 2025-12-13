@@ -50,6 +50,7 @@ from arcadepy.types.admin import SecretResponse, SecretListResponse
 
 Methods:
 
+- <code title="post /v1/admin/secrets/{secret_key}">client.admin.secrets.<a href="./src/arcadepy/resources/admin/secrets.py">create</a>(secret_key, \*\*<a href="src/arcadepy/types/admin/secret_create_params.py">params</a>) -> <a href="./src/arcadepy/types/admin/secret_response.py">SecretResponse</a></code>
 - <code title="get /v1/admin/secrets">client.admin.secrets.<a href="./src/arcadepy/resources/admin/secrets.py">list</a>() -> <a href="./src/arcadepy/types/admin/secret_list_response.py">SecretListResponse</a></code>
 - <code title="delete /v1/admin/secrets/{secret_id}">client.admin.secrets.<a href="./src/arcadepy/resources/admin/secrets.py">delete</a>(secret_id) -> None</code>
 

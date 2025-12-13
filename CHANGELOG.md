@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.11.0 (2025-12-13)
+
+Full Changelog: [v1.10.0...v1.11.0](https://github.com/ArcadeAI/arcade-py/compare/v1.10.0...v1.11.0)
+
+### Features
+
+* **api:** api update ([f98c6d3](https://github.com/ArcadeAI/arcade-py/commit/f98c6d3ccf44a38525f056bc52011fbdcc3183c1))
+* **api:** api update ([60e16d2](https://github.com/ArcadeAI/arcade-py/commit/60e16d2e59496bcf64c28328e3a351925b82dccd))
+
+
+### Bug Fixes
+
+* compat with Python 3.14 ([4453f62](https://github.com/ArcadeAI/arcade-py/commit/4453f62ffe78f5bf6ec84c89566a2581ef381cca))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([d4527cf](https://github.com/ArcadeAI/arcade-py/commit/d4527cf2a0ab18f31c0b75d6b452a09f47bd15f5))
+* ensure streams are always closed ([e4be19e](https://github.com/ArcadeAI/arcade-py/commit/e4be19ee70952d16361d55acfc082875bd926c01))
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([6834686](https://github.com/ArcadeAI/arcade-py/commit/6834686ece469c756682bb559f8bca5b5b316296))
+
+
+### Chores
+
+* add missing docstrings ([d834791](https://github.com/ArcadeAI/arcade-py/commit/d8347917cfbe05f70e64d6c01ede460e15e20896))
+* add Python 3.14 classifier and testing ([8c6d5c5](https://github.com/ArcadeAI/arcade-py/commit/8c6d5c5ace8884839590c11a0b72f9ea70731e0e))
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([0c9e340](https://github.com/ArcadeAI/arcade-py/commit/0c9e3402e6714d2c1e4273ff5bd0e2dc00cce7b2))
+* **docs:** use environment variables for authentication in code snippets ([de0cde1](https://github.com/ArcadeAI/arcade-py/commit/de0cde1a836d5b1992d8cdc284c3decbfa8eb20b))
+* **package:** drop Python 3.8 support ([d68084f](https://github.com/ArcadeAI/arcade-py/commit/d68084f663f4cf682457a195918d95cce6584772))
+* update lockfile ([d0dae69](https://github.com/ArcadeAI/arcade-py/commit/d0dae695284c4ee2873529f0e24034dc409e99e7))
+
 ## 1.10.0 (2025-11-06)
 
 Full Changelog: [v1.9.0...v1.10.0](https://github.com/ArcadeAI/arcade-py/compare/v1.9.0...v1.10.0)
