@@ -1,4 +1,4 @@
 configured_endpoints: 30
 openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/arcade-ai%2Farcade-engine-7ecb40b6650ff002eed02efd1b59c630abe1fb9eb70c9c916c15b115260e5003.yml
 openapi_spec_hash: 2e5c04d1a50afcd0bdbd9737cec227c9
-config_hash: f26ae67630e2fac8d08a018eefd1d2d9
+config_hash: 01e6bd1df0d14c729087edec4e6b6650
