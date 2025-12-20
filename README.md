@@ -118,6 +118,71 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
 
+## Pagination
+
+List methods in the Arcade API are paginated.
+
+This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
+
+```python
+from arcadepy import Arcade
+
+client = Arcade()
+
+all_user_connections = []
+# Automatically fetches more pages as needed.
+for user_connection in client.admin.user_connections.list():
+    # Do something with user_connection here
+    all_user_connections.append(user_connection)
+print(all_user_connections)
+```
+
+Or, asynchronously:
+
+```python
+import asyncio
+from arcadepy import AsyncArcade
+
+client = AsyncArcade()
+
+
+async def main() -> None:
+    all_user_connections = []
+    # Iterate through items across all pages, issuing requests as needed.
+    async for user_connection in client.admin.user_connections.list():
+        all_user_connections.append(user_connection)
+    print(all_user_connections)
+
+
+asyncio.run(main())
+```
+
+Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
+
+```python
+first_page = await client.admin.user_connections.list()
+if first_page.has_next_page():
+    print(f"will fetch next page using these details: {first_page.next_page_info()}")
+    next_page = await first_page.get_next_page()
+    print(f"number of items we just fetched: {len(next_page.items)}")
+
+# Remove `await` for non-async usage.
+```
+
+Or just work directly with the returned data:
+
+```python
+first_page = await client.admin.user_connections.list()
+
+print(
+    f"the current start offset for this page: {first_page.offset}"
+)  # => "the current start offset for this page: 1"
+for user_connection in first_page.items:
+    print(user_connection.id)
+
+# Remove `await` for non-async usage.
+```
+
 ## Nested params
 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
