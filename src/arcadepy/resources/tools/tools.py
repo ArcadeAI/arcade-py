@@ -74,6 +74,7 @@ class ToolsResource(SyncAPIResource):
     def list(
         self,
         *,
+        include_all_versions: bool | Omit = omit,
         include_format: List[Literal["arcade", "openai", "anthropic"]] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
@@ -91,6 +92,8 @@ class ToolsResource(SyncAPIResource):
         toolkit
 
         Args:
+          include_all_versions: Include all versions of each tool
+
           include_format: Comma separated tool formats that will be included in the response.
 
           limit: Number of items to return (default: 25, max: 100)
@@ -119,6 +122,7 @@ class ToolsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "include_all_versions": include_all_versions,
                         "include_format": include_format,
                         "limit": limit,
                         "offset": offset,
@@ -319,6 +323,7 @@ class AsyncToolsResource(AsyncAPIResource):
     def list(
         self,
         *,
+        include_all_versions: bool | Omit = omit,
         include_format: List[Literal["arcade", "openai", "anthropic"]] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
@@ -336,6 +341,8 @@ class AsyncToolsResource(AsyncAPIResource):
         toolkit
 
         Args:
+          include_all_versions: Include all versions of each tool
+
           include_format: Comma separated tool formats that will be included in the response.
 
           limit: Number of items to return (default: 25, max: 100)
@@ -364,6 +371,7 @@ class AsyncToolsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "include_all_versions": include_all_versions,
                         "include_format": include_format,
                         "limit": limit,
                         "offset": offset,
