@@ -45,6 +45,7 @@ class FormattedResource(SyncAPIResource):
         self,
         *,
         format: str | Omit = omit,
+        include_all_versions: bool | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         toolkit: str | Omit = omit,
@@ -62,6 +63,8 @@ class FormattedResource(SyncAPIResource):
 
         Args:
           format: Provider format
+
+          include_all_versions: Include all versions of each tool
 
           limit: Number of items to return (default: 25, max: 100)
 
@@ -90,6 +93,7 @@ class FormattedResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "format": format,
+                        "include_all_versions": include_all_versions,
                         "limit": limit,
                         "offset": offset,
                         "toolkit": toolkit,
@@ -175,6 +179,7 @@ class AsyncFormattedResource(AsyncAPIResource):
         self,
         *,
         format: str | Omit = omit,
+        include_all_versions: bool | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         toolkit: str | Omit = omit,
@@ -192,6 +197,8 @@ class AsyncFormattedResource(AsyncAPIResource):
 
         Args:
           format: Provider format
+
+          include_all_versions: Include all versions of each tool
 
           limit: Number of items to return (default: 25, max: 100)
 
@@ -220,6 +227,7 @@ class AsyncFormattedResource(AsyncAPIResource):
                 query=maybe_transform(
                     {
                         "format": format,
+                        "include_all_versions": include_all_versions,
                         "limit": limit,
                         "offset": offset,
                         "toolkit": toolkit,

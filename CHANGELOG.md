@@ -1,5 +1,47 @@
 # Changelog
 
+## 1.11.0 (2026-01-30)
+
+Full Changelog: [v1.10.0...v1.11.0](https://github.com/ArcadeAI/arcade-py/compare/v1.10.0...v1.11.0)
+
+### Features
+
+* **api:** api update ([98c6790](https://github.com/ArcadeAI/arcade-py/commit/98c6790718ee4846d1add4eb3c7a8f48ddef479f))
+* **api:** api update ([0494c61](https://github.com/ArcadeAI/arcade-py/commit/0494c619815c501dd566368295c60889db84a54a))
+* **api:** api update ([f98c6d3](https://github.com/ArcadeAI/arcade-py/commit/f98c6d3ccf44a38525f056bc52011fbdcc3183c1))
+* **api:** api update ([60e16d2](https://github.com/ArcadeAI/arcade-py/commit/60e16d2e59496bcf64c28328e3a351925b82dccd))
+* **client:** add custom JSON encoder for extended type support ([9c2e7bf](https://github.com/ArcadeAI/arcade-py/commit/9c2e7bf6cf56bdaad5d98ad5a68b9ae0b049be7e))
+* **client:** add support for binary request streaming ([6fa872f](https://github.com/ArcadeAI/arcade-py/commit/6fa872ff85ff3b33528ad6644938a2d1f65b0987))
+
+
+### Bug Fixes
+
+* compat with Python 3.14 ([4453f62](https://github.com/ArcadeAI/arcade-py/commit/4453f62ffe78f5bf6ec84c89566a2581ef381cca))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([d4527cf](https://github.com/ArcadeAI/arcade-py/commit/d4527cf2a0ab18f31c0b75d6b452a09f47bd15f5))
+* ensure streams are always closed ([e4be19e](https://github.com/ArcadeAI/arcade-py/commit/e4be19ee70952d16361d55acfc082875bd926c01))
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([6834686](https://github.com/ArcadeAI/arcade-py/commit/6834686ece469c756682bb559f8bca5b5b316296))
+* use async_to_httpx_files in patch method ([855d52c](https://github.com/ArcadeAI/arcade-py/commit/855d52c4817ecb2421b8467a0190f1222b1306de))
+
+
+### Chores
+
+* add missing docstrings ([d834791](https://github.com/ArcadeAI/arcade-py/commit/d8347917cfbe05f70e64d6c01ede460e15e20896))
+* add Python 3.14 classifier and testing ([8c6d5c5](https://github.com/ArcadeAI/arcade-py/commit/8c6d5c5ace8884839590c11a0b72f9ea70731e0e))
+* **ci:** upgrade `actions/github-script` ([48d3629](https://github.com/ArcadeAI/arcade-py/commit/48d3629b09bb29815fc62424eb09850516d436f9))
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([0c9e340](https://github.com/ArcadeAI/arcade-py/commit/0c9e3402e6714d2c1e4273ff5bd0e2dc00cce7b2))
+* **docs:** use environment variables for authentication in code snippets ([de0cde1](https://github.com/ArcadeAI/arcade-py/commit/de0cde1a836d5b1992d8cdc284c3decbfa8eb20b))
+* **internal:** add `--fix` argument to lint script ([461ab0b](https://github.com/ArcadeAI/arcade-py/commit/461ab0bfb6285d29b773511c0350efcd1a011b7e))
+* **internal:** add missing files argument to base client ([eb32a75](https://github.com/ArcadeAI/arcade-py/commit/eb32a7551debd52fdfc15f3e7948d35e48f20875))
+* **internal:** update `actions/checkout` version ([e003383](https://github.com/ArcadeAI/arcade-py/commit/e003383f9c5cc4eb3818eef781a899badbe2c8f2))
+* **package:** drop Python 3.8 support ([d68084f](https://github.com/ArcadeAI/arcade-py/commit/d68084f663f4cf682457a195918d95cce6584772))
+* speedup initial import ([12abf0c](https://github.com/ArcadeAI/arcade-py/commit/12abf0c7c4493c0ff4e27db53679e65dde59eab9))
+* update lockfile ([d0dae69](https://github.com/ArcadeAI/arcade-py/commit/d0dae695284c4ee2873529f0e24034dc409e99e7))
+
+
+### Documentation
+
+* add more examples ([9b478ad](https://github.com/ArcadeAI/arcade-py/commit/9b478ad96ad23fa3db3e93263ae540158e5e098a))
+
 ## 1.10.0 (2025-11-06)
 
 Full Changelog: [v1.9.0...v1.10.0](https://github.com/ArcadeAI/arcade-py/compare/v1.9.0...v1.10.0)
