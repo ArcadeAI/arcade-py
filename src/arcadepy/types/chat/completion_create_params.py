@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Iterable
+from typing import Dict, Iterable
 from typing_extensions import Literal, TypedDict
 
+from ..._types import SequenceNotStr
 from ..chat_message_param import ChatMessageParam
 
 __all__ = ["CompletionCreateParams", "ResponseFormat", "StreamOptions"]
@@ -46,7 +47,7 @@ class CompletionCreateParams(TypedDict, total=False):
 
     seed: int
 
-    stop: List[str]
+    stop: SequenceNotStr[str]
 
     stream: bool
 
@@ -77,6 +78,8 @@ class ResponseFormat(TypedDict, total=False):
 
 
 class StreamOptions(TypedDict, total=False):
+    """Options for streaming response. Only set this when you set stream: true."""
+
     include_usage: bool
     """
     If set, an additional chunk will be streamed before the data: [DONE] message.

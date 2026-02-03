@@ -16,6 +16,14 @@ from .chat import (
     ChatResourceWithStreamingResponse,
     AsyncChatResourceWithStreamingResponse,
 )
+from .admin import (
+    AdminResource,
+    AsyncAdminResource,
+    AdminResourceWithRawResponse,
+    AsyncAdminResourceWithRawResponse,
+    AdminResourceWithStreamingResponse,
+    AsyncAdminResourceWithStreamingResponse,
+)
 from .tools import (
     ToolsResource,
     AsyncToolsResource,
@@ -32,8 +40,22 @@ from .health import (
     HealthResourceWithStreamingResponse,
     AsyncHealthResourceWithStreamingResponse,
 )
+from .workers import (
+    WorkersResource,
+    AsyncWorkersResource,
+    WorkersResourceWithRawResponse,
+    AsyncWorkersResourceWithRawResponse,
+    WorkersResourceWithStreamingResponse,
+    AsyncWorkersResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "AdminResource",
+    "AsyncAdminResource",
+    "AdminResourceWithRawResponse",
+    "AsyncAdminResourceWithRawResponse",
+    "AdminResourceWithStreamingResponse",
+    "AsyncAdminResourceWithStreamingResponse",
     "AuthResource",
     "AsyncAuthResource",
     "AuthResourceWithRawResponse",
@@ -58,4 +80,10 @@ __all__ = [
     "AsyncToolsResourceWithRawResponse",
     "ToolsResourceWithStreamingResponse",
     "AsyncToolsResourceWithStreamingResponse",
+    "WorkersResource",
+    "AsyncWorkersResource",
+    "WorkersResourceWithRawResponse",
+    "AsyncWorkersResourceWithRawResponse",
+    "WorkersResourceWithStreamingResponse",
+    "AsyncWorkersResourceWithStreamingResponse",
 ]

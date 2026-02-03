@@ -11,6 +11,9 @@ class FormattedListParams(TypedDict, total=False):
     format: str
     """Provider format"""
 
+    include_all_versions: bool
+    """Include all versions of each tool"""
+
     limit: int
     """Number of items to return (default: 25, max: 100)"""
 
@@ -19,3 +22,6 @@ class FormattedListParams(TypedDict, total=False):
 
     toolkit: str
     """Toolkit name"""
+
+    user_id: str
+    """User ID"""

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Union, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -11,20 +11,17 @@ import httpx
 from . import _exceptions
 from ._qs import Querystring
 from ._types import (
-    NOT_GIVEN,
     Omit,
     Timeout,
     NotGiven,
     Transport,
     ProxiesTypes,
     RequestOptions,
+    not_given,
 )
-from ._utils import (
-    is_given,
-    get_async_library,
-)
+from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import auth, health
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import ArcadeError, APIStatusError
 from ._base_client import (
@@ -32,20 +29,20 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.chat import chat
-from .resources.tools import tools
+
+if TYPE_CHECKING:
+    from .resources import auth, chat, admin, tools, health, workers
+    from .resources.auth import AuthResource, AsyncAuthResource
+    from .resources.health import HealthResource, AsyncHealthResource
+    from .resources.workers import WorkersResource, AsyncWorkersResource
+    from .resources.chat.chat import ChatResource, AsyncChatResource
+    from .resources.admin.admin import AdminResource, AsyncAdminResource
+    from .resources.tools.tools import ToolsResource, AsyncToolsResource
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Arcade", "AsyncArcade", "Client", "AsyncClient"]
 
 
 class Arcade(SyncAPIClient):
-    auth: auth.AuthResource
-    health: health.HealthResource
-    chat: chat.ChatResource
-    tools: tools.ToolsResource
-    with_raw_response: ArcadeWithRawResponse
-    with_streaming_response: ArcadeWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -54,7 +51,7 @@ class Arcade(SyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -87,7 +84,7 @@ class Arcade(SyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("ARCADE_BASE_URL")
         if base_url is None:
-            base_url = f"https://api.arcade-ai.com"
+            base_url = f"https://api.arcade.dev"
 
         super().__init__(
             version=__version__,
@@ -100,12 +97,49 @@ class Arcade(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.auth = auth.AuthResource(self)
-        self.health = health.HealthResource(self)
-        self.chat = chat.ChatResource(self)
-        self.tools = tools.ToolsResource(self)
-        self.with_raw_response = ArcadeWithRawResponse(self)
-        self.with_streaming_response = ArcadeWithStreamedResponse(self)
+    @cached_property
+    def admin(self) -> AdminResource:
+        from .resources.admin import AdminResource
+
+        return AdminResource(self)
+
+    @cached_property
+    def auth(self) -> AuthResource:
+        from .resources.auth import AuthResource
+
+        return AuthResource(self)
+
+    @cached_property
+    def health(self) -> HealthResource:
+        from .resources.health import HealthResource
+
+        return HealthResource(self)
+
+    @cached_property
+    def chat(self) -> ChatResource:
+        from .resources.chat import ChatResource
+
+        return ChatResource(self)
+
+    @cached_property
+    def tools(self) -> ToolsResource:
+        from .resources.tools import ToolsResource
+
+        return ToolsResource(self)
+
+    @cached_property
+    def workers(self) -> WorkersResource:
+        from .resources.workers import WorkersResource
+
+        return WorkersResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> ArcadeWithRawResponse:
+        return ArcadeWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> ArcadeWithStreamedResponse:
+        return ArcadeWithStreamedResponse(self)
 
     @property
     @override
@@ -132,9 +166,9 @@ class Arcade(SyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
-        max_retries: int | NotGiven = NOT_GIVEN,
+        max_retries: int | NotGiven = not_given,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -213,13 +247,6 @@ class Arcade(SyncAPIClient):
 
 
 class AsyncArcade(AsyncAPIClient):
-    auth: auth.AsyncAuthResource
-    health: health.AsyncHealthResource
-    chat: chat.AsyncChatResource
-    tools: tools.AsyncToolsResource
-    with_raw_response: AsyncArcadeWithRawResponse
-    with_streaming_response: AsyncArcadeWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -228,7 +255,7 @@ class AsyncArcade(AsyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -246,7 +273,7 @@ class AsyncArcade(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async Arcade client instance.
+        """Construct a new async AsyncArcade client instance.
 
         This automatically infers the `api_key` argument from the `ARCADE_API_KEY` environment variable if it is not provided.
         """
@@ -261,7 +288,7 @@ class AsyncArcade(AsyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("ARCADE_BASE_URL")
         if base_url is None:
-            base_url = f"https://api.arcade-ai.com"
+            base_url = f"https://api.arcade.dev"
 
         super().__init__(
             version=__version__,
@@ -274,12 +301,49 @@ class AsyncArcade(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.auth = auth.AsyncAuthResource(self)
-        self.health = health.AsyncHealthResource(self)
-        self.chat = chat.AsyncChatResource(self)
-        self.tools = tools.AsyncToolsResource(self)
-        self.with_raw_response = AsyncArcadeWithRawResponse(self)
-        self.with_streaming_response = AsyncArcadeWithStreamedResponse(self)
+    @cached_property
+    def admin(self) -> AsyncAdminResource:
+        from .resources.admin import AsyncAdminResource
+
+        return AsyncAdminResource(self)
+
+    @cached_property
+    def auth(self) -> AsyncAuthResource:
+        from .resources.auth import AsyncAuthResource
+
+        return AsyncAuthResource(self)
+
+    @cached_property
+    def health(self) -> AsyncHealthResource:
+        from .resources.health import AsyncHealthResource
+
+        return AsyncHealthResource(self)
+
+    @cached_property
+    def chat(self) -> AsyncChatResource:
+        from .resources.chat import AsyncChatResource
+
+        return AsyncChatResource(self)
+
+    @cached_property
+    def tools(self) -> AsyncToolsResource:
+        from .resources.tools import AsyncToolsResource
+
+        return AsyncToolsResource(self)
+
+    @cached_property
+    def workers(self) -> AsyncWorkersResource:
+        from .resources.workers import AsyncWorkersResource
+
+        return AsyncWorkersResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncArcadeWithRawResponse:
+        return AsyncArcadeWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncArcadeWithStreamedResponse:
+        return AsyncArcadeWithStreamedResponse(self)
 
     @property
     @override
@@ -306,9 +370,9 @@ class AsyncArcade(AsyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
-        max_retries: int | NotGiven = NOT_GIVEN,
+        max_retries: int | NotGiven = not_given,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -387,35 +451,175 @@ class AsyncArcade(AsyncAPIClient):
 
 
 class ArcadeWithRawResponse:
+    _client: Arcade
+
     def __init__(self, client: Arcade) -> None:
-        self.auth = auth.AuthResourceWithRawResponse(client.auth)
-        self.health = health.HealthResourceWithRawResponse(client.health)
-        self.chat = chat.ChatResourceWithRawResponse(client.chat)
-        self.tools = tools.ToolsResourceWithRawResponse(client.tools)
+        self._client = client
+
+    @cached_property
+    def admin(self) -> admin.AdminResourceWithRawResponse:
+        from .resources.admin import AdminResourceWithRawResponse
+
+        return AdminResourceWithRawResponse(self._client.admin)
+
+    @cached_property
+    def auth(self) -> auth.AuthResourceWithRawResponse:
+        from .resources.auth import AuthResourceWithRawResponse
+
+        return AuthResourceWithRawResponse(self._client.auth)
+
+    @cached_property
+    def health(self) -> health.HealthResourceWithRawResponse:
+        from .resources.health import HealthResourceWithRawResponse
+
+        return HealthResourceWithRawResponse(self._client.health)
+
+    @cached_property
+    def chat(self) -> chat.ChatResourceWithRawResponse:
+        from .resources.chat import ChatResourceWithRawResponse
+
+        return ChatResourceWithRawResponse(self._client.chat)
+
+    @cached_property
+    def tools(self) -> tools.ToolsResourceWithRawResponse:
+        from .resources.tools import ToolsResourceWithRawResponse
+
+        return ToolsResourceWithRawResponse(self._client.tools)
+
+    @cached_property
+    def workers(self) -> workers.WorkersResourceWithRawResponse:
+        from .resources.workers import WorkersResourceWithRawResponse
+
+        return WorkersResourceWithRawResponse(self._client.workers)
 
 
 class AsyncArcadeWithRawResponse:
+    _client: AsyncArcade
+
     def __init__(self, client: AsyncArcade) -> None:
-        self.auth = auth.AsyncAuthResourceWithRawResponse(client.auth)
-        self.health = health.AsyncHealthResourceWithRawResponse(client.health)
-        self.chat = chat.AsyncChatResourceWithRawResponse(client.chat)
-        self.tools = tools.AsyncToolsResourceWithRawResponse(client.tools)
+        self._client = client
+
+    @cached_property
+    def admin(self) -> admin.AsyncAdminResourceWithRawResponse:
+        from .resources.admin import AsyncAdminResourceWithRawResponse
+
+        return AsyncAdminResourceWithRawResponse(self._client.admin)
+
+    @cached_property
+    def auth(self) -> auth.AsyncAuthResourceWithRawResponse:
+        from .resources.auth import AsyncAuthResourceWithRawResponse
+
+        return AsyncAuthResourceWithRawResponse(self._client.auth)
+
+    @cached_property
+    def health(self) -> health.AsyncHealthResourceWithRawResponse:
+        from .resources.health import AsyncHealthResourceWithRawResponse
+
+        return AsyncHealthResourceWithRawResponse(self._client.health)
+
+    @cached_property
+    def chat(self) -> chat.AsyncChatResourceWithRawResponse:
+        from .resources.chat import AsyncChatResourceWithRawResponse
+
+        return AsyncChatResourceWithRawResponse(self._client.chat)
+
+    @cached_property
+    def tools(self) -> tools.AsyncToolsResourceWithRawResponse:
+        from .resources.tools import AsyncToolsResourceWithRawResponse
+
+        return AsyncToolsResourceWithRawResponse(self._client.tools)
+
+    @cached_property
+    def workers(self) -> workers.AsyncWorkersResourceWithRawResponse:
+        from .resources.workers import AsyncWorkersResourceWithRawResponse
+
+        return AsyncWorkersResourceWithRawResponse(self._client.workers)
 
 
 class ArcadeWithStreamedResponse:
+    _client: Arcade
+
     def __init__(self, client: Arcade) -> None:
-        self.auth = auth.AuthResourceWithStreamingResponse(client.auth)
-        self.health = health.HealthResourceWithStreamingResponse(client.health)
-        self.chat = chat.ChatResourceWithStreamingResponse(client.chat)
-        self.tools = tools.ToolsResourceWithStreamingResponse(client.tools)
+        self._client = client
+
+    @cached_property
+    def admin(self) -> admin.AdminResourceWithStreamingResponse:
+        from .resources.admin import AdminResourceWithStreamingResponse
+
+        return AdminResourceWithStreamingResponse(self._client.admin)
+
+    @cached_property
+    def auth(self) -> auth.AuthResourceWithStreamingResponse:
+        from .resources.auth import AuthResourceWithStreamingResponse
+
+        return AuthResourceWithStreamingResponse(self._client.auth)
+
+    @cached_property
+    def health(self) -> health.HealthResourceWithStreamingResponse:
+        from .resources.health import HealthResourceWithStreamingResponse
+
+        return HealthResourceWithStreamingResponse(self._client.health)
+
+    @cached_property
+    def chat(self) -> chat.ChatResourceWithStreamingResponse:
+        from .resources.chat import ChatResourceWithStreamingResponse
+
+        return ChatResourceWithStreamingResponse(self._client.chat)
+
+    @cached_property
+    def tools(self) -> tools.ToolsResourceWithStreamingResponse:
+        from .resources.tools import ToolsResourceWithStreamingResponse
+
+        return ToolsResourceWithStreamingResponse(self._client.tools)
+
+    @cached_property
+    def workers(self) -> workers.WorkersResourceWithStreamingResponse:
+        from .resources.workers import WorkersResourceWithStreamingResponse
+
+        return WorkersResourceWithStreamingResponse(self._client.workers)
 
 
 class AsyncArcadeWithStreamedResponse:
+    _client: AsyncArcade
+
     def __init__(self, client: AsyncArcade) -> None:
-        self.auth = auth.AsyncAuthResourceWithStreamingResponse(client.auth)
-        self.health = health.AsyncHealthResourceWithStreamingResponse(client.health)
-        self.chat = chat.AsyncChatResourceWithStreamingResponse(client.chat)
-        self.tools = tools.AsyncToolsResourceWithStreamingResponse(client.tools)
+        self._client = client
+
+    @cached_property
+    def admin(self) -> admin.AsyncAdminResourceWithStreamingResponse:
+        from .resources.admin import AsyncAdminResourceWithStreamingResponse
+
+        return AsyncAdminResourceWithStreamingResponse(self._client.admin)
+
+    @cached_property
+    def auth(self) -> auth.AsyncAuthResourceWithStreamingResponse:
+        from .resources.auth import AsyncAuthResourceWithStreamingResponse
+
+        return AsyncAuthResourceWithStreamingResponse(self._client.auth)
+
+    @cached_property
+    def health(self) -> health.AsyncHealthResourceWithStreamingResponse:
+        from .resources.health import AsyncHealthResourceWithStreamingResponse
+
+        return AsyncHealthResourceWithStreamingResponse(self._client.health)
+
+    @cached_property
+    def chat(self) -> chat.AsyncChatResourceWithStreamingResponse:
+        from .resources.chat import AsyncChatResourceWithStreamingResponse
+
+        return AsyncChatResourceWithStreamingResponse(self._client.chat)
+
+    @cached_property
+    def tools(self) -> tools.AsyncToolsResourceWithStreamingResponse:
+        from .resources.tools import AsyncToolsResourceWithStreamingResponse
+
+        return AsyncToolsResourceWithStreamingResponse(self._client.tools)
+
+    @cached_property
+    def workers(self) -> workers.AsyncWorkersResourceWithStreamingResponse:
+        from .resources.workers import AsyncWorkersResourceWithStreamingResponse
+
+        return AsyncWorkersResourceWithStreamingResponse(self._client.workers)
 
 
 Client = Arcade

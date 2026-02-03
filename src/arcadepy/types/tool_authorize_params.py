@@ -10,6 +10,12 @@ __all__ = ["ToolAuthorizeParams"]
 class ToolAuthorizeParams(TypedDict, total=False):
     tool_name: Required[str]
 
+    next_uri: str
+    """
+    Optional: if provided, the user will be redirected to this URI after
+    authorization
+    """
+
     tool_version: str
     """Optional: if not provided, any version is used"""
 

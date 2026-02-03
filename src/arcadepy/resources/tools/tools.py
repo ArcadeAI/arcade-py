@@ -2,16 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Dict, List
+from typing_extensions import Literal
 
 import httpx
 
-from ...types import tool_list_params, tool_execute_params, tool_authorize_params
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import (
-    maybe_transform,
-    async_maybe_transform,
-)
+from ...types import tool_get_params, tool_list_params, tool_execute_params, tool_authorize_params
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from .formatted import (
     FormattedResource,
@@ -38,10 +36,9 @@ from ..._response import (
 )
 from ...pagination import SyncOffsetPage, AsyncOffsetPage
 from ..._base_client import AsyncPaginator, make_request_options
-from ...types.tool_get_response import ToolGetResponse
-from ...types.tool_list_response import ToolListResponse
+from ...types.tool_definition import ToolDefinition
 from ...types.execute_tool_response import ExecuteToolResponse
-from ...types.shared.auth_authorization_response import AuthAuthorizationResponse
+from ...types.shared.authorization_response import AuthorizationResponse
 
 __all__ = ["ToolsResource", "AsyncToolsResource"]
 
@@ -77,26 +74,35 @@ class ToolsResource(SyncAPIResource):
     def list(
         self,
         *,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        toolkit: str | NotGiven = NOT_GIVEN,
+        include_all_versions: bool | Omit = omit,
+        include_format: List[Literal["arcade", "openai", "anthropic"]] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        toolkit: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncOffsetPage[ToolListResponse]:
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SyncOffsetPage[ToolDefinition]:
         """
         Returns a page of tools from the engine configuration, optionally filtered by
         toolkit
 
         Args:
+          include_all_versions: Include all versions of each tool
+
+          include_format: Comma separated tool formats that will be included in the response.
+
           limit: Number of items to return (default: 25, max: 100)
 
           offset: Offset from the start of the list (default: 0)
 
           toolkit: Toolkit name
+
+          user_id: User ID
 
           extra_headers: Send extra headers
 
@@ -108,7 +114,7 @@ class ToolsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/v1/tools",
-            page=SyncOffsetPage[ToolListResponse],
+            page=SyncOffsetPage[ToolDefinition],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -116,33 +122,40 @@ class ToolsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "include_all_versions": include_all_versions,
+                        "include_format": include_format,
                         "limit": limit,
                         "offset": offset,
                         "toolkit": toolkit,
+                        "user_id": user_id,
                     },
                     tool_list_params.ToolListParams,
                 ),
             ),
-            model=ToolListResponse,
+            model=ToolDefinition,
         )
 
     def authorize(
         self,
         *,
         tool_name: str,
-        tool_version: str | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
+        next_uri: str | Omit = omit,
+        tool_version: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthAuthorizationResponse:
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AuthorizationResponse:
         """
         Authorizes a user for a specific tool by name
 
         Args:
+          next_uri: Optional: if provided, the user will be redirected to this URI after
+              authorization
+
           tool_version: Optional: if not provided, any version is used
 
           user_id: Required only when calling with an API key
@@ -160,6 +173,7 @@ class ToolsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "tool_name": tool_name,
+                    "next_uri": next_uri,
                     "tool_version": tool_version,
                     "user_id": user_id,
                 },
@@ -168,32 +182,36 @@ class ToolsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthAuthorizationResponse,
+            cast_to=AuthorizationResponse,
         )
 
     def execute(
         self,
         *,
         tool_name: str,
-        input: Dict[str, object] | NotGiven = NOT_GIVEN,
-        run_at: str | NotGiven = NOT_GIVEN,
-        tool_version: str | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
+        include_error_stacktrace: bool | Omit = omit,
+        input: Dict[str, object] | Omit = omit,
+        run_at: str | Omit = omit,
+        tool_version: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExecuteToolResponse:
         """
         Executes a tool by name and arguments
 
         Args:
+          include_error_stacktrace: Whether to include the error stacktrace in the response. If not provided, the
+              error stacktrace is not included.
+
           input: JSON input to the tool, if any
 
           run_at: The time at which the tool should be run (optional). If not provided, the tool
-              is run immediately
+              is run immediately. Format ISO 8601: YYYY-MM-DDTHH:MM:SS
 
           tool_version: The tool version to use (optional). If not provided, any version is used
 
@@ -210,6 +228,7 @@ class ToolsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "tool_name": tool_name,
+                    "include_error_stacktrace": include_error_stacktrace,
                     "input": input,
                     "run_at": run_at,
                     "tool_version": tool_version,
@@ -227,17 +246,23 @@ class ToolsResource(SyncAPIResource):
         self,
         name: str,
         *,
+        include_format: List[Literal["arcade", "openai", "anthropic"]] | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ToolGetResponse:
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ToolDefinition:
         """
         Returns the arcade tool specification for a specific tool
 
         Args:
+          include_format: Comma separated tool formats that will be included in the response.
+
+          user_id: User ID
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -251,9 +276,19 @@ class ToolsResource(SyncAPIResource):
         return self._get(
             f"/v1/tools/{name}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "include_format": include_format,
+                        "user_id": user_id,
+                    },
+                    tool_get_params.ToolGetParams,
+                ),
             ),
-            cast_to=ToolGetResponse,
+            cast_to=ToolDefinition,
         )
 
 
@@ -288,26 +323,35 @@ class AsyncToolsResource(AsyncAPIResource):
     def list(
         self,
         *,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        toolkit: str | NotGiven = NOT_GIVEN,
+        include_all_versions: bool | Omit = omit,
+        include_format: List[Literal["arcade", "openai", "anthropic"]] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        toolkit: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[ToolListResponse, AsyncOffsetPage[ToolListResponse]]:
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AsyncPaginator[ToolDefinition, AsyncOffsetPage[ToolDefinition]]:
         """
         Returns a page of tools from the engine configuration, optionally filtered by
         toolkit
 
         Args:
+          include_all_versions: Include all versions of each tool
+
+          include_format: Comma separated tool formats that will be included in the response.
+
           limit: Number of items to return (default: 25, max: 100)
 
           offset: Offset from the start of the list (default: 0)
 
           toolkit: Toolkit name
+
+          user_id: User ID
 
           extra_headers: Send extra headers
 
@@ -319,7 +363,7 @@ class AsyncToolsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/v1/tools",
-            page=AsyncOffsetPage[ToolListResponse],
+            page=AsyncOffsetPage[ToolDefinition],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -327,33 +371,40 @@ class AsyncToolsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "include_all_versions": include_all_versions,
+                        "include_format": include_format,
                         "limit": limit,
                         "offset": offset,
                         "toolkit": toolkit,
+                        "user_id": user_id,
                     },
                     tool_list_params.ToolListParams,
                 ),
             ),
-            model=ToolListResponse,
+            model=ToolDefinition,
         )
 
     async def authorize(
         self,
         *,
         tool_name: str,
-        tool_version: str | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
+        next_uri: str | Omit = omit,
+        tool_version: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthAuthorizationResponse:
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AuthorizationResponse:
         """
         Authorizes a user for a specific tool by name
 
         Args:
+          next_uri: Optional: if provided, the user will be redirected to this URI after
+              authorization
+
           tool_version: Optional: if not provided, any version is used
 
           user_id: Required only when calling with an API key
@@ -371,6 +422,7 @@ class AsyncToolsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "tool_name": tool_name,
+                    "next_uri": next_uri,
                     "tool_version": tool_version,
                     "user_id": user_id,
                 },
@@ -379,32 +431,36 @@ class AsyncToolsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthAuthorizationResponse,
+            cast_to=AuthorizationResponse,
         )
 
     async def execute(
         self,
         *,
         tool_name: str,
-        input: Dict[str, object] | NotGiven = NOT_GIVEN,
-        run_at: str | NotGiven = NOT_GIVEN,
-        tool_version: str | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
+        include_error_stacktrace: bool | Omit = omit,
+        input: Dict[str, object] | Omit = omit,
+        run_at: str | Omit = omit,
+        tool_version: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExecuteToolResponse:
         """
         Executes a tool by name and arguments
 
         Args:
+          include_error_stacktrace: Whether to include the error stacktrace in the response. If not provided, the
+              error stacktrace is not included.
+
           input: JSON input to the tool, if any
 
           run_at: The time at which the tool should be run (optional). If not provided, the tool
-              is run immediately
+              is run immediately. Format ISO 8601: YYYY-MM-DDTHH:MM:SS
 
           tool_version: The tool version to use (optional). If not provided, any version is used
 
@@ -421,6 +477,7 @@ class AsyncToolsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "tool_name": tool_name,
+                    "include_error_stacktrace": include_error_stacktrace,
                     "input": input,
                     "run_at": run_at,
                     "tool_version": tool_version,
@@ -438,17 +495,23 @@ class AsyncToolsResource(AsyncAPIResource):
         self,
         name: str,
         *,
+        include_format: List[Literal["arcade", "openai", "anthropic"]] | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ToolGetResponse:
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ToolDefinition:
         """
         Returns the arcade tool specification for a specific tool
 
         Args:
+          include_format: Comma separated tool formats that will be included in the response.
+
+          user_id: User ID
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -462,9 +525,19 @@ class AsyncToolsResource(AsyncAPIResource):
         return await self._get(
             f"/v1/tools/{name}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "include_format": include_format,
+                        "user_id": user_id,
+                    },
+                    tool_get_params.ToolGetParams,
+                ),
             ),
-            cast_to=ToolGetResponse,
+            cast_to=ToolDefinition,
         )
 
 

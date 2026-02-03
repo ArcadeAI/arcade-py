@@ -1,12 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
+from typing_extensions import Literal
 
 from .._models import BaseModel
 from .value_schema import ValueSchema
 
 __all__ = [
-    "ToolGetResponse",
+    "ToolDefinition",
     "Input",
     "InputParameter",
     "Toolkit",
@@ -14,6 +15,7 @@ __all__ = [
     "Requirements",
     "RequirementsAuthorization",
     "RequirementsAuthorizationOauth2",
+    "RequirementsSecret",
 ]
 
 
@@ -62,21 +64,43 @@ class RequirementsAuthorization(BaseModel):
 
     provider_type: Optional[str] = None
 
+    status: Optional[Literal["active", "inactive"]] = None
+
+    status_reason: Optional[str] = None
+
+    token_status: Optional[Literal["not_started", "pending", "completed", "failed"]] = None
+
+
+class RequirementsSecret(BaseModel):
+    key: str
+
+    met: Optional[bool] = None
+
+    status_reason: Optional[str] = None
+
 
 class Requirements(BaseModel):
     authorization: Optional[RequirementsAuthorization] = None
 
+    met: Optional[bool] = None
 
-class ToolGetResponse(BaseModel):
+    secrets: Optional[List[RequirementsSecret]] = None
+
+
+class ToolDefinition(BaseModel):
+    fully_qualified_name: str
+
     input: Input
 
     name: str
+
+    qualified_name: str
 
     toolkit: Toolkit
 
     description: Optional[str] = None
 
-    fully_qualified_name: Optional[str] = None
+    formatted_schema: Optional[Dict[str, object]] = None
 
     output: Optional[Output] = None
 

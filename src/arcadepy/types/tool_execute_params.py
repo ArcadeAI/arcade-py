@@ -11,13 +11,20 @@ __all__ = ["ToolExecuteParams"]
 class ToolExecuteParams(TypedDict, total=False):
     tool_name: Required[str]
 
+    include_error_stacktrace: bool
+    """Whether to include the error stacktrace in the response.
+
+    If not provided, the error stacktrace is not included.
+    """
+
     input: Dict[str, object]
     """JSON input to the tool, if any"""
 
     run_at: str
     """The time at which the tool should be run (optional).
 
-    If not provided, the tool is run immediately
+    If not provided, the tool is run immediately. Format ISO 8601:
+    YYYY-MM-DDTHH:MM:SS
     """
 
     tool_version: str

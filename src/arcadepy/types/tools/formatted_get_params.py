@@ -10,3 +10,6 @@ __all__ = ["FormattedGetParams"]
 class FormattedGetParams(TypedDict, total=False):
     format: str
     """Provider format"""
+
+    user_id: str
+    """User ID"""

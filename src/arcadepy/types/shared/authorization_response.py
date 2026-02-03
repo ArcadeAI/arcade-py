@@ -4,21 +4,21 @@ from typing import List, Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
-from .auth_authorization_context import AuthAuthorizationContext
+from .authorization_context import AuthorizationContext
 
-__all__ = ["AuthAuthorizationResponse"]
+__all__ = ["AuthorizationResponse"]
 
 
-class AuthAuthorizationResponse(BaseModel):
+class AuthorizationResponse(BaseModel):
     id: Optional[str] = None
 
-    context: Optional[AuthAuthorizationContext] = None
+    context: Optional[AuthorizationContext] = None
 
     provider_id: Optional[str] = None
 
     scopes: Optional[List[str]] = None
 
-    status: Optional[Literal["pending", "completed", "failed"]] = None
+    status: Optional[Literal["not_started", "pending", "completed", "failed"]] = None
 
     url: Optional[str] = None
 

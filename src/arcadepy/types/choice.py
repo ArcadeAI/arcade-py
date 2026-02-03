@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from .._models import BaseModel
 from .chat_message import ChatMessage
-from .shared.auth_authorization_response import AuthAuthorizationResponse
+from .shared.authorization_response import AuthorizationResponse
 
 __all__ = ["Choice"]
 
@@ -18,6 +18,6 @@ class Choice(BaseModel):
 
     message: Optional[ChatMessage] = None
 
-    tool_authorizations: Optional[List[AuthAuthorizationResponse]] = None
+    tool_authorizations: Optional[List[AuthorizationResponse]] = None
 
     tool_messages: Optional[List[ChatMessage]] = None

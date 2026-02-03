@@ -26,9 +26,11 @@ class TestFormatted:
     def test_method_list_with_all_params(self, client: Arcade) -> None:
         formatted = client.tools.formatted.list(
             format="format",
+            include_all_versions=True,
             limit=0,
             offset=0,
             toolkit="toolkit",
+            user_id="user_id",
         )
         assert_matches_type(SyncOffsetPage[object], formatted, path=["response"])
 
@@ -64,6 +66,7 @@ class TestFormatted:
         formatted = client.tools.formatted.get(
             name="name",
             format="format",
+            user_id="user_id",
         )
         assert_matches_type(object, formatted, path=["response"])
 
@@ -100,7 +103,9 @@ class TestFormatted:
 
 
 class TestAsyncFormatted:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
     @parametrize
     async def test_method_list(self, async_client: AsyncArcade) -> None:
@@ -111,9 +116,11 @@ class TestAsyncFormatted:
     async def test_method_list_with_all_params(self, async_client: AsyncArcade) -> None:
         formatted = await async_client.tools.formatted.list(
             format="format",
+            include_all_versions=True,
             limit=0,
             offset=0,
             toolkit="toolkit",
+            user_id="user_id",
         )
         assert_matches_type(AsyncOffsetPage[object], formatted, path=["response"])
 
@@ -149,6 +156,7 @@ class TestAsyncFormatted:
         formatted = await async_client.tools.formatted.get(
             name="name",
             format="format",
+            user_id="user_id",
         )
         assert_matches_type(object, formatted, path=["response"])
 

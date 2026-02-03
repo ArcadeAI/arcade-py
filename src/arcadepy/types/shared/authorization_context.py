@@ -4,10 +4,10 @@ from typing import Dict, Optional
 
 from ..._models import BaseModel
 
-__all__ = ["AuthAuthorizationContext"]
+__all__ = ["AuthorizationContext"]
 
 
-class AuthAuthorizationContext(BaseModel):
+class AuthorizationContext(BaseModel):
     token: Optional[str] = None
 
     user_info: Optional[Dict[str, object]] = None

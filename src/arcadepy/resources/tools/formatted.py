@@ -4,11 +4,8 @@ from __future__ import annotations
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import (
-    maybe_transform,
-    async_maybe_transform,
-)
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -47,16 +44,18 @@ class FormattedResource(SyncAPIResource):
     def list(
         self,
         *,
-        format: str | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        toolkit: str | NotGiven = NOT_GIVEN,
+        format: str | Omit = omit,
+        include_all_versions: bool | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        toolkit: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncOffsetPage[object]:
         """
         Returns a page of tools from the engine configuration, optionally filtered by
@@ -65,11 +64,15 @@ class FormattedResource(SyncAPIResource):
         Args:
           format: Provider format
 
+          include_all_versions: Include all versions of each tool
+
           limit: Number of items to return (default: 25, max: 100)
 
           offset: Offset from the start of the list (default: 0)
 
           toolkit: Toolkit name
+
+          user_id: User ID
 
           extra_headers: Send extra headers
 
@@ -90,9 +93,11 @@ class FormattedResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "format": format,
+                        "include_all_versions": include_all_versions,
                         "limit": limit,
                         "offset": offset,
                         "toolkit": toolkit,
+                        "user_id": user_id,
                     },
                     formatted_list_params.FormattedListParams,
                 ),
@@ -104,19 +109,22 @@ class FormattedResource(SyncAPIResource):
         self,
         name: str,
         *,
-        format: str | NotGiven = NOT_GIVEN,
+        format: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Returns the formatted tool specification for a specific tool, given a provider
 
         Args:
           format: Provider format
+
+          user_id: User ID
 
           extra_headers: Send extra headers
 
@@ -135,7 +143,13 @@ class FormattedResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"format": format}, formatted_get_params.FormattedGetParams),
+                query=maybe_transform(
+                    {
+                        "format": format,
+                        "user_id": user_id,
+                    },
+                    formatted_get_params.FormattedGetParams,
+                ),
             ),
             cast_to=object,
         )
@@ -164,16 +178,18 @@ class AsyncFormattedResource(AsyncAPIResource):
     def list(
         self,
         *,
-        format: str | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        toolkit: str | NotGiven = NOT_GIVEN,
+        format: str | Omit = omit,
+        include_all_versions: bool | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        toolkit: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[object, AsyncOffsetPage[object]]:
         """
         Returns a page of tools from the engine configuration, optionally filtered by
@@ -182,11 +198,15 @@ class AsyncFormattedResource(AsyncAPIResource):
         Args:
           format: Provider format
 
+          include_all_versions: Include all versions of each tool
+
           limit: Number of items to return (default: 25, max: 100)
 
           offset: Offset from the start of the list (default: 0)
 
           toolkit: Toolkit name
+
+          user_id: User ID
 
           extra_headers: Send extra headers
 
@@ -207,9 +227,11 @@ class AsyncFormattedResource(AsyncAPIResource):
                 query=maybe_transform(
                     {
                         "format": format,
+                        "include_all_versions": include_all_versions,
                         "limit": limit,
                         "offset": offset,
                         "toolkit": toolkit,
+                        "user_id": user_id,
                     },
                     formatted_list_params.FormattedListParams,
                 ),
@@ -221,19 +243,22 @@ class AsyncFormattedResource(AsyncAPIResource):
         self,
         name: str,
         *,
-        format: str | NotGiven = NOT_GIVEN,
+        format: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Returns the formatted tool specification for a specific tool, given a provider
 
         Args:
           format: Provider format
+
+          user_id: User ID
 
           extra_headers: Send extra headers
 
@@ -252,7 +277,13 @@ class AsyncFormattedResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform({"format": format}, formatted_get_params.FormattedGetParams),
+                query=await async_maybe_transform(
+                    {
+                        "format": format,
+                        "user_id": user_id,
+                    },
+                    formatted_get_params.FormattedGetParams,
+                ),
             ),
             cast_to=object,
         )
