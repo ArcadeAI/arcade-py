@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from .secret_response import SecretResponse as SecretResponse
+from .secret_create_params import SecretCreateParams as SecretCreateParams
 from .secret_list_response import SecretListResponse as SecretListResponse
 from .auth_provider_response import AuthProviderResponse as AuthProviderResponse
 from .user_connection_response import UserConnectionResponse as UserConnectionResponse

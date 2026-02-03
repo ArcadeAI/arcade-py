@@ -78,6 +78,8 @@ class ResponseFormat(TypedDict, total=False):
 
 
 class StreamOptions(TypedDict, total=False):
+    """Options for streaming response. Only set this when you set stream: true."""
+
     include_usage: bool
     """
     If set, an additional chunk will be streamed before the data: [DONE] message.
