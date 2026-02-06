@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..types import auth_status_params, auth_authorize_params, auth_confirm_user_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -49,13 +49,13 @@ class AuthResource(SyncAPIResource):
         *,
         auth_requirement: auth_authorize_params.AuthRequirement,
         user_id: str,
-        next_uri: str | NotGiven = NOT_GIVEN,
+        next_uri: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthorizationResponse:
         """
         Starts the authorization process for given authorization requirements
@@ -128,7 +128,7 @@ class AuthResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ConfirmUserResponse:
         """
         Confirms a user's details during an authorization flow
@@ -161,13 +161,13 @@ class AuthResource(SyncAPIResource):
         self,
         *,
         id: str,
-        wait: int | NotGiven = NOT_GIVEN,
+        wait: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthorizationResponse:
         """Checks the status of an ongoing authorization process for a specific tool.
 
@@ -259,13 +259,13 @@ class AsyncAuthResource(AsyncAPIResource):
         *,
         auth_requirement: auth_authorize_params.AuthRequirement,
         user_id: str,
-        next_uri: str | NotGiven = NOT_GIVEN,
+        next_uri: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthorizationResponse:
         """
         Starts the authorization process for given authorization requirements
@@ -338,7 +338,7 @@ class AsyncAuthResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ConfirmUserResponse:
         """
         Confirms a user's details during an authorization flow
@@ -371,13 +371,13 @@ class AsyncAuthResource(AsyncAPIResource):
         self,
         *,
         id: str,
-        wait: int | NotGiven = NOT_GIVEN,
+        wait: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthorizationResponse:
         """Checks the status of an ongoing authorization process for a specific tool.
 

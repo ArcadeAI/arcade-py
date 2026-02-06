@@ -44,6 +44,14 @@ class TestWorkers:
                 "retry": 0,
                 "timeout": 1,
                 "uri": "uri",
+                "headers": {"foo": "string"},
+                "oauth2": {
+                    "authorization_url": "authorization_url",
+                    "client_id": "client_id",
+                    "client_secret": "client_secret",
+                    "external_id": "external_id",
+                },
+                "secrets": {"foo": "string"},
             },
             type="type",
         )
@@ -92,7 +100,14 @@ class TestWorkers:
                 "uri": "uri",
             },
             mcp={
+                "headers": {"foo": "string"},
+                "oauth2": {
+                    "authorization_url": "authorization_url",
+                    "client_id": "client_id",
+                    "client_secret": "client_secret",
+                },
                 "retry": 0,
+                "secrets": {"foo": "string"},
                 "timeout": 1,
                 "uri": "uri",
             },
@@ -352,6 +367,14 @@ class TestAsyncWorkers:
                 "retry": 0,
                 "timeout": 1,
                 "uri": "uri",
+                "headers": {"foo": "string"},
+                "oauth2": {
+                    "authorization_url": "authorization_url",
+                    "client_id": "client_id",
+                    "client_secret": "client_secret",
+                    "external_id": "external_id",
+                },
+                "secrets": {"foo": "string"},
             },
             type="type",
         )
@@ -400,7 +423,14 @@ class TestAsyncWorkers:
                 "uri": "uri",
             },
             mcp={
+                "headers": {"foo": "string"},
+                "oauth2": {
+                    "authorization_url": "authorization_url",
+                    "client_id": "client_id",
+                    "client_secret": "client_secret",
+                },
                 "retry": 0,
+                "secrets": {"foo": "string"},
                 "timeout": 1,
                 "uri": "uri",
             },

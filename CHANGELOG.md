@@ -1,5 +1,72 @@
 # Changelog
 
+## 1.10.0 (2025-11-06)
+
+Full Changelog: [v1.9.0...v1.10.0](https://github.com/ArcadeAI/arcade-py/compare/v1.9.0...v1.10.0)
+
+### Features
+
+* **api:** api update ([292b436](https://github.com/ArcadeAI/arcade-py/commit/292b436a221bbc89d27633e42f40c7ecc88f6bed))
+
+## 1.9.0 (2025-11-04)
+
+Full Changelog: [v1.8.0...v1.9.0](https://github.com/ArcadeAI/arcade-py/compare/v1.8.0...v1.9.0)
+
+### Features
+
+* **api:** api update ([85c5f67](https://github.com/ArcadeAI/arcade-py/commit/85c5f671f829356f6b4556745785e9ecf3d86ff5))
+* **api:** api update ([73a9b83](https://github.com/ArcadeAI/arcade-py/commit/73a9b83cd333bd38db8560b91764f662fa8f4e7a))
+* **api:** api update ([cc7a611](https://github.com/ArcadeAI/arcade-py/commit/cc7a611b60084672f41979aea807f18249d1cb01))
+* **api:** api update ([eebc9ed](https://github.com/ArcadeAI/arcade-py/commit/eebc9edf476f0838f584f6d356fdaee8d8d79c76))
+
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([e5ceb83](https://github.com/ArcadeAI/arcade-py/commit/e5ceb832d91dfca38c306f69526c8a909d932f16))
+
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([8d8e4b7](https://github.com/ArcadeAI/arcade-py/commit/8d8e4b7d707dce5a3e9869f3346cd256cd759c5c))
+* do not install brew dependencies in ./scripts/bootstrap by default ([927371b](https://github.com/ArcadeAI/arcade-py/commit/927371b47365c528be87e5dce549c0363d9b7a11))
+* **internal/tests:** avoid race condition with implicit client cleanup ([b14f88e](https://github.com/ArcadeAI/arcade-py/commit/b14f88efb33569f5307d9eabc4d7b6a6da9f477e))
+* **internal:** detect missing future annotations with ruff ([0afbe98](https://github.com/ArcadeAI/arcade-py/commit/0afbe984f92a6323e30c8eeb50685083ad83869e))
+* **internal:** grammar fix (it's -&gt; its) ([95c0ec1](https://github.com/ArcadeAI/arcade-py/commit/95c0ec14da8731bd724acb9c64973a05288c7fda))
+* **internal:** update pydantic dependency ([450a852](https://github.com/ArcadeAI/arcade-py/commit/450a852ffa8000a2c7e1d4d294a925366301c3fd))
+* **types:** change optional parameter type from NotGiven to Omit ([484c472](https://github.com/ArcadeAI/arcade-py/commit/484c472696a53d5b7ea9c14d9a826bc6701f0704))
+
+## 1.8.0 (2025-09-11)
+
+Full Changelog: [v1.7.0...v1.8.0](https://github.com/ArcadeAI/arcade-py/compare/v1.7.0...v1.8.0)
+
+### Features
+
+* **api:** api update ([f658a31](https://github.com/ArcadeAI/arcade-py/commit/f658a31f59d48a0b98af76f8a8c9b26c18b63c90))
+* **api:** api update ([b5347f1](https://github.com/ArcadeAI/arcade-py/commit/b5347f1b9010f3fbc6021cca7815cd7b23e1024b))
+* **api:** api update ([2002172](https://github.com/ArcadeAI/arcade-py/commit/2002172f8b3ae40bc4369bf2bd855d5c226f32c6))
+* **client:** support file upload requests ([adee680](https://github.com/ArcadeAI/arcade-py/commit/adee6802723e2d39f46ae63d65fb8436b3407c88))
+* improve future compat with pydantic v3 ([b0fee8f](https://github.com/ArcadeAI/arcade-py/commit/b0fee8f9f58da07007420ac5b741136c41672bd9))
+* **types:** replace List[str] with SequenceNotStr in params ([acea6f7](https://github.com/ArcadeAI/arcade-py/commit/acea6f763810d79845f31d73e2ea79b153ca0007))
+
+
+### Bug Fixes
+
+* avoid newer type syntax ([565f29d](https://github.com/ArcadeAI/arcade-py/commit/565f29d37e13c4cb4bb7d6b6675c2a4f74a24ef0))
+
+
+### Chores
+
+* **internal:** add Sequence related utils ([bb04ab5](https://github.com/ArcadeAI/arcade-py/commit/bb04ab57e41ddc0d2053d43e8accfd4299c7803a))
+* **internal:** change ci workflow machines ([3238508](https://github.com/ArcadeAI/arcade-py/commit/3238508b90610f40a34f4b3c214bb8082ac28f07))
+* **internal:** codegen related update ([67c2153](https://github.com/ArcadeAI/arcade-py/commit/67c215338a0af06d69a1345d312aff24190e369f))
+* **internal:** fix ruff target version ([c10bfbb](https://github.com/ArcadeAI/arcade-py/commit/c10bfbb961d2e10744e2b8fc5940cadd2a5adb74))
+* **internal:** move mypy configurations to `pyproject.toml` file ([1eebbfd](https://github.com/ArcadeAI/arcade-py/commit/1eebbfd15baf996cf5f2cf50c097a7d846c3360f))
+* **internal:** update comment in script ([e248479](https://github.com/ArcadeAI/arcade-py/commit/e248479421494f9f585b6a035477e95b2a04c8a1))
+* **internal:** update pyright exclude list ([b322b28](https://github.com/ArcadeAI/arcade-py/commit/b322b2808fb8b419f4f895f39353e000efe51767))
+* **project:** add settings file for vscode ([9611226](https://github.com/ArcadeAI/arcade-py/commit/9611226ac1d0bb9ea0e2e5cc3dbf66c392ef90af))
+* update @stainless-api/prism-cli to v5.15.0 ([6fed0b8](https://github.com/ArcadeAI/arcade-py/commit/6fed0b8458e33c4abc422430069a7a22007e52c2))
+* update github action ([66ec9db](https://github.com/ArcadeAI/arcade-py/commit/66ec9db0a712543f3e35554d02c2c7eb8d1f0bc1))
+
 ## 1.7.0 (2025-07-23)
 
 Full Changelog: [v1.6.0...v1.7.0](https://github.com/ArcadeAI/arcade-py/compare/v1.6.0...v1.7.0)

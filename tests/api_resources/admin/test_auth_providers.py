@@ -32,10 +32,12 @@ class TestAuthProviders:
         auth_provider = client.admin.auth_providers.create(
             id="id",
             description="description",
+            external_id="external_id",
             oauth2={
                 "client_id": "client_id",
                 "authorize_request": {
                     "endpoint": "endpoint",
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "method": "method",
                     "params": {"foo": "string"},
@@ -50,6 +52,7 @@ class TestAuthProviders:
                 },
                 "refresh_request": {
                     "endpoint": "endpoint",
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "method": "method",
                     "params": {"foo": "string"},
@@ -64,6 +67,7 @@ class TestAuthProviders:
                         "on_token_grant": True,
                         "on_token_refresh": True,
                     },
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "method": "method",
                     "params": {"foo": "string"},
@@ -73,6 +77,7 @@ class TestAuthProviders:
                 },
                 "token_request": {
                     "endpoint": "endpoint",
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "method": "method",
                     "params": {"foo": "string"},
@@ -86,6 +91,7 @@ class TestAuthProviders:
                         "on_token_grant": True,
                         "on_token_refresh": True,
                     },
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "method": "method",
                     "params": {"foo": "string"},
@@ -240,6 +246,7 @@ class TestAuthProviders:
             description="description",
             oauth2={
                 "authorize_request": {
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "endpoint": "endpoint",
                     "method": "method",
@@ -255,6 +262,7 @@ class TestAuthProviders:
                     "enabled": True,
                 },
                 "refresh_request": {
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "endpoint": "endpoint",
                     "method": "method",
@@ -265,6 +273,7 @@ class TestAuthProviders:
                 },
                 "scope_delimiter": ",",
                 "token_request": {
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "endpoint": "endpoint",
                     "method": "method",
@@ -274,6 +283,7 @@ class TestAuthProviders:
                     "response_map": {"foo": "string"},
                 },
                 "user_info_request": {
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "endpoint": "endpoint",
                     "method": "method",
@@ -342,10 +352,12 @@ class TestAsyncAuthProviders:
         auth_provider = await async_client.admin.auth_providers.create(
             id="id",
             description="description",
+            external_id="external_id",
             oauth2={
                 "client_id": "client_id",
                 "authorize_request": {
                     "endpoint": "endpoint",
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "method": "method",
                     "params": {"foo": "string"},
@@ -360,6 +372,7 @@ class TestAsyncAuthProviders:
                 },
                 "refresh_request": {
                     "endpoint": "endpoint",
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "method": "method",
                     "params": {"foo": "string"},
@@ -374,6 +387,7 @@ class TestAsyncAuthProviders:
                         "on_token_grant": True,
                         "on_token_refresh": True,
                     },
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "method": "method",
                     "params": {"foo": "string"},
@@ -383,6 +397,7 @@ class TestAsyncAuthProviders:
                 },
                 "token_request": {
                     "endpoint": "endpoint",
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "method": "method",
                     "params": {"foo": "string"},
@@ -396,6 +411,7 @@ class TestAsyncAuthProviders:
                         "on_token_grant": True,
                         "on_token_refresh": True,
                     },
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "method": "method",
                     "params": {"foo": "string"},
@@ -550,6 +566,7 @@ class TestAsyncAuthProviders:
             description="description",
             oauth2={
                 "authorize_request": {
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "endpoint": "endpoint",
                     "method": "method",
@@ -565,6 +582,7 @@ class TestAsyncAuthProviders:
                     "enabled": True,
                 },
                 "refresh_request": {
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "endpoint": "endpoint",
                     "method": "method",
@@ -575,6 +593,7 @@ class TestAsyncAuthProviders:
                 },
                 "scope_delimiter": ",",
                 "token_request": {
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "endpoint": "endpoint",
                     "method": "method",
@@ -584,6 +603,7 @@ class TestAsyncAuthProviders:
                     "response_map": {"foo": "string"},
                 },
                 "user_info_request": {
+                    "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
                     "endpoint": "endpoint",
                     "method": "method",

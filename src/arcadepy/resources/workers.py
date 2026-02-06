@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..types import worker_list_params, worker_tools_params, worker_create_params, worker_update_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -48,16 +48,16 @@ class WorkersResource(SyncAPIResource):
         self,
         *,
         id: str,
-        enabled: bool | NotGiven = NOT_GIVEN,
-        http: worker_create_params.HTTP | NotGiven = NOT_GIVEN,
-        mcp: worker_create_params.Mcp | NotGiven = NOT_GIVEN,
-        type: str | NotGiven = NOT_GIVEN,
+        enabled: bool | Omit = omit,
+        http: worker_create_params.HTTP | Omit = omit,
+        mcp: worker_create_params.Mcp | Omit = omit,
+        type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkerResponse:
         """
         Create a worker
@@ -93,15 +93,15 @@ class WorkersResource(SyncAPIResource):
         self,
         id: str,
         *,
-        enabled: bool | NotGiven = NOT_GIVEN,
-        http: worker_update_params.HTTP | NotGiven = NOT_GIVEN,
-        mcp: worker_update_params.Mcp | NotGiven = NOT_GIVEN,
+        enabled: bool | Omit = omit,
+        http: worker_update_params.HTTP | Omit = omit,
+        mcp: worker_update_params.Mcp | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkerResponse:
         """
         Update a worker
@@ -136,14 +136,14 @@ class WorkersResource(SyncAPIResource):
     def list(
         self,
         *,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncOffsetPage[WorkerResponse]:
         """
         List all workers with their definitions
@@ -189,7 +189,7 @@ class WorkersResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Delete a worker
@@ -223,7 +223,7 @@ class WorkersResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkerResponse:
         """
         Get a worker by ID
@@ -256,7 +256,7 @@ class WorkersResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkerHealthResponse:
         """
         Get the health of a worker
@@ -284,14 +284,14 @@ class WorkersResource(SyncAPIResource):
         self,
         id: str,
         *,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncOffsetPage[ToolDefinition]:
         """
         Returns a page of tools
@@ -355,16 +355,16 @@ class AsyncWorkersResource(AsyncAPIResource):
         self,
         *,
         id: str,
-        enabled: bool | NotGiven = NOT_GIVEN,
-        http: worker_create_params.HTTP | NotGiven = NOT_GIVEN,
-        mcp: worker_create_params.Mcp | NotGiven = NOT_GIVEN,
-        type: str | NotGiven = NOT_GIVEN,
+        enabled: bool | Omit = omit,
+        http: worker_create_params.HTTP | Omit = omit,
+        mcp: worker_create_params.Mcp | Omit = omit,
+        type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkerResponse:
         """
         Create a worker
@@ -400,15 +400,15 @@ class AsyncWorkersResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        enabled: bool | NotGiven = NOT_GIVEN,
-        http: worker_update_params.HTTP | NotGiven = NOT_GIVEN,
-        mcp: worker_update_params.Mcp | NotGiven = NOT_GIVEN,
+        enabled: bool | Omit = omit,
+        http: worker_update_params.HTTP | Omit = omit,
+        mcp: worker_update_params.Mcp | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkerResponse:
         """
         Update a worker
@@ -443,14 +443,14 @@ class AsyncWorkersResource(AsyncAPIResource):
     def list(
         self,
         *,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[WorkerResponse, AsyncOffsetPage[WorkerResponse]]:
         """
         List all workers with their definitions
@@ -496,7 +496,7 @@ class AsyncWorkersResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Delete a worker
@@ -530,7 +530,7 @@ class AsyncWorkersResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkerResponse:
         """
         Get a worker by ID
@@ -563,7 +563,7 @@ class AsyncWorkersResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkerHealthResponse:
         """
         Get the health of a worker
@@ -591,14 +591,14 @@ class AsyncWorkersResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[ToolDefinition, AsyncOffsetPage[ToolDefinition]]:
         """
         Returns a page of tools
