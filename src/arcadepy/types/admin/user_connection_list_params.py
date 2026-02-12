@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing_extensions import TypedDict
 
-__all__ = ["UserConnectionListParams", "Provider", "User"]
+__all__ = ["UserConnectionListParams"]
 
 
 class UserConnectionListParams(TypedDict, total=False):
@@ -14,16 +14,8 @@ class UserConnectionListParams(TypedDict, total=False):
     offset: int
     """Page offset"""
 
-    provider: Provider
-
-    user: User
-
-
-class Provider(TypedDict, total=False):
-    id: str
+    provider_id: str
     """Provider ID"""
 
-
-class User(TypedDict, total=False):
-    id: str
+    user_id: str
     """User ID"""
