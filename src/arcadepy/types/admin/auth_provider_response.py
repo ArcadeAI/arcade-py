@@ -54,8 +54,6 @@ class Oauth2ClientSecret(BaseModel):
 
     exists: Optional[bool] = None
 
-    hint: Optional[str] = None
-
     value: Optional[str] = None
 
 

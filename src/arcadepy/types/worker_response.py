@@ -33,8 +33,6 @@ class HTTPSecret(BaseModel):
 
     exists: Optional[bool] = None
 
-    hint: Optional[str] = None
-
     value: Optional[str] = None
 
 
@@ -55,8 +53,6 @@ class McpOauth2ClientSecret(BaseModel):
 
     exists: Optional[bool] = None
 
-    hint: Optional[str] = None
-
     value: Optional[str] = None
 
 
@@ -76,8 +72,6 @@ class McpSecrets(BaseModel):
     editable: Optional[bool] = None
 
     exists: Optional[bool] = None
-
-    hint: Optional[str] = None
 
     value: Optional[str] = None
 

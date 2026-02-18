@@ -23,8 +23,6 @@ class SecretResponse(BaseModel):
 
     description: Optional[str] = None
 
-    hint: Optional[str] = None
-
     key: Optional[str] = None
 
     last_accessed_at: Optional[str] = None
