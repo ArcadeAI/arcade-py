@@ -9,3 +9,6 @@ __all__ = ["HealthSchema"]
 
 class HealthSchema(BaseModel):
     healthy: Optional[bool] = None
+
+    reason: Optional[str] = None
+    """Optional: explains why unhealthy"""
