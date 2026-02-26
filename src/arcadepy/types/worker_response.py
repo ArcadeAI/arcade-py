@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 from typing_extensions import Literal
 
 from .._models import BaseModel
@@ -64,6 +64,8 @@ class McpOauth2(BaseModel):
     client_secret: Optional[McpOauth2ClientSecret] = None
 
     redirect_uri: Optional[str] = None
+
+    supported_scopes: Optional[List[str]] = None
 
 
 class McpSecrets(BaseModel):
