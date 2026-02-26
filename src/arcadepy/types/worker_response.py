@@ -63,6 +63,8 @@ class McpOauth2(BaseModel):
 
     client_secret: Optional[McpOauth2ClientSecret] = None
 
+    external_id: Optional[str] = None
+
     redirect_uri: Optional[str] = None
 
     supported_scopes: Optional[List[str]] = None
