@@ -28,8 +28,8 @@ class TestUserConnections:
         user_connection = client.admin.user_connections.list(
             limit=0,
             offset=0,
-            provider_id="provider_id",
-            user_id="user_id",
+            provider={"id": "id"},
+            user={"id": "id"},
         )
         assert_matches_type(SyncOffsetPage[UserConnectionResponse], user_connection, path=["response"])
 
@@ -107,8 +107,8 @@ class TestAsyncUserConnections:
         user_connection = await async_client.admin.user_connections.list(
             limit=0,
             offset=0,
-            provider_id="provider_id",
-            user_id="user_id",
+            provider={"id": "id"},
+            user={"id": "id"},
         )
         assert_matches_type(AsyncOffsetPage[UserConnectionResponse], user_connection, path=["response"])
 

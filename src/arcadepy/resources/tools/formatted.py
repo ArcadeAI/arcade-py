@@ -17,8 +17,6 @@ from ..._response import (
 from ...pagination import SyncOffsetPage, AsyncOffsetPage
 from ...types.tools import formatted_get_params, formatted_list_params
 from ..._base_client import AsyncPaginator, make_request_options
-from ...types.tools.formatted_get_response import FormattedGetResponse
-from ...types.tools.formatted_list_response import FormattedListResponse
 
 __all__ = ["FormattedResource", "AsyncFormattedResource"]
 
@@ -58,7 +56,7 @@ class FormattedResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncOffsetPage[FormattedListResponse]:
+    ) -> SyncOffsetPage[object]:
         """
         Returns a page of tools from the engine configuration, optionally filtered by
         toolkit, formatted for a specific provider
@@ -86,7 +84,7 @@ class FormattedResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/v1/formatted_tools",
-            page=SyncOffsetPage[FormattedListResponse],
+            page=SyncOffsetPage[object],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -104,7 +102,7 @@ class FormattedResource(SyncAPIResource):
                     formatted_list_params.FormattedListParams,
                 ),
             ),
-            model=FormattedListResponse,
+            model=object,
         )
 
     def get(
@@ -119,7 +117,7 @@ class FormattedResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FormattedGetResponse:
+    ) -> object:
         """
         Returns the formatted tool specification for a specific tool, given a provider
 
@@ -153,7 +151,7 @@ class FormattedResource(SyncAPIResource):
                     formatted_get_params.FormattedGetParams,
                 ),
             ),
-            cast_to=FormattedGetResponse,
+            cast_to=object,
         )
 
 
@@ -192,7 +190,7 @@ class AsyncFormattedResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[FormattedListResponse, AsyncOffsetPage[FormattedListResponse]]:
+    ) -> AsyncPaginator[object, AsyncOffsetPage[object]]:
         """
         Returns a page of tools from the engine configuration, optionally filtered by
         toolkit, formatted for a specific provider
@@ -220,7 +218,7 @@ class AsyncFormattedResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/v1/formatted_tools",
-            page=AsyncOffsetPage[FormattedListResponse],
+            page=AsyncOffsetPage[object],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -238,7 +236,7 @@ class AsyncFormattedResource(AsyncAPIResource):
                     formatted_list_params.FormattedListParams,
                 ),
             ),
-            model=FormattedListResponse,
+            model=object,
         )
 
     async def get(
@@ -253,7 +251,7 @@ class AsyncFormattedResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FormattedGetResponse:
+    ) -> object:
         """
         Returns the formatted tool specification for a specific tool, given a provider
 
@@ -287,7 +285,7 @@ class AsyncFormattedResource(AsyncAPIResource):
                     formatted_get_params.FormattedGetParams,
                 ),
             ),
-            cast_to=FormattedGetResponse,
+            cast_to=object,
         )
 
 

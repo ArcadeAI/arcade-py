@@ -11,9 +11,6 @@ __all__ = [
     "Input",
     "InputParameter",
     "Toolkit",
-    "Metadata",
-    "MetadataBehavior",
-    "MetadataClassification",
     "Output",
     "Requirements",
     "RequirementsAuthorization",
@@ -44,30 +41,6 @@ class Toolkit(BaseModel):
     description: Optional[str] = None
 
     version: Optional[str] = None
-
-
-class MetadataBehavior(BaseModel):
-    destructive: Optional[bool] = None
-
-    idempotent: Optional[bool] = None
-
-    open_world: Optional[bool] = None
-
-    operations: Optional[List[str]] = None
-
-    read_only: Optional[bool] = None
-
-
-class MetadataClassification(BaseModel):
-    service_domains: Optional[List[str]] = None
-
-
-class Metadata(BaseModel):
-    behavior: Optional[MetadataBehavior] = None
-
-    classification: Optional[MetadataClassification] = None
-
-    extras: Optional[Dict[str, object]] = None
 
 
 class Output(BaseModel):
@@ -128,8 +101,6 @@ class ToolDefinition(BaseModel):
     description: Optional[str] = None
 
     formatted_schema: Optional[Dict[str, object]] = None
-
-    metadata: Optional[Metadata] = None
 
     output: Optional[Output] = None
 
