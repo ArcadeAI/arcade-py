@@ -47,8 +47,8 @@ class UserConnectionsResource(SyncAPIResource):
         *,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
-        provider: user_connection_list_params.Provider | Omit = omit,
-        user: user_connection_list_params.User | Omit = omit,
+        provider_id: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -63,6 +63,10 @@ class UserConnectionsResource(SyncAPIResource):
           limit: Page size
 
           offset: Page offset
+
+          provider_id: Provider ID
+
+          user_id: User ID
 
           extra_headers: Send extra headers
 
@@ -84,8 +88,8 @@ class UserConnectionsResource(SyncAPIResource):
                     {
                         "limit": limit,
                         "offset": offset,
-                        "provider": provider,
-                        "user": user,
+                        "provider_id": provider_id,
+                        "user_id": user_id,
                     },
                     user_connection_list_params.UserConnectionListParams,
                 ),
@@ -153,8 +157,8 @@ class AsyncUserConnectionsResource(AsyncAPIResource):
         *,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
-        provider: user_connection_list_params.Provider | Omit = omit,
-        user: user_connection_list_params.User | Omit = omit,
+        provider_id: str | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -169,6 +173,10 @@ class AsyncUserConnectionsResource(AsyncAPIResource):
           limit: Page size
 
           offset: Page offset
+
+          provider_id: Provider ID
+
+          user_id: User ID
 
           extra_headers: Send extra headers
 
@@ -190,8 +198,8 @@ class AsyncUserConnectionsResource(AsyncAPIResource):
                     {
                         "limit": limit,
                         "offset": offset,
-                        "provider": provider,
-                        "user": user,
+                        "provider_id": provider_id,
+                        "user_id": user_id,
                     },
                     user_connection_list_params.UserConnectionListParams,
                 ),
