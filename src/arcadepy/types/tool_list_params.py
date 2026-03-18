@@ -9,6 +9,15 @@ __all__ = ["ToolListParams"]
 
 
 class ToolListParams(TypedDict, total=False):
+    filter: str
+    """JSON metadata filter.
+
+    Array fields (service_domains, operations): shorthand array or object with
+    any_of/all_of/none_of operators (case-insensitive). Boolean fields: read_only,
+    destructive, idempotent, open_world. Extras: case-sensitive key-value subset
+    match.
+    """
+
     include_all_versions: bool
     """Include all versions of each tool"""
 

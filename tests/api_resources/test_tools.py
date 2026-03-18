@@ -30,6 +30,7 @@ class TestTools:
     @parametrize
     def test_method_list_with_all_params(self, client: Arcade) -> None:
         tool = client.tools.list(
+            filter="filter",
             include_all_versions=True,
             include_format=["arcade"],
             limit=0,
@@ -204,6 +205,7 @@ class TestAsyncTools:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncArcade) -> None:
         tool = await async_client.tools.list(
+            filter="filter",
             include_all_versions=True,
             include_format=["arcade"],
             limit=0,
