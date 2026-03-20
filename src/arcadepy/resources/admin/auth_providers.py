@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -138,7 +138,7 @@ class AuthProvidersResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._delete(
-            f"/v1/admin/auth_providers/{id}",
+            path_template("/v1/admin/auth_providers/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -171,7 +171,7 @@ class AuthProvidersResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/v1/admin/auth_providers/{id}",
+            path_template("/v1/admin/auth_providers/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -210,7 +210,7 @@ class AuthProvidersResource(SyncAPIResource):
         if not path_id:
             raise ValueError(f"Expected a non-empty value for `path_id` but received {path_id!r}")
         return self._patch(
-            f"/v1/admin/auth_providers/{path_id}",
+            path_template("/v1/admin/auth_providers/{path_id}", path_id=path_id),
             body=maybe_transform(
                 {
                     "body_id": body_id,
@@ -345,7 +345,7 @@ class AsyncAuthProvidersResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._delete(
-            f"/v1/admin/auth_providers/{id}",
+            path_template("/v1/admin/auth_providers/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -378,7 +378,7 @@ class AsyncAuthProvidersResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/v1/admin/auth_providers/{id}",
+            path_template("/v1/admin/auth_providers/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -417,7 +417,7 @@ class AsyncAuthProvidersResource(AsyncAPIResource):
         if not path_id:
             raise ValueError(f"Expected a non-empty value for `path_id` but received {path_id!r}")
         return await self._patch(
-            f"/v1/admin/auth_providers/{path_id}",
+            path_template("/v1/admin/auth_providers/{path_id}", path_id=path_id),
             body=await async_maybe_transform(
                 {
                     "body_id": body_id,

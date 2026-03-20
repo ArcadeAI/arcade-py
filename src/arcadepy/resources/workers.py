@@ -6,7 +6,7 @@ import httpx
 
 from ..types import worker_list_params, worker_tools_params, worker_create_params, worker_update_params
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -118,7 +118,7 @@ class WorkersResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._patch(
-            f"/v1/workers/{id}",
+            path_template("/v1/workers/{id}", id=id),
             body=maybe_transform(
                 {
                     "enabled": enabled,
@@ -207,7 +207,7 @@ class WorkersResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/v1/workers/{id}",
+            path_template("/v1/workers/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -240,7 +240,7 @@ class WorkersResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/v1/workers/{id}",
+            path_template("/v1/workers/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -273,7 +273,7 @@ class WorkersResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/v1/workers/{id}/health",
+            path_template("/v1/workers/{id}/health", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -312,7 +312,7 @@ class WorkersResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get_api_list(
-            f"/v1/workers/{id}/tools",
+            path_template("/v1/workers/{id}/tools", id=id),
             page=SyncOffsetPage[ToolDefinition],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -425,7 +425,7 @@ class AsyncWorkersResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._patch(
-            f"/v1/workers/{id}",
+            path_template("/v1/workers/{id}", id=id),
             body=await async_maybe_transform(
                 {
                     "enabled": enabled,
@@ -514,7 +514,7 @@ class AsyncWorkersResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/v1/workers/{id}",
+            path_template("/v1/workers/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -547,7 +547,7 @@ class AsyncWorkersResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/v1/workers/{id}",
+            path_template("/v1/workers/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -580,7 +580,7 @@ class AsyncWorkersResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/v1/workers/{id}/health",
+            path_template("/v1/workers/{id}/health", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -619,7 +619,7 @@ class AsyncWorkersResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get_api_list(
-            f"/v1/workers/{id}/tools",
+            path_template("/v1/workers/{id}/tools", id=id),
             page=AsyncOffsetPage[ToolDefinition],
             options=make_request_options(
                 extra_headers=extra_headers,

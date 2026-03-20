@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -70,7 +70,7 @@ class SecretsResource(SyncAPIResource):
         if not secret_key:
             raise ValueError(f"Expected a non-empty value for `secret_key` but received {secret_key!r}")
         return self._post(
-            f"/v1/admin/secrets/{secret_key}",
+            path_template("/v1/admin/secrets/{secret_key}", secret_key=secret_key),
             body=maybe_transform(
                 {
                     "value": value,
@@ -130,7 +130,7 @@ class SecretsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `secret_id` but received {secret_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/v1/admin/secrets/{secret_id}",
+            path_template("/v1/admin/secrets/{secret_id}", secret_id=secret_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -186,7 +186,7 @@ class AsyncSecretsResource(AsyncAPIResource):
         if not secret_key:
             raise ValueError(f"Expected a non-empty value for `secret_key` but received {secret_key!r}")
         return await self._post(
-            f"/v1/admin/secrets/{secret_key}",
+            path_template("/v1/admin/secrets/{secret_key}", secret_key=secret_key),
             body=await async_maybe_transform(
                 {
                     "value": value,
@@ -246,7 +246,7 @@ class AsyncSecretsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `secret_id` but received {secret_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/v1/admin/secrets/{secret_id}",
+            path_template("/v1/admin/secrets/{secret_id}", secret_id=secret_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
