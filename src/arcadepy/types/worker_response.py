@@ -81,9 +81,13 @@ class McpSecrets(BaseModel):
 
 
 class Mcp(BaseModel):
+    external_id: Optional[str] = None
+
     headers: Optional[Dict[str, str]] = None
 
     oauth2: Optional[McpOauth2] = None
+
+    redirect_uri: Optional[str] = None
 
     retry: Optional[int] = None
 
