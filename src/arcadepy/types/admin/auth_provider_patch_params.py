@@ -13,6 +13,8 @@ __all__ = [
     "Oauth2AuthorizeRequest",
     "Oauth2Pkce",
     "Oauth2RefreshRequest",
+    "Oauth2TokenIntrospectionRequest",
+    "Oauth2TokenIntrospectionRequestTriggers",
     "Oauth2TokenRequest",
     "Oauth2UserInfoRequest",
     "Oauth2UserInfoRequestTriggers",
@@ -75,6 +77,32 @@ class Oauth2RefreshRequest(TypedDict, total=False):
     response_map: Dict[str, str]
 
 
+class Oauth2TokenIntrospectionRequestTriggers(TypedDict, total=False):
+    on_token_grant: bool
+
+    on_token_refresh: bool
+
+
+class Oauth2TokenIntrospectionRequest(TypedDict, total=False):
+    auth_header_value_format: str
+
+    auth_method: str
+
+    endpoint: str
+
+    method: str
+
+    params: Dict[str, str]
+
+    request_content_type: Literal["application/x-www-form-urlencoded", "application/json"]
+
+    response_content_type: Literal["application/x-www-form-urlencoded", "application/json"]
+
+    response_map: Dict[str, str]
+
+    triggers: Oauth2TokenIntrospectionRequestTriggers
+
+
 class Oauth2TokenRequest(TypedDict, total=False):
     auth_header_value_format: str
 
@@ -131,6 +159,8 @@ class Oauth2(TypedDict, total=False):
     refresh_request: Oauth2RefreshRequest
 
     scope_delimiter: Literal[",", " "]
+
+    token_introspection_request: Oauth2TokenIntrospectionRequest
 
     token_request: Oauth2TokenRequest
 

@@ -272,6 +272,20 @@ class TestAuthProviders:
                     "response_map": {"foo": "string"},
                 },
                 "scope_delimiter": ",",
+                "token_introspection_request": {
+                    "auth_header_value_format": "auth_header_value_format",
+                    "auth_method": "auth_method",
+                    "endpoint": "endpoint",
+                    "method": "method",
+                    "params": {"foo": "string"},
+                    "request_content_type": "application/x-www-form-urlencoded",
+                    "response_content_type": "application/x-www-form-urlencoded",
+                    "response_map": {"foo": "string"},
+                    "triggers": {
+                        "on_token_grant": True,
+                        "on_token_refresh": True,
+                    },
+                },
                 "token_request": {
                     "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
@@ -592,6 +606,20 @@ class TestAsyncAuthProviders:
                     "response_map": {"foo": "string"},
                 },
                 "scope_delimiter": ",",
+                "token_introspection_request": {
+                    "auth_header_value_format": "auth_header_value_format",
+                    "auth_method": "auth_method",
+                    "endpoint": "endpoint",
+                    "method": "method",
+                    "params": {"foo": "string"},
+                    "request_content_type": "application/x-www-form-urlencoded",
+                    "response_content_type": "application/x-www-form-urlencoded",
+                    "response_map": {"foo": "string"},
+                    "triggers": {
+                        "on_token_grant": True,
+                        "on_token_refresh": True,
+                    },
+                },
                 "token_request": {
                     "auth_header_value_format": "auth_header_value_format",
                     "auth_method": "auth_method",
