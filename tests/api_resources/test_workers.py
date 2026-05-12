@@ -37,12 +37,12 @@ class TestWorkers:
             http={
                 "retry": 0,
                 "secret": "secret",
-                "timeout": 1,
+                "timeout": 0,
                 "uri": "uri",
             },
             mcp={
                 "retry": 0,
-                "timeout": 1,
+                "timeout": 0,
                 "uri": "uri",
                 "headers": {"foo": "string"},
                 "oauth2": {
@@ -96,7 +96,7 @@ class TestWorkers:
             http={
                 "retry": 0,
                 "secret": "secret",
-                "timeout": 1,
+                "timeout": 0,
                 "uri": "uri",
             },
             mcp={
@@ -108,7 +108,7 @@ class TestWorkers:
                 },
                 "retry": 0,
                 "secrets": {"foo": "string"},
-                "timeout": 1,
+                "timeout": 0,
                 "uri": "uri",
             },
         )
@@ -360,12 +360,12 @@ class TestAsyncWorkers:
             http={
                 "retry": 0,
                 "secret": "secret",
-                "timeout": 1,
+                "timeout": 0,
                 "uri": "uri",
             },
             mcp={
                 "retry": 0,
-                "timeout": 1,
+                "timeout": 0,
                 "uri": "uri",
                 "headers": {"foo": "string"},
                 "oauth2": {
@@ -419,7 +419,7 @@ class TestAsyncWorkers:
             http={
                 "retry": 0,
                 "secret": "secret",
-                "timeout": 1,
+                "timeout": 0,
                 "uri": "uri",
             },
             mcp={
@@ -431,7 +431,7 @@ class TestAsyncWorkers:
                 },
                 "retry": 0,
                 "secrets": {"foo": "string"},
-                "timeout": 1,
+                "timeout": 0,
                 "uri": "uri",
             },
         )
