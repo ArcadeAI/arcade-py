@@ -21,7 +21,7 @@ class ToolListParams(TypedDict, total=False):
     include_all_versions: bool
     """Include all versions of each tool"""
 
-    include_format: List[Literal["arcade", "openai", "anthropic"]]
+    include_format: List[Literal["arcade", "openai", "anthropic", "mcp"]]
     """Comma separated tool formats that will be included in the response."""
 
     limit: int

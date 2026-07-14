@@ -76,7 +76,7 @@ class ToolsResource(SyncAPIResource):
         *,
         filter: str | Omit = omit,
         include_all_versions: bool | Omit = omit,
-        include_format: List[Literal["arcade", "openai", "anthropic"]] | Omit = omit,
+        include_format: List[Literal["arcade", "openai", "anthropic", "mcp"]] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         toolkit: str | Omit = omit,
@@ -253,7 +253,7 @@ class ToolsResource(SyncAPIResource):
         self,
         name: str,
         *,
-        include_format: List[Literal["arcade", "openai", "anthropic"]] | Omit = omit,
+        include_format: List[Literal["arcade", "openai", "anthropic", "mcp"]] | Omit = omit,
         user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -332,7 +332,7 @@ class AsyncToolsResource(AsyncAPIResource):
         *,
         filter: str | Omit = omit,
         include_all_versions: bool | Omit = omit,
-        include_format: List[Literal["arcade", "openai", "anthropic"]] | Omit = omit,
+        include_format: List[Literal["arcade", "openai", "anthropic", "mcp"]] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         toolkit: str | Omit = omit,
@@ -509,7 +509,7 @@ class AsyncToolsResource(AsyncAPIResource):
         self,
         name: str,
         *,
-        include_format: List[Literal["arcade", "openai", "anthropic"]] | Omit = omit,
+        include_format: List[Literal["arcade", "openai", "anthropic", "mcp"]] | Omit = omit,
         user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

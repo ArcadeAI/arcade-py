@@ -1,10 +1,11 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from __future__ import annotations
+
 from typing import Dict, List, Optional
 from typing_extensions import Literal
 
 from .._models import BaseModel
-from .value_schema import ValueSchema
 
 __all__ = [
     "ToolDefinition",
@@ -25,7 +26,7 @@ __all__ = [
 class InputParameter(BaseModel):
     name: str
 
-    value_schema: ValueSchema
+    value_schema: "ValueSchema"
 
     description: Optional[str] = None
 
@@ -75,7 +76,7 @@ class Output(BaseModel):
 
     description: Optional[str] = None
 
-    value_schema: Optional[ValueSchema] = None
+    value_schema: Optional["ValueSchema"] = None
 
 
 class RequirementsAuthorizationOauth2(BaseModel):
@@ -134,3 +135,6 @@ class ToolDefinition(BaseModel):
     output: Optional[Output] = None
 
     requirements: Optional[Requirements] = None
+
+
+from .value_schema import ValueSchema
