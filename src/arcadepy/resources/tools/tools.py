@@ -79,6 +79,7 @@ class ToolsResource(SyncAPIResource):
         include_format: List[Literal["arcade", "openai", "anthropic", "mcp"]] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
+        search: str | Omit = omit,
         toolkit: str | Omit = omit,
         user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -105,6 +106,10 @@ class ToolsResource(SyncAPIResource):
           limit: Number of items to return (default: 25, max: 100)
 
           offset: Offset from the start of the list (default: 0)
+
+          search: Case-insensitive literal substring matched against each tool's name, MCP server
+              name, qualified name, and description; multiple whitespace-separated terms must
+              all match. Max 2000 characters.
 
           toolkit: Toolkit name
 
@@ -133,6 +138,7 @@ class ToolsResource(SyncAPIResource):
                         "include_format": include_format,
                         "limit": limit,
                         "offset": offset,
+                        "search": search,
                         "toolkit": toolkit,
                         "user_id": user_id,
                     },
@@ -335,6 +341,7 @@ class AsyncToolsResource(AsyncAPIResource):
         include_format: List[Literal["arcade", "openai", "anthropic", "mcp"]] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
+        search: str | Omit = omit,
         toolkit: str | Omit = omit,
         user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -361,6 +368,10 @@ class AsyncToolsResource(AsyncAPIResource):
           limit: Number of items to return (default: 25, max: 100)
 
           offset: Offset from the start of the list (default: 0)
+
+          search: Case-insensitive literal substring matched against each tool's name, MCP server
+              name, qualified name, and description; multiple whitespace-separated terms must
+              all match. Max 2000 characters.
 
           toolkit: Toolkit name
 
@@ -389,6 +400,7 @@ class AsyncToolsResource(AsyncAPIResource):
                         "include_format": include_format,
                         "limit": limit,
                         "offset": offset,
+                        "search": search,
                         "toolkit": toolkit,
                         "user_id": user_id,
                     },

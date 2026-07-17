@@ -30,6 +30,13 @@ class ToolListParams(TypedDict, total=False):
     offset: int
     """Offset from the start of the list (default: 0)"""
 
+    search: str
+    """
+    Case-insensitive literal substring matched against each tool's name, MCP server
+    name, qualified name, and description; multiple whitespace-separated terms must
+    all match. Max 2000 characters.
+    """
+
     toolkit: str
     """Toolkit name"""
 
