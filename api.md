@@ -117,19 +117,6 @@ Methods:
 - <code title="post /v1/tools/execute">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">execute</a>(\*\*<a href="src/arcadepy/types/tool_execute_params.py">params</a>) -> <a href="./src/arcadepy/types/execute_tool_response.py">ExecuteToolResponse</a></code>
 - <code title="get /v1/tools/{name}">client.tools.<a href="./src/arcadepy/resources/tools/tools.py">get</a>(name, \*\*<a href="src/arcadepy/types/tool_get_params.py">params</a>) -> <a href="./src/arcadepy/types/tool_definition.py">ToolDefinition</a></code>
 
-## Scheduled
-
-Types:
-
-```python
-from arcadepy.types.tools import ScheduledGetResponse
-```
-
-Methods:
-
-- <code title="get /v1/scheduled_tools">client.tools.scheduled.<a href="./src/arcadepy/resources/tools/scheduled.py">list</a>(\*\*<a href="src/arcadepy/types/tools/scheduled_list_params.py">params</a>) -> <a href="./src/arcadepy/types/tool_execution.py">SyncOffsetPage[ToolExecution]</a></code>
-- <code title="get /v1/scheduled_tools/{id}">client.tools.scheduled.<a href="./src/arcadepy/resources/tools/scheduled.py">get</a>(id) -> <a href="./src/arcadepy/types/tools/scheduled_get_response.py">ScheduledGetResponse</a></code>
-
 ## Formatted
 
 Types:

@@ -19,14 +19,6 @@ from .formatted import (
     FormattedResourceWithStreamingResponse,
     AsyncFormattedResourceWithStreamingResponse,
 )
-from .scheduled import (
-    ScheduledResource,
-    AsyncScheduledResource,
-    ScheduledResourceWithRawResponse,
-    AsyncScheduledResourceWithRawResponse,
-    ScheduledResourceWithStreamingResponse,
-    AsyncScheduledResourceWithStreamingResponse,
-)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
     to_raw_response_wrapper,
@@ -44,10 +36,6 @@ __all__ = ["ToolsResource", "AsyncToolsResource"]
 
 
 class ToolsResource(SyncAPIResource):
-    @cached_property
-    def scheduled(self) -> ScheduledResource:
-        return ScheduledResource(self._client)
-
     @cached_property
     def formatted(self) -> FormattedResource:
         return FormattedResource(self._client)
@@ -306,10 +294,6 @@ class ToolsResource(SyncAPIResource):
 
 
 class AsyncToolsResource(AsyncAPIResource):
-    @cached_property
-    def scheduled(self) -> AsyncScheduledResource:
-        return AsyncScheduledResource(self._client)
-
     @cached_property
     def formatted(self) -> AsyncFormattedResource:
         return AsyncFormattedResource(self._client)
@@ -585,10 +569,6 @@ class ToolsResourceWithRawResponse:
         )
 
     @cached_property
-    def scheduled(self) -> ScheduledResourceWithRawResponse:
-        return ScheduledResourceWithRawResponse(self._tools.scheduled)
-
-    @cached_property
     def formatted(self) -> FormattedResourceWithRawResponse:
         return FormattedResourceWithRawResponse(self._tools.formatted)
 
@@ -609,10 +589,6 @@ class AsyncToolsResourceWithRawResponse:
         self.get = async_to_raw_response_wrapper(
             tools.get,
         )
-
-    @cached_property
-    def scheduled(self) -> AsyncScheduledResourceWithRawResponse:
-        return AsyncScheduledResourceWithRawResponse(self._tools.scheduled)
 
     @cached_property
     def formatted(self) -> AsyncFormattedResourceWithRawResponse:
@@ -637,10 +613,6 @@ class ToolsResourceWithStreamingResponse:
         )
 
     @cached_property
-    def scheduled(self) -> ScheduledResourceWithStreamingResponse:
-        return ScheduledResourceWithStreamingResponse(self._tools.scheduled)
-
-    @cached_property
     def formatted(self) -> FormattedResourceWithStreamingResponse:
         return FormattedResourceWithStreamingResponse(self._tools.formatted)
 
@@ -661,10 +633,6 @@ class AsyncToolsResourceWithStreamingResponse:
         self.get = async_to_streamed_response_wrapper(
             tools.get,
         )
-
-    @cached_property
-    def scheduled(self) -> AsyncScheduledResourceWithStreamingResponse:
-        return AsyncScheduledResourceWithStreamingResponse(self._tools.scheduled)
 
     @cached_property
     def formatted(self) -> AsyncFormattedResourceWithStreamingResponse:

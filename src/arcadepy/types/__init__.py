@@ -15,7 +15,6 @@ from .chat_message import ChatMessage as ChatMessage
 from .value_schema import ValueSchema as ValueSchema
 from .chat_response import ChatResponse as ChatResponse
 from .health_schema import HealthSchema as HealthSchema
-from .tool_execution import ToolExecution as ToolExecution
 from .tool_definition import ToolDefinition as ToolDefinition
 from .tool_get_params import ToolGetParams as ToolGetParams
 from .worker_response import WorkerResponse as WorkerResponse
@@ -31,7 +30,6 @@ from .auth_authorize_params import AuthAuthorizeParams as AuthAuthorizeParams
 from .confirm_user_response import ConfirmUserResponse as ConfirmUserResponse
 from .execute_tool_response import ExecuteToolResponse as ExecuteToolResponse
 from .tool_authorize_params import ToolAuthorizeParams as ToolAuthorizeParams
-from .tool_execution_attempt import ToolExecutionAttempt as ToolExecutionAttempt
 from .worker_health_response import WorkerHealthResponse as WorkerHealthResponse
 from .auth_confirm_user_params import AuthConfirmUserParams as AuthConfirmUserParams
 

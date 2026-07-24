@@ -16,22 +16,8 @@ from .formatted import (
     FormattedResourceWithStreamingResponse,
     AsyncFormattedResourceWithStreamingResponse,
 )
-from .scheduled import (
-    ScheduledResource,
-    AsyncScheduledResource,
-    ScheduledResourceWithRawResponse,
-    AsyncScheduledResourceWithRawResponse,
-    ScheduledResourceWithStreamingResponse,
-    AsyncScheduledResourceWithStreamingResponse,
-)
 
 __all__ = [
-    "ScheduledResource",
-    "AsyncScheduledResource",
-    "ScheduledResourceWithRawResponse",
-    "AsyncScheduledResourceWithRawResponse",
-    "ScheduledResourceWithStreamingResponse",
-    "AsyncScheduledResourceWithStreamingResponse",
     "FormattedResource",
     "AsyncFormattedResource",
     "FormattedResourceWithRawResponse",
