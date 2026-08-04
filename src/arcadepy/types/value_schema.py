@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional
+from typing import List, Optional
 
 from .._models import BaseModel
 
@@ -16,7 +16,7 @@ class ValueSchema(BaseModel):
 
     enum: Optional[List[str]] = None
 
-    inner_properties: Optional[Dict[str, "ValueSchema"]] = None
+    inner_properties: Optional[object] = None
 
     inner_required_keys: Optional[List[str]] = None
 
@@ -26,6 +26,6 @@ class ValueSchema(BaseModel):
 
     nullable: Optional[bool] = None
 
-    properties: Optional[Dict[str, "ValueSchema"]] = None
+    properties: Optional[object] = None
 
     required_keys: Optional[List[str]] = None
