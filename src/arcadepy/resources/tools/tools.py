@@ -192,6 +192,7 @@ class ToolsResource(SyncAPIResource):
         tool_name: str,
         include_error_stacktrace: bool | Omit = omit,
         input: Dict[str, object] | Omit = omit,
+        query_id: str | Omit = omit,
         run_at: str | Omit = omit,
         tool_version: str | Omit = omit,
         user_id: str | Omit = omit,
@@ -210,6 +211,10 @@ class ToolsResource(SyncAPIResource):
               error stacktrace is not included.
 
           input: JSON input to the tool, if any
+
+          query_id: Optional Condex selection query_id that surfaced this tool. When set, the
+              execution is correlated to the selection query as training data. Ignored if
+              empty.
 
           run_at: The time at which the tool should be run (optional). If not provided, the tool
               is run immediately. Format ISO 8601: YYYY-MM-DDTHH:MM:SS
@@ -231,6 +236,7 @@ class ToolsResource(SyncAPIResource):
                     "tool_name": tool_name,
                     "include_error_stacktrace": include_error_stacktrace,
                     "input": input,
+                    "query_id": query_id,
                     "run_at": run_at,
                     "tool_version": tool_version,
                     "user_id": user_id,
@@ -450,6 +456,7 @@ class AsyncToolsResource(AsyncAPIResource):
         tool_name: str,
         include_error_stacktrace: bool | Omit = omit,
         input: Dict[str, object] | Omit = omit,
+        query_id: str | Omit = omit,
         run_at: str | Omit = omit,
         tool_version: str | Omit = omit,
         user_id: str | Omit = omit,
@@ -468,6 +475,10 @@ class AsyncToolsResource(AsyncAPIResource):
               error stacktrace is not included.
 
           input: JSON input to the tool, if any
+
+          query_id: Optional Condex selection query_id that surfaced this tool. When set, the
+              execution is correlated to the selection query as training data. Ignored if
+              empty.
 
           run_at: The time at which the tool should be run (optional). If not provided, the tool
               is run immediately. Format ISO 8601: YYYY-MM-DDTHH:MM:SS
@@ -489,6 +500,7 @@ class AsyncToolsResource(AsyncAPIResource):
                     "tool_name": tool_name,
                     "include_error_stacktrace": include_error_stacktrace,
                     "input": input,
+                    "query_id": query_id,
                     "run_at": run_at,
                     "tool_version": tool_version,
                     "user_id": user_id,

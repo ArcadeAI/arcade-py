@@ -20,6 +20,13 @@ class ToolExecuteParams(TypedDict, total=False):
     input: Dict[str, object]
     """JSON input to the tool, if any"""
 
+    query_id: str
+    """Optional Condex selection query_id that surfaced this tool.
+
+    When set, the execution is correlated to the selection query as training data.
+    Ignored if empty.
+    """
+
     run_at: str
     """The time at which the tool should be run (optional).
 
