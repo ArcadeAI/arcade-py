@@ -130,6 +130,21 @@ class ToolDefinition(BaseModel):
 
     formatted_schema: Optional[Dict[str, object]] = None
 
+    index_state: Optional[str] = None
+    """
+    IndexState reports whether this tool is available through tool search yet
+    ("indexed" or "pending"). Populated only when tool search is active for the org
+    and Condex is reachable; otherwise omitted, so existing callers are unaffected.
+    The handler derives and injects this value — see the tool-listing enrichment
+    path.
+    """
+
+    last_indexed_at: Optional[str] = None
+    """
+    LastIndexedAt is the tool's last successful index-write time, set only when
+    IndexState is "indexed" and Condex reported a timestamp.
+    """
+
     metadata: Optional[Metadata] = None
 
     output: Optional[Output] = None
