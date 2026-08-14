@@ -81,6 +81,8 @@ class McpSecrets(BaseModel):
 
 
 class Mcp(BaseModel):
+    authorized_by: Optional[str] = None
+
     external_id: Optional[str] = None
 
     headers: Optional[Dict[str, str]] = None
