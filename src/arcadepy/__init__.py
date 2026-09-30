@@ -82,11 +82,13 @@ _setup_logging()
 # error messages point to this module instead of the module
 # it was originally defined in, e.g.
 # arcadepy._exceptions.NotFoundError -> arcadepy.NotFoundError
-__locals = locals()
+import sys as _sys
+
+__module = _sys.modules[__name__]
 for __name in __all__:
     if not __name.startswith("__"):
         try:
-            __locals[__name].__module__ = "arcadepy"
+            getattr(__module, __name).__module__ = "arcadepy"
         except (TypeError, AttributeError):
             # Some of our exported symbols are builtins which we can't set attributes for.
             pass
