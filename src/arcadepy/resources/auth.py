@@ -208,7 +208,8 @@ class AuthResource(SyncAPIResource):
 
     def wait_for_completion(self, auth_response_or_id: AuthorizationResponse | str) -> AuthorizationResponse:
         """
-        Waits for the authorization process to complete, for example:
+        Waits until authorization completes or fails, then returns the terminal response.
+        Inspect the returned status to distinguish success from failure. For example:
 
         ```py
         auth_response = client.auth.start("you@example.com", "github")
@@ -226,7 +227,7 @@ class AuthResource(SyncAPIResource):
             auth_id_val = auth_response_or_id
             auth_response = AuthorizationResponse()
 
-        while auth_response.status != "completed":
+        while auth_response.status not in ("completed", "failed"):
             auth_response = self.status(
                 id=auth_id_val,
                 wait=_DEFAULT_LONGPOLL_WAIT_TIME,
@@ -421,7 +422,8 @@ class AsyncAuthResource(AsyncAPIResource):
         auth_response_or_id: AuthorizationResponse | str,
     ) -> AuthorizationResponse:
         """
-        Waits for the authorization process to complete, for example:
+        Waits until authorization completes or fails, then returns the terminal response.
+        Inspect the returned status to distinguish success from failure. For example:
 
         ```py
         auth_response = client.auth.start("you@example.com", "github")
@@ -439,7 +441,7 @@ class AsyncAuthResource(AsyncAPIResource):
             auth_id_val = auth_response_or_id
             auth_response = AuthorizationResponse()
 
-        while auth_response.status != "completed":
+        while auth_response.status not in ("completed", "failed"):
             auth_response = await self.status(
                 id=auth_id_val,
                 wait=_DEFAULT_LONGPOLL_WAIT_TIME,
