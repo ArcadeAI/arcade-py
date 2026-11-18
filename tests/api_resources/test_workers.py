@@ -13,6 +13,7 @@ from arcadepy.types import (
     ToolDefinition,
     WorkerResponse,
     WorkerHealthResponse,
+    WorkerAuthorizeResponse,
 )
 from arcadepy.pagination import SyncOffsetPage, AsyncOffsetPage
 
@@ -339,6 +340,44 @@ class TestWorkers:
                 id="",
             )
 
+    @parametrize
+    def test_method_authorize(self, client: Arcade) -> None:
+        worker = client.workers.authorize(
+            "id",
+        )
+        assert_matches_type(WorkerAuthorizeResponse, worker, path=["response"])
+
+    @parametrize
+    def test_raw_response_authorize(self, client: Arcade) -> None:
+        response = client.workers.with_raw_response.authorize(
+            "id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        worker = response.parse()
+        assert_matches_type(WorkerAuthorizeResponse, worker, path=["response"])
+
+    @parametrize
+    def test_streaming_response_authorize(self, client: Arcade) -> None:
+        with client.workers.with_streaming_response.authorize(
+            "id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            worker = response.parse()
+            assert_matches_type(WorkerAuthorizeResponse, worker, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_authorize(self, client: Arcade) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.workers.with_raw_response.authorize(
+                "",
+            )
+
 
 class TestAsyncWorkers:
     parametrize = pytest.mark.parametrize(
@@ -660,4 +699,42 @@ class TestAsyncWorkers:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.workers.with_raw_response.tools(
                 id="",
+            )
+
+    @parametrize
+    async def test_method_authorize(self, async_client: AsyncArcade) -> None:
+        worker = await async_client.workers.authorize(
+            "id",
+        )
+        assert_matches_type(WorkerAuthorizeResponse, worker, path=["response"])
+
+    @parametrize
+    async def test_raw_response_authorize(self, async_client: AsyncArcade) -> None:
+        response = await async_client.workers.with_raw_response.authorize(
+            "id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        worker = await response.parse()
+        assert_matches_type(WorkerAuthorizeResponse, worker, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_authorize(self, async_client: AsyncArcade) -> None:
+        async with async_client.workers.with_streaming_response.authorize(
+            "id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            worker = await response.parse()
+            assert_matches_type(WorkerAuthorizeResponse, worker, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_authorize(self, async_client: AsyncArcade) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.workers.with_raw_response.authorize(
+                "",
             )

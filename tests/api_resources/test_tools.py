@@ -12,6 +12,12 @@ from tests.utils import assert_matches_type
 from arcadepy.types import (
     ToolDefinition,
     ExecuteToolResponse,
+    ToolRequirementsResponse,
+    ToolListExecutionsResponse,
+    ToolCountExecutionsResponse,
+    ToolRetrieveExecutionResponse,
+    ToolListScheduledInProjectResponse,
+    ToolRetrieveScheduledInProjectResponse,
 )
 from arcadepy.pagination import SyncOffsetPage, AsyncOffsetPage
 from arcadepy.types.shared import AuthorizationResponse
@@ -189,6 +195,356 @@ class TestTools:
                 name="",
             )
 
+    @parametrize
+    def test_method_requirements(self, client: Arcade) -> None:
+        tool = client.tools.requirements()
+        assert_matches_type(ToolRequirementsResponse, tool, path=["response"])
+
+    @parametrize
+    def test_method_requirements_with_all_params(self, client: Arcade) -> None:
+        tool = client.tools.requirements(
+            authorize=True,
+            tool_names=["tool_names"],
+            tools=[{"tool_name": "tool_name"}],
+            user_id="user_id",
+        )
+        assert_matches_type(ToolRequirementsResponse, tool, path=["response"])
+
+    @parametrize
+    def test_raw_response_requirements(self, client: Arcade) -> None:
+        response = client.tools.with_raw_response.requirements()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tool = response.parse()
+        assert_matches_type(ToolRequirementsResponse, tool, path=["response"])
+
+    @parametrize
+    def test_streaming_response_requirements(self, client: Arcade) -> None:
+        with client.tools.with_streaming_response.requirements() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tool = response.parse()
+            assert_matches_type(ToolRequirementsResponse, tool, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_list_executions(self, client: Arcade) -> None:
+        tool = client.tools.list_executions(
+            "org_id",
+            "project_id",
+        )
+        assert_matches_type(ToolListExecutionsResponse, tool, path=["response"])
+
+    @parametrize
+    def test_method_list_executions_with_all_params(self, client: Arcade) -> None:
+        tool = client.tools.list_executions(
+            "org_id",
+            "project_id",
+            limit=1,
+            offset=1,
+            tool_name="tool_name",
+            toolkit_name="toolkit_name",
+            user_id="user_id",
+            outcome="success",
+            failure_reason="failure_reason",
+            start_time="start_time",
+            end_time="end_time",
+        )
+        assert_matches_type(ToolListExecutionsResponse, tool, path=["response"])
+
+    @parametrize
+    def test_raw_response_list_executions(self, client: Arcade) -> None:
+        response = client.tools.with_raw_response.list_executions(
+            "org_id",
+            "project_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tool = response.parse()
+        assert_matches_type(ToolListExecutionsResponse, tool, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list_executions(self, client: Arcade) -> None:
+        with client.tools.with_streaming_response.list_executions(
+            "org_id",
+            "project_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tool = response.parse()
+            assert_matches_type(ToolListExecutionsResponse, tool, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_list_executions(self, client: Arcade) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org_id` but received ''"):
+            client.tools.with_raw_response.list_executions(
+                "",
+                "project_id",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            client.tools.with_raw_response.list_executions(
+                "org_id",
+                "",
+            )
+
+    @parametrize
+    def test_method_count_executions(self, client: Arcade) -> None:
+        tool = client.tools.count_executions(
+            "org_id",
+            "project_id",
+        )
+        assert_matches_type(ToolCountExecutionsResponse, tool, path=["response"])
+
+    @parametrize
+    def test_method_count_executions_with_all_params(self, client: Arcade) -> None:
+        tool = client.tools.count_executions(
+            "org_id",
+            "project_id",
+            tool_name="tool_name",
+            toolkit_name="toolkit_name",
+            outcome="success",
+            start_time="start_time",
+            end_time="end_time",
+        )
+        assert_matches_type(ToolCountExecutionsResponse, tool, path=["response"])
+
+    @parametrize
+    def test_raw_response_count_executions(self, client: Arcade) -> None:
+        response = client.tools.with_raw_response.count_executions(
+            "org_id",
+            "project_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tool = response.parse()
+        assert_matches_type(ToolCountExecutionsResponse, tool, path=["response"])
+
+    @parametrize
+    def test_streaming_response_count_executions(self, client: Arcade) -> None:
+        with client.tools.with_streaming_response.count_executions(
+            "org_id",
+            "project_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tool = response.parse()
+            assert_matches_type(ToolCountExecutionsResponse, tool, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_count_executions(self, client: Arcade) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org_id` but received ''"):
+            client.tools.with_raw_response.count_executions(
+                "",
+                "project_id",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            client.tools.with_raw_response.count_executions(
+                "org_id",
+                "",
+            )
+
+    @parametrize
+    def test_method_retrieve_execution(self, client: Arcade) -> None:
+        tool = client.tools.retrieve_execution(
+            "org_id",
+            "project_id",
+            "id",
+        )
+        assert_matches_type(ToolRetrieveExecutionResponse, tool, path=["response"])
+
+    @parametrize
+    def test_method_retrieve_execution_with_all_params(self, client: Arcade) -> None:
+        tool = client.tools.retrieve_execution(
+            "org_id",
+            "project_id",
+            "id",
+            include_inputs=True,
+            include_outputs=True,
+        )
+        assert_matches_type(ToolRetrieveExecutionResponse, tool, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve_execution(self, client: Arcade) -> None:
+        response = client.tools.with_raw_response.retrieve_execution(
+            "org_id",
+            "project_id",
+            "id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tool = response.parse()
+        assert_matches_type(ToolRetrieveExecutionResponse, tool, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve_execution(self, client: Arcade) -> None:
+        with client.tools.with_streaming_response.retrieve_execution(
+            "org_id",
+            "project_id",
+            "id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tool = response.parse()
+            assert_matches_type(ToolRetrieveExecutionResponse, tool, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_retrieve_execution(self, client: Arcade) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org_id` but received ''"):
+            client.tools.with_raw_response.retrieve_execution(
+                "",
+                "project_id",
+                "id",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            client.tools.with_raw_response.retrieve_execution(
+                "org_id",
+                "",
+                "id",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.tools.with_raw_response.retrieve_execution(
+                "org_id",
+                "project_id",
+                "",
+            )
+
+    @parametrize
+    def test_method_list_scheduled_in_project(self, client: Arcade) -> None:
+        tool = client.tools.list_scheduled_in_project(
+            "org_id",
+            "project_id",
+        )
+        assert_matches_type(ToolListScheduledInProjectResponse, tool, path=["response"])
+
+    @parametrize
+    def test_method_list_scheduled_in_project_with_all_params(self, client: Arcade) -> None:
+        tool = client.tools.list_scheduled_in_project(
+            "org_id",
+            "project_id",
+            limit=1,
+            offset=1,
+        )
+        assert_matches_type(ToolListScheduledInProjectResponse, tool, path=["response"])
+
+    @parametrize
+    def test_raw_response_list_scheduled_in_project(self, client: Arcade) -> None:
+        response = client.tools.with_raw_response.list_scheduled_in_project(
+            "org_id",
+            "project_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tool = response.parse()
+        assert_matches_type(ToolListScheduledInProjectResponse, tool, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list_scheduled_in_project(self, client: Arcade) -> None:
+        with client.tools.with_streaming_response.list_scheduled_in_project(
+            "org_id",
+            "project_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tool = response.parse()
+            assert_matches_type(ToolListScheduledInProjectResponse, tool, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_list_scheduled_in_project(self, client: Arcade) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org_id` but received ''"):
+            client.tools.with_raw_response.list_scheduled_in_project(
+                "",
+                "project_id",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            client.tools.with_raw_response.list_scheduled_in_project(
+                "org_id",
+                "",
+            )
+
+    @parametrize
+    def test_method_retrieve_scheduled_in_project(self, client: Arcade) -> None:
+        tool = client.tools.retrieve_scheduled_in_project(
+            "org_id",
+            "project_id",
+            "id",
+        )
+        assert_matches_type(ToolRetrieveScheduledInProjectResponse, tool, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve_scheduled_in_project(self, client: Arcade) -> None:
+        response = client.tools.with_raw_response.retrieve_scheduled_in_project(
+            "org_id",
+            "project_id",
+            "id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tool = response.parse()
+        assert_matches_type(ToolRetrieveScheduledInProjectResponse, tool, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve_scheduled_in_project(self, client: Arcade) -> None:
+        with client.tools.with_streaming_response.retrieve_scheduled_in_project(
+            "org_id",
+            "project_id",
+            "id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tool = response.parse()
+            assert_matches_type(ToolRetrieveScheduledInProjectResponse, tool, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_retrieve_scheduled_in_project(self, client: Arcade) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org_id` but received ''"):
+            client.tools.with_raw_response.retrieve_scheduled_in_project(
+                "",
+                "project_id",
+                "id",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            client.tools.with_raw_response.retrieve_scheduled_in_project(
+                "org_id",
+                "",
+                "id",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.tools.with_raw_response.retrieve_scheduled_in_project(
+                "org_id",
+                "project_id",
+                "",
+            )
+
 
 class TestAsyncTools:
     parametrize = pytest.mark.parametrize(
@@ -360,4 +716,354 @@ class TestAsyncTools:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `name` but received ''"):
             await async_client.tools.with_raw_response.get(
                 name="",
+            )
+
+    @parametrize
+    async def test_method_requirements(self, async_client: AsyncArcade) -> None:
+        tool = await async_client.tools.requirements()
+        assert_matches_type(ToolRequirementsResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_method_requirements_with_all_params(self, async_client: AsyncArcade) -> None:
+        tool = await async_client.tools.requirements(
+            authorize=True,
+            tool_names=["tool_names"],
+            tools=[{"tool_name": "tool_name"}],
+            user_id="user_id",
+        )
+        assert_matches_type(ToolRequirementsResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_raw_response_requirements(self, async_client: AsyncArcade) -> None:
+        response = await async_client.tools.with_raw_response.requirements()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tool = await response.parse()
+        assert_matches_type(ToolRequirementsResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_requirements(self, async_client: AsyncArcade) -> None:
+        async with async_client.tools.with_streaming_response.requirements() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tool = await response.parse()
+            assert_matches_type(ToolRequirementsResponse, tool, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_list_executions(self, async_client: AsyncArcade) -> None:
+        tool = await async_client.tools.list_executions(
+            "org_id",
+            "project_id",
+        )
+        assert_matches_type(ToolListExecutionsResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_method_list_executions_with_all_params(self, async_client: AsyncArcade) -> None:
+        tool = await async_client.tools.list_executions(
+            "org_id",
+            "project_id",
+            limit=1,
+            offset=1,
+            tool_name="tool_name",
+            toolkit_name="toolkit_name",
+            user_id="user_id",
+            outcome="success",
+            failure_reason="failure_reason",
+            start_time="start_time",
+            end_time="end_time",
+        )
+        assert_matches_type(ToolListExecutionsResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_raw_response_list_executions(self, async_client: AsyncArcade) -> None:
+        response = await async_client.tools.with_raw_response.list_executions(
+            "org_id",
+            "project_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tool = await response.parse()
+        assert_matches_type(ToolListExecutionsResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list_executions(self, async_client: AsyncArcade) -> None:
+        async with async_client.tools.with_streaming_response.list_executions(
+            "org_id",
+            "project_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tool = await response.parse()
+            assert_matches_type(ToolListExecutionsResponse, tool, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_list_executions(self, async_client: AsyncArcade) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org_id` but received ''"):
+            await async_client.tools.with_raw_response.list_executions(
+                "",
+                "project_id",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            await async_client.tools.with_raw_response.list_executions(
+                "org_id",
+                "",
+            )
+
+    @parametrize
+    async def test_method_count_executions(self, async_client: AsyncArcade) -> None:
+        tool = await async_client.tools.count_executions(
+            "org_id",
+            "project_id",
+        )
+        assert_matches_type(ToolCountExecutionsResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_method_count_executions_with_all_params(self, async_client: AsyncArcade) -> None:
+        tool = await async_client.tools.count_executions(
+            "org_id",
+            "project_id",
+            tool_name="tool_name",
+            toolkit_name="toolkit_name",
+            outcome="success",
+            start_time="start_time",
+            end_time="end_time",
+        )
+        assert_matches_type(ToolCountExecutionsResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_raw_response_count_executions(self, async_client: AsyncArcade) -> None:
+        response = await async_client.tools.with_raw_response.count_executions(
+            "org_id",
+            "project_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tool = await response.parse()
+        assert_matches_type(ToolCountExecutionsResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_count_executions(self, async_client: AsyncArcade) -> None:
+        async with async_client.tools.with_streaming_response.count_executions(
+            "org_id",
+            "project_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tool = await response.parse()
+            assert_matches_type(ToolCountExecutionsResponse, tool, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_count_executions(self, async_client: AsyncArcade) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org_id` but received ''"):
+            await async_client.tools.with_raw_response.count_executions(
+                "",
+                "project_id",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            await async_client.tools.with_raw_response.count_executions(
+                "org_id",
+                "",
+            )
+
+    @parametrize
+    async def test_method_retrieve_execution(self, async_client: AsyncArcade) -> None:
+        tool = await async_client.tools.retrieve_execution(
+            "org_id",
+            "project_id",
+            "id",
+        )
+        assert_matches_type(ToolRetrieveExecutionResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_method_retrieve_execution_with_all_params(self, async_client: AsyncArcade) -> None:
+        tool = await async_client.tools.retrieve_execution(
+            "org_id",
+            "project_id",
+            "id",
+            include_inputs=True,
+            include_outputs=True,
+        )
+        assert_matches_type(ToolRetrieveExecutionResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve_execution(self, async_client: AsyncArcade) -> None:
+        response = await async_client.tools.with_raw_response.retrieve_execution(
+            "org_id",
+            "project_id",
+            "id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tool = await response.parse()
+        assert_matches_type(ToolRetrieveExecutionResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve_execution(self, async_client: AsyncArcade) -> None:
+        async with async_client.tools.with_streaming_response.retrieve_execution(
+            "org_id",
+            "project_id",
+            "id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tool = await response.parse()
+            assert_matches_type(ToolRetrieveExecutionResponse, tool, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve_execution(self, async_client: AsyncArcade) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org_id` but received ''"):
+            await async_client.tools.with_raw_response.retrieve_execution(
+                "",
+                "project_id",
+                "id",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            await async_client.tools.with_raw_response.retrieve_execution(
+                "org_id",
+                "",
+                "id",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.tools.with_raw_response.retrieve_execution(
+                "org_id",
+                "project_id",
+                "",
+            )
+
+    @parametrize
+    async def test_method_list_scheduled_in_project(self, async_client: AsyncArcade) -> None:
+        tool = await async_client.tools.list_scheduled_in_project(
+            "org_id",
+            "project_id",
+        )
+        assert_matches_type(ToolListScheduledInProjectResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_method_list_scheduled_in_project_with_all_params(self, async_client: AsyncArcade) -> None:
+        tool = await async_client.tools.list_scheduled_in_project(
+            "org_id",
+            "project_id",
+            limit=1,
+            offset=1,
+        )
+        assert_matches_type(ToolListScheduledInProjectResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_raw_response_list_scheduled_in_project(self, async_client: AsyncArcade) -> None:
+        response = await async_client.tools.with_raw_response.list_scheduled_in_project(
+            "org_id",
+            "project_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tool = await response.parse()
+        assert_matches_type(ToolListScheduledInProjectResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list_scheduled_in_project(self, async_client: AsyncArcade) -> None:
+        async with async_client.tools.with_streaming_response.list_scheduled_in_project(
+            "org_id",
+            "project_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tool = await response.parse()
+            assert_matches_type(ToolListScheduledInProjectResponse, tool, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_list_scheduled_in_project(self, async_client: AsyncArcade) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org_id` but received ''"):
+            await async_client.tools.with_raw_response.list_scheduled_in_project(
+                "",
+                "project_id",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            await async_client.tools.with_raw_response.list_scheduled_in_project(
+                "org_id",
+                "",
+            )
+
+    @parametrize
+    async def test_method_retrieve_scheduled_in_project(self, async_client: AsyncArcade) -> None:
+        tool = await async_client.tools.retrieve_scheduled_in_project(
+            "org_id",
+            "project_id",
+            "id",
+        )
+        assert_matches_type(ToolRetrieveScheduledInProjectResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve_scheduled_in_project(self, async_client: AsyncArcade) -> None:
+        response = await async_client.tools.with_raw_response.retrieve_scheduled_in_project(
+            "org_id",
+            "project_id",
+            "id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tool = await response.parse()
+        assert_matches_type(ToolRetrieveScheduledInProjectResponse, tool, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve_scheduled_in_project(self, async_client: AsyncArcade) -> None:
+        async with async_client.tools.with_streaming_response.retrieve_scheduled_in_project(
+            "org_id",
+            "project_id",
+            "id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tool = await response.parse()
+            assert_matches_type(ToolRetrieveScheduledInProjectResponse, tool, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve_scheduled_in_project(self, async_client: AsyncArcade) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org_id` but received ''"):
+            await async_client.tools.with_raw_response.retrieve_scheduled_in_project(
+                "",
+                "project_id",
+                "id",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            await async_client.tools.with_raw_response.retrieve_scheduled_in_project(
+                "org_id",
+                "",
+                "id",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.tools.with_raw_response.retrieve_scheduled_in_project(
+                "org_id",
+                "project_id",
+                "",
             )

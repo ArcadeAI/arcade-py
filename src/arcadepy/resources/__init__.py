@@ -24,6 +24,14 @@ from .admin import (
     AdminResourceWithStreamingResponse,
     AsyncAdminResourceWithStreamingResponse,
 )
+from .hooks import (
+    HooksResource,
+    AsyncHooksResource,
+    HooksResourceWithRawResponse,
+    AsyncHooksResourceWithRawResponse,
+    HooksResourceWithStreamingResponse,
+    AsyncHooksResourceWithStreamingResponse,
+)
 from .tools import (
     ToolsResource,
     AsyncToolsResource,
@@ -40,6 +48,14 @@ from .health import (
     HealthResourceWithStreamingResponse,
     AsyncHealthResourceWithStreamingResponse,
 )
+from .plugins import (
+    PluginsResource,
+    AsyncPluginsResource,
+    PluginsResourceWithRawResponse,
+    AsyncPluginsResourceWithRawResponse,
+    PluginsResourceWithStreamingResponse,
+    AsyncPluginsResourceWithStreamingResponse,
+)
 from .workers import (
     WorkersResource,
     AsyncWorkersResource,
@@ -47,6 +63,14 @@ from .workers import (
     AsyncWorkersResourceWithRawResponse,
     WorkersResourceWithStreamingResponse,
     AsyncWorkersResourceWithStreamingResponse,
+)
+from .gateways import (
+    GatewaysResource,
+    AsyncGatewaysResource,
+    GatewaysResourceWithRawResponse,
+    AsyncGatewaysResourceWithRawResponse,
+    GatewaysResourceWithStreamingResponse,
+    AsyncGatewaysResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -86,4 +110,22 @@ __all__ = [
     "AsyncWorkersResourceWithRawResponse",
     "WorkersResourceWithStreamingResponse",
     "AsyncWorkersResourceWithStreamingResponse",
+    "HooksResource",
+    "AsyncHooksResource",
+    "HooksResourceWithRawResponse",
+    "AsyncHooksResourceWithRawResponse",
+    "HooksResourceWithStreamingResponse",
+    "AsyncHooksResourceWithStreamingResponse",
+    "PluginsResource",
+    "AsyncPluginsResource",
+    "PluginsResourceWithRawResponse",
+    "AsyncPluginsResourceWithRawResponse",
+    "PluginsResourceWithStreamingResponse",
+    "AsyncPluginsResourceWithStreamingResponse",
+    "GatewaysResource",
+    "AsyncGatewaysResource",
+    "GatewaysResourceWithRawResponse",
+    "AsyncGatewaysResourceWithRawResponse",
+    "GatewaysResourceWithStreamingResponse",
+    "AsyncGatewaysResourceWithStreamingResponse",
 ]

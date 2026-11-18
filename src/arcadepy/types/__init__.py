@@ -17,19 +17,63 @@ from .tool_execution import ToolExecution as ToolExecution
 from .tool_definition import ToolDefinition as ToolDefinition
 from .tool_get_params import ToolGetParams as ToolGetParams
 from .worker_response import WorkerResponse as WorkerResponse
+from .hook_list_params import HookListParams as HookListParams
 from .tool_list_params import ToolListParams as ToolListParams
 from .tool_get_response import ToolGetResponse as ToolGetResponse
 from .auth_status_params import AuthStatusParams as AuthStatusParams
 from .chat_message_param import ChatMessageParam as ChatMessageParam
+from .hook_create_params import HookCreateParams as HookCreateParams
+from .hook_list_response import HookListResponse as HookListResponse
+from .hook_update_params import HookUpdateParams as HookUpdateParams
+from .plugin_list_params import PluginListParams as PluginListParams
 from .worker_list_params import WorkerListParams as WorkerListParams
+from .gateway_list_params import GatewayListParams as GatewayListParams
 from .tool_execute_params import ToolExecuteParams as ToolExecuteParams
 from .worker_tools_params import WorkerToolsParams as WorkerToolsParams
+from .hook_create_response import HookCreateResponse as HookCreateResponse
+from .hook_retrieve_params import HookRetrieveParams as HookRetrieveParams
+from .hook_update_response import HookUpdateResponse as HookUpdateResponse
+from .plugin_create_params import PluginCreateParams as PluginCreateParams
+from .plugin_list_response import PluginListResponse as PluginListResponse
+from .plugin_update_params import PluginUpdateParams as PluginUpdateParams
 from .worker_create_params import WorkerCreateParams as WorkerCreateParams
 from .worker_update_params import WorkerUpdateParams as WorkerUpdateParams
 from .auth_authorize_params import AuthAuthorizeParams as AuthAuthorizeParams
 from .confirm_user_response import ConfirmUserResponse as ConfirmUserResponse
 from .execute_tool_response import ExecuteToolResponse as ExecuteToolResponse
+from .gateway_create_params import GatewayCreateParams as GatewayCreateParams
+from .gateway_list_response import GatewayListResponse as GatewayListResponse
+from .gateway_update_params import GatewayUpdateParams as GatewayUpdateParams
 from .tool_authorize_params import ToolAuthorizeParams as ToolAuthorizeParams
+from .gateway_replace_params import GatewayReplaceParams as GatewayReplaceParams
+from .hook_retrieve_response import HookRetrieveResponse as HookRetrieveResponse
+from .plugin_create_response import PluginCreateResponse as PluginCreateResponse
+from .plugin_update_response import PluginUpdateResponse as PluginUpdateResponse
 from .tool_execution_attempt import ToolExecutionAttempt as ToolExecutionAttempt
 from .worker_health_response import WorkerHealthResponse as WorkerHealthResponse
+from .gateway_create_response import GatewayCreateResponse as GatewayCreateResponse
+from .gateway_update_response import GatewayUpdateResponse as GatewayUpdateResponse
+from .hook_bulk_upsert_params import HookBulkUpsertParams as HookBulkUpsertParams
 from .auth_confirm_user_params import AuthConfirmUserParams as AuthConfirmUserParams
+from .gateway_replace_response import GatewayReplaceResponse as GatewayReplaceResponse
+from .gateway_slug_info_params import GatewaySlugInfoParams as GatewaySlugInfoParams
+from .plugin_retrieve_response import PluginRetrieveResponse as PluginRetrieveResponse
+from .tool_requirements_params import ToolRequirementsParams as ToolRequirementsParams
+from .gateway_retrieve_response import GatewayRetrieveResponse as GatewayRetrieveResponse
+from .hook_bulk_upsert_response import HookBulkUpsertResponse as HookBulkUpsertResponse
+from .worker_authorize_response import WorkerAuthorizeResponse as WorkerAuthorizeResponse
+from .gateway_slug_info_response import GatewaySlugInfoResponse as GatewaySlugInfoResponse
+from .tool_requirements_response import ToolRequirementsResponse as ToolRequirementsResponse
+from .tool_list_executions_params import ToolListExecutionsParams as ToolListExecutionsParams
+from .tool_count_executions_params import ToolCountExecutionsParams as ToolCountExecutionsParams
+from .tool_list_executions_response import ToolListExecutionsResponse as ToolListExecutionsResponse
+from .tool_count_executions_response import ToolCountExecutionsResponse as ToolCountExecutionsResponse
+from .tool_retrieve_execution_params import ToolRetrieveExecutionParams as ToolRetrieveExecutionParams
+from .tool_retrieve_execution_response import ToolRetrieveExecutionResponse as ToolRetrieveExecutionResponse
+from .tool_list_scheduled_in_project_params import ToolListScheduledInProjectParams as ToolListScheduledInProjectParams
+from .tool_list_scheduled_in_project_response import (
+    ToolListScheduledInProjectResponse as ToolListScheduledInProjectResponse,
+)
+from .tool_retrieve_scheduled_in_project_response import (
+    ToolRetrieveScheduledInProjectResponse as ToolRetrieveScheduledInProjectResponse,
+)
