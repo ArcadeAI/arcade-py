@@ -20,6 +20,7 @@ from .._base_client import AsyncPaginator, make_request_options
 from ..types.tool_definition import ToolDefinition
 from ..types.worker_response import WorkerResponse
 from ..types.worker_health_response import WorkerHealthResponse
+from ..types.worker_authorize_response import WorkerAuthorizeResponse
 
 __all__ = ["WorkersResource", "AsyncWorkersResource"]
 
@@ -330,6 +331,39 @@ class WorkersResource(SyncAPIResource):
             model=ToolDefinition,
         )
 
+    def authorize(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> WorkerAuthorizeResponse:
+        """
+        Authorize a worker
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._get(
+            f"/v1/workers/{id}/authorize",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=WorkerAuthorizeResponse,
+        )
+
 
 class AsyncWorkersResource(AsyncAPIResource):
     @cached_property
@@ -637,6 +671,39 @@ class AsyncWorkersResource(AsyncAPIResource):
             model=ToolDefinition,
         )
 
+    async def authorize(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> WorkerAuthorizeResponse:
+        """
+        Authorize a worker
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._get(
+            f"/v1/workers/{id}/authorize",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=WorkerAuthorizeResponse,
+        )
+
 
 class WorkersResourceWithRawResponse:
     def __init__(self, workers: WorkersResource) -> None:
@@ -662,6 +729,9 @@ class WorkersResourceWithRawResponse:
         )
         self.tools = to_raw_response_wrapper(
             workers.tools,
+        )
+        self.authorize = to_raw_response_wrapper(
+            workers.authorize,
         )
 
 
@@ -690,6 +760,9 @@ class AsyncWorkersResourceWithRawResponse:
         self.tools = async_to_raw_response_wrapper(
             workers.tools,
         )
+        self.authorize = async_to_raw_response_wrapper(
+            workers.authorize,
+        )
 
 
 class WorkersResourceWithStreamingResponse:
@@ -717,6 +790,9 @@ class WorkersResourceWithStreamingResponse:
         self.tools = to_streamed_response_wrapper(
             workers.tools,
         )
+        self.authorize = to_streamed_response_wrapper(
+            workers.authorize,
+        )
 
 
 class AsyncWorkersResourceWithStreamingResponse:
@@ -743,4 +819,7 @@ class AsyncWorkersResourceWithStreamingResponse:
         )
         self.tools = async_to_streamed_response_wrapper(
             workers.tools,
+        )
+        self.authorize = async_to_streamed_response_wrapper(
+            workers.authorize,
         )

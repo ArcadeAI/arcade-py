@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import auth, health, workers
+from .resources import auth, hooks, health, plugins, workers, gateways
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import ArcadeError, APIStatusError
 from ._base_client import (
@@ -106,6 +106,9 @@ class Arcade(SyncAPIClient):
         self.chat = chat.ChatResource(self)
         self.tools = tools.ToolsResource(self)
         self.workers = workers.WorkersResource(self)
+        self.hooks = hooks.HooksResource(self)
+        self.plugins = plugins.PluginsResource(self)
+        self.gateways = gateways.GatewaysResource(self)
         self.with_raw_response = ArcadeWithRawResponse(self)
         self.with_streaming_response = ArcadeWithStreamedResponse(self)
 
@@ -284,6 +287,9 @@ class AsyncArcade(AsyncAPIClient):
         self.chat = chat.AsyncChatResource(self)
         self.tools = tools.AsyncToolsResource(self)
         self.workers = workers.AsyncWorkersResource(self)
+        self.hooks = hooks.AsyncHooksResource(self)
+        self.plugins = plugins.AsyncPluginsResource(self)
+        self.gateways = gateways.AsyncGatewaysResource(self)
         self.with_raw_response = AsyncArcadeWithRawResponse(self)
         self.with_streaming_response = AsyncArcadeWithStreamedResponse(self)
 
@@ -400,6 +406,9 @@ class ArcadeWithRawResponse:
         self.chat = chat.ChatResourceWithRawResponse(client.chat)
         self.tools = tools.ToolsResourceWithRawResponse(client.tools)
         self.workers = workers.WorkersResourceWithRawResponse(client.workers)
+        self.hooks = hooks.HooksResourceWithRawResponse(client.hooks)
+        self.plugins = plugins.PluginsResourceWithRawResponse(client.plugins)
+        self.gateways = gateways.GatewaysResourceWithRawResponse(client.gateways)
 
 
 class AsyncArcadeWithRawResponse:
@@ -410,6 +419,9 @@ class AsyncArcadeWithRawResponse:
         self.chat = chat.AsyncChatResourceWithRawResponse(client.chat)
         self.tools = tools.AsyncToolsResourceWithRawResponse(client.tools)
         self.workers = workers.AsyncWorkersResourceWithRawResponse(client.workers)
+        self.hooks = hooks.AsyncHooksResourceWithRawResponse(client.hooks)
+        self.plugins = plugins.AsyncPluginsResourceWithRawResponse(client.plugins)
+        self.gateways = gateways.AsyncGatewaysResourceWithRawResponse(client.gateways)
 
 
 class ArcadeWithStreamedResponse:
@@ -420,6 +432,9 @@ class ArcadeWithStreamedResponse:
         self.chat = chat.ChatResourceWithStreamingResponse(client.chat)
         self.tools = tools.ToolsResourceWithStreamingResponse(client.tools)
         self.workers = workers.WorkersResourceWithStreamingResponse(client.workers)
+        self.hooks = hooks.HooksResourceWithStreamingResponse(client.hooks)
+        self.plugins = plugins.PluginsResourceWithStreamingResponse(client.plugins)
+        self.gateways = gateways.GatewaysResourceWithStreamingResponse(client.gateways)
 
 
 class AsyncArcadeWithStreamedResponse:
@@ -430,6 +445,9 @@ class AsyncArcadeWithStreamedResponse:
         self.chat = chat.AsyncChatResourceWithStreamingResponse(client.chat)
         self.tools = tools.AsyncToolsResourceWithStreamingResponse(client.tools)
         self.workers = workers.AsyncWorkersResourceWithStreamingResponse(client.workers)
+        self.hooks = hooks.AsyncHooksResourceWithStreamingResponse(client.hooks)
+        self.plugins = plugins.AsyncPluginsResourceWithStreamingResponse(client.plugins)
+        self.gateways = gateways.AsyncGatewaysResourceWithStreamingResponse(client.gateways)
 
 
 Client = Arcade
